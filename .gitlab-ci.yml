@@ -1,0 +1,20 @@
+stages:
+  - build
+  - deploy
+
+build-container:
+  stage: build
+  script:
+    ## Login to Gitlab Provided Container Registry for this project.
+    - docker info
+    - docker-compose build --pull
+  only:
+    - master
+
+deploy-target:
+  stage: deploy
+  script:
+    - docker-compose ps | grep 'Up' && docker-compose down
+    - docker-compose up -d  
+  only:
+    - master
