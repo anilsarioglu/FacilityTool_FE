@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+    reverseproxy:
+        image: nginx
+        container_name: proxy
+        ports:
+           - 0.0.0.0:80:80
+        external_links:
+           - springboot:tomcat
+        volumes:
+           - ./.docker/nginx/nginx.conf:/etc/nginx/nginx.conf
+    springboot:
+        build: .
+        container_name: java-app
+        restart: always
+        command: java -jar /target/HelloWorld-0.0.1-SNAPSHOT.jar
+
