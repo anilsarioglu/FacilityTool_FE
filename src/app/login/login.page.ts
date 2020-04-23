@@ -13,7 +13,7 @@ import { LoadingController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   errorMessage: string;
 
-  constructor(private authService: AuthenticationService, private loadingController: LoadingController) { }
+  constructor(private authService: AuthenticationService, private loadingController: LoadingController,private router: Router) { }
 
   async ngOnInit() {
     // If coming back after logging into Auth0,
@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
   async login() {
     const loadingIndicator = await this.showLoadingIndictator();
     try {
+      await this.authService.onLoginSuccess(); 
       //await this.authService.login();
     } catch (e) {
       console.log(`caught error ${e.message}`);
