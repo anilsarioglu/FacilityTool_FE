@@ -1,23 +1,11 @@
-FROM maven:3.6-jdk-11 as maven
+FROM node:latest AS build
 
-# copy the project files
-COPY pom.xml ./pom.xml
+WORKDIR /app
 
-# build all dependencies
-RUN mvn dependency:go-offline -B
+COPY . . 
 
-# copy your other files
-COPY src ./src
+RUN npm install && npm run build
 
-# build for release
-RUN mvn package
+FROM nginx AS deploy 
 
-# create JRE-Container
-FROM openjdk:11-jre-slim 
-
-# set source directory
-WORKDIR /target
-
-# copy over the built artifact from the maven image
-COPY --from=maven target/*.jar ./
-
+COPY --from=build /app/www /var/www/html
