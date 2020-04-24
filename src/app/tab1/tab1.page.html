@@ -9,7 +9,7 @@
 <ion-content>
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
 
-   <ion-card *ngFor="let d of melding" (click)="detailMelding(d)">
+   <ion-card *ngFor="let d of meldingLijst" (click)="detailMelding(d)">
         <ion-card-content>
             <ion-card-title>
                 {{d.melder}}
@@ -17,6 +17,7 @@
             <ion-card-subtitle>{{d.datum}}</ion-card-subtitle>
             <p>{{d.type}}</p>
             <p>{{d.locatie}}</p>
+            <p>{{d.soortMelding}}</p>
         </ion-card-content>
     </ion-card>
 
@@ -27,3 +28,4 @@
     </ion-fab>
 
 </ion-content>
+

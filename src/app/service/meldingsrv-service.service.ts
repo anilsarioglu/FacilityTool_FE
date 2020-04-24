@@ -8,7 +8,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 export class MeldingsrvServiceService {
   private contentHeaders: HttpHeaders;
   
-  //meldingen: Melding[] = [];
+  // meldingen: Melding[] = [];
 
   constructor() { }
 }
