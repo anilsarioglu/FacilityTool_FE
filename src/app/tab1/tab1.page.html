@@ -12,6 +12,20 @@
             <ion-title size="large">Tab one</ion-title>
         </ion-toolbar>
     </ion-header>
+
+    <ion-card *ngFor="let ml of meldingLijst;let i = index;" (click)="detailMelding(ml)">
+
+        <ion-card-content>
+            <ion-card-title>
+                {{ml.melder}}
+            </ion-card-title>
+            <ion-card-subtitle>{{ml.datum}}</ion-card-subtitle>
+            <p>{{ml.type}}</p>
+            <p>{{ml.locatie}}</p>
+        </ion-card-content>
+    </ion-card>
+
+
     <ion-fab (click)="addMelding()" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button color="danger">
             <ion-icon name="add"></ion-icon>

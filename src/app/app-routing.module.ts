@@ -8,6 +8,8 @@ const routes: Routes = [
   { path: 'melding/:locatie', loadChildren: () => import('./melding/melding.module').then(m => m.MeldingPageModule) },
   { path: 'tab1', loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule) },
   { path: 'tab1/:melding', loadChildren: () => import('./tab1/tab1.module').then(m => m.Tab1PageModule) },
+  { path: 'detail-melding', loadChildren: () => import('./detail-melding/detail-melding.module').then(m => m.DetailMeldingPageModule) }
+
 
 ];
 @NgModule({
