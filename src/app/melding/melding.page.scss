@@ -1,0 +1,34 @@
+#formpke {
+    width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 10px 10px 5px grey;
+}
+
+ion-content .APLL {
+    margin-left: 35%;
+    margin-top: 2%;
+}
+
+ion-slides {
+    margin-top: 10%;
+    background: #e6e6e6;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    img {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+
+// .datumke {
+//      position: absolute;
+//     right: 10px;
+//     top: 0px;
+// }
+.error-message {
+    color: var(--ion-color-danger);
+}
+
+.footerBtn {
+    height: 80px;
+}

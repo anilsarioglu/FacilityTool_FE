@@ -1,0 +1,56 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <p class="ion-text-center">Melding rapporteren</p>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
+        <div>
+            <p> melder: {{melder}}</p>
+            <p> PNummer: {{PNummer}}</p>
+            <p class="datumke">{{ datum | date:"dd/MM/yy" }}</p>
+        </div>
+
+        <div>
+            <ion-item>
+                <ion-label>Type</ion-label>
+                <ion-select value="d" ok-text="OK" cancel-text="Annuleren" formControlName="type">
+                    <ion-select-option *ngFor="let md of meldingData" required>
+                        {{md}}
+                    </ion-select-option>
+                </ion-select>
+            </ion-item>
+        </div>
+
+        <div>
+            <label>Locatie: </label>
+            <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0">
+            <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
+                Locatie kiezen
+            </ion-button>
+
+        </div>
+
+        <ion-item>
+            <ion-label position="floating">Beschrijving: </ion-label>
+            <ion-textarea required inputmode="text" formControlName="beschrijving"></ion-textarea>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Locatie beschrijving: </ion-label>
+            <ion-textarea inputmode="text" formControlName="locatiebeschr"></ion-textarea>
+        </ion-item>
+
+        <ion-button class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">Verzenden
+        </ion-button>
+
+    </form>
+
+
+</ion-content>
