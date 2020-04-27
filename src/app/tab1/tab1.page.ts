@@ -36,7 +36,7 @@ export class Tab1Page {
   }
 
   detailMelding(data) {
-    console.log("geklikt");
+    console.log('geklikt');
     // this.router.navigate(['/detail-melding'], data);
     this.router.navigate(['/detail-melding'], {
       queryParams: {
@@ -52,8 +52,8 @@ export class Tab1Page {
     let event = e.currentTarget.innerText;
 
     const alert = await this.alertCtrl.create({
-      header: "Weet u zeker dat u deze melding wil verwijderen!",
-      message: "" + event.toLowerCase(),
+      header: 'Weet u zeker dat u deze melding wil verwijderen!',
+      message: '' + event.toLowerCase(),
       buttons: [
         {
           text: 'Ja',
