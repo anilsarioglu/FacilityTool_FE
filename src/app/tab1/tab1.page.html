@@ -1,25 +1,51 @@
-<ion-header>
+<ion-header [translucent]="true">
     <ion-toolbar color="danger">
         <ion-title class="ion-text-center">
-            rapporteringslijst
+            Meldingen
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Meldingen</ion-title>
+        </ion-toolbar>
+    </ion-header>
 
-   <ion-card *ngFor="let d of meldingLijst" (click)="detailMelding(d)">
-        <ion-card-content>
-            <ion-card-title>
-                {{d.melder}}
-            </ion-card-title>
-            <ion-card-subtitle>{{d.datum}}</ion-card-subtitle>
-            <p>{{d.type}}</p>
-            <p>{{d.locatie}}</p>
-            <p>{{d.soortMelding}}</p>
-        </ion-card-content>
-    </ion-card>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let ml of meldingLijst;let i = index;" id="kaart">
+                <ion-card>
+                    <ion-item>
+                        <ion-icon name="pin" slot="start"></ion-icon>
+                        <ion-label> {{ml.melder}} - {{ml.pNummer}}</ion-label>
+                        <ion-button fill="outline" type="button" (click)="detailMelding(ml)">View
+                        </ion-button>
+                        <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" (click)="deleteMelding(i,$event,ml.id)" class="btn btn-danger remove-btn">
+                            <ion-icon name="trash"></ion-icon>
+                        </ion-button>
+
+                    </ion-item>
+                    <div *ngFor="let mlpu of ml.photos;let i=index;" style=" width: 100%;height:100%;">
+                        <img style="float: right" *ngIf="i==0 && mlpu.url" [src]="mlpu.url">
+                    </div>
+
+                    <ion-card-content>
+                        <p>{{ml.datum}}</p>
+                        <p>{{ml.locatie}}</p>
+                        <p> {{ml.type}}</p>
+                        <p> {{ml.beschrijving}}</p>
+                        <p> {{ml.locatiebeschr}}</p>
+
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+
 
     <ion-fab (click)="addMelding()" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button color="danger">
@@ -28,4 +54,3 @@
     </ion-fab>
 
 </ion-content>
-

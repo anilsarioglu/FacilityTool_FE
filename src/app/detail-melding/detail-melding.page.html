@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>Detail</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <div id="centerke">
+        <ion-card>
+            <ion-card-header>
+                <ion-card-title>{{meldingData.melder}}</ion-card-title>
+                <ion-card-subtitle>{{meldingData.datum}} </ion-card-subtitle>
+
+            </ion-card-header>
+
+            <ion-card-content>
+                <p> {{meldingData.pNummer}}</p>
+                <p>{{meldingData.locatie}} is een {{meldingData.type}}</p>
+                <p>Algemene beschrijving: {{meldingData.beschrijving}}</p>
+                <p>Locatie beschrijving: {{meldingData.locatiebeschr}}</p>
+            </ion-card-content>
+        </ion-card>
+
+        <div>
+            <ion-slides [options]="sliderOpts">
+                <ion-slide *ngFor="let mlpu of meldingData.photos; let i=index;">
+                    <div>
+                        <img [src]="mlpu.url" (click)="openPreview(mlpu.url)" alt="Image Preview" tappable>
+                    </div>
+                </ion-slide>
+            </ion-slides>
+        </div>
+
+
+
+        <ion-card class="card" *ngFor="let mdr of meldingData.reactie">
+
+            <ion-card-header>
+                <ion-card-title>{{mdr.melder}}</ion-card-title>
+                <ion-card-subtitle>{{mdr.datum}} </ion-card-subtitle>
+
+            </ion-card-header>
+
+            <ion-card-content>
+                {{mdr.bericht}}
+            </ion-card-content>
+
+        </ion-card>
+
+
+
+
+
+
+        <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
+            <ion-item>
+                <ion-textarea required inputmode="text" formControlName="bericht" placeholder="Schrijf een reactie">
+                </ion-textarea>
+            </ion-item>
+
+            <ion-button class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">
+                Verzenden
+            </ion-button>
+
+        </form>
+
+    </div>
+
+
+
+
+
+
+</ion-content>

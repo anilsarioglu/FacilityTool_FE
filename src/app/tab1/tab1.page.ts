@@ -1,47 +1,44 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController} from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MeldingService } from '../services/melding/melding.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page implements OnInit {
-  user: any;
+export class Tab1Page {
 
-  meldingLijst: any = [{
-    id: 1,
-    userrole: 'technical staff',
-    soortMelding: 'defect',
-    melder: 'Jori Jensen',
-    datum: '15/10/2020',
-    type: 'Sanitair',
-    locatie: 'NOO 3.5'
-  },
-    {
-      id: 2,
-      userrole: 'teacher',
-      soortMelding: 'taak',
-      melder: 'John Possemier',
-      datum: '24/04/2020',
-      type: 'Verlichting',
-      locatie: 'ELL 1.0.8/03'
-    }];
-  kopiemeldingLijst: any = this.meldingLijst;
+  melding: any;
+  meldingLijst: any = [];
+  kopieLijstVanMeldingen: any = [];
 
-  constructor(private navCtrl: NavController, private router: Router) {
-    this.router;
+  constructor(private ms: MeldingService, private alertCtrl: AlertController, private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.melding = this.activatedRoute.snapshot.params['melding'];
+    this.lijstMeldingen();
+
   }
 
-  ngOnInit() {
 
+  lijstMeldingen() {
+    this.ms.getAlleMeldingen().subscribe(data => {
+      console.log(data);
+      this.meldingLijst = data;
+      this.kopieLijstVanMeldingen = this.meldingLijst;
+    });
+  }
+
+  async addMelding() {
+    console.log("addMelding");
+    this.navCtrl.navigateForward("/melding")
   }
 
   detailMelding(data) {
-    console.log('geklikt');
+    console.log("geklikt");
     // this.router.navigate(['/detail-melding'], data);
-    this.router.navigate(['/tabs/tab2'], {
+    this.router.navigate(['/detail-melding'], {
       queryParams: {
         value: JSON.stringify(data)
       },
@@ -49,45 +46,31 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  initializeItems(): void {
-    this.meldingLijst = this.kopiemeldingLijst;
-    this.user = 'technical staff';
+
+  async deleteMelding(i, e, id) {
+    console.log(e);
+    let event = e.currentTarget.innerText;
+
+    const alert = await this.alertCtrl.create({
+      header: "Weet u zeker dat u deze melding wil verwijderen!",
+      message: "" + event.toLowerCase(),
+      buttons: [
+        {
+          text: 'Ja',
+          handler: () => {
+            alert.dismiss().then(() => {
+              this.ms.deleteMelding(id).subscribe();
+              this.meldingLijst.splice(i, 1);
+            });
+            return false;
+          }
+        },
+        { text: 'Nee' }
+      ]
+    });
+    await alert.present();
+
+
   }
 
-  async getLijst() {
-    if (this.user === 'admin') {
-      return this.meldingLijst;
-    } else if (this.user === 'technical staff') {
-      return this.meldingLijst.soortMelding === 'defect';
-    } else {
-      return this.meldingLijst.soortMelding === 'taak';
-    }
-    /*return this.meldingLijst.filter((melding) =>{
-      return
-    });*/
-  }
-
-  async searchItems(e) {
-    console.log(this.meldingLijst);
-    this.initializeItems();
-    const val: string = e.target.value;
-
-    if (!val) { return; }
-
-    if (val.trim() !== '') {
-      this.meldingLijst = this.kopiemeldingLijst.filter((item) => {
-        return (item.type.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-          (item.melder.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-          (item.datum.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-          (item.locatie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-          (item.soortMelding.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-    }
-  }
-
-  async addMelding() {
-    console.log('addMelding');
-    // this.router.navigate("/meldingaanmakentab")
-    this.router.navigate(['/tabs/tab2']);
-  }
 }
