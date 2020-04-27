@@ -55,7 +55,7 @@ export class DetailMeldingPage implements OnInit {
 
 
   uploadSubmit() {
-    this.reacties.push(this.createItem({
+    this.reacties.push(this.createItem(new {
       melder: this.meldingData.melder,
       bericht: this.berichten,
       datum: this.datePipe.transform(this.myDate, 'dd-MM-yyTHH:mm:ss')

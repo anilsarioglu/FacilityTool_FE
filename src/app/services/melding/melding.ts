@@ -10,8 +10,13 @@ export class Melding {
         public locatie: string,
         public beschrijving: string,
         public locatiebeschr: string,
-        private status: string
-        /*public image: Binary*/) {
-
+        private status: string,
+        /*public image: Binary*/
+        
+        /** Upvoting System **/
+        public numberUpvotes: string,
+        public isUpvoted: boolean
+        ) 
+        {
     }
 }

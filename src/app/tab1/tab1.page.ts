@@ -3,6 +3,7 @@ import { NavController, ModalController, ActionSheetController, AlertController 
 import { Router, ActivatedRoute } from '@angular/router';
 import { MeldingService } from '../services/melding/melding.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Melding } from '../services/melding/melding';
 
 @Component({
   selector: 'app-tab1',
@@ -73,4 +74,9 @@ export class Tab1Page {
 
   }
 
+  /** Upvoting System **/
+  onIconClick(melding: Melding) {
+    console.log("Cliked");
+    this.ms.upvoteMelding(melding.id).subscribe();
+  }
 }

@@ -42,8 +42,6 @@ export class MeldingPage implements OnInit {
   fileName: any;
   myFiles: string[] = [];
 
-
-
   sliderOpts = {
     zoom: false,
     slidesPerView: 5,
