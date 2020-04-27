@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page implements OnInit {
-  melding: any;
+  user: any;
 
   meldingLijst: any = [{
     id: 1,
@@ -51,12 +51,20 @@ export class Tab1Page implements OnInit {
 
   initializeItems(): void {
     this.meldingLijst = this.kopiemeldingLijst;
+    this.user = 'technical staff';
   }
 
-  async getLijst(){
-    return this.meldingLijst.filter((melding) =>{
+  async getLijst() {
+    if (this.user === 'admin') {
+      return this.meldingLijst;
+    } else if (this.user === 'technical staff') {
+      return this.meldingLijst.soortMelding === 'defect';
+    } else {
+      return this.meldingLijst.soortMelding === 'taak';
+    }
+    /*return this.meldingLijst.filter((melding) =>{
       return
-    });
+    });*/
   }
 
   async searchItems(e) {
