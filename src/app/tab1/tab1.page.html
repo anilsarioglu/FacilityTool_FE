@@ -12,8 +12,7 @@
             <ion-title size="large">Meldingen</ion-title>
         </ion-toolbar>
     </ion-header>
-
-
+    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
     <ion-grid>
         <ion-row>
             <ion-col *ngFor="let ml of meldingLijst;let i = index;" id="kaart">

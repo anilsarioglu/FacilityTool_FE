@@ -21,6 +21,31 @@ export class Tab1Page {
 
   }
 
+  initializeItems(): void {
+    this.meldingLijst = this.kopieLijstVanMeldingen;
+  }
+
+  async searchItems(e) {
+    console.log(this.meldingLijst);
+    this.initializeItems();
+    const val: string = e.target.value;
+
+    if (!val) { return; }
+
+    if (val.trim() !== '') {
+      this.meldingLijst = this.kopieLijstVanMeldingen.filter((item) => {
+        return (item.type.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.melder.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.datum.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.locatie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.pNummer.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.status.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            //(item.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.beschrijving.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.locatiebeschr.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+    }
+  }
 
   lijstMeldingen() {
     this.ms.getAlleMeldingen().subscribe(data => {
@@ -31,8 +56,8 @@ export class Tab1Page {
   }
 
   async addMelding() {
-    console.log("addMelding");
-    this.navCtrl.navigateForward("/melding")
+    console.log('addMelding');
+    this.navCtrl.navigateForward('/melding');
   }
 
   detailMelding(data) {
@@ -46,10 +71,9 @@ export class Tab1Page {
     });
   }
 
-
   async deleteMelding(i, e, id) {
     console.log(e);
-    let event = e.currentTarget.innerText;
+    const event = e.currentTarget.innerText;
 
     const alert = await this.alertCtrl.create({
       header: 'Weet u zeker dat u deze melding wil verwijderen!',
@@ -69,8 +93,5 @@ export class Tab1Page {
       ]
     });
     await alert.present();
-
-
   }
-
 }
