@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
@@ -7,6 +7,9 @@ import { IonicModule } from '@ionic/angular';
 import { MeldingPageRoutingModule } from './melding-routing.module';
 
 import { MeldingPage } from './melding.page';
+
+
+import { FileDropDirective, FileSelectDirective } from "ng2-file-upload";
 
 @NgModule({
   imports: [
@@ -16,6 +19,7 @@ import { MeldingPage } from './melding.page';
     IonicModule,
     MeldingPageRoutingModule
   ],
-  declarations: [MeldingPage]
+  declarations: [MeldingPage, FileSelectDirective,
+    FileDropDirective]
 })
 export class MeldingPageModule { }

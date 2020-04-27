@@ -8,12 +8,12 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content class="bg">
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
         <div>
             <p> melder: {{melder}}</p>
-            <p> PNummer: {{PNummer}}</p>
+            <p> PNummer: {{pNummer}}</p>
             <p class="datumke">{{ datum | date:"dd/MM/yy" }}</p>
         </div>
 
@@ -47,10 +47,59 @@
             <ion-textarea inputmode="text" formControlName="locatiebeschr"></ion-textarea>
         </ion-item>
 
+        <ion-item>
+            <ion-label position="floating">Een vraag stellen: </ion-label>
+            <ion-textarea inputmode="text" formControlName="bericht"></ion-textarea>
+        </ion-item>
+
+
+        <div class="images-preview mt-2" *ngIf="photos.length">
+            <ion-slides [options]="sliderOpts">
+                <ion-slide formArrayName="photos" *ngFor="let photo of photos.controls; let i = index;">
+                    <div class="card mb-3" [formGroupName]="i">
+                        <ion-button color="danger" type="button" (click)="removePhoto(i)" class="btn btn-danger remove-btn">x
+                        </ion-button>
+                        <img [src]="photo.controls.url.value" class="card-img-top" alt="Image Preview" tappable (click)="openPreview(photo.controls.url.value)" height="150px" width="300px">
+                    </div>
+                </ion-slide>
+            </ion-slides>
+        </div>
+
+
+
+        <div id="showHideTakeImg">
+            <div class="form-group" id="imgBrowser">
+                <ion-input color="primary" type="file" id="files" multiple (change)="detectImages($event)" accept="image/*">
+                </ion-input>
+            </div>
+
+            <!-- 
+            vertical="bottom" horizontal="end" -->
+            <ion-fab id="imgMobile" horizontal="end">
+                <ion-fab-button class="fabke" color="danger">Foto</ion-fab-button>
+
+                <ion-fab-list side="top">
+                    <ion-fab-button color="danger" (click)="takePhotos()">
+                        <ion-icon name="camera"></ion-icon>
+                    </ion-fab-button>
+
+                </ion-fab-list>
+                <ion-fab-list side="start">
+                    <ion-fab-button color="danger" (click)="getImage(0)">
+                        <ion-icon name="image"></ion-icon>
+                    </ion-fab-button>
+                </ion-fab-list>
+            </ion-fab>
+        </div>
+
+
         <ion-button class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">Verzenden
         </ion-button>
 
+
+
     </form>
+
 
 
 </ion-content>

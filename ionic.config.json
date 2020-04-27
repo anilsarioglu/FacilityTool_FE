@@ -1,5 +1,7 @@
 {
   "name": "facilitytoolionic",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

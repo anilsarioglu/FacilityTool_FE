@@ -13,4 +13,28 @@
         </ion-toolbar>
     </ion-header>
 
+    <input type="file" accept=".jpg,.png,.jpeg" id="image-input" (change)="selectFile($event)">
+    <br><br> Original: Size: {{sizeOfOriginalImage | number : '1.2-2'}}MB
+    <br><img [src]="localUrl" height="200px">
+    <br><br><br> Compressed: Size: {{sizeOFCompressedImage | number : '1.2-2'}}MB<br>
+    <img [src]="localCompressedURl" height="150px">
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="danger">Foto</ion-fab-button>
+
+        <ion-fab-list side="top">
+            <ion-fab-button color="danger" (click)="takePhotos()">
+                <ion-icon name="camera"></ion-icon>
+            </ion-fab-button>
+
+        </ion-fab-list>
+        <ion-fab-list side="start">
+            <ion-fab-button color="danger" (click)="getImage(0)">
+                <ion-icon name="image"></ion-icon>
+            </ion-fab-button>
+        </ion-fab-list>
+    </ion-fab>
+
+
+
 </ion-content>

@@ -4,6 +4,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LocatieService } from '../services/locatie/locatie.service';
+import { MeldingService } from '../services/melding/melding.service';
 
 @Component({
   selector: 'app-locatie',
@@ -15,15 +16,19 @@ export class LocatiePage implements OnInit {
   locaties: Locatie[];
   locatieLijst: any[];
 
+  meldingbestaat: Boolean;
+  tekst;
+
 
   constructor(private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController) { }
+    private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController, private ms: MeldingService) { }
 
   ngOnInit() {
     this.ls.geefAlleLocaties().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
     })
+
 
   }
 
@@ -67,13 +72,30 @@ export class LocatiePage implements OnInit {
 
     const alert = await this.alertCtrl.create({
       header: "Locatie",
-      message: "" + event,
+      message: "" + event.toLowerCase(),
       buttons: [
         {
-          text: 'Selecteer',
+          text: 'Selecteer locatie',
           handler: () => {
             alert.dismiss().then(() => { this.router.navigate(['/melding' + '/' + event]); });
             return false;
+          }
+        },
+        {
+          text: 'reeds gemelde defecten',
+          handler: () => {
+            this.ms.getAlleLocatiesFromMeldingen(event).subscribe(async data => {
+              if (data.length >= 1) {
+                alert.dismiss().then(() => { this.router.navigate(['/locatie-melding' + '/' + event]); });
+                return false;
+              } else {
+                const alert2 = await this.alertCtrl.create({
+                  header: "Geen defecten.",
+                  buttons: [{ text: 'Annuleer' }]
+                });
+                alert2.present();
+              }
+            })
           }
         },
         { text: 'Annuleer' }
@@ -92,3 +114,7 @@ export class LocatiePage implements OnInit {
   }
 
 }
+
+
+
+

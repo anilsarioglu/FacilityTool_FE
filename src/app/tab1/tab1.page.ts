@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, ActionSheetController } from '@ionic/angular';
+import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MeldingService } from '../services/melding/melding.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tab1',
@@ -14,9 +15,10 @@ export class Tab1Page {
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
 
-  constructor(private ms: MeldingService, private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private ms: MeldingService, private alertCtrl: AlertController, private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
     this.melding = this.activatedRoute.snapshot.params['melding'];
     this.lijstMeldingen();
+
   }
 
 
@@ -44,5 +46,31 @@ export class Tab1Page {
     });
   }
 
+
+  async deleteMelding(i, e, id) {
+    console.log(e);
+    let event = e.currentTarget.innerText;
+
+    const alert = await this.alertCtrl.create({
+      header: "Weet u zeker dat u deze melding wil verwijderen!",
+      message: "" + event.toLowerCase(),
+      buttons: [
+        {
+          text: 'Ja',
+          handler: () => {
+            alert.dismiss().then(() => {
+              this.ms.deleteMelding(id).subscribe();
+              this.meldingLijst.splice(i, 1);
+            });
+            return false;
+          }
+        },
+        { text: 'Nee' }
+      ]
+    });
+    await alert.present();
+
+
+  }
 
 }
