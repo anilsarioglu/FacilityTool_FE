@@ -12,10 +12,25 @@
             <ion-title size="large">Meldingen</ion-title>
         </ion-toolbar>
     </ion-header>
+
+    <ion-list>
+        <ion-item>
+            <ion-label>Sorteer op:</ion-label>
+            <ion-select [(ngModel)]="sortVal" name="sorting" placeholder="Selecteer filter" (ionChange)="sortAll()">
+                <ion-select-option value="datum">Datum</ion-select-option>
+                <ion-select-option value="type">Type</ion-select-option>
+                <ion-select-option value="locatie">Locatie</ion-select-option>
+                <ion-select-option value="status">Status</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+
+    <p>Opdracht</p><ion-toggle [(ngModel)]="toggle" (ionChange)="toggleOpdDef()"></ion-toggle><p>Defect</p>
+
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
     <ion-grid>
         <ion-row>
-            <ion-col *ngFor="let ml of meldingLijst;let i = index;" id="kaart">
+            <ion-col *ngFor="let ml of kopieLijstVanMeldingen;let i = index;" id="kaart">
                 <ion-card>
                     <ion-item>
                         <ion-icon name="pin" slot="start"></ion-icon>
