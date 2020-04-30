@@ -69,7 +69,8 @@ export class Tab1Page {
   async sortAll() {
     this.kopieLijstVanMeldingen = this.kopieLijstVanMeldingen.sort((n1, n2) => {
       if (this.sortVal === 'datum') {
-        return n1.datum - n2.datum;
+
+        return 0;
       } else if (this.sortVal === 'type') {
         if (n1.type > n2.type) {
           return 1;
@@ -128,7 +129,7 @@ export class Tab1Page {
             alert.dismiss().then(() => {
               this.ms.deleteMelding(id).subscribe();
               this.kopieLijstVanMeldingen.splice(i, 1);
-              this.lijstMeldingen();
+              window.location.reload();
             });
             return false;
           }
