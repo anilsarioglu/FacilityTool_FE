@@ -147,7 +147,7 @@ export class Tab1Page {
     console.log("Cliked on item " + index);
 
     this.ms.upvoteMelding(this.melding.id).subscribe((updatedMelding) => {
-      this.meldingLijst[index] = updatedMelding;
+      this.kopieLijstVanMeldingen[index] = updatedMelding;
       console.log(updatedMelding);
     });
 
