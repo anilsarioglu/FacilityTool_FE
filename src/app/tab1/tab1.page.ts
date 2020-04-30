@@ -127,7 +127,8 @@ export class Tab1Page {
           handler: () => {
             alert.dismiss().then(() => {
               this.ms.deleteMelding(id).subscribe();
-              this.meldingLijst.splice(i, 1);
+              this.kopieLijstVanMeldingen.splice(i, 1);
+              this.lijstMeldingen();
             });
             return false;
           }
@@ -135,6 +136,7 @@ export class Tab1Page {
         { text: 'Nee' }
       ]
     });
+    this.activeList();
     await alert.present();
   }
 }

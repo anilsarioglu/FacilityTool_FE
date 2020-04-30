@@ -79,7 +79,7 @@ export class MeldingPage implements OnInit {
 
     // console.log(this.uploadForm.value);
     this.ms.postAlleMeldingen(this.uploadForm.value).subscribe((data) => { console.log(data); });
-    this.router.navigate(['/tab1']);
+    this.router.navigate(['/tabs/tab1']);
   }
 
   dataURItoBlob(dataURI) {
@@ -94,7 +94,7 @@ export class MeldingPage implements OnInit {
   }
 
   async kiesLocatie() {
-    this.navCtrl.navigateForward("/locatie")
+    this.navCtrl.navigateForward("/locatie");
   }
 
   createItem(data): FormGroup {
