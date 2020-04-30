@@ -3,11 +3,12 @@ import { NavController, ModalController, ActionSheetController, AlertController 
 import { Router, ActivatedRoute } from '@angular/router';
 import { MeldingService } from '../services/melding/melding.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Melding } from '../services/melding/melding';
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
 
@@ -139,5 +140,17 @@ export class Tab1Page {
     });
     this.activeList();
     await alert.present();
+  }
+
+  /** Upvoting System **/
+  onIconClick(melding: Melding, index: number) {
+    this.melding = melding;
+    console.log("Cliked on item " + index);
+
+    this.ms.upvoteMelding(this.melding.id).subscribe((updatedMelding) => {
+      this.kopieLijstVanMeldingen[index] = updatedMelding;
+      console.log(updatedMelding);
+    });
+
   }
 }
