@@ -14,7 +14,7 @@ export class Melding {
         /*public image: Binary*/
         
         /** Upvoting System **/
-        public numberUpvotes: string,
+        public numberUpvotes: number,
         public isUpvoted: boolean
         ) 
         {

@@ -53,7 +53,7 @@ export class MeldingService {
     return this.http.get<any>(this.urlMeldingDeleteById + id, { headers: this.contentHeaders });
   }
 
-  upvoteMelding(id: string) {
+  upvoteMelding(id: string): Observable<Melding> {
     return this.http.put<Melding>(this.urlMeldingUpvote + id, { headers: this.contentHeaders});
   }
 

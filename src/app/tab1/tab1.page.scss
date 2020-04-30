@@ -7,3 +7,25 @@ ion-content ion-toolbar {
 //     margin-left: auto;
 //     margin-right: auto;
 // }
+
+.box1 {
+    position: relative;
+}
+
+.description {
+    position: relative;
+}
+
+.upvote {
+    position: absolute; 
+    bottom: 0px; 
+    right: 0px;
+}
+
+.upvote p {
+    text-align: center;
+}
+
+.heart-icon {
+    font-size: 35px;
+}

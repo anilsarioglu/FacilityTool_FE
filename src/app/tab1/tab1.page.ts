@@ -8,7 +8,7 @@ import { Melding } from '../services/melding/melding';
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
-  styleUrls: ['tab1.page.scss']
+  styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
 
@@ -16,7 +16,8 @@ export class Tab1Page {
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
 
-  constructor(private ms: MeldingService, private alertCtrl: AlertController, private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private ms: MeldingService, private alertCtrl: AlertController, private navCtrl: NavController, 
+    private router: Router, private activatedRoute: ActivatedRoute) {
     this.melding = this.activatedRoute.snapshot.params['melding'];
     this.lijstMeldingen();
 
@@ -70,13 +71,17 @@ export class Tab1Page {
       ]
     });
     await alert.present();
-
-
   }
 
   /** Upvoting System **/
-  onIconClick(melding: Melding) {
-    console.log("Cliked");
-    this.ms.upvoteMelding(melding.id).subscribe();
+  onIconClick(melding: Melding, index: number) {
+    this.melding = melding;
+    console.log("Cliked on item " + index);
+
+    this.ms.upvoteMelding(this.melding.id).subscribe((updatedMelding) => {
+      this.meldingLijst[index] = updatedMelding;
+      console.log(updatedMelding);
+    });
+
   }
 }
