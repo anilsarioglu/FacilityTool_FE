@@ -38,28 +38,37 @@
 
 
 
-        <ion-card class="card" *ngFor="let mdr of meldingData.reactie">
+        <ion-list>
+
+            <ion-item *ngFor="let mdr of meldingData.reactie">
+                <ion-avatar slot="start">
+                    <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
+                </ion-avatar>
+                <ion-label>
+                    <h3>{{mdr.name}}</h3>
+                    <p>{{mdr.message}}</p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+
+
+        <!-- <ion-card class="card" *ngFor="let mdr of meldingData.reactie">
 
             <ion-card-header>
-                <ion-card-title>{{mdr.melder}}</ion-card-title>
-                <ion-card-subtitle>{{mdr.datum}} </ion-card-subtitle>
+                <ion-card-title>{{mdr.name}}</ion-card-title>
 
             </ion-card-header>
 
             <ion-card-content>
-                {{mdr.bericht}}
+                {{mdr.message}}
             </ion-card-content>
 
-        </ion-card>
-
-
-
-
+        </ion-card> -->
 
 
         <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
             <ion-item>
-                <ion-textarea required inputmode="text" formControlName="bericht" placeholder="Schrijf een reactie">
+                <ion-textarea required inputmode="text" formControlName="message" placeholder="Schrijf een reactie">
                 </ion-textarea>
             </ion-item>
 

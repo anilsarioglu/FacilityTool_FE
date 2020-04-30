@@ -72,9 +72,10 @@ export class MeldingPage implements OnInit {
   uploadSubmit() {
 
     this.reacties.push(this.createItem({
-      melder: this.melder,
-      bericht: this.berichten,
-      datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
+      // id: this.be,
+      name: this.melder,
+      message: this.berichten
+      // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
     // console.log(this.uploadForm.value);
@@ -152,15 +153,8 @@ export class MeldingPage implements OnInit {
       result => {
         this.imgResultAfterCompress = result;
         this.localCompressedURl = result;
-        // console.log(this.imgResultAfterCompress);
         this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024)
-        // console.warn('Size in bytes after compression:', this.sizeOFCompressedImage);
-        // create file from byte
-        // const imageName = fileName;
-        // call method that creates a blob from dataUri
         const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
-        //imageFile created below is the new compressed file which can be send to API in form data
-        // const imageFile = new File([result], imageName, { type: 'image/*' });
 
       });
   }
@@ -209,9 +203,7 @@ export class MeldingPage implements OnInit {
 
     this.camera.getPicture(options).then(imagedata => {
       let data = 'data:image/*;base64,' + imagedata;
-      // this.afbeelding.push(data);
       this.localUrl = data;
-      // console.log(data);
       this.photos.push(this.createItem({
         url: this.localUrl
       }));

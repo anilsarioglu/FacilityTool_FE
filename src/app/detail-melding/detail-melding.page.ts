@@ -33,14 +33,29 @@ export class DetailMeldingPage implements OnInit {
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
     });
-    // this.id = 1;
 
   }
 
   ngOnInit() {
-    // this.id++;
     this.formulier();
   }
+
+  uploadSubmit() {
+    console.log(this.uploadForm.value);
+    this.ms.postAlleReacties(this.uploadForm.value).subscribe();
+  }
+
+  formulier() {
+    this.uploadForm = this.fb.group({
+      id: this.meldingData.id,
+      name: this.meldingData.melder,
+      message: []
+    });
+  }
+
+
+
+  get messages() { return this.uploadForm.get("message") };
 
 
   openPreview(img) {
@@ -51,46 +66,6 @@ export class DetailMeldingPage implements OnInit {
       }
     }).then(modal => modal.present());
   }
-
-
-
-  uploadSubmit() {
-    this.reacties.push(this.createItem({
-      melder: this.meldingData.melder,
-      bericht: this.berichten,
-      datum: this.datePipe.transform(this.myDate, 'dd-MM-yyTHH:mm:ss')
-    }));
-
-    console.log(this.uploadForm.value);
-    this.ms.postAlleMeldingen(this.uploadForm.value).subscribe((data) => { console.log(data); });
-
-  }
-
-
-
-  formulier() {
-    this.uploadForm = this.fb.group({
-      id: [this.meldingData.id],
-      melder: [this.meldingData.melder],
-      datum: [this.meldingData.datum],
-      pNummer: [this.meldingData.pNummer],
-      type: [this.meldingData.type],
-      locatie: [this.meldingData.locatie],
-      beschrijving: [this.meldingData.beschrijving],
-      locatiebeschr: [this.meldingData.locatiebeschr],
-      status: [this.meldingData.status],
-      reactie: this.fb.array([]),
-      bericht: []
-    });
-  }
-
-  createItem(data): FormGroup {
-    return this.fb.group(data);
-  }
-
-
-  get reacties(): FormArray { return this.uploadForm.get('reactie') as FormArray; }
-  get berichten() { return this.uploadForm.get("bericht") };
 
 
 }
