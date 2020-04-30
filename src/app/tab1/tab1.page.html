@@ -47,12 +47,24 @@
                     </div>
 
                     <ion-card-content>
-                        <p>{{ml.datum}}</p>
-                        <p>{{ml.locatie}}</p>
-                        <p> {{ml.type}}</p>
-                        <p> {{ml.beschrijving}}</p>
-                        <p> {{ml.locatiebeschr}}</p>
-
+                        <div class="box1">
+                            <div class="description">
+                                <p>{{ml.datum}}</p>
+                                <p>{{ml.locatie}}</p>
+                                <p> {{ml.type}}</p>
+                                <p> {{ml.beschrijving}}</p>
+                                <p> {{ml.locatiebeschr}}</p>
+                            </div>
+                            <div class="upvote">
+                                <p>{{ ml.numberUpvotes }}</p>
+                                <ion-button icon-only *ngIf="!ml.upvoted" (click)="onIconClick(ml, i)">
+                                    <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+                                </ion-button>
+                                <ion-button icon-only *ngIf="ml.upvoted" (click)="onIconClick(ml, i)">
+                                    <ion-icon name="heart" class="heart-icon"></ion-icon>
+                                </ion-button>
+                            </div>
+                        </div>
                     </ion-card-content>
                 </ion-card>
             </ion-col>

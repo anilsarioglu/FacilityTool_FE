@@ -21,9 +21,11 @@ export class MeldingService {
 
   private urlFindById = "http://localhost:8080/meldingJSON/findById/";
 
+  private urlMeldingUpvote = "http://localhost:8080/melding/upvote/";
+
   constructor(private http: HttpClient) {
     this.contentHeaders = new HttpHeaders();
-    this.contentHeaders.set('Content-Type', undefined);
+    this.contentHeaders.set('Content-Type', 'application/json');
 
     // this.contentHeaders.set('Content-Type', 'application/x-www-form-urlencoded');
     // this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
@@ -42,8 +44,6 @@ export class MeldingService {
     return this.http.get<any>(this.urlFindById + id, { headers: this.contentHeaders });
   }
 
-
-
   getAlleLocatiesFromMeldingen(locatie: Melding): Observable<Melding[]> {
     return this.http.get<any>(this.urlMeldingJsonFindByLocatie + locatie, { headers: this.contentHeaders });
   }
@@ -53,7 +53,9 @@ export class MeldingService {
     return this.http.get<any>(this.urlMeldingDeleteById + id, { headers: this.contentHeaders });
   }
 
-
+  upvoteMelding(id: string): Observable<Melding> {
+    return this.http.put<Melding>(this.urlMeldingUpvote + id, { headers: this.contentHeaders});
+  }
 
 
 
