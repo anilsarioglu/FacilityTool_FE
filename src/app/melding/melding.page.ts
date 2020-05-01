@@ -107,7 +107,8 @@ export class MeldingPage implements OnInit {
     this.uploadForm = this.fb.group({
       melder: [this.melder],
       pNummer: [this.pNummer],
-      datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
+      // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
+      datum: [this.datum],
       type: ['', [Validators.required]],
       locatie: [this.locatie],
       beschrijving: ['', [Validators.required, Validators.maxLength(100)]],
