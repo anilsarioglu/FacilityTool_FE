@@ -18,6 +18,15 @@
         </div>
 
         <div>
+            <label>Locatie: </label>
+            <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0">
+            <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
+                Locatie kiezen
+            </ion-button>
+
+        </div>
+
+        <div>
             <ion-item>
                 <ion-label>Type</ion-label>
                 <ion-select value="d" ok-text="OK" cancel-text="Annuleren" formControlName="type">
@@ -28,14 +37,7 @@
             </ion-item>
         </div>
 
-        <div>
-            <label>Locatie: </label>
-            <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0">
-            <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
-                Locatie kiezen
-            </ion-button>
 
-        </div>
 
         <ion-item>
             <ion-label position="floating">Beschrijving: </ion-label>

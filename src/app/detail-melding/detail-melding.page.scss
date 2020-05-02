@@ -3,7 +3,8 @@
         margin-left: 41%;
         .profilepicposition {
             position: absolute;
-            right: 0%;
+            // right: 0%;
+            right: 3%;
             bottom: 20%
         }
     }
@@ -14,11 +15,15 @@
         overflow-wrap: break-word;
         white-space: normal;
         word-break: break-all;
-        margin-right: 20px;
+        // margin-right: 20px;
+        margin-right: 32px;
     }
     ion-slides {
         margin-top: 10%;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    ion-list {
+        margin-top: 10%;
     }
     @media screen and (min-width: 576px) {
         // browser
@@ -33,5 +38,42 @@
     }
     .card {
         margin-top: 50px !important;
+    }
+    input {
+        float: left;
+        height: 50px;
+        border-radius: 15px;
+        font-size: 1.5em;
+        margin-top: 10%;
+        width: 90%;
+    }
+    .send {
+        float: right;
+        // background: url("../../assets/imgs/send.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 30px;
+        width: 30px;
+        margin-left: -1px;
+        margin-top: 10%
+    }
+    .chat-container {
+        margin-left: 43%;
+        .socketAvatar {
+            margin-left: 90%;
+            // margin-bottom: -15%;
+        }
+    }
+    .localItem {
+        // margin-left: -5%;
+        margin-left: -10%;
+    }
+    .localvalues {
+        margin-left: -95%;
+        // margin-left: -85%;
+        line-height: 90%;
+    }
+    .sub {
+        color: #666666;
     }
 }

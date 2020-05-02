@@ -74,7 +74,8 @@ export class MeldingPage implements OnInit {
     this.reacties.push(this.createItem({
       // id: this.be,
       name: this.melder,
-      message: this.berichten
+      message: this.berichten,
+      datum: this.datum
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
@@ -83,16 +84,7 @@ export class MeldingPage implements OnInit {
     this.router.navigate(['/tab1']);
   }
 
-  dataURItoBlob(dataURI) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([int8Array], { type: 'image/*' });
-    return blob;
-  }
+
 
   async kiesLocatie() {
     this.navCtrl.navigateForward("/locatie")
@@ -145,11 +137,21 @@ export class MeldingPage implements OnInit {
     }).then(modal => modal.present());
   }
 
+  dataURItoBlob(dataURI) {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/*' });
+    return blob;
+  }
+
 
   compressFile(image) {
     var orientation = -1;
     this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
-    // console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
     this.imageCompress.compressFile(image, orientation, 50, 50).then(
       result => {
         this.imgResultAfterCompress = result;
@@ -210,5 +212,29 @@ export class MeldingPage implements OnInit {
       }));
     });
   }
+
+
+  takePhotos() {
+    let options: CameraOptions = {
+      quality: 100,
+      allowEdit: true,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      correctOrientation: true,
+      mediaType: this.camera.MediaType.PICTURE,
+      encodingType: this.camera.EncodingType.JPEG,
+      destinationType: this.camera.DestinationType.FILE_URI
+    }
+    this.camera.getPicture().then((imagedata) => {
+      let filename = imagedata.substring(imagedata.lastIndexOf('/') + 1);
+      let path = imagedata.substring(0, imagedata.lastIndexOf('/') + 1);
+      this.file.readAsDataURL(path, filename).then(base64data => {
+        this.photos.push(this.createItem({
+          url: base64data
+        }));
+      })
+    })
+  }
+
 
 }

@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LocatieService } from '../services/locatie/locatie.service';
 import { MeldingService } from '../services/melding/melding.service';
-
+import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-locatie',
   templateUrl: './locatie.page.html',
@@ -20,13 +20,22 @@ export class LocatiePage implements OnInit {
   tekst;
 
 
-  constructor(private navCtrl: NavController, private router: Router,
+  constructor(private storage: Storage, private navCtrl: NavController, private router: Router,
     private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController, private ms: MeldingService) { }
 
+
   ngOnInit() {
+    this.storage.get("location").then(data => {
+      if (this.locaties || this.locaties.length == data.length) {
+        this.locaties = data;
+        // console.log(data.length);
+      }
+    })
+
     this.ls.geefAlleLocaties().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
+      this.storage.set("location", this.locaties);
     })
 
 
