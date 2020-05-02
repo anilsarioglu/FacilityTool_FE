@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { NavController, NavParams, ModalController } from '@ionic/angular';
+import { NavController, NavParams, ModalController, PopoverController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { getLocaleMonthNames, DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,7 +12,9 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { ImageModalPage } from '../image-modal/image-modal.page';
 import { FileUploader } from 'ng2-file-upload';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Prediction } from '../services/prediction/prediction';
+import * as mobilenet from '@tensorflow-models/mobilenet';
 
 @Component({
   selector: 'app-melding',
@@ -22,6 +24,11 @@ import { FileUploader } from 'ng2-file-upload';
 
 export class MeldingPage implements OnInit {
 
+  @ViewChild('img', { static: false }) imageEl: ElementRef;
+
+  predictions: Prediction[];
+
+  model: any;
 
   uploadForm: FormGroup;
   meldingen: Melding[];
@@ -53,7 +60,7 @@ export class MeldingPage implements OnInit {
 
 
   private contentHeaders: HttpHeaders;
-  constructor(private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
+  constructor(private popoverController: PopoverController, private barcode: BarcodeScanner, private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
     private imageCompress: NgxImageCompressService, private modalController: ModalController,
     private http: HttpClient, private navCtrl: NavController,
     private router: Router, private activatedRoute: ActivatedRoute,
@@ -63,11 +70,20 @@ export class MeldingPage implements OnInit {
 
   }
 
+  popup() {
+    for (let i = 0; i < this.predictions.length; i++) {
+      alert(this.predictions[i].className + "-" + this.predictions[i].probability)
+    }
 
-
-  ngOnInit() {
-    this.formulier();
   }
+
+
+
+  async ngOnInit() {
+    this.formulier();
+    this.model = await mobilenet.load();
+  }
+
 
   uploadSubmit() {
 
@@ -172,10 +188,15 @@ export class MeldingPage implements OnInit {
       var reader = new FileReader();
       reader.onload = (event: any) => {
         this.localUrl = event.target.result;
+        setTimeout(async () => {
+          const imgEl = this.imageEl.nativeElement;
+          this.predictions = await this.model.classify(imgEl);
+        }, 0);
         // 35, 25
         //10,5
         this.imageCompress.compressFile(this.localUrl, orientation, 10, 5).then(
           result => {
+
             this.photos.push(this.createItem({
               name: file.name,
               lastModified: file.lastModified,
@@ -184,11 +205,29 @@ export class MeldingPage implements OnInit {
               type: file.type,
               url: result
             }));
+
           });
       }
       reader.readAsDataURL(file);
     }
   }
+
+
+  public errorMessages = {
+    type: [
+      { type: 'required', message: 'Kies defect of opdracht' }
+    ],
+    locatie: [
+      { type: 'required', message: 'kies een locatie' }
+    ],
+    beschrijving: [
+      { type: 'required', message: 'Een beschrijving is noodzakelijk' },
+      { type: 'mexlength', message: 'Rustig, je moet ook geen verhaal schrijven' }
+    ],
+    locatiebeschr: [
+      { type: 'mexlength', message: 'Lengte mag niet langer dan 100 karakters bevatten' }
+    ]
+  };
 
 
   getImage(sourceType: number) {
@@ -215,6 +254,12 @@ export class MeldingPage implements OnInit {
 
 
   takePhotos() {
+    this.barcode.scan().then(data => {
+      this.photos.push(this.createItem({
+        text: data.text
+      }));
+    })
+
     let options: CameraOptions = {
       quality: 100,
       allowEdit: true,

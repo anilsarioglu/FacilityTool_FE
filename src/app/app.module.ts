@@ -21,6 +21,7 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ImageModalPage } from './image-modal/image-modal.page';
 import { IonicStorageModule } from '@ionic/storage';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent, ImageModalPage],
@@ -42,6 +43,7 @@ import { IonicStorageModule } from '@ionic/storage';
     File,
     PhotoViewer,
     ImagePicker,
+    BarcodeScanner,
     NgxImageCompressService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

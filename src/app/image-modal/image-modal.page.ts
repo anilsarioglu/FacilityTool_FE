@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NavParams, ModalController, IonSlides } from '@ionic/angular';
 
+
 @Component({
   selector: 'app-image-modal',
   templateUrl: './image-modal.page.html',
@@ -9,6 +10,7 @@ import { NavParams, ModalController, IonSlides } from '@ionic/angular';
 export class ImageModalPage implements OnInit {
 
   img: any;
+
 
   @ViewChild('slider', { read: ElementRef, static: true }) slider: ElementRef;
 
@@ -23,8 +25,9 @@ export class ImageModalPage implements OnInit {
 
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.img = this.navParams.get('img');
+
   }
 
   zoom(zoomIn: boolean) {
