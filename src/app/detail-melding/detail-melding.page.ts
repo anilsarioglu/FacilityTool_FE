@@ -77,7 +77,6 @@ export class DetailMeldingPage implements OnInit {
     });
   }
 
-
   sendMessage(message) {
     this.stompClient.send('/app/send/message', {}, message);
     $('#input').val('');
