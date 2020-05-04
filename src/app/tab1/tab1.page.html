@@ -1,5 +1,6 @@
 <ion-header [translucent]="true">
     <ion-toolbar color="danger">
+        <!-- <img src="./assets/icon/apicon.png" width="40px" style="display:inline-block" height="40px"/> -->
         <ion-title class="ion-text-center">
             Meldingen
         </ion-title>
@@ -13,21 +14,28 @@
         </ion-toolbar>
     </ion-header>
 
-    <ion-list>
-        <ion-item>
-            <ion-label>Sorteer op:</ion-label>
-            <ion-select [(ngModel)]="sortVal" name="sorting" placeholder="Selecteer filter" (ionChange)="sortAll()">
-                <ion-select-option value="datum">Datum</ion-select-option>
-                <ion-select-option value="type">Type</ion-select-option>
-                <ion-select-option value="locatie">Locatie</ion-select-option>
-                <ion-select-option value="status">Status</ion-select-option>
-            </ion-select>
-        </ion-item>
-    </ion-list>
-
-    <p>Opdracht</p><ion-toggle [(ngModel)]="toggle" (ionChange)="toggleOpdDef()"></ion-toggle><p>Defect</p>
-
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+
+    <div id="filter">
+        <ion-list id="sortingList">
+            <ion-item>
+                <ion-label>Sorteer op:</ion-label>
+                <ion-select [(ngModel)]="sortVal" placeholder="" (ionChange)="sortAll()">
+                    <ion-select-option value="datum">Datum</ion-select-option>
+                    <ion-select-option value="type">Type</ion-select-option>
+                    <ion-select-option value="locatie">Locatie</ion-select-option>
+                    <ion-select-option value="status">Status</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+        <div id="toggleOD">
+            <p>Opdracht</p>
+            <ion-toggle [(ngModel)]="toggle" (ionChange)="toggleOpdDef()"></ion-toggle>
+            <p>Defect</p>
+        </div>
+    </div>
+    <br/>
+
     <ion-grid>
         <ion-row>
             <ion-col *ngFor="let ml of kopieLijstVanMeldingen;let i = index;" id="kaart">
@@ -49,7 +57,7 @@
                     <ion-card-content>
                         <div class="box1">
                             <div class="description">
-                                <p>{{ml.datum}}</p>
+                                <p>{{ml.datum | date:'dd/MM/yy-HHumm'}}</p>
                                 <p>{{ml.locatie}}</p>
                                 <p> {{ml.type}}</p>
                                 <p> {{ml.beschrijving}}</p>
@@ -71,7 +79,7 @@
         </ion-row>
     </ion-grid>
 
-
+    <ion-button (click)='ExportJson()' class="exportbutton" id="export" color="danger">Lijst Exporteren</ion-button>
 
     <ion-fab (click)="addMelding()" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button color="danger">

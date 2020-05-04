@@ -1,12 +1,42 @@
 ion-content ion-toolbar {
     --background: translucent;
 }
+ion-searchbar {
+    text-align:center;
+}
 
-// #kaart {
-//     width: 650px;
-//     margin-left: auto;
-//     margin-right: auto;
-// }
+#filter {
+    margin:auto;
+    text-align:center;
+}
+
+#sortingList {
+    margin:auto;
+    width: 18%;
+    display: inline-block;
+}
+
+#sortingList ion-label{
+    font-size: 12px;
+}
+
+#toggleOD {
+    display: inline-block;
+    position: relative;
+    bottom: 10px;
+    padding-left: 15%;
+    font-size: 12px;
+}
+
+#toggleOD p, ion-toggle{
+    float: left;
+}
+
+ion-grid {
+    margin:auto;
+}
+
+
 
 .box1 {
     position: relative;
@@ -28,4 +58,12 @@ ion-content ion-toolbar {
 
 .heart-icon {
     font-size: 35px;
+}
+
+.exportbutton {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin-right: 80%;
+    margin-bottom: 30px;
 }

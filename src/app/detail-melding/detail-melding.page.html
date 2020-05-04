@@ -14,7 +14,7 @@
         <ion-card>
             <ion-card-header>
                 <ion-card-title>{{meldingData.melder}}</ion-card-title>
-                <ion-card-subtitle>{{meldingData.datum}} </ion-card-subtitle>
+                <ion-card-subtitle>{{meldingData.datum | date:'dd/MM/yy-HHumm'}} </ion-card-subtitle>
 
             </ion-card-header>
 
@@ -37,13 +37,12 @@
         </div>
 
 
-
+        <div *ngIf="!(meldingData.reactie.length)">
         <ion-card class="card" *ngFor="let mdr of meldingData.reactie">
 
             <ion-card-header>
                 <ion-card-title>{{mdr.melder}}</ion-card-title>
                 <ion-card-subtitle>{{mdr.datum}} </ion-card-subtitle>
-
             </ion-card-header>
 
             <ion-card-content>
@@ -51,7 +50,7 @@
             </ion-card-content>
 
         </ion-card>
-
+        </div>
 
 
 

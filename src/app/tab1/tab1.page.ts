@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MeldingService } from '../services/melding/melding.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Melding } from '../services/melding/melding';
+import {formatDate} from '@angular/common';
 
 @Component({
   selector: 'app-tab1',
@@ -67,11 +68,11 @@ export class Tab1Page {
     this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen;
   }
 
-  async sortAll() {
+  sortAll() {
     this.kopieLijstVanMeldingen = this.kopieLijstVanMeldingen.sort((n1, n2) => {
       if (this.sortVal === 'datum') {
-
-        return 0;
+        // @ts-ignore
+          return new Date(n1.datum) as any - new Date(n2.datum) as any;
       } else if (this.sortVal === 'type') {
         if (n1.type > n2.type) {
           return 1;
@@ -142,15 +143,40 @@ export class Tab1Page {
     await alert.present();
   }
 
-  /** Upvoting System **/
+  // Upvoting System
   onIconClick(melding: Melding, index: number) {
     this.melding = melding;
-    console.log("Cliked on item " + index);
+    console.log('Cliked on item ' + index);
 
     this.ms.upvoteMelding(this.melding.id).subscribe((updatedMelding) => {
-      this.kopieLijstVanMeldingen[index] = updatedMelding;
+      this.meldingLijst[index] = updatedMelding;
+      this.lijstMeldingen();
       console.log(updatedMelding);
     });
+  }
+
+  downloadCSVFromJson = (filename, arrayOfJson) => {
+    // convert JSON to CSV
+    const replacer = (key, value) => value === null ? '' : value;
+    const header = Object.keys(arrayOfJson[0]);
+    let csv = arrayOfJson.map(row => header.map(fieldName =>
+        JSON.stringify(row[fieldName], replacer)).join(','));
+    csv.unshift(header.join(','));
+    csv = csv.join('\r\n');
+
+    // Create link and download
+    const link = document.createElement('a');
+    link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
+    link.setAttribute('download', filename);
+    link.style.visibility = 'hidden';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
   }
+
+  ExportJson() {
+    this.downloadCSVFromJson('MeldingenLijst.csv', this.kopieLijstVanMeldingen);
+  }
+
 }

@@ -72,7 +72,7 @@ export class MeldingPage implements OnInit {
     this.reacties.push(this.createItem({
       melder: this.melder,
       bericht: this.berichten,
-      datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
+      //datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
     // console.log(this.uploadForm.value);
@@ -104,7 +104,8 @@ export class MeldingPage implements OnInit {
     this.uploadForm = this.fb.group({
       melder: [this.melder],
       pNummer: [this.pNummer],
-      datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
+      //datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
+      datum: [this.datum],
       type: ['', [Validators.required]],
       locatie: [this.locatie],
       beschrijving: ['', [Validators.required, Validators.maxLength(100)]],
