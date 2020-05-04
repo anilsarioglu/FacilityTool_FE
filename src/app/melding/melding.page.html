@@ -18,6 +18,19 @@
         </div>
 
         <div>
+            <label>Locatie: </label>
+            <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0">
+            <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
+                Locatie kiezen
+            </ion-button>
+            <div *ngFor="let error of errorMessages.name">
+                <ng-container *ngIf="locatie.hasError(error.type)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
+        </div>
+
+        <div>
             <ion-item>
                 <ion-label>Type</ion-label>
                 <ion-select value="d" ok-text="OK" cancel-text="Annuleren" formControlName="type">
@@ -27,25 +40,33 @@
                 </ion-select>
             </ion-item>
         </div>
-
-        <div>
-            <label>Locatie: </label>
-            <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0">
-            <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
-                Locatie kiezen
-            </ion-button>
-
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="type.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
         </div>
+
+
 
         <ion-item>
             <ion-label position="floating">Beschrijving: </ion-label>
             <ion-textarea required inputmode="text" formControlName="beschrijving"></ion-textarea>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="beschrijving.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label position="floating">Locatie beschrijving: </ion-label>
             <ion-textarea inputmode="text" formControlName="locatiebeschr"></ion-textarea>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="locatiebeschr.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label position="floating">Een vraag stellen: </ion-label>
@@ -53,17 +74,25 @@
         </ion-item>
 
 
-        <div class="images-preview mt-2" *ngIf="photos.length">
+            <div class="images-preview mt-2" *ngIf="photos.length">
             <ion-slides [options]="sliderOpts">
                 <ion-slide formArrayName="photos" *ngFor="let photo of photos.controls; let i = index;">
                     <div class="card mb-3" [formGroupName]="i">
+                        <ion-icon size="large" color="primary" (mouseover)="popup()" name="information-circle">
+                        </ion-icon>
                         <ion-button color="danger" type="button" (click)="removePhoto(i)" class="btn btn-danger remove-btn">x
                         </ion-button>
-                        <img [src]="photo.controls.url.value" class="card-img-top" alt="Image Preview" tappable (click)="openPreview(photo.controls.url.value)" height="150px" width="300px">
+                        <img #img [src]="photo.controls.url.value" class="card-img-top" alt="Image Preview" tappable (click)="openPreview(photo.controls.url.value)" height="150px" width="300px">
                     </div>
+                    <!-- <div class="list-group">
+                        <div class="list-group-item" *ngFor="let prediction of predictions">
+                            {{prediction.className}} - {{prediction.probability}}
+                        </div>
+                    </div> -->
                 </ion-slide>
             </ion-slides>
-        </div>
+
+            </div>
 
 
 
@@ -93,10 +122,7 @@
         </div>
 
 
-        <ion-button class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">Verzenden
-        </ion-button>
-
-
+        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">Verzenden</ion-button>
 
     </form>
 

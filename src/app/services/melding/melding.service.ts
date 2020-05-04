@@ -23,6 +23,9 @@ export class MeldingService {
 
   private urlMeldingUpvote = "http://localhost:8080/melding/upvote/";
 
+
+  private urlReactions = 'http://localhost:8080/melding/reactie';
+
   constructor(private http: HttpClient) {
     this.contentHeaders = new HttpHeaders();
     this.contentHeaders.set('Content-Type', 'application/json');
@@ -34,6 +37,10 @@ export class MeldingService {
 
   postAlleMeldingen(data: Melding): Observable<Melding> {
     return this.http.post<any>(this.urlMelding, data, { headers: this.contentHeaders });
+  }
+
+  postAlleReacties(data: Melding): Observable<Melding> {
+    return this.http.post<any>(this.urlReactions, data, { headers: this.contentHeaders });
   }
 
   getAlleMeldingen(): Observable<Melding[]> {

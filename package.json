@@ -13,12 +13,14 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "9.1.4",
     "@angular/common": "~8.2.14",
     "@angular/core": "~8.2.14",
     "@angular/forms": "~8.2.14",
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@ionic-native/barcode-scanner": "^5.24.0",
     "@ionic-native/camera": "^5.24.0",
     "@ionic-native/core": "^5.0.7",
     "@ionic-native/file": "^5.24.0",
@@ -27,15 +29,23 @@
     "@ionic-native/splash-screen": "^5.0.0",
     "@ionic-native/status-bar": "^5.0.0",
     "@ionic/angular": "^5.0.0",
+    "@ionic/storage": "^2.2.0",
+    "@tensorflow-models/mobilenet": "^2.0.4",
+    "@tensorflow/tfjs-node": "^1.7.4",
     "cordova-android": "^8.1.0",
     "cordova-browser": "6.0.0",
     "cordova-plugin-browsersync": "^1.1.0",
     "cordova-plugin-camera": "^4.1.0",
     "core-js": "^2.5.4",
+    "ionic-tooltips": "^3.1.0",
+    "jquery": "^3.5.0",
+    "net": "^1.0.2",
     "ng2-file-upload": "^1.4.0",
     "ng2-img-max": "^2.2.4",
     "ngx-image-compress": "^8.0.4",
     "rxjs": "~6.5.1",
+    "stompjs": "^2.3.3",
+    "string_decoder": "^1.3.0",
     "tslib": "^1.9.0",
     "zone.js": "~0.9.1"
   },
@@ -82,7 +92,9 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-camera": {
         "ANDROID_SUPPORT_V4_VERSION": "27.+"
-      }
+      },
+      "cordova-sqlite-storage": {},
+      "phonegap-plugin-barcodescanner": {}
     },
     "platforms": [
       "android",

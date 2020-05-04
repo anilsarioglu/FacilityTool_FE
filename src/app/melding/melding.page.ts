@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { NavController, NavParams, ModalController } from '@ionic/angular';
+import { NavController, NavParams, ModalController, PopoverController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { getLocaleMonthNames, DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -12,7 +12,9 @@ import { NgxImageCompressService } from 'ngx-image-compress';
 import { Ng2ImgMaxService } from 'ng2-img-max';
 import { ImageModalPage } from '../image-modal/image-modal.page';
 import { FileUploader } from 'ng2-file-upload';
-
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { Prediction } from '../services/prediction/prediction';
+import * as mobilenet from '@tensorflow-models/mobilenet';
 
 @Component({
   selector: 'app-melding',
@@ -22,6 +24,11 @@ import { FileUploader } from 'ng2-file-upload';
 
 export class MeldingPage implements OnInit {
 
+  @ViewChild('img', { static: false }) imageEl: ElementRef;
+
+  predictions: Prediction[];
+
+  model: any;
 
   uploadForm: FormGroup;
   meldingen: Melding[];
@@ -51,7 +58,7 @@ export class MeldingPage implements OnInit {
 
 
   private contentHeaders: HttpHeaders;
-  constructor(private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
+  constructor(private popoverController: PopoverController, private barcode: BarcodeScanner, private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
     private imageCompress: NgxImageCompressService, private modalController: ModalController,
     private http: HttpClient, private navCtrl: NavController,
     private router: Router, private activatedRoute: ActivatedRoute,
@@ -61,18 +68,27 @@ export class MeldingPage implements OnInit {
 
   }
 
-
-
-  ngOnInit() {
-    this.formulier();
+  popup() {
+    for (let i = 0; i < this.predictions.length; i++) {
+      alert(this.predictions[i].className + '-' + this.predictions[i].probability);
+    }
   }
+
+
+  async ngOnInit() {
+    this.formulier();
+    this.model = await mobilenet.load();
+  }
+
 
   uploadSubmit() {
 
     this.reacties.push(this.createItem({
-      melder: this.melder,
-      bericht: this.berichten,
-      //datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
+      // id: this.be,
+      name: this.melder,
+      message: this.berichten,
+      datum: this.datum
+      // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
     // console.log(this.uploadForm.value);
@@ -80,16 +96,7 @@ export class MeldingPage implements OnInit {
     this.router.navigate(['/tabs/tab1']);
   }
 
-  dataURItoBlob(dataURI) {
-    const byteString = window.atob(dataURI);
-    const arrayBuffer = new ArrayBuffer(byteString.length);
-    const int8Array = new Uint8Array(arrayBuffer);
-    for (let i = 0; i < byteString.length; i++) {
-      int8Array[i] = byteString.charCodeAt(i);
-    }
-    const blob = new Blob([int8Array], { type: 'image/*' });
-    return blob;
-  }
+
 
   async kiesLocatie() {
     this.navCtrl.navigateForward("/locatie");
@@ -104,7 +111,7 @@ export class MeldingPage implements OnInit {
     this.uploadForm = this.fb.group({
       melder: [this.melder],
       pNummer: [this.pNummer],
-      //datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
+      // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
       datum: [this.datum],
       type: ['', [Validators.required]],
       locatie: [this.locatie],
@@ -142,24 +149,27 @@ export class MeldingPage implements OnInit {
     }).then(modal => modal.present());
   }
 
+  dataURItoBlob(dataURI) {
+    const byteString = window.atob(dataURI);
+    const arrayBuffer = new ArrayBuffer(byteString.length);
+    const int8Array = new Uint8Array(arrayBuffer);
+    for (let i = 0; i < byteString.length; i++) {
+      int8Array[i] = byteString.charCodeAt(i);
+    }
+    const blob = new Blob([int8Array], { type: 'image/*' });
+    return blob;
+  }
+
 
   compressFile(image) {
     var orientation = -1;
     this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
-    // console.warn('Size in bytes is now:', this.sizeOfOriginalImage);
     this.imageCompress.compressFile(image, orientation, 50, 50).then(
       result => {
         this.imgResultAfterCompress = result;
         this.localCompressedURl = result;
-        // console.log(this.imgResultAfterCompress);
         this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024)
-        // console.warn('Size in bytes after compression:', this.sizeOFCompressedImage);
-        // create file from byte
-        // const imageName = fileName;
-        // call method that creates a blob from dataUri
         const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
-        //imageFile created below is the new compressed file which can be send to API in form data
-        // const imageFile = new File([result], imageName, { type: 'image/*' });
 
       });
   }
@@ -174,10 +184,15 @@ export class MeldingPage implements OnInit {
       var reader = new FileReader();
       reader.onload = (event: any) => {
         this.localUrl = event.target.result;
+        setTimeout(async () => {
+          const imgEl = this.imageEl.nativeElement;
+          this.predictions = await this.model.classify(imgEl);
+        }, 0);
         // 35, 25
         //10,5
         this.imageCompress.compressFile(this.localUrl, orientation, 10, 5).then(
           result => {
+
             this.photos.push(this.createItem({
               name: file.name,
               lastModified: file.lastModified,
@@ -186,11 +201,29 @@ export class MeldingPage implements OnInit {
               type: file.type,
               url: result
             }));
+
           });
       }
       reader.readAsDataURL(file);
     }
   }
+
+
+  public errorMessages = {
+    type: [
+      { type: 'required', message: 'Kies defect of opdracht' }
+    ],
+    locatie: [
+      { type: 'required', message: 'kies een locatie' }
+    ],
+    beschrijving: [
+      { type: 'required', message: 'Een beschrijving is noodzakelijk' },
+      { type: 'mexlength', message: 'Rustig, je moet ook geen verhaal schrijven' }
+    ],
+    locatiebeschr: [
+      { type: 'mexlength', message: 'Lengte mag niet langer dan 100 karakters bevatten' }
+    ]
+  };
 
 
   getImage(sourceType: number) {
@@ -208,13 +241,41 @@ export class MeldingPage implements OnInit {
 
     this.camera.getPicture(options).then(imagedata => {
       let data = 'data:image/*;base64,' + imagedata;
-      // this.afbeelding.push(data);
       this.localUrl = data;
-      // console.log(data);
       this.photos.push(this.createItem({
         url: this.localUrl
       }));
     });
   }
+
+
+  takePhotos() {
+    this.barcode.scan().then(data => {
+      this.photos.push(this.createItem({
+        text: data.text
+      }));
+    })
+
+    let options: CameraOptions = {
+      quality: 100,
+      allowEdit: true,
+      targetWidth: 1000,
+      targetHeight: 1000,
+      correctOrientation: true,
+      mediaType: this.camera.MediaType.PICTURE,
+      encodingType: this.camera.EncodingType.JPEG,
+      destinationType: this.camera.DestinationType.FILE_URI
+    }
+    this.camera.getPicture().then((imagedata) => {
+      let filename = imagedata.substring(imagedata.lastIndexOf('/') + 1);
+      let path = imagedata.substring(0, imagedata.lastIndexOf('/') + 1);
+      this.file.readAsDataURL(path, filename).then(base64data => {
+        this.photos.push(this.createItem({
+          url: base64data
+        }));
+      })
+    })
+  }
+
 
 }

@@ -11,11 +11,11 @@
 <ion-content>
 
     <div id="centerke">
+
         <ion-card>
             <ion-card-header>
                 <ion-card-title>{{meldingData.melder}}</ion-card-title>
-                <ion-card-subtitle>{{meldingData.datum | date:'dd/MM/yy-HHumm'}} </ion-card-subtitle>
-
+                <ion-card-subtitle>{{meldingData.datum | date:"dd/MM/yy-HHumm"}} </ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
@@ -37,36 +37,59 @@
         </div>
 
 
-        <div *ngIf="!(meldingData.reactie.length)">
-        <ion-card class="card" *ngFor="let mdr of meldingData.reactie">
+        <div *ngIf="meldingData.reactie.length > 0">
+            <ion-list>
+            <ion-item class="card" *ngFor="let mdr of meldingData.reactie" id="itemke">
+            <ion-avatar class="profilepicposition">
+                <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
+            </ion-avatar>
+            <ion-label>
+                <h3 class="naam">{{mdr.name}}</h3>
+                <p class="wrap-text">{{mdr.datum | date:"dd/MM/yy-HHumm"}}</p>
+                <p class="wrap-text">{{mdr.message}}</p>
+            </ion-label>
 
-            <ion-card-header>
-                <ion-card-title>{{mdr.melder}}</ion-card-title>
-                <ion-card-subtitle>{{mdr.datum}} </ion-card-subtitle>
-            </ion-card-header>
-
-            <ion-card-content>
-                {{mdr.bericht}}
-            </ion-card-content>
-
-        </ion-card>
+        </ion-item>
+                </ion-list>
         </div>
 
 
+        <div class="chat-container">
+            <div class="chat">
+                <div class="message">
+                    <div *ngIf="message.length">
+                        <ion-avatar class="socketAvatar" style="width: 40px;height:40px;">
+                            <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
+                        </ion-avatar>
+                        <p>
+                            {{this.uploadForm.get('name').value}}
+                        </p>
+                    </div>
+                    <div *ngIf="!message.length">
+                        <ion-item *ngFor="let v of values" class="localItem">
+                            <ion-avatar class="socketAvatar" style="width: 40px;height:40px;">
+                                <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
+                            </ion-avatar>
+                            <div class="localvalues">
+                                <p> {{v.name}}</p>
+                                <p class="sub">{{v.datum | date:"dd/MM/yy-HHumm"}}</p>
+                                <p class="sub"> {{v.message}}</p>
+                            </div>
+                        </ion-item>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
 
-
-        <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
-            <ion-item>
-                <ion-textarea required inputmode="text" formControlName="bericht" placeholder="Schrijf een reactie">
-                </ion-textarea>
-            </ion-item>
-
-            <ion-button class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">
-                Verzenden
-            </ion-button>
-
+        <form [formGroup]="uploadForm" id="formpke">
+            <input formControlName="message" maxlength="255" required inputmode="text" id="input" type="text" #input placeholder="Schrijf hier een reactie...">
+            <div (click)="sendMessage(input.value)">
+                <ion-icon class="send" name="send"></ion-icon>
+            </div>
         </form>
+
 
     </div>
 

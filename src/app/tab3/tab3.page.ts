@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 export class Tab3Page {
 
   darkMode: boolean = true;
+  name: string = 'Amine Abdelfettah';
+  pNumber: string = 'P103906';
 
   constructor() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');

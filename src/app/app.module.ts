@@ -20,13 +20,15 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ImageModalPage } from './image-modal/image-modal.page';
-
+import { IonicStorageModule } from '@ionic/storage';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   declarations: [AppComponent, ImageModalPage],
   entryComponents: [ImageModalPage],
   imports: [BrowserModule,
     IonicModule.forRoot(),
+    IonicStorageModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -41,6 +43,7 @@ import { ImageModalPage } from './image-modal/image-modal.page';
     File,
     PhotoViewer,
     ImagePicker,
+    BarcodeScanner,
     NgxImageCompressService,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

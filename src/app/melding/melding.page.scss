@@ -2,6 +2,10 @@
     --background: linear-gradient(90deg, rgba(203, 105, 99, 0.3144608185070903) 0%, rgba(230, 137, 129, 0.12958686892725846) 35%, rgba(24, 202, 238, 0.034348773689163115) 100%);
 }
 
+.btn {
+    //margin-top: -17%
+}
+
 ion-content .APLL {
     margin-left: 35%;
     margin-top: 2%;
@@ -61,4 +65,8 @@ ion-slides {
             display: none;
         }
     }
+}
+
+.images-preview mt-2 {
+    min-height: 500px;
 }
