@@ -32,6 +32,7 @@
     "@ionic/storage": "^2.2.0",
     "@tensorflow-models/mobilenet": "^2.0.4",
     "@tensorflow/tfjs-node": "^1.7.4",
+    "@swimlane/ngx-datatable": "^17.0.0",
     "cordova-android": "^8.1.0",
     "cordova-browser": "6.0.0",
     "cordova-plugin-browsersync": "^1.1.0",

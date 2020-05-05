@@ -15,6 +15,18 @@ const routes: Routes = [
   { path: 'locatie-melding/:locatie', loadChildren: () => import('./locatieMelding/locatie-melding.module').then(m => m.LocatieMeldingPageModule) },
   { path: 'image-modal', loadChildren: () => import('./image-modal/image-modal.module').then(m => m.ImageModalPageModule) }
   //{ path: 'app', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule) },
+  {
+    path: 'category-select',
+    loadChildren: () => import('./category-select/category-select.module').then( m => m.CategorySelectPageModule)
+  },
+  {
+    path: 'category-manage',
+    loadChildren: () => import('./category-manage/category-manage.module').then( m => m.CategoryManagePageModule)
+  }
+
+
+
+
 ];
 @NgModule({
   imports: [
