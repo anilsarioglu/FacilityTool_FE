@@ -13,8 +13,8 @@ const routes: Routes = [
   { path: 'detail-melding', loadChildren: () => import('./detail-melding/detail-melding.module').then(m => m.DetailMeldingPageModule) },
   { path: 'locatie-melding', loadChildren: () => import('./locatieMelding/locatie-melding.module').then(m => m.LocatieMeldingPageModule) },
   { path: 'locatie-melding/:locatie', loadChildren: () => import('./locatieMelding/locatie-melding.module').then(m => m.LocatieMeldingPageModule) },
-  { path: 'image-modal', loadChildren: () => import('./image-modal/image-modal.module').then(m => m.ImageModalPageModule) }
-  //{ path: 'app', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule) },
+  { path: 'image-modal', loadChildren: () => import('./image-modal/image-modal.module').then(m => m.ImageModalPageModule) },
+  // { path: 'app', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule) },
   {
     path: 'category-select',
     loadChildren: () => import('./category-select/category-select.module').then( m => m.CategorySelectPageModule)

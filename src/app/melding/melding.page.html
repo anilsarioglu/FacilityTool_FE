@@ -18,11 +18,11 @@
         </div>
 
         <div>
-            <label>Locatie: </label>
-            <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0">
-            <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
-                Locatie kiezen
-            </ion-button>
+                <label>Locatie: </label>
+                <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
+                <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
+                    Locatie kiezen
+                </ion-button>
             <div *ngFor="let error of errorMessages.name">
                 <ng-container *ngIf="locatie.hasError(error.type)">
                     <small class="error-message">{{error.message}}</small>
@@ -42,19 +42,13 @@
         </div>
 
         <div>
-            <label>Locatie: </label>
-            <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
-            <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
-                Locatie kiezen
-            </ion-button>
-        </div>
-
-        <div>
             <label>Categorie: </label>
             <input type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
             <ion-button (click)="kiesCategory()" color="danger" size="small" expand="full" required style="height: 40px;">
                 Categorie kiezen
             </ion-button>
+        </div>
+
         <div *ngFor="let error of errorMessages.name">
             <ng-container *ngIf="type.hasError(error.type)">
                 <small class="error-message">{{error.message}}</small>
