@@ -21,18 +21,18 @@ export class CategoryManagePage implements OnInit {
   categoryList: any[];
 
   categoryForm: FormGroup;
-  
+
   constructor(private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private cs: CategoryService, private alertCtrl: AlertController, private fb: FormBuilder) {
+              private http: HttpClient, private cs: CategoryService, private alertCtrl: AlertController, private fb: FormBuilder) {
      }
-    
+
     ngOnInit() {
       this.formulier();
       this.selected();
       this.cs.getAllCategories().subscribe(data => {
         this.categories = data;
-        this.categoryList = this.categories; 
-      })
+        this.categoryList = this.categories;
+      });
     }
 
     createItem(d): FormGroup {
@@ -45,23 +45,23 @@ export class CategoryManagePage implements OnInit {
         description: ['', [Validators.required, Validators.maxLength(100)]],
       });
     }
-    
-    get name() { return this.categoryForm.get("name") };
-    get description() { return this.categoryForm.get("description") };
 
-    
+    get name() { return this.categoryForm.get('name'); }
+    get description() { return this.categoryForm.get('description'); }
+
+
     uploadSubmit() {
       this.cs.postCategory(this.categoryForm.value).subscribe((data) => { console.log(data); });
       location.reload();
     }
 
-    selectedLevel;
+    selectedLevel: string;
 
-    selected(){
-      console.log(this.selectedLevel)
+    selected() {
+      console.log(this.selectedLevel);
     }
 
-    deleteCategory(e){
+    deleteCategory(e) {
       console.log(e);
       
       this.cs.deleteCategory(this.selectedLevel).subscribe();
