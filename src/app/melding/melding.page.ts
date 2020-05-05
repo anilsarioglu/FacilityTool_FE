@@ -93,7 +93,7 @@ export class MeldingPage implements OnInit {
 
     // console.log(this.uploadForm.value);
     this.ms.postAlleMeldingen(this.uploadForm.value).subscribe((data) => { console.log(data); });
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['/tab1']);
   }
 
 
