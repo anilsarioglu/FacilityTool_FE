@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Locatie } from '../services/locatie/locatie';
 import { NavController, AlertController } from '@ionic/angular';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { LocatieService } from '../services/locatie/locatie.service';
 import { MeldingService } from '../services/melding/melding.service';
@@ -15,21 +15,28 @@ export class LocatiePage implements OnInit {
 
   locaties: Locatie[];
   locatieLijst: any[];
+  category: string;
 
   meldingbestaat: Boolean;
   tekst;
 
 
   constructor(private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController, private ms: MeldingService) { }
+    private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController, private ms: MeldingService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.ls.geefAlleLocaties().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
+      this.setValue();
     })
+  }
 
-
+  setValue() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const category_param = params['category'];
+      this.category = category_param;   
+    });
   }
 
   initializeItems(): void {
@@ -69,7 +76,8 @@ export class LocatiePage implements OnInit {
   async selectLocatie(e: any) {
 
     let event = e.currentTarget.innerText;
-
+    console.log("deze shit:" + this.category);
+    
     const alert = await this.alertCtrl.create({
       header: "Locatie",
       message: "" + event.toLowerCase(),
@@ -77,7 +85,7 @@ export class LocatiePage implements OnInit {
         {
           text: 'Selecteer locatie',
           handler: () => {
-            alert.dismiss().then(() => { this.router.navigate(['/melding' + '/' + event]); });
+            alert.dismiss().then(() => { this.router.navigate(['/melding'], { queryParams: { location: event, category: this.category } }); });
             return false;
           }
         },

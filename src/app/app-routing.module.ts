@@ -11,7 +11,15 @@ const routes: Routes = [
   { path: 'detail-melding', loadChildren: () => import('./detail-melding/detail-melding.module').then(m => m.DetailMeldingPageModule) },
   { path: 'locatie-melding', loadChildren: () => import('./locatieMelding/locatie-melding.module').then(m => m.LocatieMeldingPageModule) },
   { path: 'locatie-melding/:locatie', loadChildren: () => import('./locatieMelding/locatie-melding.module').then(m => m.LocatieMeldingPageModule) },
-  { path: 'image-modal', loadChildren: () => import('./image-modal/image-modal.module').then(m => m.ImageModalPageModule) }
+  { path: 'image-modal', loadChildren: () => import('./image-modal/image-modal.module').then(m => m.ImageModalPageModule) },  {
+    path: 'category-select',
+    loadChildren: () => import('./category-select/category-select.module').then( m => m.CategorySelectPageModule)
+  },
+  {
+    path: 'category-manage',
+    loadChildren: () => import('./category-manage/category-manage.module').then( m => m.CategoryManagePageModule)
+  }
+
 
 
 
