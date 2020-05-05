@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+<div (click)=" selectCategory($event) " *ngFor="let c of categories ">
+    <ion-button class="btn " expand="full " style="font-size: 9px" button-balanced>
+        <p>{{c.name}}:<br>  <br>{{c.description}}</p>
+    </ion-button>
+</div>
+
+
+</ion-content>

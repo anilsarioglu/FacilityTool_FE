@@ -40,6 +40,7 @@ export class MeldingPage implements OnInit {
   status = 'IN_BEHANDELING';
 
   locatie: any;
+  category: string;
   localUrl: any;
   localCompressedURl: any;
   sizeOfOriginalImage: number;
@@ -48,6 +49,8 @@ export class MeldingPage implements OnInit {
   imgResultAfterCompress: string;
   fileName: any;
   myFiles: string[] = [];
+
+
 
   sliderOpts = {
     zoom: false,
@@ -65,7 +68,7 @@ export class MeldingPage implements OnInit {
     private fb: FormBuilder, private datePipe: DatePipe, private ms: MeldingService, private camera: Camera, private file: File) {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
     this.locatie = this.activatedRoute.snapshot.params['locatie'];
-
+    this.category = this.activatedRoute.snapshot.params['category'];
   }
 
   popup() {
@@ -78,6 +81,23 @@ export class MeldingPage implements OnInit {
   async ngOnInit() {
     this.formulier();
     this.model = await mobilenet.load();
+    this.setValue();
+  }
+
+  inputCat: string = '';
+  inputLoc: string = '';
+
+  setValue() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      const category_param = params['category'];
+      console.log(category_param);
+      this.inputCat = category_param;
+    });
+    this.activatedRoute.queryParams.subscribe(params => {
+      const location_param = params['location'];
+      console.log(location_param);
+      this.inputLoc = location_param;
+    });
   }
 
 
@@ -93,13 +113,18 @@ export class MeldingPage implements OnInit {
 
     // console.log(this.uploadForm.value);
     this.ms.postAlleMeldingen(this.uploadForm.value).subscribe((data) => { console.log(data); });
-    this.router.navigate(['/tabs/tab1']);
+    this.router.navigate(['/tab1']);
   }
 
 
 
   async kiesLocatie() {
     this.navCtrl.navigateForward("/locatie");
+    this.navCtrl.navigateForward("/locatie" + "?location=" + this.inputLoc + "?category=" + this.inputCat)
+  }
+
+  async kiesCategory() {
+    this.navCtrl.navigateForward("/category-select" + "?location=" + this.inputLoc + "?category=" + this.inputCat)
   }
 
   createItem(data): FormGroup {
@@ -115,6 +140,7 @@ export class MeldingPage implements OnInit {
       datum: [this.datum],
       type: ['', [Validators.required]],
       locatie: [this.locatie],
+      category: [this.category],
       beschrijving: ['', [Validators.required, Validators.maxLength(100)]],
       locatiebeschr: ['', [Validators.required, Validators.maxLength(100)]],
       status: [this.status],
@@ -129,6 +155,7 @@ export class MeldingPage implements OnInit {
   get datums() { return this.uploadForm.get("datum") };
   get type() { return this.uploadForm.get("type") };
   get locaties() { return this.uploadForm.get("locatie") };
+  get categories() { return this.uploadForm.get("category") }
   get beschrijving() { return this.uploadForm.get("beschrijving") };
   get locatiebeschr() { return this.uploadForm.get("locatiebeschr") };
   get statuss() { return this.uploadForm.get("status") };
