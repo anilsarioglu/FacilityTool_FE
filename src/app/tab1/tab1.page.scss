@@ -1,3 +1,95 @@
 ion-content ion-toolbar {
-  --background: translucent;
+    --background: translucent;
+}
+ion-searchbar {
+    text-align:center;
+}
+
+#filter {
+    margin:auto;
+    text-align:center;
+}
+
+#sortingList {
+    margin:auto;
+    width: 18%;
+    display: inline-block;
+}
+
+#sortingList ion-label{
+    font-size: 12px;
+}
+
+#toggleOD {
+    display: inline-block;
+    position: relative;
+    bottom: 10px;
+    padding-left: 15%;
+    font-size: 12px;
+}
+
+#toggleOD p, ion-toggle{
+    float: left;
+}
+
+ion-grid {
+    margin:auto;
+    width:70%;
+}
+
+.exportbutton {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin:auto;
+    margin-bottom: 30px;
+    width:40%;
+    font-size: 10px;
+}
+
+.box1 {
+    position: relative;
+}
+
+.description {
+    position: relative;
+}
+
+.upvote {
+    position: absolute; 
+    bottom: 0px; 
+    right: 0px;
+}
+
+.upvote p {
+    text-align: center;
+}
+
+.heart-icon {
+    font-size: 35px;
+}
+
+@media only screen and (max-width: 600px) {
+    #sortingList {
+        width: 50%;
+        margin-left: 0;
+    }
+    #toggleOD {
+        padding-left: 3%;
+        font-size: 12px;
+    }
+    ion-grid {
+        width:100%;
+    }
+    .description {
+        width: 65%;
+        overflow: visible;
+        text-overflow: unset;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        word-break: break-all;
+        // margin-right: 20px;
+        margin-right: 32px;
+    }
 }

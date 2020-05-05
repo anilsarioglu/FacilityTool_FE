@@ -1,16 +1,88 @@
 <ion-header [translucent]="true">
     <ion-toolbar color="danger">
+        <!-- <img src="./assets/icon/apicon.png" width="40px" style="display:inline-block" height="40px"/> -->
         <ion-title class="ion-text-center">
-            Tab 1
+            Meldingen
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Tab one</ion-title>
+        <ion-toolbar color="danger">
+            <ion-title size="large">Meldingen</ion-title>
         </ion-toolbar>
     </ion-header>
-</ion-content>
 
+    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+
+    <div id="filter">
+        <ion-list id="sortingList">
+            <ion-item>
+                <ion-label>Sorteer op:</ion-label>
+                <ion-select [(ngModel)]="sortVal" placeholder="" (ionChange)="sortAll()">
+                    <ion-select-option value="datum">Datum</ion-select-option>
+                    <ion-select-option value="type">Type</ion-select-option>
+                    <ion-select-option value="locatie">Locatie</ion-select-option>
+                    <ion-select-option value="status">Status</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+        <div id="toggleOD">
+            <p>Opdracht</p>
+            <ion-toggle [(ngModel)]="toggle" (ionChange)="toggleOpdDef()"></ion-toggle>
+            <p>Defect</p>
+        </div>
+    </div>
+    <br />
+
+    <ion-grid>
+        <ion-row>
+            <ion-col *ngFor="let ml of kopieLijstVanMeldingen;let i = index;" id="kaart">
+                <ion-card>
+                    <ion-item>
+                        <ion-icon name="pin" slot="start"></ion-icon>
+                        <ion-label> {{ml.melder}} - {{ml.pNummer}}</ion-label>
+                        <ion-button fill="outline" type="button" (click)="detailMelding(ml)">View
+                        </ion-button>
+                        <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" (click)="deleteMelding(i,$event,ml.id)" class="btn btn-danger remove-btn">
+                            <ion-icon name="trash"></ion-icon>
+                        </ion-button>
+
+                    </ion-item>
+
+                    <ion-card-content>
+                        <div class="box1">
+                            <div class="description">
+                                <p>{{ml.datum | date:'dd/MM/yy-HHumm'}}</p>
+                                <p>{{ml.locatie}}</p>
+                                <p> {{ml.type}}</p>
+                                <p> {{ml.beschrijving}}</p>
+                                <p> {{ml.locatiebeschr}}</p>
+                            </div>
+                            <div class="upvote">
+                                <p>{{ ml.numberUpvotes }}</p>
+                                <ion-button icon-only *ngIf="!ml.upvoted" (click)="onIconClick(ml, i)">
+                                    <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+                                </ion-button>
+                                <ion-button icon-only *ngIf="ml.upvoted" (click)="onIconClick(ml, i)">
+                                    <ion-icon name="heart" class="heart-icon"></ion-icon>
+                                </ion-button>
+                            </div>
+                        </div>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-button (click)='ExportJson()' class="exportbutton" id="export" color="danger">Lijst Exporteren
+    </ion-button>
+
+    <ion-fab (click)="addMelding()" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="danger">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+</ion-content>

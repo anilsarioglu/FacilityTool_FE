@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
     <ion-toolbar color="danger">
         <ion-title class="ion-text-center">
-            Tab 3
+            Instellingen
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -12,5 +12,24 @@
             <ion-title size="large">Tab 3</ion-title>
         </ion-toolbar>
     </ion-header>
+
+    <ion-item>
+        <ion-avatar slot="start">
+            <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
+        </ion-avatar>
+        <ion-label>
+            <h3>{{name}}</h3>
+            <p>{{pNumber}}</p>
+        </ion-label>
+    </ion-item>
+
+
+    <ion-list>
+        <ion-item>
+            <ion-icon slot="start" name="moon"></ion-icon>
+            <ion-label>Toggle Dark Theme</ion-label>
+            <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="cambio()"></ion-toggle>
+        </ion-item>
+    </ion-list>
 
 </ion-content>

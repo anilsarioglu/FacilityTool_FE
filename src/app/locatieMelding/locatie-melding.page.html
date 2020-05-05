@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <p class="ion-text-center">Reeds gemelde defecten</p>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-card *ngFor="let mll of meldingLocatieList;let i = index;">
+        <ion-item>
+            <ion-icon name="pin" slot="start"></ion-icon>
+            <ion-label> {{mll.melder}} - {{mll.pNummer}}</ion-label>
+            <ion-button fill="outline" slot="end" (click)="detailMelding(mll)">View</ion-button>
+        </ion-item>
+
+        <ion-card-content>
+            <p>{{mll.datum}}</p>
+            <p>{{mll.locatie}}</p>
+            <p> {{mll.type}}</p>
+            <p> {{mll.beschrijving}}</p>
+            <p> {{mll.locatiebeschr}}</p>
+            <!-- <div *ngFor="let mlpu of ml.photos;let i=index;" style=" width: 100%;height:100%;">
+                            <img *ngIf="i==0 && mlpu.url" src="{{mlpu.url}}">
+                        </div> -->
+        </ion-card-content>
+    </ion-card>
+
+
+</ion-content>
