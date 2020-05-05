@@ -37,7 +37,15 @@ ion-grid {
     width:70%;
 }
 
-
+.exportbutton {
+    color: white;
+    display: flex;
+    justify-content: center;
+    margin:auto;
+    margin-bottom: 30px;
+    width:40%;
+    font-size: 10px;
+}
 
 .box1 {
     position: relative;
@@ -61,10 +69,27 @@ ion-grid {
     font-size: 35px;
 }
 
-.exportbutton {
-    color: white;
-    display: flex;
-    justify-content: center;
-    margin-right: 80%;
-    margin-bottom: 30px;
+@media only screen and (max-width: 600px) {
+    #sortingList {
+        width: 50%;
+        margin-left: 0;
+    }
+    #toggleOD {
+        padding-left: 3%;
+        font-size: 12px;
+    }
+    ion-grid {
+        width:100%;
+    }
+    .description {
+        width: 65%;
+        overflow: visible;
+        text-overflow: unset;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        white-space: normal;
+        word-break: break-all;
+        // margin-right: 20px;
+        margin-right: 32px;
+    }
 }
