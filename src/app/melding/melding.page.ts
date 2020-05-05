@@ -174,8 +174,6 @@ export class MeldingPage implements OnInit {
       });
   }
 
-
-
   detectImages(event) {
     var orientation = -1;
     let files = event.target.files;
