@@ -25,11 +25,16 @@ ion-slides {
     color: var(--ion-color-danger);
 }
 
+
+
 .footerBtn {
     height: 60px;
 }
 
 #formpke {
+    padding: 20px;
+    position: static; 
+    margin-top: 70px;
     @media screen and (min-width: 576px) {
         // browser
         // width: 650px;

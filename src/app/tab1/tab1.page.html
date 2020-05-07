@@ -7,7 +7,8 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+
+<ion-content class="bg" [fullscreen]="true">
     <ion-header collapse="condense">
         <ion-toolbar color="danger">
             <ion-title size="large">Meldingen</ion-title>
@@ -30,7 +31,7 @@
         </ion-list>
         <div id="toggleOD">
             <p>Opdracht</p>
-            <ion-toggle [(ngModel)]="toggle" (ionChange)="toggleOpdDef()"></ion-toggle>
+            <ion-toggle color="danger" [(ngModel)]="toggle" (ionChange)="toggleOpdDef()"></ion-toggle>
             <p>Defect</p>
         </div>
     </div>
@@ -43,7 +44,7 @@
                     <ion-item>
                         <ion-icon name="pin" slot="start"></ion-icon>
                         <ion-label> {{ml.melder}} - {{ml.pNummer}}</ion-label>
-                        <ion-button fill="outline" type="button" (click)="detailMelding(ml)">View
+                        <ion-button  style:color="danger" color="danger" fill="outline" type="button" (click)="detailMelding(ml)">View
                         </ion-button>
                         <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" (click)="deleteMelding(i,$event,ml.id)" class="btn btn-danger remove-btn">
                             <ion-icon name="trash"></ion-icon>
@@ -51,7 +52,7 @@
 
                     </ion-item>
 
-                    <ion-card-content>
+                    <ion-card-content class="meldinggrid">
                         <div class="box1">
                             <div class="description">
                                 <p>{{ml.datum | date:'dd/MM/yy-HHumm'}}</p>
@@ -62,11 +63,11 @@
                             </div>
                             <div class="upvote">
                                 <p>{{ ml.numberUpvotes }}</p>
-                                <ion-button icon-only *ngIf="!ml.upvoted" (click)="onIconClick(ml, i)">
-                                    <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
+                                <ion-button color="danger" icon-only *ngIf="!ml.upvoted" (click)="onIconClick(ml, i)">
+                                    <ion-icon  name="heart-outline" class="heart-icon"></ion-icon>
                                 </ion-button>
-                                <ion-button icon-only *ngIf="ml.upvoted" (click)="onIconClick(ml, i)">
-                                    <ion-icon name="heart" class="heart-icon"></ion-icon>
+                                <ion-button color="danger" icon-only *ngIf="ml.upvoted" (click)="onIconClick(ml, i)">
+                                    <ion-icon  name="heart" class="heart-icon"></ion-icon>
                                 </ion-button>
                             </div>
                         </div>

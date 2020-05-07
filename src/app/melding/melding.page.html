@@ -11,7 +11,7 @@
 <ion-content class="bg">
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
-        <div>
+        <div >
             <p> melder: {{melder}}</p>
             <p> PNummer: {{pNummer}}</p>
             <p class="datumke">{{ datum | date:"dd/MM/yy" }}</p>
@@ -126,7 +126,7 @@
                 </ion-fab-list>
             </ion-fab>
         </div>
-        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">Verzenden</ion-button>
+        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Rapporteren</ion-button>
 
     </form>
 </ion-content>
