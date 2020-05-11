@@ -2,7 +2,8 @@
     ion-content.bgAP {
         --background: url("../../assets/imgs/Mobile.jpg") 0 0/100% 100% no-repeat;
     }
-    h1 {
+    .h2 {
+        position: fixed;
         text-indent: 100%;
         white-space: nowrap;
         overflow: hidden;
@@ -12,7 +13,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-        margin-top: 75%;
+        margin-top: 95%;
         width: 75%;
     }
 }
@@ -22,18 +23,19 @@
         --background: url("../../assets/imgs/bg-AP.jpg") 0 0/100% 100% no-repeat;
     }
     .fpsignup {
-        background-color: rgba(255, 255, 255, .7);
-        padding: 1rem;
+        background-color: rgba(255, 255, 255, 0.945);
+        padding: 0.5rem;
         -webkit-box-shadow: 0 1px 1px 1px rgba(0, 0, 0, .3);
         box-shadow: 0 1px 1px 1px rgba(0, 0, 0, .3);
         border: 1px solid #fff;
         position: fixed;
-        top: 25%;
-        left: 25%;
-        width: 50%;
-        height: 50%;
-        h1 {
-            font-size: 5rem;
+        top: 35%;
+        left: 35%;
+        width: 30%;
+        height: 30%;
+        h2 {
+            font-size: 3rem;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
             color: #2e2929;
             text-align: center;
         }
@@ -42,8 +44,8 @@
             display: block;
             margin-left: auto;
             margin-right: auto;
-            margin-top: 20%;
-            width: 45%;
+            margin-top: 8%;
+            width: 65%;
         }
     }
 }

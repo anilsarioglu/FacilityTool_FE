@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="danger">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button defaultHref="/tab1"></ion-back-button>
         </ion-buttons>
         <p class="ion-text-center">Melding rapporteren</p>
     </ion-toolbar>
@@ -20,7 +20,7 @@
 
         <div>
                 <label>Locatie: </label>
-                <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
+                <input size="60" type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
                 <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
                     Locatie kiezen
                 </ion-button>
@@ -44,7 +44,7 @@
 
         <div>
             <label>Categorie: </label>
-            <input type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
+            <input size="60" type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
             <ion-button (click)="kiesCategory()" color="danger" size="small" expand="full" required style="height: 40px;">
                 Categorie kiezen
             </ion-button>

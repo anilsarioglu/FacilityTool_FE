@@ -1,17 +1,15 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+          </ion-buttons>
         <ion-title class="ion-text-center">
             Instellingen
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Tab 3</ion-title>
-        </ion-toolbar>
-    </ion-header>
+<ion-content>
 
     <ion-item>
         <ion-avatar slot="start">
@@ -28,7 +26,7 @@
         <ion-item>
             <ion-icon slot="start" name="moon"></ion-icon>
             <ion-label>Toggle Dark Theme</ion-label>
-            <ion-toggle slot="end" [ngModel]="darkMode" (ionChange)="cambio()"></ion-toggle>
+            <ion-toggle color="danger" slot="end" [ngModel]="darkMode" (ionChange)="cambio()"></ion-toggle>
         </ion-item>
     </ion-list>
 

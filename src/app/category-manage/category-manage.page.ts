@@ -19,6 +19,7 @@ export class CategoryManagePage implements OnInit {
 
   categories: Category[];
   categoryList: any[];
+  kopieLijstVanCategories: any[]; 
 
   categoryForm: FormGroup;
 
@@ -33,6 +34,17 @@ export class CategoryManagePage implements OnInit {
         this.categories = data;
         this.categoryList = this.categories;
       });
+    }
+
+    searchItems(e){
+      const val: string = e.target.value;
+
+      this.categoryList;
+      if (val.trim() !== '') {
+        this.kopieLijstVanCategories = this.categoryList.filter((item) => {
+          return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+        });
+      }
     }
 
     createItem(d): FormGroup {
