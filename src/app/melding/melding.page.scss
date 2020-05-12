@@ -34,10 +34,11 @@ ion-slides {
 #formpke {
     padding: 20px;
     position: static; 
-    margin-top: 70px;
+    
     @media screen and (min-width: 576px) {
         // browser
         // width: 650px;
+        margin-top: 70px;
         width: 650px;
         margin-left: auto;
         margin-right: auto;
@@ -47,13 +48,10 @@ ion-slides {
     }
     @media (max-width: 576px) {
         // mobile
-        box-shadow: 10px 10px 5px grey;
+        margin-top: 25px;
+        box-shadow: 5px 5px 5px grey;
         background-color: #ffffff;
-        .datumke {
-            position: absolute;
-            right: 10px;
-            top: 33px;
-        }
+
     }
 }
 

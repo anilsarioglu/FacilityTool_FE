@@ -29,7 +29,6 @@ export class CategoryManagePage implements OnInit {
 
     ngOnInit() {
       this.formulier();
-      this.selected();
       this.cs.getAllCategories().subscribe(data => {
         this.categories = data;
         this.categoryList = this.categories;
@@ -67,16 +66,11 @@ export class CategoryManagePage implements OnInit {
       location.reload();
     }
 
-    selectedLevel: string;
-
-    selected() {
-      console.log(this.selectedLevel);
-    }
 
     deleteCategory(e) {
       console.log(e);
       
-      this.cs.deleteCategory(this.selectedLevel).subscribe();
-      location.reload();
+      //this.cs.deleteCategory(e.target.value).subscribe();
+      //location.reload();
     }
 }
