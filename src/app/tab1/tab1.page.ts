@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterEvent } from '@angular/router';
 import { MeldingService } from '../services/melding/melding.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Melding } from '../services/melding/melding';
@@ -19,6 +19,8 @@ export class Tab1Page {
   actieveLijstVanMeldingen: any = [];
   sortVal: any;
   toggle: boolean;
+
+
 
   constructor(private ms: MeldingService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
@@ -178,5 +180,9 @@ export class Tab1Page {
   ExportJson() {
     this.downloadCSVFromJson('MeldingenLijst.csv', this.kopieLijstVanMeldingen);
   }
+
+
+
+
 
 }

@@ -1,20 +1,17 @@
 <ion-header>
-  <ion-toolbar>
     <ion-toolbar color="danger">
       <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
+        <ion-menu-button autoHide="false"></ion-menu-button>
       </ion-buttons>
-      <ion-title>Categorie beheer</ion-title>
-  </ion-toolbar>
+      <ion-title class="header">Categorie beheer</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="categoryForm" (ngSubmit)="uploadSubmit()" id="formCategory">
+<form [formGroup]="categoryForm" (ngSubmit)="uploadSubmit()" id="form">
     <div>
-        <p class="center">Categorie Toevoegen</p>
+        <p class="midden">Categorie Toevoegen</p>
     </div>
-    <hr>
 
     <ion-item>
         <ion-label position="floating">Naam categorie: </ion-label>
@@ -25,48 +22,26 @@
         <ion-label position="floating">Beschrijving categorie: </ion-label>
         <ion-textarea inputmode="text" formControlName="description"></ion-textarea>
     </ion-item> 
-    <div class="center">
-    <ion-button class="btn btn-primary" class="footerBtn" color="success" size="default" type="submit">Toevoegen</ion-button>
-  </div>
+    <ion-button [disabled]="!categoryForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button> 
 </form>
 
-  
+<form id="form">
     <div>
-        <p class="center">Categorie Verwijderen</p>
+        <p class="midden">Alle categorieën</p>
     </div>
-    <hr>
-    <div class="select">
-      Kies een categorie: 
-    <select class="custom-select" [(ngModel)]="selectedLevel" (change)="selected()">
-      <option></option>
-      <option *ngFor="let c of categories" >{{c.name}}</option>
-    </select>
-  </div>
-  <div class="center">
-    <ion-button class="btn btn-primary" class="footerBtn" color="danger" size="default" (click)="deleteCategory($event)">Verwijder</ion-button>
-  </div>
+    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
     <div>
-      <p class="center">Huidige Categorieën</p>
+      <ion-list *ngFor="let c of categories">
+        <ion-item>
+          {{c.name}} 
+          <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory($event)">
+            <ion-icon color="danger" name="trash-outline" ></ion-icon>
+          </ion-button>
+        </ion-item>
+      </ion-list>
   </div>
-  <hr>
-<div class="table-div">
-<table class="redTable">
-  <thead>
-  <tr>
-  <th>Naam</th>
-  <th>Beschrijving</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let c of categories">
-    <td>{{c.name}}</td>
-    <td>{{c.description}}</td>
-  </tr>
-  </tbody>
-  </table>
-</div>
+</form>
+<p>
 
-
-
-
+</p>
   </ion-content>

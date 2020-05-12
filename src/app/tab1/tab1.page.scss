@@ -5,6 +5,11 @@ ion-searchbar {
     text-align:center;
 }
 
+ion-card-content {
+    //--background: linear-gradient(90deg, rgba(203, 105, 99, 0.3144608185070903) 0%, rgba(230, 137, 129, 0.12958686892725846) 35%, rgba(24, 202, 238, 0.034348773689163115) 100%);
+    background-color: #fefefe;
+}
+
 #filter {
     margin:auto;
     text-align:center;
@@ -46,13 +51,16 @@ ion-grid {
     width:40%;
     font-size: 10px;
 }
+.bg {
+    background-color: #68676c;
+}
 
 .box1 {
     position: relative;
 }
 
 .description {
-    position: relative;
+    position: relative
 }
 
 .upvote {
@@ -67,6 +75,7 @@ ion-grid {
 
 .heart-icon {
     font-size: 35px;
+    color: "danger"; 
 }
 
 @media only screen and (max-width: 600px) {

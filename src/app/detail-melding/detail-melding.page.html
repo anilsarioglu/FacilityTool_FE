@@ -1,32 +1,36 @@
 <ion-header>
     <ion-toolbar color="danger">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button defaultHref="/tab1"></ion-back-button>
         </ion-buttons>
-        <ion-title>Detail</ion-title>
+        <ion-title class="title">Detail Melding</ion-title>
     </ion-toolbar>
 </ion-header>
 
 
 <ion-content>
 
-    <div id="centerke">
+    <div id="detailmelding">
 
         <ion-card>
             <ion-card-header>
-                <ion-card-title>{{meldingData.melder}}</ion-card-title>
+                <ion-card-title>{{meldingData.melder}} - {{meldingData.pNummer}}</ion-card-title>
                 <ion-card-subtitle>{{meldingData.datum | date:"dd/MM/yy-HHumm"}} </ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
-                <p> {{meldingData.pNummer}}</p>
-                <p>{{meldingData.locatie}} is een {{meldingData.type}}</p>
+                <p> {{meldingData.type}}</p>
+                <p>{{meldingData.locatie}}</p>
                 <p>Algemene beschrijving: {{meldingData.beschrijving}}</p>
                 <p>Locatie beschrijving: {{meldingData.locatiebeschr}}</p>
             </ion-card-content>
         </ion-card>
 
-        <div>
+        <ion-card class="afbeeldingCard">
+            <ion-card-header style="color:black">
+                Afbeelding:
+            </ion-card-header>
+            <ion-card-content>
             <ion-slides [options]="sliderOpts">
                 <ion-slide *ngFor="let mlpu of meldingData.photos; let i=index;">
                     <div>
@@ -34,12 +38,13 @@
                     </div>
                 </ion-slide>
             </ion-slides>
-        </div>
+        </ion-card-content>
+        </ion-card>
 
 
         <div *ngIf="meldingData.reactie.length > 0">
             <ion-list>
-            <ion-item class="card" *ngFor="let mdr of meldingData.reactie" id="itemke">
+                <ion-item class="card" *ngFor="let mdr of meldingData.reactie" id="itemke">
             <ion-avatar class="profilepicposition">
                 <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
             </ion-avatar>
@@ -48,9 +53,8 @@
                 <p class="wrap-text">{{mdr.datum | date:"dd/MM/yy-HHumm"}}</p>
                 <p class="wrap-text">{{mdr.message}}</p>
             </ion-label>
-
-        </ion-item>
-                </ion-list>
+                </ion-item>
+            </ion-list>
         </div>
 
 

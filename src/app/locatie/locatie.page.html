@@ -1,26 +1,29 @@
 <ion-header>
     <ion-toolbar color="danger">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+                <ion-back-button defaultHref="/melding"></ion-back-button>
         </ion-buttons>
-        <ion-button (click)="selectEllerman()" size="small" color="danger">
-            <p class="eller">Ellerman</p>
-        </ion-button>
-        <ion-button (click)="selectNoorder()" size="small" color="danger">
-            <p>Noorderplaats</p>
-        </ion-button>
+        <ion-title class="header">Locatie kiezen</ion-title>
     </ion-toolbar>
 
 
 </ion-header>
 
 <ion-content>
-
+    <div class="wrapper">
+    <ion-button class="eller" (click)="selectEllerman()" size="small" color="danger">
+        <p>Ellerman</p>
+    </ion-button>
+    <ion-button (click)="selectNoorder()" size="small" color="danger">
+        <p>Noorderplaats</p>
+    </ion-button>
+    </div>
+    
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
     <div>
         <ion-list>
             <ion-item>
-                <ion-label>Verdieping</ion-label>
+                <ion-label class="verdieping">Verdieping</ion-label>
                 <ion-select value="d" ok-text="OK" cancel-text="Annuleren" (ionChange)="selectedVerdieping($event.target.value)">
                     <ion-select-option *ngFor="let v of [-1,0,1,2,3,4,5]">{{v}}</ion-select-option>
                 </ion-select>
@@ -28,7 +31,7 @@
         </ion-list>
     </div>
     <div (click)=" selectLocatie($event) " *ngFor="let l of locaties ">
-        <ion-button class="btn " expand="full " style="font-size: 9px" button-balanced>
+        <ion-button color="apgrey" class="btn "  expand="full " style="font-size: 9px" button-balanced>
             <p>{{l.lokaal}} {{l.naam}}</p>
             <p> </p>
         </ion-button>

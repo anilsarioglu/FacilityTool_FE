@@ -1,4 +1,9 @@
-#centerke {
+.title {
+    text-align: center;
+}
+
+#detailmelding {
+    margin-top: 40px;
     #itemke:nth-child(n+2) {
         margin-left: 41%;
         .profilepicposition {
@@ -7,6 +12,11 @@
             right: 3%;
             bottom: 20%
         }
+    }
+    
+    .afbeeldingCard {
+        margin-top: 30px;
+        font-size: 25px;
     }
     .wrap-text {
         overflow: visible;
@@ -19,8 +29,8 @@
         margin-right: 32px;
     }
     ion-slides {
-        margin-top: 10%;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        //margin-top: 10%;
+        //box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
     ion-list {
         margin-top: 10%;

@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="danger">
         <ion-buttons slot="start">
-            <ion-back-button></ion-back-button>
+            <ion-back-button defaultHref="/tab1"></ion-back-button>
         </ion-buttons>
         <p class="ion-text-center">Melding rapporteren</p>
     </ion-toolbar>
@@ -11,15 +11,16 @@
 <ion-content class="bg">
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
-        <div>
+        <div >
             <p> melder: {{melder}}</p>
             <p> PNummer: {{pNummer}}</p>
-            <p class="datumke">{{ datum | date:"dd/MM/yy" }}</p>
+            <p>{{ datum | date:"dd/MM/yy" }}</p>
+            <!--class="datum" !-->
         </div>
 
         <div>
                 <label>Locatie: </label>
-                <input type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
+                <input size="60" type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
                 <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
                     Locatie kiezen
                 </ion-button>
@@ -43,7 +44,7 @@
 
         <div>
             <label>Categorie: </label>
-            <input type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
+            <input size="60" type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
             <ion-button (click)="kiesCategory()" color="danger" size="small" expand="full" required style="height: 40px;">
                 Categorie kiezen
             </ion-button>
@@ -126,7 +127,7 @@
                 </ion-fab-list>
             </ion-fab>
         </div>
-        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="success" expand="full" type="submit">Verzenden</ion-button>
+        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Rapporteren</ion-button>
 
     </form>
 </ion-content>
