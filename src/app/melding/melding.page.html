@@ -10,7 +10,7 @@
 
 <ion-content class="bg">
 
-    <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="formpke">
+    <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
         <div >
             <p> melder: {{melder}}</p>
             <p> PNummer: {{pNummer}}</p>
@@ -19,18 +19,26 @@
         </div>
 
         <div>
+            <div>
                 <label>Locatie: </label>
                 <input size="60" type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
                 <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
                     Locatie kiezen
                 </ion-button>
+            </div>
             <div *ngFor="let error of errorMessages.name">
                 <ng-container *ngIf="locatie.hasError(error.type)">
                     <small class="error-message">{{error.message}}</small>
                 </ng-container>
             </div>
         </div>
-
+        <div>
+            <label>Categorie: </label>
+            <input size="60" type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
+            <ion-button (click)="kiesCategory()" color="danger" size="small" expand="full" required style="height: 40px;">
+                Categorie kiezen
+            </ion-button>
+        </div>
         <div>
             <ion-item>
                 <ion-label>Type</ion-label>
@@ -41,14 +49,8 @@
                 </ion-select>
             </ion-item>
         </div>
-
-        <div>
-            <label>Categorie: </label>
-            <input size="60" type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
-            <ion-button (click)="kiesCategory()" color="danger" size="small" expand="full" required style="height: 40px;">
-                Categorie kiezen
-            </ion-button>
-        </div>
+        
+        
 
         <div *ngFor="let error of errorMessages.name">
             <ng-container *ngIf="type.hasError(error.type)">
