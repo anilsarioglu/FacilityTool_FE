@@ -12,10 +12,9 @@
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
         <div >
-            <p> melder: {{melder}}</p>
-            <p> PNummer: {{pNummer}}</p>
-            <p>{{ datum | date:"dd/MM/yy" }}</p>
-            <!--class="datum" !-->
+            <p class="bold"> Melder: {{melder}}</p>
+            <p class="bold"> PNummer: {{pNummer}}</p>
+            <p>Datum: {{ datum | date:"dd/MM/yy" }}</p>
         </div>
 
         <div>

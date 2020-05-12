@@ -14,6 +14,9 @@ ion-slides {
         padding-bottom: 10px;
     }
 }
+.bold{
+    font-weight: bold;
+}
 
 .error-message {
     color: var(--ion-color-danger);
@@ -31,12 +34,10 @@ ion-slides {
     
     @media screen and (min-width: 576px) {
         // browser
-        // width: 650px;
         margin-top: 30px;
         width: 850px;
         margin-left: auto;
         margin-right: auto;
-        // box-shadow: 10px 10px 5px grey;
         background-color: #ffffff;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
