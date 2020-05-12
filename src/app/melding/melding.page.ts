@@ -33,9 +33,9 @@ export class MeldingPage implements OnInit {
   uploadForm: FormGroup;
   meldingen: Melding[];
   datum = new Date();
-  melder = 'Amine Abdelfettah'
+  melder = 'Amine Abdelfettah';
   pNummer = 'P103906';
-  meldingData = ["Defect", "Opdracht"];
+  meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
 
@@ -113,7 +113,8 @@ export class MeldingPage implements OnInit {
 
     // console.log(this.uploadForm.value);
     this.ms.postAlleMeldingen(this.uploadForm.value).subscribe((data) => { console.log(data); });
-    this.router.navigate(['/tab1']);
+    //this.router.navigate(['/tab1']);
+    this.router.navigate(['/app/tabs/tab1']);
   }
 
 
@@ -124,7 +125,7 @@ export class MeldingPage implements OnInit {
   }
 
   async kiesCategory() {
-    this.navCtrl.navigateForward("/category-select" + "?location=" + this.inputLoc + "?category=" + this.inputCat)
+    this.navCtrl.navigateForward("/category-select" + "?location=" + this.inputLoc + "?category=" + this.inputCat);
   }
 
   createItem(data): FormGroup {
