@@ -7,8 +7,8 @@ import { CategoryService } from '../services/category/category.service';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule} from '@angular/forms';
-import { AppComponent }  from '../app.component';
+import { FormsModule } from '@angular/forms';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-category-manage',
@@ -19,58 +19,57 @@ export class CategoryManagePage implements OnInit {
 
   categories: Category[];
   categoryList: any[];
-  kopieLijstVanCategories: any[]; 
+  kopieLijstVanCategories: any[];
 
   categoryForm: FormGroup;
 
   constructor(private navCtrl: NavController, private router: Router,
-              private http: HttpClient, private cs: CategoryService, private alertCtrl: AlertController, private fb: FormBuilder) {
-     }
+    private http: HttpClient, private cs: CategoryService, private alertCtrl: AlertController, private fb: FormBuilder) {
+  }
 
-    ngOnInit() {
-      this.formulier();
-      this.cs.getAllCategories().subscribe(data => {
-        this.categories = data;
-        this.categoryList = this.categories;
+  ngOnInit() {
+    this.formulier();
+    this.cs.getAllCategories().subscribe(data => {
+      this.categories = data;
+      this.categoryList = this.categories;
+    });
+  }
+
+  searchItems(e) {
+    const val: string = e.target.value;
+
+    this.categoryList;
+    if (val.trim() !== '') {
+      this.kopieLijstVanCategories = this.categoryList.filter((item) => {
+        return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
+  }
 
-    searchItems(e){
-      const val: string = e.target.value;
+  createItem(d): FormGroup {
+    return this.fb.group(d);
+  }
 
-      this.categoryList;
-      if (val.trim() !== '') {
-        this.kopieLijstVanCategories = this.categoryList.filter((item) => {
-          return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
-        });
-      }
-    }
+  formulier() {
+    this.categoryForm = this.fb.group({
+      name: ['', [Validators.required, Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.maxLength(100)]],
+    });
+  }
 
-    createItem(d): FormGroup {
-      return this.fb.group(d);
-    }
-
-    formulier() {
-      this.categoryForm = this.fb.group({
-        name: ['', [Validators.required, Validators.maxLength(100)]],
-        description: ['', [Validators.required, Validators.maxLength(100)]],
-      });
-    }
-
-    get name() { return this.categoryForm.get('name'); }
-    get description() { return this.categoryForm.get('description'); }
+  get name() { return this.categoryForm.get('name'); }
+  get description() { return this.categoryForm.get('description'); }
 
 
-    uploadSubmit() {
-      this.cs.postCategory(this.categoryForm.value).subscribe((data) => { console.log(data); });
-      location.reload();
-    }
+  uploadSubmit() {
+    this.cs.postCategory(this.categoryForm.value).subscribe((data) => { console.log(data); });
+    location.reload();
+  }
 
 
-    deleteCategory(e) {
-      console.log(e);
-      
-      //this.cs.deleteCategory(e.target.value).subscribe();
-      //location.reload();
-    }
+  deleteCategory(i, e, id) {
+
+    this.cs.deleteCategory(id).subscribe();
+    this.categories.splice(i, 1);
+  }
 }
