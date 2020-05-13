@@ -1,54 +1,42 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Locatie } from './locatie';
+import { Location } from '../../models/Location';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LocatieService {
-
+export class LocationService {
   //private url = "http://localhost:8100/assets/json/ell.json";
   private contentHeaders: HttpHeaders;
 
-  locaties: Locatie[] = [];
-
-  private AlleLocaties = "http://localhost:8080/getAllLocaties";
-
-  private LocatiesCampus = "http://localhost:8080/findByCampus";
-  private locatiesVerdieping = "http://localhost:8080/findByVerdieping";
-  private locatiesLokaal = "http://localhost:8080/findByLokaal";
-  private LocatiesNaam = "http://localhost:8080/findByNaam";
-
-  private campus: String;
-  private verdieping: number;
-  private lokaal: String;
-  private naam: String;
-
+  private urlLocations = "http://localhost:8080/locations/";
+  private urlLocationsByCampus = "http://localhost:8080/locations/by-campus/";
+  private urlLocationsByFloor = "http://localhost:8080/locations/by-floor/";
+  private urlLocationsByRoom = "http://localhost:8080/locations/by-room/";
+  private urlLocationsByName = "http://localhost:8080/locations/by-name/";
 
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
-
+    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
   }
 
-  geefAlleLocaties(): Observable<Locatie[]> {
-    return this.http.get<Locatie[]>(this.AlleLocaties, { headers: this.contentHeaders });
+  getAllLocations(): Observable<Location[]> {
+    return this.http.get<Location[]>(this.urlLocations, { headers: this.contentHeaders });
   }
 
-  geefCampus(campus): Observable<Locatie[]> {
-    return this.http.get<Locatie[]>(`${this.LocatiesCampus}/${campus}`, { headers: this.contentHeaders });
+  getLocationsByCampus(campus: string): Observable<Location[]> {
+    return this.http.get<Location[]>(this.urlLocationsByCampus + campus, { headers: this.contentHeaders });
   }
 
-  geefVerdieping(verdieping: number): Observable<Locatie[]> {
-    return this.http.get<Locatie[]>(`${this.locatiesVerdieping}/${verdieping}`, { headers: this.contentHeaders });
+  getLocationsByFloor(floor: number): Observable<Location[]> {
+    return this.http.get<Location[]>(this.urlLocationsByFloor + floor, { headers: this.contentHeaders });
   }
 
-  geefLokaal(lokaal: String): Observable<Locatie[]> {
-    return this.http.get<Locatie[]>(`${this.locatiesLokaal}/${lokaal}`, { headers: this.contentHeaders });
+  getLocationByRoom(room: string): Observable<Location> {
+    return this.http.get<Location>(this.urlLocationsByRoom + room, { headers: this.contentHeaders });
   }
 
-  geefNaam(naam: String): Observable<Locatie[]> {
-    return this.http.get<Locatie[]>(`${this.LocatiesNaam}/${naam}`, { headers: this.contentHeaders });
+  getLocationsByName(name: string): Observable<Location[]> {
+    return this.http.get<Location[]>(this.urlLocationsByName + name, { headers: this.contentHeaders });
   }
-
 }

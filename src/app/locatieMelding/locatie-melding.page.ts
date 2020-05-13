@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LocatieService } from '../services/locatie/locatie.service';
-import { Locatie } from '../services/locatie/locatie';
-import { MeldingService } from '../services/melding/melding.service';
+import { Location } from '../models/Location';
+import { MeldingService } from '../services/melding/report.service';
 
 @Component({
   selector: 'app-locatie-melding',
@@ -22,7 +21,7 @@ export class LocatieMeldingPage implements OnInit {
 
   ngOnInit() {
     // console.log(this.meldingLocatie);
-    this.ms.getAlleLocatiesFromMeldingen(this.meldingLocatie).subscribe(data => {
+    this.ms.getReportsByLocation(this.meldingLocatie).subscribe(data => {
       this.meldingLocatieList = data;
       console.log(this.meldingLocatieList);
     })

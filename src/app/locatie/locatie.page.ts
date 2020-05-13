@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Locatie } from '../services/locatie/locatie';
+import { Location } from '../models/Location';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { LocatieService } from '../services/locatie/locatie.service';
-import { MeldingService } from '../services/melding/melding.service';
+import { LocationService } from '../services/locatie/locatie.service';
+import { MeldingService } from '../services/melding/report.service';
 import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-locatie',
   templateUrl: './locatie.page.html',
@@ -13,7 +14,7 @@ import { Storage } from '@ionic/storage';
 })
 export class LocatiePage implements OnInit {
 
-  locaties: Locatie[];
+  locaties: Location[];
   locatieLijst: any[];
   category: string;
 
@@ -22,7 +23,7 @@ export class LocatiePage implements OnInit {
 
 
   constructor(private storage: Storage,private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController, private ms: MeldingService, private activatedRoute: ActivatedRoute) { }
+    private http: HttpClient, private ls: LocationService, private alertCtrl: AlertController, private ms: MeldingService, private activatedRoute: ActivatedRoute) { }
 
 
   ngOnInit() {
@@ -33,7 +34,7 @@ export class LocatiePage implements OnInit {
       }
     })
 
-    this.ls.geefAlleLocaties().subscribe(data => {
+    this.ls.getAllLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
       this.setValue();
