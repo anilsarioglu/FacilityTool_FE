@@ -85,7 +85,7 @@ export class DetailMeldingPage implements OnInit {
 
     this.items.push(this.uploadForm.value);
     this.storage.set('reaction', this.items);
-    this.ms.postAlleReacties(this.uploadForm.value).subscribe();
+    this.ms.postReaction(this.uploadForm.value).subscribe();
 
   }
 
