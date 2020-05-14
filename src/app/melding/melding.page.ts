@@ -5,7 +5,7 @@ import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, F
 import { getLocaleMonthNames, DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MeldingService } from '../services/report/report.service';
-import { Melding } from '../services/report/melding';
+import { Report } from '../models/Report';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -31,15 +31,15 @@ export class MeldingPage implements OnInit {
   model: any;
 
   uploadForm: FormGroup;
-  meldingen: Melding[];
-  datum = new Date();
-  melder = 'Amine Abdelfettah';
-  pNummer = 'P103906';
+  meldingen: Report[];
+  date = new Date();
+  reporter = 'Amine Abdelfettah';
+  pNumber = 'P103906';
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
 
-  locatie: any;
+  location: any;
   category: string;
   localUrl: any;
   localCompressedURl: any;
@@ -50,15 +50,12 @@ export class MeldingPage implements OnInit {
   fileName: any;
   myFiles: string[] = [];
 
-
-
   sliderOpts = {
     zoom: false,
     slidesPerView: 5,
     centeredSlides: true,
     spaceBetween: 3
   }
-
 
   private contentHeaders: HttpHeaders;
   constructor(private popoverController: PopoverController, private barcode: BarcodeScanner, private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
@@ -67,7 +64,7 @@ export class MeldingPage implements OnInit {
     private router: Router, private activatedRoute: ActivatedRoute,
     private fb: FormBuilder, private datePipe: DatePipe, private ms: MeldingService, private camera: Camera, private file: File) {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
-    this.locatie = this.activatedRoute.snapshot.params['locatie'];
+    this.location = this.activatedRoute.snapshot.params['locatie'];
     this.category = this.activatedRoute.snapshot.params['category'];
   }
 
@@ -105,14 +102,14 @@ export class MeldingPage implements OnInit {
 
     this.reacties.push(this.createItem({
       // id: this.be,
-      name: this.melder,
+      name: this.reporter,
       message: this.berichten,
-      datum: this.datum
+      date: this.date
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
     // console.log(this.uploadForm.value);
-    this.ms.postAlleMeldingen(this.uploadForm.value).subscribe((data) => { console.log(data); });
+    this.ms.postReaction(this.uploadForm.value).subscribe((data) => { console.log(data); });
     //this.router.navigate(['/tab1']);
     this.router.navigate(['/tab1']);
   }
@@ -135,12 +132,12 @@ export class MeldingPage implements OnInit {
 
   formulier() {
     this.uploadForm = this.fb.group({
-      melder: [this.melder],
-      pNummer: [this.pNummer],
+      melder: [this.reporter],
+      pNummer: [this.pNumber],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
-      datum: [this.datum],
+      datum: [this.date],
       type: ['', [Validators.required]],
-      locatie: [this.locatie],
+      locatie: [this.location],
       category: [this.category],
       beschrijving: ['', [Validators.required, Validators.maxLength(100)]],
       locatiebeschr: ['', [Validators.required, Validators.maxLength(100)]],
