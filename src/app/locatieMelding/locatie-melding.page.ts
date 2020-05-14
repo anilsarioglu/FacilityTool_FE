@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { LocatieService } from '../services/locatie/locatie.service';
-import { Locatie } from '../services/locatie/locatie';
-import { MeldingService } from '../services/melding/melding.service';
+import { LocatieService } from '../services/location/location.service';
+import { Locatie } from '../services/location/locatie';
+import { MeldingService } from '../services/report/report.service';
 
 @Component({
   selector: 'app-locatie-melding',

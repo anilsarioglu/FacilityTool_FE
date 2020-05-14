@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute, RouterEvent } from '@angular/router';
-import { MeldingService } from '../services/melding/melding.service';
+import { MeldingService } from '../services/report/report.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Melding } from '../services/melding/melding';
+import { Melding } from '../services/report/melding';
 import {formatDate} from '@angular/common';
 
 @Component({
@@ -84,11 +84,7 @@ export class Tab1Page {
         }
         return 0;
       } else if (this.sortVal === 'locatie') {
-<<<<<<< HEAD
         if (n1.location > n2.location) {
-=======
-        if (n1.locatie > n2.locatie) {
->>>>>>> parent of f983ebe... Fixed the naming conventions of the services
           return 1;
         }
         if (n1.locatie < n2.locatie) {
@@ -184,9 +180,4 @@ export class Tab1Page {
   ExportJson() {
     this.downloadCSVFromJson('MeldingenLijst.csv', this.kopieLijstVanMeldingen);
   }
-
-
-
-
-
 }

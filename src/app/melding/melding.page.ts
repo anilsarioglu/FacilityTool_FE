@@ -4,8 +4,8 @@ import { NavController, NavParams, ModalController, PopoverController } from '@i
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { getLocaleMonthNames, DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MeldingService } from '../services/melding/melding.service';
-import { Melding } from '../services/melding/melding';
+import { MeldingService } from '../services/report/report.service';
+import { Melding } from '../services/report/melding';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { NgxImageCompressService } from 'ngx-image-compress';

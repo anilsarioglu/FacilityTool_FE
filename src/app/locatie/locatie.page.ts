@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Locatie } from '../services/locatie/locatie';
+import { Locatie } from '../services/location/locatie';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { LocatieService } from '../services/locatie/locatie.service';
-import { MeldingService } from '../services/melding/melding.service';
+import { LocatieService } from '../services/location/location.service';
+import { MeldingService } from '../services/report/report.service';
 import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-locatie',
