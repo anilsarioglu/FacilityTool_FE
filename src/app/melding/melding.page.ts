@@ -67,7 +67,7 @@ export class MeldingPage implements OnInit {
     private router: Router, private activatedRoute: ActivatedRoute,
     private fb: FormBuilder, private datePipe: DatePipe, private ms: MeldingService, private camera: Camera, private file: File) {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
-    this.location = this.activatedRoute.snapshot.params['locatie'];
+    this.location = this.activatedRoute.snapshot.params['location'];
     this.category = this.activatedRoute.snapshot.params['category'];
   }
 
@@ -151,17 +151,17 @@ export class MeldingPage implements OnInit {
     });
   }
 
-  get reporters() { return this.uploadForm.get("melder") };
-  get pNumbers() { return this.uploadForm.get("pNummer") };
-  get dates() { return this.uploadForm.get("datum") };
+  get reporters() { return this.uploadForm.get("reporter") };
+  get pNumbers() { return this.uploadForm.get("pNumber") };
+  get dates() { return this.uploadForm.get("date") };
   get type() { return this.uploadForm.get("type") };
-  get locations() { return this.uploadForm.get("locatie") };
+  get locations() { return this.uploadForm.get("location") };
   get categories() { return this.uploadForm.get("category") }
-  get description() { return this.uploadForm.get("beschrijving") };
-  get locationDescription() { return this.uploadForm.get("locatiebeschr") };
+  get description() { return this.uploadForm.get("description") };
+  get locationDescription() { return this.uploadForm.get("locationDescription") };
   get statusses() { return this.uploadForm.get("status") };
-  get reactions(): FormArray { return this.uploadForm.get('reactie') as FormArray; }
-  get messages() { return this.uploadForm.get("bericht") };
+  get reactions(): FormArray { return this.uploadForm.get('reaction') as FormArray; }
+  get messages() { return this.uploadForm.get("message") };
   get photos(): FormArray { return this.uploadForm.get('photos') as FormArray; };
 
   removePhoto(i) {
@@ -302,6 +302,4 @@ export class MeldingPage implements OnInit {
       })
     })
   }
-
-
 }

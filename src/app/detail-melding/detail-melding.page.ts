@@ -33,7 +33,7 @@ export class DetailMeldingPage implements OnInit {
   message: String = '';
   date = new Date();
 
-  storageDatum: Date;
+  storageDate: Date;
   storageMessage: String = '';
   storageName: String = '';
 
@@ -85,7 +85,7 @@ export class DetailMeldingPage implements OnInit {
 
     this.items.push(this.uploadForm.value);
     this.storage.set('reaction', this.items);
-    this.ms.postReaction(this.uploadForm.value).subscribe();
+    this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
 
   }
 
@@ -99,7 +99,7 @@ export class DetailMeldingPage implements OnInit {
       messageId: this.meldingData.id,
       name: this.meldingData.melder,
       message: this.message,
-      datum: this.date
+      date: this.date
     });
   }
 

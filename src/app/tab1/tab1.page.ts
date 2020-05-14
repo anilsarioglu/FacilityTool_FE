@@ -72,7 +72,7 @@ export class Tab1Page {
 
   sortAll() {
     this.kopieLijstVanMeldingen = this.kopieLijstVanMeldingen.sort((n1, n2) => {
-      if (this.sortVal === 'date') {
+      if (this.sortVal === 'datum') {
         // @ts-ignore
           return new Date(n1.date) as any - new Date(n2.date) as any;
       } else if (this.sortVal === 'type') {
@@ -83,7 +83,7 @@ export class Tab1Page {
           return -1;
         }
         return 0;
-      } else if (this.sortVal === 'location') {
+      } else if (this.sortVal === 'locatie') {
         if (n1.location > n2.location) {
           return 1;
         }

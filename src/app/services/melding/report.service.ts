@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Report } from '../../models/Report';
 import { Reaction } from '../../models/Reaction';
-import { Location } from '../../models/Location';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -26,8 +25,8 @@ export class MeldingService {
     return this.http.post<Report>(this.urlReports, report, { headers: this.contentHeaders });
   }
 
-  postReaction(reaction: Reaction): Observable<Reaction> {
-    return this.http.post<Reaction>(this.urlReactions, reaction, { headers: this.contentHeaders });
+  postReaction(id: string, reaction: Reaction): Observable<Reaction> {
+    return this.http.post<Reaction>(this.urlReactions + id, reaction, { headers: this.contentHeaders });
   }
 
   getAllReports(): Observable<Report[]> {
@@ -38,7 +37,7 @@ export class MeldingService {
     return this.http.get<Report>(this.urlReportsById + id, { headers: this.contentHeaders });
   }
 
-  getReportsByLocation(location: Location): Observable<Report[]> {
+  getReportsByLocation(location: string): Observable<Report[]> {
     return this.http.get<Report[]>(this.urlReportsByLocation + location, { headers: this.contentHeaders });
   }
 
