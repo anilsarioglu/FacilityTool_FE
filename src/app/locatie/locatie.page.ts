@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '../models/Location';
+import { Locatie } from '../services/locatie/locatie';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { LocationService } from '../services/locatie/location.service';
-import { MeldingService } from '../services/melding/report.service';
+import { LocatieService } from '../services/locatie/locatie.service';
+import { MeldingService } from '../services/melding/melding.service';
 import { Storage } from '@ionic/storage';
-
 @Component({
   selector: 'app-locatie',
   templateUrl: './locatie.page.html',
@@ -14,7 +13,7 @@ import { Storage } from '@ionic/storage';
 })
 export class LocatiePage implements OnInit {
 
-  locaties: Location[];
+  locaties: Locatie[];
   locatieLijst: any[];
   category: string;
 
@@ -23,23 +22,20 @@ export class LocatiePage implements OnInit {
 
 
   constructor(private storage: Storage,private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private ls: LocationService, private alertCtrl: AlertController, private ms: MeldingService, private activatedRoute: ActivatedRoute) { }
+    private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController, private ms: MeldingService, private activatedRoute: ActivatedRoute) { }
 
 
   ngOnInit() {
-    /*
     this.storage.get("location").then(data => {
       if (this.locaties || this.locaties.length == data.length) {
         this.locaties = data;
         // console.log(data.length);
       }
     })
-    */
 
-    this.ls.getAllLocations().subscribe(data => {
+    this.ls.geefAlleLocaties().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
-      console.log(this.locaties);
       this.setValue();
       this.storage.set("location", this.locaties);
     })
@@ -104,7 +100,7 @@ export class LocatiePage implements OnInit {
         {
           text: 'reeds gemelde defecten',
           handler: () => {
-            this.ms.getReportsByLocation(event).subscribe(async data => {
+            this.ms.getAlleLocatiesFromMeldingen(event).subscribe(async data => {
               if (data.length >= 1) {
                 alert.dismiss().then(() => { this.router.navigate(['/locatie-melding' + '/' + event]); });
                 return false;

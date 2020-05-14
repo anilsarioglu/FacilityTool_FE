@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../models/Category';
+import { Category } from '../services/category/category';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';

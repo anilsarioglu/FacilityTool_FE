@@ -4,8 +4,8 @@ import { NavController, NavParams, ModalController, PopoverController } from '@i
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { getLocaleMonthNames, DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MeldingService } from '../services/melding/report.service';
-import { Report } from '../models/Report';
+import { MeldingService } from '../services/melding/melding.service';
+import { Melding } from '../services/melding/melding';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -31,15 +31,15 @@ export class MeldingPage implements OnInit {
   model: any;
 
   uploadForm: FormGroup;
-  meldingen: Report[];
-  date = new Date();
-  reporter = 'Amine Abdelfettah';
-  pNumber = 'P103906';
+  meldingen: Melding[];
+  datum = new Date();
+  melder = 'Amine Abdelfettah';
+  pNummer = 'P103906';
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
 
-  location: any;
+  locatie: any;
   category: string;
   localUrl: any;
   localCompressedURl: any;
@@ -67,7 +67,7 @@ export class MeldingPage implements OnInit {
     private router: Router, private activatedRoute: ActivatedRoute,
     private fb: FormBuilder, private datePipe: DatePipe, private ms: MeldingService, private camera: Camera, private file: File) {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
-    this.location = this.activatedRoute.snapshot.params['location'];
+    this.locatie = this.activatedRoute.snapshot.params['locatie'];
     this.category = this.activatedRoute.snapshot.params['category'];
   }
 
@@ -103,16 +103,16 @@ export class MeldingPage implements OnInit {
 
   uploadSubmit() {
 
-    this.reactions.push(this.createItem({
+    this.reacties.push(this.createItem({
       // id: this.be,
-      name: this.reporter,
-      message: this.messages,
-      datum: this.date
+      name: this.melder,
+      message: this.berichten,
+      datum: this.datum
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
     // console.log(this.uploadForm.value);
-    this.ms.postReport(this.uploadForm.value).subscribe((data) => { console.log(data); });
+    this.ms.postAlleMeldingen(this.uploadForm.value).subscribe((data) => { console.log(data); });
     //this.router.navigate(['/tab1']);
     this.router.navigate(['/tab1']);
   }
@@ -135,33 +135,33 @@ export class MeldingPage implements OnInit {
 
   formulier() {
     this.uploadForm = this.fb.group({
-      reporter: [this.reporter],
-      pNumber: [this.pNumber],
+      melder: [this.melder],
+      pNummer: [this.pNummer],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
-      date: [this.date],
+      datum: [this.datum],
       type: ['', [Validators.required]],
-      location: [this.location],
+      locatie: [this.locatie],
       category: [this.category],
-      description: ['', [Validators.required, Validators.maxLength(100)]],
-      locationDescription: ['', [Validators.required, Validators.maxLength(100)]],
+      beschrijving: ['', [Validators.required, Validators.maxLength(100)]],
+      locatiebeschr: ['', [Validators.required, Validators.maxLength(100)]],
       status: [this.status],
-      reaction: this.fb.array([]),
-      message: [],
+      reactie: this.fb.array([]),
+      bericht: [],
       photos: this.fb.array([])
     });
   }
 
-  get reporters() { return this.uploadForm.get("reporter") };
-  get pNumbers() { return this.uploadForm.get("pNumber") };
-  get dates() { return this.uploadForm.get("date") };
+  get melders() { return this.uploadForm.get("melder") };
+  get pNummers() { return this.uploadForm.get("pNummer") };
+  get datums() { return this.uploadForm.get("datum") };
   get type() { return this.uploadForm.get("type") };
-  get locations() { return this.uploadForm.get("location") };
+  get locaties() { return this.uploadForm.get("locatie") };
   get categories() { return this.uploadForm.get("category") }
-  get description() { return this.uploadForm.get("description") };
-  get locationDescription() { return this.uploadForm.get("locationDescription") };
-  get statusses() { return this.uploadForm.get("status") };
-  get reactions(): FormArray { return this.uploadForm.get('reaction') as FormArray; }
-  get messages() { return this.uploadForm.get("message") };
+  get beschrijving() { return this.uploadForm.get("beschrijving") };
+  get locatiebeschr() { return this.uploadForm.get("locatiebeschr") };
+  get statuss() { return this.uploadForm.get("status") };
+  get reacties(): FormArray { return this.uploadForm.get('reactie') as FormArray; }
+  get berichten() { return this.uploadForm.get("bericht") };
   get photos(): FormArray { return this.uploadForm.get('photos') as FormArray; };
 
   removePhoto(i) {
@@ -239,14 +239,14 @@ export class MeldingPage implements OnInit {
     type: [
       { type: 'required', message: 'Kies defect of opdracht' }
     ],
-    location: [
+    locatie: [
       { type: 'required', message: 'kies een locatie' }
     ],
-    description: [
+    beschrijving: [
       { type: 'required', message: 'Een beschrijving is noodzakelijk' },
       { type: 'mexlength', message: 'Rustig, je moet ook geen verhaal schrijven' }
     ],
-    locationDescription: [
+    locatiebeschr: [
       { type: 'mexlength', message: 'Lengte mag niet langer dan 100 karakters bevatten' }
     ]
   };
@@ -302,4 +302,6 @@ export class MeldingPage implements OnInit {
       })
     })
   }
+
+
 }

@@ -12,21 +12,21 @@
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
         <div >
-            <p class="bold"> Melder: {{reporter}}</p>
-            <p class="bold"> PNummer: {{pNumber}}</p>
-            <p>Datum: {{ date | date:"dd/MM/yy" }}</p>
+            <p class="bold"> Melder: {{melder}}</p>
+            <p class="bold"> PNummer: {{pNummer}}</p>
+            <p>Datum: {{ datum | date:"dd/MM/yy" }}</p>
         </div>
 
         <div>
             <div>
                 <label>Locatie: </label>
-                <input size="60" type="text" formControlName="location" formGroupName="location" readonly style="border:0" [(ngModel)]="inputLoc">
+                <input size="60" type="text" formControlName="locatie" formGroupName="locatie" readonly style="border:0" [(ngModel)]="inputLoc">
                 <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
                     Locatie kiezen
                 </ion-button>
             </div>
             <div *ngFor="let error of errorMessages.name">
-                <ng-container *ngIf="location.hasError(error.type)">
+                <ng-container *ngIf="locatie.hasError(error.type)">
                     <small class="error-message">{{error.message}}</small>
                 </ng-container>
             </div>
@@ -59,27 +59,27 @@
 
         <ion-item>
             <ion-label position="floating">Beschrijving: </ion-label>
-            <ion-textarea required inputmode="text" formControlName="description"></ion-textarea>
+            <ion-textarea required inputmode="text" formControlName="beschrijving"></ion-textarea>
         </ion-item>
         <div *ngFor="let error of errorMessages.name">
-            <ng-container *ngIf="description.hasError(error.type)">
+            <ng-container *ngIf="beschrijving.hasError(error.type)">
                 <small class="error-message">{{error.message}}</small>
             </ng-container>
         </div>
 
         <ion-item>
             <ion-label position="floating">Locatie beschrijving: </ion-label>
-            <ion-textarea inputmode="text" formControlName="locationDescription"></ion-textarea>
+            <ion-textarea inputmode="text" formControlName="locatiebeschr"></ion-textarea>
         </ion-item>
         <div *ngFor="let error of errorMessages.name">
-            <ng-container *ngIf="locationDescription.hasError(error.type)">
+            <ng-container *ngIf="locatiebeschr.hasError(error.type)">
                 <small class="error-message">{{error.message}}</small>
             </ng-container>
         </div>
 
         <ion-item>
             <ion-label position="floating">Een vraag stellen: </ion-label>
-            <ion-textarea inputmode="text" formControlName="message"></ion-textarea>
+            <ion-textarea inputmode="text" formControlName="bericht"></ion-textarea>
         </ion-item>
 
 
