@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute, RouterEvent } from '@angular/router';
-import { MeldingService } from '../services/report/report.service';
+import { ReportService } from '../services/report/report.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
@@ -20,7 +20,7 @@ export class Tab1Page {
   sortVal: any;
   toggle: boolean;
 
-  constructor(private ms: MeldingService, private alertCtrl: AlertController,
+  constructor(private ms: ReportService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();

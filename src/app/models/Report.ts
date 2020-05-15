@@ -15,6 +15,6 @@ export class Report {
         public numberUpvotes: number;
         public isUpvoted: boolean;
         public status: string;
-        public reaction: Reaction;
+        public reactions: Reaction;
         public photos: Object;
 }

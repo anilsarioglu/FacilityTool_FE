@@ -34,7 +34,7 @@
             <ion-list *ngFor="let c of categories; let i = index;">
                 <ion-item>
                     {{c.name}}
-                    <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory(i,$event,c.name)">
+                    <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory(i,c.name)">
                         <ion-icon color="danger" name="trash-outline"></ion-icon>
                     </ion-button>
                 </ion-item>

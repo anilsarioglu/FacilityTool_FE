@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class MeldingService {
+export class ReportService {
   private contentHeaders: HttpHeaders;
 
   private urlReports = "http://localhost:8080/reports/";

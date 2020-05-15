@@ -4,7 +4,7 @@ import { NavController, NavParams, ModalController, PopoverController } from '@i
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { getLocaleMonthNames, DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MeldingService } from '../services/report/report.service';
+import { ReportService } from '../services/report/report.service';
 import { Report } from '../models/Report';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
@@ -62,7 +62,7 @@ export class MeldingPage implements OnInit {
     private imageCompress: NgxImageCompressService, private modalController: ModalController,
     private http: HttpClient, private navCtrl: NavController,
     private router: Router, private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder, private datePipe: DatePipe, private ms: MeldingService, private camera: Camera, private file: File) {
+    private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File) {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
     this.location = this.activatedRoute.snapshot.params['locatie'];
     this.category = this.activatedRoute.snapshot.params['category'];
@@ -100,17 +100,19 @@ export class MeldingPage implements OnInit {
 
   uploadSubmit() {
 
-    this.reacties.push(this.createItem({
+    this.reactions.push(this.createItem({
       // id: this.be,
       name: this.reporter,
-      message: this.berichten,
+      message: this.messages,
       date: this.date
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
     // console.log(this.uploadForm.value);
-    this.ms.postReaction(this.uploadForm.value).subscribe((data) => { console.log(data); });
-    //this.router.navigate(['/tab1']);
+    this.ms.postReport(this.uploadForm.value).subscribe((report) => {
+      console.log(report)
+    });
+    // this.ms.postReaction("1", this.uploadForm.value).subscribe((data) => { console.log(data); });
     this.router.navigate(['/tab1']);
   }
 
@@ -132,33 +134,33 @@ export class MeldingPage implements OnInit {
 
   formulier() {
     this.uploadForm = this.fb.group({
-      melder: [this.reporter],
-      pNummer: [this.pNumber],
+      reporter: [this.reporter],
+      pNumber: [this.pNumber],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
-      datum: [this.date],
+      date: [this.date],
       type: ['', [Validators.required]],
-      locatie: [this.location],
+      location: [this.location],
       category: [this.category],
-      beschrijving: ['', [Validators.required, Validators.maxLength(100)]],
-      locatiebeschr: ['', [Validators.required, Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.maxLength(100)]],
+      locationDescription: ['', [Validators.required, Validators.maxLength(100)]],
       status: [this.status],
-      reactie: this.fb.array([]),
-      bericht: [],
+      reactions: this.fb.array([]),
+      message: [],
       photos: this.fb.array([])
     });
   }
 
-  get melders() { return this.uploadForm.get("melder") };
-  get pNummers() { return this.uploadForm.get("pNummer") };
-  get datums() { return this.uploadForm.get("datum") };
+  get reporters() { return this.uploadForm.get("reporter") };
+  get pNumbers() { return this.uploadForm.get("pNumber") };
+  get datums() { return this.uploadForm.get("date") };
   get type() { return this.uploadForm.get("type") };
-  get locaties() { return this.uploadForm.get("locatie") };
+  get locations() { return this.uploadForm.get("location") };
   get categories() { return this.uploadForm.get("category") }
-  get beschrijving() { return this.uploadForm.get("beschrijving") };
-  get locatiebeschr() { return this.uploadForm.get("locatiebeschr") };
+  get description() { return this.uploadForm.get("description") };
+  get locationDescription() { return this.uploadForm.get("locationDescription") };
   get statuss() { return this.uploadForm.get("status") };
-  get reacties(): FormArray { return this.uploadForm.get('reactie') as FormArray; }
-  get berichten() { return this.uploadForm.get("bericht") };
+  get reactions(): FormArray { return this.uploadForm.get('reactions') as FormArray; }
+  get messages() { return this.uploadForm.get("message") };
   get photos(): FormArray { return this.uploadForm.get('photos') as FormArray; };
 
   removePhoto(i) {

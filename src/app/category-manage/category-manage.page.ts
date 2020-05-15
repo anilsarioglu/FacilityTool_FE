@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../services/category/category';
+import { Category } from '../models/Category';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -62,14 +62,16 @@ export class CategoryManagePage implements OnInit {
 
 
   uploadSubmit() {
-    this.cs.postCategory(this.categoryForm.value).subscribe((data) => { console.log(data); });
+    this.cs.postCategory(this.categoryForm.value).subscribe((data) => { 
+      console.log(data); 
+    });
     location.reload();
   }
 
 
-  deleteCategory(i, e, id) {
+  deleteCategory(i: number, name: string) {
 
-    this.cs.deleteCategory(id).subscribe();
+    this.cs.deleteCategory(name).subscribe();
     this.categories.splice(i, 1);
   }
 }

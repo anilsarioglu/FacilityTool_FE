@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Locatie } from '../services/location/locatie';
+import { Location } from '../models/Location';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { LocatieService } from '../services/location/location.service';
-import { MeldingService } from '../services/report/report.service';
+import { LocationService } from '../services/location/location.service';
+import { ReportService } from '../services/report/report.service';
 import { Storage } from '@ionic/storage';
 @Component({
   selector: 'app-locatie',
   templateUrl: './locatie.page.html',
   styleUrls: ['./locatie.page.scss'],
 })
+
 export class LocatiePage implements OnInit {
 
-  locaties: Locatie[];
+  locaties: Location[];
   locatieLijst: any[];
   category: string;
 
@@ -22,18 +23,19 @@ export class LocatiePage implements OnInit {
 
 
   constructor(private storage: Storage,private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private ls: LocatieService, private alertCtrl: AlertController, private ms: MeldingService, private activatedRoute: ActivatedRoute) { }
+    private http: HttpClient, private ls: LocationService, private alertCtrl: AlertController, private ms: ReportService, private activatedRoute: ActivatedRoute) { }
 
 
   ngOnInit() {
+    /*
     this.storage.get("location").then(data => {
       if (this.locaties || this.locaties.length == data.length) {
         this.locaties = data;
         // console.log(data.length);
       }
     })
-
-    this.ls.geefAlleLocaties().subscribe(data => {
+    */
+    this.ls.getAllLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
       this.setValue();
@@ -61,8 +63,8 @@ export class LocatiePage implements OnInit {
 
     if (val.trim() !== '') {
       this.locaties = this.locatieLijst.filter((item) => {
-        return (item.naam.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
-          item.lokaal.toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.name.toLowerCase().indexOf(val.toLowerCase()) > -1 ||
+          item.room.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
     }
   }
@@ -100,7 +102,7 @@ export class LocatiePage implements OnInit {
         {
           text: 'reeds gemelde defecten',
           handler: () => {
-            this.ms.getAlleLocatiesFromMeldingen(event).subscribe(async data => {
+            this.ms.getReportsByLocation(event).subscribe(async data => {
               if (data.length >= 1) {
                 alert.dismiss().then(() => { this.router.navigate(['/locatie-melding' + '/' + event]); });
                 return false;
@@ -124,7 +126,7 @@ export class LocatiePage implements OnInit {
   selectedVerdieping(e) {
     this.initializeItems();
     this.locaties = this.locatieLijst.filter((item) => {
-      if (e == item.verdieping) return item.verdieping;
+      if (e == item.floor) return item.floor;
     })
 
   }
