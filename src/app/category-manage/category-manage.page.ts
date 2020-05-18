@@ -32,13 +32,14 @@ export class CategoryManagePage implements OnInit {
     this.cs.getAllCategories().subscribe(data => {
       this.categories = data;
       this.categoryList = this.categories;
+      this.kopieLijstVanCategories = this.categoryList; 
     });
   }
 
   searchItems(e) {
     const val: string = e.target.value;
 
-    this.categoryList;
+    this.kopieLijstVanCategories = this.categoryList; 
     if (val.trim() !== '') {
       this.kopieLijstVanCategories = this.categoryList.filter((item) => {
         return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
