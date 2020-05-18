@@ -25,7 +25,7 @@
         <ion-button [disabled]="!categoryForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button>
     </form>
 
-<form id="form">
+<form id='form'>
     <div>
         <p class="midden">Alle categorieën</p>
     </div>
@@ -34,7 +34,7 @@
       <ion-list *ngFor="let c of kopieLijstVanCategories;let i = index;">
         <ion-item>
           {{c.name}} 
-          <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory($event)">
+          <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory(i,c.name)">
             <ion-icon color="danger" name="trash-outline" ></ion-icon>
           </ion-button>
         </ion-item>

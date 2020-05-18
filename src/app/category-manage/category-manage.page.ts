@@ -19,11 +19,11 @@ export class CategoryManagePage implements OnInit {
   categories: Category[];
   categoryList: any[];
   kopieLijstVanCategories: any[];
-
   categoryForm: FormGroup;
 
   constructor(private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private cs: CategoryService, private alertCtrl: AlertController, private fb: FormBuilder) {
+              private http: HttpClient, private cs: CategoryService,
+              private alertCtrl: AlertController, private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -56,22 +56,23 @@ export class CategoryManagePage implements OnInit {
     });
   }
 
-  get name() { return this.categoryForm.get('name'); }
-  get description() { return this.categoryForm.get('description'); }
+  get name() {
+    return this.categoryForm.get('name');
+  }
+
+  get description() {
+    return this.categoryForm.get('description');
+  }
 
   uploadSubmit() {
-    this.cs.postCategory(this.categoryForm.value).subscribe((data) => { console.log(data); });
+    this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
+      console.log(data);
+    });
     location.reload();
   }
 
-  deleteCategory(i, e, id) {
-    this.cs.deleteCategory(id).subscribe();
-    this.categories.splice(i, 1);
-  }
-
-  /*deleteCategory(i: number, name: string) {
-
+  deleteCategory(i: number, name: string) {
     this.cs.deleteCategory(name).subscribe();
-    this.categories.splice(i, 1);
-  }*/
+    this.kopieLijstVanCategories.splice(i, 1);
+  }
 }
