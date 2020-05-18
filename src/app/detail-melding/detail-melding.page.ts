@@ -27,15 +27,15 @@ export class DetailMeldingPage implements OnInit {
   private stompClient;
 
   uploadForm: FormGroup;
-  meldingData: any
-  myDate: String = new Date().toISOString();
+  meldingData: any;
+  myDate: string = new Date().toISOString();
 
-  message: String = '';
+  message: string = '';
   date = new Date();
 
   storageDatum: Date;
-  storageMessage: String = '';
-  storageName: String = '';
+  storageMessage: string = '';
+  storageName: string = '';
 
   items = [];
   values;
@@ -46,9 +46,13 @@ export class DetailMeldingPage implements OnInit {
     slidesPerView: 6,
     centeredSlides: true,
     spaceBetween: 10
-  }
+  };
 
-  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private ms: MeldingService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private toastController: ToastController, private storage: Storage, private file: File,
+              private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService,
+              private ms: MeldingService, private activatedRoute: ActivatedRoute,
+              private fb: FormBuilder, private datePipe: DatePipe) {
+
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
       this.ms.getById(this.meldingData.id).subscribe((data) => {
@@ -56,22 +60,21 @@ export class DetailMeldingPage implements OnInit {
         console.log(data);
       });
     });
+
     this.storage.get('reaction').then((val) => {
       this.values = val;
-    })
+    });
     this.initializeWebSocketConnection();
-
   }
 
-
   initializeWebSocketConnection() {
-    let ws = new SockJS(this.serverUrl);
+    const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
-    let that = this;
+    const that = this;
     this.stompClient.connect({}, () => {
-      that.stompClient.subscribe("/chat", (message) => {
+      that.stompClient.subscribe('/chat', (message) => {
         if (message.body) {
-          $(".chat").append("<div class='message'>" + message.body + "</div>")
+          $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
         }
       });
     });
@@ -93,7 +96,6 @@ export class DetailMeldingPage implements OnInit {
     this.formulier();
   }
 
-
   formulier() {
     this.uploadForm = this.fb.group({
       messageId: this.meldingData.id,
@@ -103,10 +105,7 @@ export class DetailMeldingPage implements OnInit {
     });
   }
 
-
-
-  get messages() { return this.uploadForm.get("message") };
-
+  get messages() { return this.uploadForm.get('message'); }
 
   openPreview(img) {
     this.modalController.create({
@@ -116,6 +115,4 @@ export class DetailMeldingPage implements OnInit {
       }
     }).then(modal => modal.present());
   }
-
-
 }

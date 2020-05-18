@@ -13,13 +13,6 @@ import {formatDate} from '@angular/common';
 })
 export class Tab1Page {
 
-  melding: any;
-  meldingLijst: any = [];
-  kopieLijstVanMeldingen: any = [];
-  actieveLijstVanMeldingen: any = [];
-  sortVal: any;
-  toggle: boolean;
-
 
 
   constructor(private ms: MeldingService, private alertCtrl: AlertController,
@@ -27,11 +20,19 @@ export class Tab1Page {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
     this.sortVal = ' ';
+    this.kleur = 'green';
   }
+
+  melding: any;
+  meldingLijst: any = [];
+  kopieLijstVanMeldingen: any = [];
+  actieveLijstVanMeldingen: any = [];
+  sortVal: any;
+  toggle: boolean;
+  kleur: any;
 
   lijstMeldingen() {
     this.ms.getAlleMeldingen().subscribe(data => {
-      console.log(data);
       this.meldingLijst = data;
       this.activeList();
     });
@@ -133,7 +134,6 @@ export class Tab1Page {
             alert.dismiss().then(() => {
               this.ms.deleteMelding(id).subscribe();
               this.kopieLijstVanMeldingen.splice(i, 1);
-              window.location.reload();
             });
             return false;
           }
@@ -181,8 +181,34 @@ export class Tab1Page {
     this.downloadCSVFromJson('MeldingenLijst.csv', this.kopieLijstVanMeldingen);
   }
 
-
-
-
-
+  kleurStatus(data) {
+    switch (data.toString().toUpperCase()) {
+      case 'IN_BEHANDELING':
+        this.kleur = 'yellow';
+        break;
+      case 'GOED_GEKEURD':
+        this.kleur = 'green';
+        break;
+      case 'GEANNULEERD':
+        this.kleur = 'red';
+        break;
+      case 'BEËINDIGD':
+        this.kleur = 'red';
+        break;
+      case 'IN_UITVOERING':
+        this.kleur = 'yellow';
+        break;
+      case 'VOLTOOID':
+        this.kleur = 'green';
+        break;
+      case 'GEARCHIVEERD':
+        this.kleur = 'orange';
+        break;
+      case 'IN_WACHT':
+        this.kleur = 'orange';
+        break;
+      default:
+        this.kleur = 'grey';
+    }
+  }
 }

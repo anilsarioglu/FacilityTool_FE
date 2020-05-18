@@ -42,7 +42,7 @@
             <ion-col *ngFor="let ml of kopieLijstVanMeldingen;let i = index;" id="kaart">
                 <ion-card>
                     <ion-item>
-                        <ion-icon name="pin" slot="start"></ion-icon>
+                        <ion-icon name="pin" slot="start" [ngStyle]="{'color': kleur}" (load)="kleurStatus(ml.status)"></ion-icon>
                         <ion-label> {{ml.melder}} - {{ml.pNummer}}</ion-label>
                         <ion-button  style:color="danger" color="danger" fill="outline" type="button" (click)="detailMelding(ml)">View
                         </ion-button>

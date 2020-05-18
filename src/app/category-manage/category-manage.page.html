@@ -31,7 +31,7 @@
     </div>
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
     <div>
-      <ion-list *ngFor="let c of categories">
+      <ion-list *ngFor="let c of kopieLijstVanCategories;let i = index;" id="kaart">
         <ion-item>
           {{c.name}} 
           <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory($event)">

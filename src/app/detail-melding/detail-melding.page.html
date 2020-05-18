@@ -7,15 +7,13 @@
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-
     <div id="detailmelding">
-
         <ion-card>
             <ion-card-header>
                 <ion-card-title>{{meldingData.melder}} - {{meldingData.pNummer}}</ion-card-title>
                 <ion-card-subtitle>{{meldingData.datum | date:"dd/MM/yy-HHumm"}} </ion-card-subtitle>
+                <ion-card-subtitle>Status: {{meldingData.status}}</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
@@ -31,16 +29,15 @@
                 Afbeelding:
             </ion-card-header>
             <ion-card-content>
-            <ion-slides [options]="sliderOpts">
-                <ion-slide *ngFor="let mlpu of meldingData.photos; let i=index;">
-                    <div>
-                        <img [src]="mlpu.url" (click)="openPreview(mlpu.url)" alt="Image Preview" tappable>
-                    </div>
-                </ion-slide>
-            </ion-slides>
-        </ion-card-content>
+                <ion-slides [options]="sliderOpts">
+                    <ion-slide *ngFor="let mlpu of meldingData.photos; let i=index;">
+                        <div>
+                            <img [src]="mlpu.url" (click)="openPreview(mlpu.url)" alt="Image Preview" tappable>
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+            </ion-card-content>
         </ion-card>
-
 
         <div *ngIf="meldingData.reactie.length > 0">
             <ion-list>
@@ -56,7 +53,6 @@
                 </ion-item>
             </ion-list>
         </div>
-
 
         <div class="chat-container">
             <div class="chat">
@@ -86,15 +82,11 @@
             </div>
         </div>
 
-
         <form [formGroup]="uploadForm" id="formpke">
             <input formControlName="message" maxlength="255" required inputmode="text" id="input" type="text" #input placeholder="Schrijf hier een reactie...">
             <div (click)="sendMessage(input.value)">
                 <ion-icon class="send" name="send"></ion-icon>
             </div>
         </form>
-
-
     </div>
-
 </ion-content>
