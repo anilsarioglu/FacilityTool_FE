@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute, RouterEvent } from '@angular/router';
-import { MeldingService } from '../services/melding/melding.service';
+import { ReportService } from '../services/report/report.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Melding } from '../services/melding/melding';
+import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
 
 @Component({
@@ -13,16 +13,6 @@ import {formatDate} from '@angular/common';
 })
 export class Tab1Page {
 
-
-
-  constructor(private ms: MeldingService, private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.melding = this.activatedRoute.snapshot.params.melding;
-    this.lijstMeldingen();
-    this.sortVal = ' ';
-    this.kleur = 'green';
-  }
-
   melding: any;
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
@@ -31,8 +21,17 @@ export class Tab1Page {
   toggle: boolean;
   kleur: any;
 
+  constructor(private ms: ReportService, private alertCtrl: AlertController,
+              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.melding = this.activatedRoute.snapshot.params.melding;
+    this.lijstMeldingen();
+    this.sortVal = ' ';
+    this.kleur = 'green';
+  }
+
   lijstMeldingen() {
-    this.ms.getAlleMeldingen().subscribe(data => {
+    this.ms.getAllReports().subscribe(data => {
+      console.log(data);
       this.meldingLijst = data;
       this.activeList();
     });
@@ -45,14 +44,14 @@ export class Tab1Page {
     if (val.trim() !== '') {
       this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen.filter((item) => {
         return (item.type.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.melder.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.datum.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.locatie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.pNummer.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.reporter.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.date.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.location.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.pNumber.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.status.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             // (item.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.beschrijving.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.locatiebeschr.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+            (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.locationDescription.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
   }
@@ -75,7 +74,7 @@ export class Tab1Page {
     this.kopieLijstVanMeldingen = this.kopieLijstVanMeldingen.sort((n1, n2) => {
       if (this.sortVal === 'datum') {
         // @ts-ignore
-          return new Date(n1.datum) as any - new Date(n2.datum) as any;
+          return new Date(n1.date) as any - new Date(n2.date) as any;
       } else if (this.sortVal === 'type') {
         if (n1.type > n2.type) {
           return 1;
@@ -85,10 +84,10 @@ export class Tab1Page {
         }
         return 0;
       } else if (this.sortVal === 'locatie') {
-        if (n1.locatie > n2.locatie) {
+        if (n1.location > n2.location) {
           return 1;
         }
-        if (n1.locatie < n2.locatie) {
+        if (n1.location < n2.location) {
           return -1;
         }
         return 0;
@@ -116,7 +115,6 @@ export class Tab1Page {
       queryParams: {
         value: JSON.stringify(data)
       },
-
     });
   }
 
@@ -132,8 +130,9 @@ export class Tab1Page {
           text: 'Ja',
           handler: () => {
             alert.dismiss().then(() => {
-              this.ms.deleteMelding(id).subscribe();
+              this.ms.deleteReportById(id).subscribe();
               this.kopieLijstVanMeldingen.splice(i, 1);
+              window.location.reload();
             });
             return false;
           }
@@ -146,11 +145,11 @@ export class Tab1Page {
   }
 
   // Upvoting System
-  onIconClick(melding: Melding, index: number) {
+  onIconClick(melding: Report, index: number) {
     this.melding = melding;
     console.log('Cliked on item ' + index);
 
-    this.ms.upvoteMelding(this.melding.id).subscribe((updatedMelding) => {
+    this.ms.putUpvoteReport(this.melding.id).subscribe((updatedMelding) => {
       this.meldingLijst[index] = updatedMelding;
       this.lijstMeldingen();
       console.log(updatedMelding);

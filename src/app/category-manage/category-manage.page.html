@@ -1,29 +1,29 @@
 <ion-header>
     <ion-toolbar color="danger">
-      <ion-buttons slot="start">
-        <ion-menu-button autoHide="false"></ion-menu-button>
-      </ion-buttons>
-      <ion-title class="header">Categorie beheer</ion-title>
-  </ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button autoHide="false"></ion-menu-button>
+        </ion-buttons>
+        <ion-title class="header">Categorie beheer</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-<form [formGroup]="categoryForm" (ngSubmit)="uploadSubmit()" id="form">
-    <div>
-        <p class="midden">Categorie Toevoegen</p>
-    </div>
+    <form [formGroup]="categoryForm" (ngSubmit)="uploadSubmit()" id="form">
+        <div>
+            <p class="midden">Categorie Toevoegen</p>
+        </div>
 
-    <ion-item>
-        <ion-label position="floating">Naam categorie: </ion-label>
-        <ion-textarea required inputmode="text" formControlName="name"></ion-textarea>
-    </ion-item>
+        <ion-item>
+            <ion-label position="floating">Naam categorie: </ion-label>
+            <ion-textarea required inputmode="text" formControlName="name"></ion-textarea>
+        </ion-item>
 
-    <ion-item>
-        <ion-label position="floating">Beschrijving categorie: </ion-label>
-        <ion-textarea inputmode="text" formControlName="description"></ion-textarea>
-    </ion-item> 
-    <ion-button [disabled]="!categoryForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button> 
-</form>
+        <ion-item>
+            <ion-label position="floating">Beschrijving categorie: </ion-label>
+            <ion-textarea inputmode="text" formControlName="description"></ion-textarea>
+        </ion-item>
+        <ion-button [disabled]="!categoryForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button>
+    </form>
 
 <form id="form">
     <div>
@@ -31,7 +31,7 @@
     </div>
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
     <div>
-      <ion-list *ngFor="let c of kopieLijstVanCategories;let i = index;" id="kaart">
+      <ion-list *ngFor="let c of kopieLijstVanCategories;let i = index;">
         <ion-item>
           {{c.name}} 
           <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory($event)">
@@ -43,5 +43,5 @@
 </form>
 <p>
 
-</p>
-  </ion-content>
+    </p>
+</ion-content>

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { MeldingService } from '../services/melding/melding.service';
+import { ReportService } from '../services/report/report.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -48,14 +48,10 @@ export class DetailMeldingPage implements OnInit {
     spaceBetween: 10
   };
 
-  constructor(private toastController: ToastController, private storage: Storage, private file: File,
-              private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService,
-              private ms: MeldingService, private activatedRoute: ActivatedRoute,
-              private fb: FormBuilder, private datePipe: DatePipe) {
-
+  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private ms: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
-      this.ms.getById(this.meldingData.id).subscribe((data) => {
+      this.ms.getReportById(this.meldingData.id).subscribe((data) => {
         this.meldingDB = data;
         console.log(data);
       });
@@ -88,7 +84,7 @@ export class DetailMeldingPage implements OnInit {
 
     this.items.push(this.uploadForm.value);
     this.storage.set('reaction', this.items);
-    this.ms.postAlleReacties(this.uploadForm.value).subscribe();
+    this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
 
   }
 
