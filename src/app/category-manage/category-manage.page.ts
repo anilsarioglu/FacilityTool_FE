@@ -74,5 +74,6 @@ export class CategoryManagePage implements OnInit {
 
     this.cs.deleteCategory(name).subscribe();
     this.categories.splice(i, 1);
+    this.kopieLijstVanCategories.splice(i, 1);
   }
 }
