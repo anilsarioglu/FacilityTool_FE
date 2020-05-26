@@ -87,8 +87,8 @@
             <ion-slides [options]="sliderOpts">
                 <ion-slide formArrayName="photos" *ngFor="let photo of photos.controls; let i = index;">
                     <div class="card mb-3" [formGroupName]="i">
-                        <ion-icon size="large" color="primary" (mouseover)="popup()" name="information-circle">
-                        </ion-icon>
+                        <!-- <ion-icon size="large" color="primary" (mouseover)="popup()" name="information-circle">
+                        </ion-icon> -->
                         <ion-button color="danger" type="button" (click)="removePhoto(i)" class="btn btn-danger remove-btn">x
                         </ion-button>
                         <img #img [src]="photo.controls.url.value" class="card-img-top" alt="Image Preview" tappable (click)="openPreview(photo.controls.url.value)" height="150px" width="300px">
