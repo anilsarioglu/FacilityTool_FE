@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+// azure
+import { MsalGuard } from '@azure/msal-angular';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -16,11 +19,12 @@ const routes: Routes = [
   { path: 'locatie-melding/:locatie', loadChildren: () => import('./locatieMelding/locatie-melding.module').then(m => m.LocatieMeldingPageModule) },
   { path: 'image-modal', loadChildren: () => import('./image-modal/image-modal.module').then(m => m.ImageModalPageModule) },
   {path: 'category-select', loadChildren: () => import('./category-select/category-select.module').then( m => m.CategorySelectPageModule)},
-  {path: 'category-manage', loadChildren: () => import('./category-manage/category-manage.module').then( m => m.CategoryManagePageModule)}
+  {path: 'category-manage', loadChildren: () => import('./category-manage/category-manage.module').then( m => m.CategoryManagePageModule)},
+  //azure
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules })
   ],
   exports: [RouterModule]
 })

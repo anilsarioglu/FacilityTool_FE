@@ -23,7 +23,9 @@ import { ImageModalPage } from './image-modal/image-modal.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
-import { MsalModule, MsalInterceptor } from '@azure/msal-angular';
+import { MsalModule, MsalInterceptor, BroadcastService } from '@azure/msal-angular';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
@@ -38,12 +40,15 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HttpClientModule,
     AppRoutingModule,
     Ng2ImgMaxModule,
-    //test azure
+    //azure
     MsalModule.forRoot({
       auth: {
         clientId: '0c080e9a-d3cd-4047-8287-42b13b386f97', // This is your client ID
-        authority: 'https://login.microsoftonline.com//mhWqi@Kdkv51[lO88c=btuu-.ctMPc=i', // This is your tenant ID
-        redirectUri: 'http://localhost:8080/login/oauth2/code/azure'// This is your redirect URI
+        authority: 'https://login.microsoftonline.com/33d8cf3c-2f14-48c0-9ad6-5d2825533673', // This is your tenant ID
+        redirectUri: 'http://localhost:8080/login/oauth2/code/azure',// This is your redirect URI
+        //redirectUri: environment.redirectUrl
+        validateAuthority: true,
+        navigateToLoginRequestUrl: false,
       },
       cache: {
         cacheLocation: 'localStorage',
@@ -74,7 +79,14 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     ImagePicker,
     BarcodeScanner,
     NgxImageCompressService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    BroadcastService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    //azure
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })

@@ -6,12 +6,17 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
 
+//azure
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
 export class Tab1Page {
+//azure
+ graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
 
   melding: any;
   meldingLijst: any = [];
@@ -21,7 +26,8 @@ export class Tab1Page {
   toggle: boolean;
 
   constructor(private ms: ReportService, private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
+              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
     this.sortVal = ' ';
@@ -178,4 +184,12 @@ export class Tab1Page {
     this.downloadCSVFromJson('MeldingenLijst.xlsx', this.kopieLijstVanMeldingen);
   } 
 
+ 
+getProfile() {
+  this.http.get(this.graphMeEndpoint).toPromise()
+    .then(profile => {
+     // this.profile = profile;
+     console.log(profile);
+    });
+}
 }
