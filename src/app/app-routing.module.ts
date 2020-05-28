@@ -16,7 +16,11 @@ const routes: Routes = [
   { path: 'locatie-melding/:locatie', loadChildren: () => import('./locatieMelding/locatie-melding.module').then(m => m.LocatieMeldingPageModule) },
   { path: 'image-modal', loadChildren: () => import('./image-modal/image-modal.module').then(m => m.ImageModalPageModule) },
   {path: 'category-select', loadChildren: () => import('./category-select/category-select.module').then( m => m.CategorySelectPageModule)},
-  {path: 'category-manage', loadChildren: () => import('./category-manage/category-manage.module').then( m => m.CategoryManagePageModule)}
+  {path: 'category-manage', loadChildren: () => import('./category-manage/category-manage.module').then( m => m.CategoryManagePageModule)},  {
+    path: 'tech-detail-report',
+    loadChildren: () => import('./tech-detail-report/tech-detail-report.module').then( m => m.TechDetailReportPageModule)
+  }
+
 ];
 @NgModule({
   imports: [
