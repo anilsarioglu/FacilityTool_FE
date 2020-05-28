@@ -8,6 +8,7 @@ export class Report {
         public pNumber: string;
         public date: Date;
         public type: string;
+        public requestDate: Date;
         public location: Location;
         public category: Category;
         public description: string;

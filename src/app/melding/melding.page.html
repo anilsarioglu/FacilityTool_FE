@@ -41,7 +41,7 @@
         <div>
             <ion-item>
                 <ion-label>Type</ion-label>
-                <ion-select value="d" ok-text="OK" cancel-text="Annuleren" formControlName="type">
+                <ion-select value="d" ok-text="OK" cancel-text="Annuleren" formControlName="type" (ionChange)="showDateInput($event)">
                     <ion-select-option *ngFor="let md of meldingData" required>
                         {{md}}
                     </ion-select-option>
@@ -49,7 +49,12 @@
             </ion-item>
         </div>
         
-        
+        <div *ngIf="showDateSelector" >
+            <ion-item>
+                <ion-label>Datum uit te voeren: </ion-label>
+                <ion-datetime #dateSelector displayFormat="D MMM YYYY H:mm" min="2020" max="2100" (ionChange)="selectedDateTime(dateSelector.value)" formControlName="requestDate" [(value)]="dateBind"></ion-datetime>
+            </ion-item>
+        </div>
 
         <div *ngFor="let error of errorMessages.name">
             <ng-container *ngIf="type.hasError(error.type)">
