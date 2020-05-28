@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+// azure
+import { MsalGuard } from '@azure/msal-angular';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -20,8 +23,7 @@ const routes: Routes = [
   { path: 'tech-detail-report', loadChildren: () => import('./tech-detail-report/tech-detail-report.module').then(m => m.TechDetailReportPageModule) },
   { path: 'emergency', loadChildren: () => import('./emergency/emergency.module').then(m => m.EmergencyPageModule) },
   { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) }
-
-
+  //azure
 ];
 @NgModule({
   imports: [

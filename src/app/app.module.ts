@@ -23,6 +23,12 @@ import { ImageModalPage } from './image-modal/image-modal.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+import { MsalModule, MsalInterceptor, BroadcastService } from '@azure/msal-angular';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+
+const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
+
 @NgModule({
   declarations: [AppComponent, ImageModalPage],
   entryComponents: [ImageModalPage],
@@ -33,7 +39,35 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
-    Ng2ImgMaxModule],
+    Ng2ImgMaxModule,
+    //azure
+    MsalModule.forRoot({
+      auth: {
+        clientId: '0c080e9a-d3cd-4047-8287-42b13b386f97', // This is your client ID
+        authority: 'https://login.microsoftonline.com/33d8cf3c-2f14-48c0-9ad6-5d2825533673', // This is your tenant ID
+        redirectUri: 'http://localhost:8100/tab1',// This is your redirect URI
+        //redirectUri: environment.redirectUrl
+        validateAuthority: true,
+        navigateToLoginRequestUrl: false,
+      },
+      cache: {
+        cacheLocation: 'localStorage',
+        storeAuthStateInCookie: isIE, // Set to true for Internet Explorer 11
+      },
+    }, {
+      popUp: !isIE,
+      consentScopes: [
+        'user.read',
+        'openid',
+        'profile',
+      ],
+      unprotectedResources: [],
+      protectedResourceMap: [
+        ['https://graph.microsoft.com/v1.0/me', ['user.read']]
+      ],
+      extraQueryParameters: {}
+    })
+  ],
   providers: [
     StatusBar,
     SplashScreen,
@@ -45,7 +79,14 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     ImagePicker,
     BarcodeScanner,
     NgxImageCompressService,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    BroadcastService,
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    //azure
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: MsalInterceptor,
+      multi: true
+  }
   ],
   bootstrap: [AppComponent]
 })

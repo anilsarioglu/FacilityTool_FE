@@ -61,19 +61,17 @@ export class CategoryManagePage implements OnInit {
   get name() { return this.categoryForm.get('name'); }
   get description() { return this.categoryForm.get('description'); }
 
-
   uploadSubmit() {
-    this.cs.postCategory(this.categoryForm.value).subscribe((data) => { 
-      console.log(data); 
+    this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
+      console.log(data);
+      this.kopieLijstVanCategories.splice(this.kopieLijstVanCategories.length, 0, data);
     });
-    location.reload();
+    this.categoryForm.reset();
   }
 
-
-  deleteCategory(i: number, name: string) {
-
-    this.cs.deleteCategory(name).subscribe();
-    this.categories.splice(i, 1);
+  deleteCategory(i: number, cat: Category) {
+    this.cs.deleteCategory(cat.name).subscribe();
     this.kopieLijstVanCategories.splice(i, 1);
+    this.categoryList.splice(this.categoryList.indexOf(cat), 1);
   }
 }
