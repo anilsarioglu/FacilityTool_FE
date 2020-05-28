@@ -39,7 +39,7 @@ export class LoginPage implements OnInit {
     //const loadingIndicator = await this.showLoadingIndictator();
     const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
-        if (isIE) {
+        if (!isIE) {
           this.authService.loginRedirect({
             extraScopesToConsent: ["user.read", "openid", "profile"]
           });

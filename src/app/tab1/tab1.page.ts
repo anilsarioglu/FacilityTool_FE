@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute, RouterEvent } from '@angular/router';
 import { ReportService } from '../services/report/report.service';
@@ -9,12 +9,13 @@ import {formatDate} from '@angular/common';
 //azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
 //azure
  graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
 
@@ -184,12 +185,16 @@ export class Tab1Page {
     this.downloadCSVFromJson('MeldingenLijst.xlsx', this.kopieLijstVanMeldingen);
   } 
 
- 
+  ngOnInit() {
+    this.getProfile();
+  }
+  
+ //azure profile
+ profile: any; 
 getProfile() {
   this.http.get(this.graphMeEndpoint).toPromise()
     .then(profile => {
-     // this.profile = profile;
-     console.log(profile);
+     this.profile = profile;
     });
 }
 }
