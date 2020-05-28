@@ -129,28 +129,28 @@ export class MeldingPage implements OnInit {
     this.navCtrl.navigateForward("/category-select" + "?location=" + this.inputLoc + "?category=" + this.inputCat);
   }
 
-   //Logging the selected date event
- selectedDateTime($event) {
-  console.log($event); // --> wil contains $event.day.value, $event.month.value and $event.year.value
-}
-
-//Binds the date picker component with variable
-dateBind;
-
-//Hide and show date picker by checking the type of report
-showDateInput($event) {
-  console.log($event);
-  if (this.type.value == " Opdracht "){
-    this.showDateSelector = true;
-    this.dateBind = this.date.toISOString();
-    console.log("Date should be current date: " + this.dateBind); 
+  //Logging the selected date event
+  selectedDateTime($event) {
+    console.log($event); // --> wil contains $event.day.value, $event.month.value and $event.year.value
   }
-  else if (this.type.value == " Defect "){
-    this.showDateSelector = false;
-    this.dateBind = undefined;
-    console.log("Date should always be undefined: " + this.dateBind); 
+
+  //Binds the date picker component with variable
+  dateBind;
+
+  //Hide and show date picker by checking the type of report
+  showDateInput($event) {
+    console.log($event);
+    if (this.type.value == " Opdracht ") {
+      this.showDateSelector = true;
+      this.dateBind = this.date.toISOString();
+      console.log("Date should be current date: " + this.dateBind);
+    }
+    else if (this.type.value == " Defect ") {
+      this.showDateSelector = false;
+      this.dateBind = undefined;
+      console.log("Date should always be undefined: " + this.dateBind);
+    }
   }
-}
 
   createItem(data): FormGroup {
     return this.fb.group(data);
