@@ -17,7 +17,9 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 export class Tab1Page implements OnInit {
 //azure
+ profile: any; 
  graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
+
 
   melding: any;
   meldingLijst: any = [];
@@ -186,15 +188,16 @@ export class Tab1Page implements OnInit {
   } 
 
   ngOnInit() {
-    this.getProfile();
+    //this.getProfile();
   }
   
  //azure profile
- profile: any; 
-getProfile() {
-  this.http.get(this.graphMeEndpoint).toPromise()
-    .then(profile => {
-     this.profile = profile;
-    });
-}
+//  getProfile() {
+//   this.http.get(this.graphMeEndpoint).toPromise()
+//     .then(profile => {
+//       this.profile = profile;
+//     });
+//}
+
+
 }

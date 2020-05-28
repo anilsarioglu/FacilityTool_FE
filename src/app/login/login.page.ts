@@ -62,6 +62,7 @@ export class LoginPage implements OnInit {
         });
         }
   }
+  
   // private async showLoadingIndictator() {
   //   const loadingIndicator = await this.loadingController.create({
   //     message: 'Verbinden met Azure...'

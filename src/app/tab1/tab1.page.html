@@ -80,12 +80,11 @@
     <ion-button (click)='ExportJson()' class="exportbutton" id="export" color="danger">Lijst Exporteren
     </ion-button>
 
-
-    <ion-card>
+    <!-- <ion-card>
         <ion-item>
-           <p>{{profile?.displayName}}</p>
+           <p>{{this.adalService.userInfo.profile.name}}</p>
         </ion-item>
-    </ion-card>
+    </ion-card> -->
 
     <ion-fab (click)="addMelding()" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button color="danger">
