@@ -21,8 +21,6 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./detail-melding.page.scss'],
 })
 export class DetailMeldingPage implements OnInit {
-
-
   private serverUrl = 'http://localhost:8080/socket'
   private stompClient;
 
@@ -41,6 +39,9 @@ export class DetailMeldingPage implements OnInit {
   values;
   meldingDB;
 
+  ishidden: boolean = false;
+  newState: any;
+
   sliderOpts = {
     zoom: false,
     slidesPerView: 6,
@@ -55,6 +56,7 @@ export class DetailMeldingPage implements OnInit {
         this.meldingDB = data;
         console.log(data);
       });
+      this.newState = ' ';
     });
 
     this.storage.get('reaction').then((val) => {
@@ -110,5 +112,17 @@ export class DetailMeldingPage implements OnInit {
         img: img
       }
     }).then(modal => modal.present());
+  }
+
+  Hide() {
+    this.ishidden = !this.ishidden;
+  }
+
+  changeState() {
+    this.ms.putStatusReport(this.meldingData.id, this.newState).subscribe((report) => {
+      console.log(report);
+      this.meldingData.status = this.newState;
+    });
+    this.ishidden = !this.ishidden;
   }
 }

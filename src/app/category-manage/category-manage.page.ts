@@ -22,8 +22,7 @@ export class CategoryManagePage implements OnInit {
   categoryForm: FormGroup;
 
   constructor(private navCtrl: NavController, private router: Router,
-              private http: HttpClient, private cs: CategoryService,
-              private alertCtrl: AlertController, private fb: FormBuilder) {
+    private http: HttpClient, private cs: CategoryService, private alertCtrl: AlertController, private fb: FormBuilder) {
   }
 
   ngOnInit() {
@@ -35,8 +34,9 @@ export class CategoryManagePage implements OnInit {
     });
   }
 
-  async searchItems(e) {
+  searchItems(e) {
     const val: string = e.target.value;
+
     this.kopieLijstVanCategories = this.categoryList;
     if (val.trim() !== '') {
       this.kopieLijstVanCategories = this.categoryList.filter((item) => {
@@ -56,23 +56,21 @@ export class CategoryManagePage implements OnInit {
     });
   }
 
-  get name() {
-    return this.categoryForm.get('name');
-  }
+  get name() { return this.categoryForm.get('name'); }
+  get description() { return this.categoryForm.get('description'); }
 
-  get description() {
-    return this.categoryForm.get('description');
-  }
 
   uploadSubmit() {
     this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
       console.log(data);
+      this.kopieLijstVanCategories.splice(this.kopieLijstVanCategories.length, 0, data);
     });
-    location.reload();
+    this.categoryForm.reset();
   }
 
-  deleteCategory(i: number, name: string) {
-    this.cs.deleteCategory(name).subscribe();
+  deleteCategory(i: number, cat: Category) {
+    this.cs.deleteCategory(cat.name).subscribe();
     this.kopieLijstVanCategories.splice(i, 1);
+    this.categoryList.splice(this.categoryList.indexOf(cat), 1);
   }
 }

@@ -20,28 +20,28 @@
 
         <ion-item>
             <ion-label position="floating">Beschrijving categorie: </ion-label>
-            <ion-textarea inputmode="text" formControlName="description"></ion-textarea>
+            <ion-textarea [(ngModel)]="toggle" inputmode="text" formControlName="description"></ion-textarea>
         </ion-item>
         <ion-button [disabled]="!categoryForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button>
     </form>
 
-<form id='form'>
-    <div>
-        <p class="midden">Alle categorieën</p>
-    </div>
-    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
-    <div>
-      <ion-list *ngFor="let c of kopieLijstVanCategories;let i = index;">
-        <ion-item>
-          {{c.name}} 
-          <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory(i,c.name)">
-            <ion-icon color="danger" name="trash-outline" ></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-list>
-  </div>
-</form>
-<p>
+    <form id="form">
+        <div>
+            <p class="midden">Alle categorieën</p>
+        </div>
+        <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+        <div>
+            <ion-list *ngFor="let c of kopieLijstVanCategories; let i = index;">
+                <ion-item>
+                    {{c.name}}
+                    <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory(i,c)">
+                        <ion-icon color="danger" name="trash-outline"></ion-icon>
+                    </ion-button>
+                </ion-item>
+            </ion-list>
+        </div>
+    </form>
+    <p>
 
     </p>
 </ion-content>

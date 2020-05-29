@@ -13,21 +13,20 @@ import {formatDate} from '@angular/common';
 })
 export class Tab1Page {
 
+  constructor(private ms: ReportService, private alertCtrl: AlertController,
+              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
+    this.melding = this.activatedRoute.snapshot.params.melding;
+    this.lijstMeldingen();
+    this.sortVal = ' ';
+  }
+
   melding: any;
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
   actieveLijstVanMeldingen: any = [];
   sortVal: any;
   toggle: boolean;
-  kleur: any;
-
-  constructor(private ms: ReportService, private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.melding = this.activatedRoute.snapshot.params.melding;
-    this.lijstMeldingen();
-    this.sortVal = ' ';
-    this.kleur = 'green';
-  }
+  pincolor: any;
 
   lijstMeldingen() {
     this.ms.getAllReports().subscribe(data => {
@@ -118,7 +117,7 @@ export class Tab1Page {
     });
   }
 
-  async deleteMelding(i, e, id) {
+  async deleteMelding(i, e, ml) {
     console.log(e);
     const event = e.currentTarget.innerText;
 
@@ -130,10 +129,11 @@ export class Tab1Page {
           text: 'Ja',
           handler: () => {
             alert.dismiss().then(() => {
-              this.ms.deleteReportById(id).subscribe();
+              this.ms.deleteReportById(ml.id).subscribe();
               this.kopieLijstVanMeldingen.splice(i, 1);
-              window.location.reload();
             });
+            this.meldingLijst.splice(this.meldingLijst.indexOf(ml), 1);
+            this.actieveLijstVanMeldingen.splice(this.actieveLijstVanMeldingen.indexOf(ml), 1);
             return false;
           }
         },
@@ -180,34 +180,33 @@ export class Tab1Page {
     this.downloadCSVFromJson('MeldingenLijst.csv', this.kopieLijstVanMeldingen);
   }
 
-  kleurStatus(data) {
+  ionViewWillEnter() {
+    this.kopieLijstVanMeldingen.splice();
+  }
+
+  doRefresh(event) {
+    this.lijstMeldingen();
+    setTimeout(() => {
+      event.target.complete();
+    }, 100);
+  }
+
+  colorStatus(data) {
     switch (data.toString().toUpperCase()) {
-      case 'IN_BEHANDELING':
-        this.kleur = 'yellow';
-        break;
-      case 'GOED_GEKEURD':
-        this.kleur = 'green';
-        break;
-      case 'GEANNULEERD':
-        this.kleur = 'red';
-        break;
-      case 'BEËINDIGD':
-        this.kleur = 'red';
-        break;
       case 'IN_UITVOERING':
-        this.kleur = 'yellow';
-        break;
+      case 'IN_BEHANDELING':
+        return 'yellow';
       case 'VOLTOOID':
-        this.kleur = 'green';
-        break;
+      case 'GOED_GEKEURD':
+        return 'green';
+      case 'GEANNULEERD':
+      case 'BEËINDIGD':
+        return 'red';
       case 'GEARCHIVEERD':
-        this.kleur = 'orange';
-        break;
       case 'IN_WACHT':
-        this.kleur = 'orange';
-        break;
+        return 'orange';
       default:
-        this.kleur = 'grey';
+        return 'grey';
     }
   }
 }

@@ -15,8 +15,19 @@
         <ion-card>
             <ion-card-header>
                 <ion-card-title>{{meldingData.reporter}} - {{meldingData.pNumber}}</ion-card-title>
-                <ion-card-subtitle>{{meldingData.date | date:"dd/MM/yy-HHumm"}} </ion-card-subtitle>
-                <ion-card-subtitle>Status: {{meldingData.status}}</ion-card-subtitle>
+                <ion-card-subtitle>{{meldingData.date | date: "dd/MM/yy-HHumm"}} </ion-card-subtitle>
+                <ion-card-subtitle>Status: <ion-label [hidden]=ishidden>{{meldingData.status}}</ion-label>
+                    <ion-select [hidden]=!ishidden [(ngModel)]="newState" placeholder={{meldingData.status}} okText="Bevestig" cancelText="Annuleer" (ionChange)="changeState()">
+                        <ion-select-option value="IN_UITVOERING">In uitvoering</ion-select-option>
+                        <ion-select-option value="IN_BEHANDELING">In behandeling</ion-select-option>
+                        <ion-select-option value="VOLTOOID">Voltooid</ion-select-option>
+                        <ion-select-option value="GOED_GEKEURD">Goedgekeurd</ion-select-option>
+                        <ion-select-option value="GEANNULEERD">Geannuleerd</ion-select-option>
+                        <ion-select-option value="BEËINDIGD">Beëindigd</ion-select-option>
+                        <ion-select-option value="GEARCHIVEERD">Gearchiveerd</ion-select-option>
+                        <ion-select-option value="IN_WACHT">In wacht</ion-select-option>
+                    </ion-select>
+                    <ion-icon id="edit-icon" name="pencil-sharp" (click)="Hide()"></ion-icon></ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
