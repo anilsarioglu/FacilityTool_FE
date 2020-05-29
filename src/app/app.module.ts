@@ -27,6 +27,7 @@ import { MsalModule, MsalInterceptor, BroadcastService } from '@azure/msal-angul
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
+
 const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
 @NgModule({
