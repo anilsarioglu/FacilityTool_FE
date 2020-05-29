@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EmergencyService } from '../services/emergency/emergency.service';
 import { AlertController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-emergency',
@@ -12,18 +13,25 @@ export class EmergencyPage implements OnInit {
 
   emergencyList: any = [];
 
-  constructor(private es: EmergencyService, private alertCtrl: AlertController, private router: Router) {
+  constructor(private storage: Storage, private es: EmergencyService, private alertCtrl: AlertController, private router: Router) {
     this.listEmergencies();
   }
 
   ngOnInit() {
   }
 
+  doRefresh(event) {
+    this.listEmergencies();
+    setTimeout(() => {
+      event.target.complete();
+    }, 100);
+  }
 
   listEmergencies() {
     this.es.getAllEmergencies().subscribe(data => {
       console.log(data);
       this.emergencyList = data;
+      this.storage.set("emergency", this.emergencyList);
     });
   }
 
