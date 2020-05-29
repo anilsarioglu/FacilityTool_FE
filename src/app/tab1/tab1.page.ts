@@ -5,9 +5,12 @@ import { ReportService } from '../services/report/report.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
-
+//xlxs
+import * as XLSX from 'xlsx';
 //azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+
+
 
 
 @Component({
@@ -17,7 +20,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 export class Tab1Page implements OnInit {
 //azure
- profile: any; 
+ profile: any;
  graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
 
 
@@ -27,6 +30,7 @@ export class Tab1Page implements OnInit {
   actieveLijstVanMeldingen: any = [];
   sortVal: any;
   toggle: boolean;
+  pincolor: any;
 
   constructor(private ms: ReportService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
@@ -125,7 +129,7 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  async deleteMelding(i, e, id) {
+  async deleteMelding(i, e, ml) {
     console.log(e);
     const event = e.currentTarget.innerText;
 
@@ -137,10 +141,11 @@ export class Tab1Page implements OnInit {
           text: 'Ja',
           handler: () => {
             alert.dismiss().then(() => {
-              this.ms.deleteReportById(id).subscribe();
+              this.ms.deleteReportById(ml.id).subscribe();
               this.kopieLijstVanMeldingen.splice(i, 1);
-              window.location.reload();
             });
+            this.meldingLijst.splice(this.meldingLijst.indexOf(ml), 1);
+            this.actieveLijstVanMeldingen.splice(this.actieveLijstVanMeldingen.indexOf(ml), 1);
             return false;
           }
         },
@@ -163,41 +168,83 @@ export class Tab1Page implements OnInit {
     });
   }
 
+  // downloadCSVFromJson = (filename, arrayOfJson) => {
+  //   // convert JSON to CSV
+  //   const replacer = (key, value) => value === null ? '' : value;
+  //   const header = Object.keys(arrayOfJson[0]);
+  //   let csv = arrayOfJson.map(row => header.map(fieldName =>
+  //       JSON.stringify(row[fieldName], replacer)).join(','));
+  //   csv.unshift(header.join(','));
+  //   csv = csv.join('\r\n');
 
-  downloadCSVFromJson = (filename, arrayOfJson) => {
-    // convert JSON to CSV
-    const replacer = (key, value) => value === null ? '' : value // specify how you want to handle null values here
-    const header = Object.keys(arrayOfJson[0])
-    let csv = arrayOfJson.map(row => header.map(fieldName => 
-    JSON.stringify(row[fieldName], replacer)).join(','))
-    csv.unshift(header.join(','))
-    csv = csv.join('\r\n')
-  
-    // Create link and download
-    var link = document.createElement('a');
-    link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
-     link.setAttribute('download', filename); 
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  //   // Create link and download
+  //   const link = document.createElement('a');
+  //   link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
+  //   link.setAttribute('download', filename);
+  //   link.style.visibility = 'hidden';
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // }
+  // ExportJson() {
+  //   this.downloadCSVFromJson('MeldingenLijst.xlsx', this.kopieLijstVanMeldingen);
+  // }
+
+  /*name of the excel-file which will be downloaded. */ 
+
+  fileName= 'ExcelSheet.xlsx';  
     
-  }; 
-  ExportJson(){
-    this.downloadCSVFromJson('MeldingenLijst.xlsx', this.kopieLijstVanMeldingen);
-  } 
+  exportExcel(): void 
+      {
+          /* table id is passed over here */   
+          let element = document.getElementById('excel-table'); 
+        
+        
+            const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+  
+          /* generate workbook and add the worksheet */
+          const wb: XLSX.WorkBook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+        //  /* save to file */
+          XLSX.writeFile(wb, this.fileName);
+        
+      }
 
   ngOnInit() {
-    //this.getProfile();
+    // this.getProfile();
   }
-  
- //azure profile
+ // azure profile
 //  getProfile() {
 //   this.http.get(this.graphMeEndpoint).toPromise()
 //     .then(profile => {
 //       this.profile = profile;
 //     });
-//}
+// }
 
+  doRefresh(event) {
+    this.lijstMeldingen();
+    setTimeout(() => {
+      event.target.complete();
+    }, 100);
+  }
 
+  colorStatus(data) {
+    switch (data.toString().toUpperCase()) {
+      case 'IN_UITVOERING':
+      case 'IN_BEHANDELING':
+        return 'yellow';
+      case 'VOLTOOID':
+      case 'GOED_GEKEURD':
+        return 'green';
+      case 'GEANNULEERD':
+      case 'BEËINDIGD':
+        return 'red';
+      case 'GEARCHIVEERD':
+      case 'IN_WACHT':
+        return 'orange';
+      default:
+        return 'grey';
+    }
+  }
 }

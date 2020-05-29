@@ -2,6 +2,11 @@
     text-align: center;
 }
 
+#edit-icon {
+    font-size: 18px;
+    padding-left: 25px;
+}
+
 #detailmelding {
     margin-top: 40px;
     #itemke:nth-child(n+2) {
@@ -85,5 +90,8 @@
     }
     .sub {
         color: #666666;
+    }
+    ion-select {
+        width: 30%;
     }
 }
