@@ -1,20 +1,19 @@
-
 <ion-header [translucent]="true">
     <ion-toolbar color="danger">
         <!-- <img src="./assets/icon/apicon.png" width="40px" style="display:inline-block" height="40px"/> -->
         <ion-buttons slot="start">
             <ion-menu-button autoHide="false"></ion-menu-button>
-          </ion-buttons>
+        </ion-buttons>
         <ion-title class="ion-text-center">
             Meldingen
         </ion-title>
-    </ion-toolbar>       
-        
+    </ion-toolbar>
+
 </ion-header>
 
 
 <ion-content class="bg" [fullscreen]="true">
-   
+
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
 
     <div id="filter">
@@ -47,7 +46,7 @@
                     <ion-item>
                         <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(ml.status)}"></ion-icon>
                         <ion-label> {{ml.reporter}} - {{ml.pNumber}}</ion-label>
-                        <ion-button  style:color="danger" color="danger" fill="outline" type="button" (click)="detailMelding(ml)">View
+                        <ion-button style:color="danger" color="danger" fill="outline" type="button" (click)="detailMelding(ml)">View
                         </ion-button>
                         <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" (click)="deleteMelding(i,$event,ml)" class="btn btn-danger remove-btn">
                             <ion-icon name="trash"></ion-icon>
@@ -66,10 +65,10 @@
                             <div class="upvote">
                                 <p>{{ ml.numberUpvotes }}</p>
                                 <ion-button color="danger" icon-only *ngIf="!ml.upvoted" (click)="onIconClick(ml, i)">
-                                    <ion-icon  name="heart-outline" class="heart-icon"></ion-icon>
+                                    <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
                                 </ion-button>
                                 <ion-button color="danger" icon-only *ngIf="ml.upvoted" (click)="onIconClick(ml, i)">
-                                    <ion-icon  name="heart" class="heart-icon"></ion-icon>
+                                    <ion-icon name="heart" class="heart-icon"></ion-icon>
                                 </ion-button>
                             </div>
                         </div>
@@ -82,13 +81,15 @@
     <ion-button (click)='ExportJson()' class="exportbutton" id="export" color="danger">Lijst Exporteren
     </ion-button>
 
+    <!-- <ion-card>
+        <ion-item>
+           <p>{{this.adalService.userInfo.profile.name}}</p>
+        </ion-item>
+    </ion-card> -->
+
     <ion-fab (click)="addMelding()" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button color="danger">
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
     </ion-fab>
 </ion-content>
-
-
-
-

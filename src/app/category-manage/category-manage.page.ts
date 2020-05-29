@@ -59,7 +59,6 @@ export class CategoryManagePage implements OnInit {
   get name() { return this.categoryForm.get('name'); }
   get description() { return this.categoryForm.get('description'); }
 
-
   uploadSubmit() {
     this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
       console.log(data);
@@ -71,6 +70,6 @@ export class CategoryManagePage implements OnInit {
   deleteCategory(i: number, cat: Category) {
     this.cs.deleteCategory(cat.name).subscribe();
     this.kopieLijstVanCategories.splice(i, 1);
-    this.categoryList.splice(this.categoryList.indexOf(cat), 1);
+    this.categories.splice(this.categories.indexOf(cat), 1);
   }
 }

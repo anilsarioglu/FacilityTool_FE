@@ -1,0 +1,59 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/emergency"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="title">Detailpagina noodnummer</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
+
+        <ion-item>
+            <ion-label position="floating">Type noodnummer: </ion-label>
+            <ion-input type="text" formControlName="emergencyContactsType" value="{{this.emergencyData.emergencyContactsType}}"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Type werknemer: </ion-label>
+            <ion-input inputmode="text" formControlName="employeeType" value="{{this.emergencyData.employeeType}}">
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Naam: </ion-label>
+            <ion-input inputmode="text" formControlName="employeeName" value="{{this.emergencyData.employeeName}}">
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Telefoonnummer: </ion-label>
+            <ion-input inputmode="tel" formControlName="phoneNumber" value="{{this.emergencyData.phoneNumber}}">
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Mobiele nummer: </ion-label>
+            <ion-input inputmode="tel" formControlName="mobileNumber" value="{{this.emergencyData.mobileNumber}}">
+            </ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Primare mail: </ion-label>
+            <ion-input inputmode="email" formControlName="mail" value="{{this.emergencyData.mail}}"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Secundaire mail: </ion-label>
+            <ion-input inputmode="email" formControlName="mail2" value="{{this.emergencyData.mail2}}">
+            </ion-input>
+        </ion-item>
+
+
+
+        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Wijzigen</ion-button>
+
+    </form>
+
+</ion-content>

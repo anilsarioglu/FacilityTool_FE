@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute, RouterEvent } from '@angular/router';
 import { ReportService } from '../services/report/report.service';
@@ -6,19 +6,20 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
 
+//azure
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+//azure
+ profile: any;
+ graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
 
-  constructor(private ms: ReportService, private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.melding = this.activatedRoute.snapshot.params.melding;
-    this.lijstMeldingen();
-    this.sortVal = ' ';
-  }
 
   melding: any;
   meldingLijst: any = [];
@@ -27,6 +28,14 @@ export class Tab1Page {
   sortVal: any;
   toggle: boolean;
   pincolor: any;
+
+  constructor(private ms: ReportService, private alertCtrl: AlertController,
+              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
+    this.melding = this.activatedRoute.snapshot.params.melding;
+    this.lijstMeldingen();
+    this.sortVal = ' ';
+  }
 
   lijstMeldingen() {
     this.ms.getAllReports().subscribe(data => {
@@ -173,16 +182,21 @@ export class Tab1Page {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-
   }
-
   ExportJson() {
-    this.downloadCSVFromJson('MeldingenLijst.csv', this.kopieLijstVanMeldingen);
+    this.downloadCSVFromJson('MeldingenLijst.xlsx', this.kopieLijstVanMeldingen);
   }
 
-  ionViewWillEnter() {
-    this.kopieLijstVanMeldingen.splice();
+  ngOnInit() {
+    // this.getProfile();
   }
+ // azure profile
+//  getProfile() {
+//   this.http.get(this.graphMeEndpoint).toPromise()
+//     .then(profile => {
+//       this.profile = profile;
+//     });
+// }
 
   doRefresh(event) {
     this.lijstMeldingen();

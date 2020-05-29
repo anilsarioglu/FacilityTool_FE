@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tab1"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="title">Emergency</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+    <ion-card *ngFor="let el of emergencyList;let i = index;" id="kaart">
+        <ion-item>
+            <ion-label>{{el.employeeName}} - {{el.emergencyContactsType}}</ion-label>
+            <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" (click)="deleteEmergency(i,$event,el.id)" class="btn btn-danger remove-btn">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <ion-button style="zoom:1.5;" color="warning" slot="end" type="button" (click)="changeEmergency(el)" class="btn btn-warning edit-btn">
+                <ion-icon name="create"></ion-icon>
+            </ion-button>
+        </ion-item>
+
+
+        <ion-card-content>
+            <p>Soort medewerker: {{el.employeeType}}</p>
+            <p>Telefoonnummer: {{el.phoneNumber}}</p>
+            <p *ngIf="el.mobileNumber">Mobiele nummer: {{el.mobileNumber}}</p>
+            <p *ngIf="el.mail">Primaire e-mail: {{el.mail}}</p>
+            <p *ngIf="el.mail2">Secundaire mail: {{el.mail2}}</p>
+
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>

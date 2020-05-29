@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MsalService} from '@azure/msal-angular';
 
 @Component({
   selector: 'app-tab3',
@@ -11,9 +12,14 @@ export class Tab3Page {
   name: string = 'Amine Abdelfettah';
   pNumber: string = 'P103906';
 
-  constructor() {
+  constructor(private authServive: MsalService) {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     this.darkMode = prefersDark.matches;
+  }
+
+  //azure log out
+  logout() {
+    this.authServive.logout();
   }
 
 
