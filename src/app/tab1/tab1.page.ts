@@ -5,6 +5,8 @@ import { ReportService } from '../services/report/report.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
+import { Employee } from '../models/Employee';
+import { EmployeeService } from '../services/employee/employee.service';
 
 @Component({
   selector: 'app-tab1',
@@ -19,12 +21,18 @@ export class Tab1Page {
   actieveLijstVanMeldingen: any = [];
   sortVal: any;
   toggle: boolean;
+  // Assign Defect
+  assignText: string = "Toewijzen aan:";
+  hideMe = {};
+  employees: Employee[];
+  selectedEmployeeIds: string[] = [];
 
-  constructor(private ms: ReportService, private alertCtrl: AlertController,
+  constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
     this.sortVal = ' ';
+    this.hideMe = {};
   }
 
   lijstMeldingen() {
@@ -121,7 +129,7 @@ export class Tab1Page {
     const event = e.currentTarget.innerText;
 
     const alert = await this.alertCtrl.create({
-      header: 'Weet u zeker dat u deze melding wil verwijderen!',
+      header: 'Weet u zeker dat u deze melding wil verwijderen?',
       message: '' + event.toLowerCase(),
       buttons: [
         {
@@ -142,7 +150,45 @@ export class Tab1Page {
     await alert.present();
   }
 
-  // Upvoting System
+  // Assign Defect
+  onAssignClick(reportId: string) {
+    this.employeeService.getAllEmployees().subscribe(employees => {
+      this.employees = employees;
+    });
+    this.hideMe[reportId] = !this.hideMe[reportId]
+  }
+
+  onEmptyClick(report: Report) {
+    this.hideMe[report.id] = !this.hideMe[report.id];
+    this.selectedEmployeeIds = [];
+  }
+
+  async onToewijzenClick(report: Report) {
+    const alert = await this.alertCtrl.create({
+      header: 'Bevestiging gevraagd!',
+      message: 'De geselecteerde medewerkers zullen een melding krijgen',
+      buttons: [
+        {
+          text: 'Annuleer',
+          role: 'cancel'
+        }, {
+          text: 'Bevestig',
+          handler: () => {
+            console.log(this.selectedEmployeeIds);
+            for (let employeeId of this.selectedEmployeeIds) {
+              this.employeeService.postReportToEmployee(employeeId, report).subscribe(report => {
+                console.log(report);
+              });
+            this.assignText = "Toegewezen aan:";
+          }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  // Upvoting
   onIconClick(melding: Report, index: number) {
     this.melding = melding;
     console.log('Cliked on item ' + index);

@@ -39,8 +39,7 @@ export class LoginPage implements OnInit {
       console.log(`caught error ${e.message}`);
     } finally {
       loadingIndicator.dismiss();
-      //this.navCtrl.navigateForward('/tab1');
-      this.navCtrl.navigateForward('/app/tabs/tab1');
+      this.navCtrl.navigateForward('/tab1');
     }
   }
   private async showLoadingIndictator() {

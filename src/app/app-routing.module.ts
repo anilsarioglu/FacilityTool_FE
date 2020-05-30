@@ -18,6 +18,7 @@ const routes: Routes = [
   {path: 'category-select', loadChildren: () => import('./category-select/category-select.module').then( m => m.CategorySelectPageModule)},
   {path: 'category-manage', loadChildren: () => import('./category-manage/category-manage.module').then( m => m.CategoryManagePageModule)}
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

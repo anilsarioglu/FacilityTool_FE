@@ -23,6 +23,7 @@ import { ImageModalPage } from './image-modal/image-modal.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+
 @NgModule({
   declarations: [AppComponent, ImageModalPage],
   entryComponents: [ImageModalPage],
