@@ -16,11 +16,9 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./category-manage.page.scss'],
 })
 export class CategoryManagePage implements OnInit {
-
   categories: Category[];
   categoryList: any[];
   kopieLijstVanCategories: any[];
-
   categoryForm: FormGroup;
 
   constructor(private navCtrl: NavController, private router: Router,
@@ -32,14 +30,14 @@ export class CategoryManagePage implements OnInit {
     this.cs.getAllCategories().subscribe(data => {
       this.categories = data;
       this.categoryList = this.categories;
-      this.kopieLijstVanCategories = this.categoryList; 
+      this.kopieLijstVanCategories = this.categoryList;
     });
   }
 
   searchItems(e) {
     const val: string = e.target.value;
 
-    this.kopieLijstVanCategories = this.categoryList; 
+    this.kopieLijstVanCategories = this.categoryList;
     if (val.trim() !== '') {
       this.kopieLijstVanCategories = this.categoryList.filter((item) => {
         return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
@@ -61,19 +59,17 @@ export class CategoryManagePage implements OnInit {
   get name() { return this.categoryForm.get('name'); }
   get description() { return this.categoryForm.get('description'); }
 
-
   uploadSubmit() {
-    this.cs.postCategory(this.categoryForm.value).subscribe((data) => { 
-      console.log(data); 
+    this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
+      console.log(data);
+      this.kopieLijstVanCategories.splice(this.kopieLijstVanCategories.length, 0, data);
     });
-    location.reload();
+    this.categoryForm.reset();
   }
 
-
-  deleteCategory(i: number, name: string) {
-
-    this.cs.deleteCategory(name).subscribe();
-    this.categories.splice(i, 1);
+  deleteCategory(i: number, cat: Category) {
+    this.cs.deleteCategory(cat.name).subscribe();
     this.kopieLijstVanCategories.splice(i, 1);
+    this.categories.splice(this.categories.indexOf(cat), 1);
   }
 }

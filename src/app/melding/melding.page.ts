@@ -39,6 +39,9 @@ export class MeldingPage implements OnInit {
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
 
+  showDateSelector: boolean = false;
+
+  requestDate: Date;
   location: any;
   category: string;
   localUrl: any;
@@ -119,12 +122,34 @@ export class MeldingPage implements OnInit {
 
 
   async kiesLocatie() {
-    this.navCtrl.navigateForward("/locatie");
     this.navCtrl.navigateForward("/locatie" + "?location=" + this.inputLoc + "?category=" + this.inputCat)
   }
 
   async kiesCategory() {
     this.navCtrl.navigateForward("/category-select" + "?location=" + this.inputLoc + "?category=" + this.inputCat);
+  }
+
+  //Logging the selected date event
+  selectedDateTime($event) {
+    console.log($event); // --> wil contains $event.day.value, $event.month.value and $event.year.value
+  }
+
+  //Binds the date picker component with variable
+  dateBind;
+
+  //Hide and show date picker by checking the type of report
+  showDateInput($event) {
+    console.log($event);
+    if (this.type.value == " Opdracht ") {
+      this.showDateSelector = true;
+      this.dateBind = this.date.toISOString();
+      console.log("Date should be current date: " + this.dateBind);
+    }
+    else if (this.type.value == " Defect ") {
+      this.showDateSelector = false;
+      this.dateBind = undefined;
+      console.log("Date should always be undefined: " + this.dateBind);
+    }
   }
 
   createItem(data): FormGroup {
@@ -139,6 +164,7 @@ export class MeldingPage implements OnInit {
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
       date: [this.date],
       type: ['', [Validators.required]],
+      requestDate: [this.requestDate],
       location: [this.location],
       category: [this.category],
       description: ['', [Validators.required, Validators.maxLength(100)]],
@@ -154,6 +180,7 @@ export class MeldingPage implements OnInit {
   get pNumbers() { return this.uploadForm.get("pNumber") };
   get datums() { return this.uploadForm.get("date") };
   get type() { return this.uploadForm.get("type") };
+  get reqDate() { return this.uploadForm.get("requestDate") };
   get locations() { return this.uploadForm.get("location") };
   get categories() { return this.uploadForm.get("category") }
   get description() { return this.uploadForm.get("description") };

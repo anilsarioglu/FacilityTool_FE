@@ -20,6 +20,7 @@
     "@angular/platform-browser": "~8.2.14",
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
+    "@azure/msal-angular": "^1.0.0",
     "@ionic-native/barcode-scanner": "^5.24.0",
     "@ionic-native/camera": "^5.24.0",
     "@ionic-native/core": "^5.0.7",
@@ -41,6 +42,7 @@
     "ionic-selectable": "^4.6.0",
     "ionic-tooltips": "^3.1.0",
     "jquery": "^3.5.0",
+    "msal": "^1.3.1",
     "net": "^1.0.2",
     "ng2-file-upload": "^1.4.0",
     "ng2-img-max": "^2.2.4",
@@ -49,6 +51,7 @@
     "stompjs": "^2.3.3",
     "string_decoder": "^1.3.0",
     "tslib": "^1.9.0",
+    "xlsx": "^0.16.1",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

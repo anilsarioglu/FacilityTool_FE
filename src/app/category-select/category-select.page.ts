@@ -62,14 +62,15 @@ export class CategorySelectPage implements OnInit {
       header: "Categorie",
       message: "" + event.toLowerCase(),
       buttons: [
+        
+        { text: 'Annuleer' },
         {
           text: 'Selecteer categorie',
           handler: () => {
             alert.dismiss().then(() => { this.router.navigate(['/melding'], { queryParams: { location: this.location, category: event } }); });
             return false;
           }
-        },
-        { text: 'Annuleer' }
+        }
       ]
     });
     await alert.present();

@@ -1,0 +1,24 @@
+.wrap-text {
+    overflow: visible;
+    text-overflow: unset;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    word-break: break-all;
+    // margin-right: 20px;
+    margin-right: 32px;
+}
+
+#form {
+    padding: 20px;
+    position: static;
+    @media screen and (min-width: 576px) {
+        // browser
+        margin-top: 30px;
+        width: 850px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+}

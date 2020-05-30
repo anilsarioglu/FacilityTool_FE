@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, ActionSheetController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute, RouterEvent } from '@angular/router';
 import { ReportService } from '../services/report/report.service';
@@ -7,13 +7,24 @@ import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
 import { Employee } from '../models/Employee';
 import { EmployeeService } from '../services/employee/employee.service';
+//xlxs
+import * as XLSX from 'xlsx';
+//azure
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+
+
+
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
+//azure
+ profile: any;
+ graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
+
 
   melding: any;
   meldingLijst: any = [];
@@ -26,9 +37,12 @@ export class Tab1Page {
   hideMe = {};
   employees: Employee[];
   selectedEmployeeIds: string[] = [];
+  
+  pincolor: any;
 
   constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute) {
+              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
     this.sortVal = ' ';
@@ -124,7 +138,7 @@ export class Tab1Page {
     });
   }
 
-  async deleteMelding(i, e, id) {
+  async deleteMelding(i, e, ml) {
     console.log(e);
     const event = e.currentTarget.innerText;
 
@@ -136,10 +150,11 @@ export class Tab1Page {
           text: 'Ja',
           handler: () => {
             alert.dismiss().then(() => {
-              this.ms.deleteReportById(id).subscribe();
+              this.ms.deleteReportById(ml.id).subscribe();
               this.kopieLijstVanMeldingen.splice(i, 1);
-              window.location.reload();
             });
+            this.meldingLijst.splice(this.meldingLijst.indexOf(ml), 1);
+            this.actieveLijstVanMeldingen.splice(this.actieveLijstVanMeldingen.indexOf(ml), 1);
             return false;
           }
         },
@@ -200,27 +215,83 @@ export class Tab1Page {
     });
   }
 
-  downloadCSVFromJson = (filename, arrayOfJson) => {
-    // convert JSON to CSV
-    const replacer = (key, value) => value === null ? '' : value;
-    const header = Object.keys(arrayOfJson[0]);
-    let csv = arrayOfJson.map(row => header.map(fieldName =>
-        JSON.stringify(row[fieldName], replacer)).join(','));
-    csv.unshift(header.join(','));
-    csv = csv.join('\r\n');
+  // downloadCSVFromJson = (filename, arrayOfJson) => {
+  //   // convert JSON to CSV
+  //   const replacer = (key, value) => value === null ? '' : value;
+  //   const header = Object.keys(arrayOfJson[0]);
+  //   let csv = arrayOfJson.map(row => header.map(fieldName =>
+  //       JSON.stringify(row[fieldName], replacer)).join(','));
+  //   csv.unshift(header.join(','));
+  //   csv = csv.join('\r\n');
 
-    // Create link and download
-    const link = document.createElement('a');
-    link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
-    link.setAttribute('download', filename);
-    link.style.visibility = 'hidden';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  //   // Create link and download
+  //   const link = document.createElement('a');
+  //   link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
+  //   link.setAttribute('download', filename);
+  //   link.style.visibility = 'hidden';
+  //   document.body.appendChild(link);
+  //   link.click();
+  //   document.body.removeChild(link);
+  // }
+  // ExportJson() {
+  //   this.downloadCSVFromJson('MeldingenLijst.xlsx', this.kopieLijstVanMeldingen);
+  // }
 
+  /*name of the excel-file which will be downloaded. */ 
+
+  fileName= 'ExcelSheet.xlsx';  
+    
+  exportExcel(): void 
+      {
+          /* table id is passed over here */   
+          let element = document.getElementById('excel-table'); 
+        
+        
+            const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+  
+          /* generate workbook and add the worksheet */
+          const wb: XLSX.WorkBook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+  
+        //  /* save to file */
+          XLSX.writeFile(wb, this.fileName);
+        
+      }
+
+  ngOnInit() {
+    // this.getProfile();
+  }
+ // azure profile
+//  getProfile() {
+//   this.http.get(this.graphMeEndpoint).toPromise()
+//     .then(profile => {
+//       this.profile = profile;
+//     });
+// }
+
+  doRefresh(event) {
+    this.lijstMeldingen();
+    setTimeout(() => {
+      event.target.complete();
+    }, 100);
   }
 
-  ExportJson() {
-    this.downloadCSVFromJson('MeldingenLijst.csv', this.kopieLijstVanMeldingen);
+  colorStatus(data) {
+    switch (data.toString().toUpperCase()) {
+      case 'IN_UITVOERING':
+      case 'IN_BEHANDELING':
+        return 'yellow';
+      case 'VOLTOOID':
+      case 'GOED_GEKEURD':
+        return 'green';
+      case 'GEANNULEERD':
+      case 'BEËINDIGD':
+        return 'red';
+      case 'GEARCHIVEERD':
+      case 'IN_WACHT':
+        return 'orange';
+      default:
+        return 'grey';
+    }
   }
 }

@@ -15,7 +15,19 @@
         <ion-card>
             <ion-card-header>
                 <ion-card-title>{{meldingData.reporter}} - {{meldingData.pNumber}}</ion-card-title>
-                <ion-card-subtitle>{{meldingData.date | date:"dd/MM/yy-HHumm"}} </ion-card-subtitle>
+                <ion-card-subtitle>{{meldingData.date | date: "dd/MM/yy-HHumm"}} </ion-card-subtitle>
+                <ion-card-subtitle>Status: <ion-label [hidden]=ishidden>{{meldingData.status}}</ion-label>
+                    <ion-select [hidden]=!ishidden [(ngModel)]="newState" placeholder={{meldingData.status}} okText="Bevestig" cancelText="Annuleer" (ionChange)="changeState()">
+                        <ion-select-option value="IN_UITVOERING">In uitvoering</ion-select-option>
+                        <ion-select-option value="IN_BEHANDELING">In behandeling</ion-select-option>
+                        <ion-select-option value="VOLTOOID">Voltooid</ion-select-option>
+                        <ion-select-option value="GOED_GEKEURD">Goedgekeurd</ion-select-option>
+                        <ion-select-option value="GEANNULEERD">Geannuleerd</ion-select-option>
+                        <ion-select-option value="BEËINDIGD">Beëindigd</ion-select-option>
+                        <ion-select-option value="GEARCHIVEERD">Gearchiveerd</ion-select-option>
+                        <ion-select-option value="IN_WACHT">In wacht</ion-select-option>
+                    </ion-select>
+                    <ion-icon id="edit-icon" name="pencil-sharp" (click)="Hide()"></ion-icon></ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
@@ -31,33 +43,31 @@
                 Afbeelding:
             </ion-card-header>
             <ion-card-content>
-            <ion-slides [options]="sliderOpts">
-                <ion-slide *ngFor="let mlpu of meldingData.photos; let i=index;">
-                    <div>
-                        <img [src]="mlpu.url" (click)="openPreview(mlpu.url)" alt="Image Preview" tappable>
-                    </div>
-                </ion-slide>
-            </ion-slides>
-        </ion-card-content>
+                <ion-slides [options]="sliderOpts">
+                    <ion-slide *ngFor="let mlpu of meldingData.photos; let i=index;">
+                        <div>
+                            <img [src]="mlpu.url" (click)="openPreview(mlpu.url)" alt="Image Preview" tappable>
+                        </div>
+                    </ion-slide>
+                </ion-slides>
+            </ion-card-content>
         </ion-card>
-
 
         <!-- <div *ngIf="meldingData.reactie.length > 0"> -->
         <div>
             <ion-list>
                 <ion-item class="card" *ngFor="let mdr of meldingData.reactie" id="itemke">
-            <ion-avatar class="profilepicposition">
-                <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
-            </ion-avatar>
-            <ion-label>
-                <h3 class="naam">{{mdr.name}}</h3>
-                <p class="wrap-text">{{mdr.date | date:"dd/MM/yy-HHumm"}}</p>
-                <p class="wrap-text">{{mdr.message}}</p>
-            </ion-label>
+                    <ion-avatar class="profilepicposition">
+                        <img src="https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png">
+                    </ion-avatar>
+                    <ion-label>
+                        <h3 class="naam">{{mdr.name}}</h3>
+                        <p class="wrap-text">{{mdr.date | date:"dd/MM/yy-HHumm"}}</p>
+                        <p class="wrap-text">{{mdr.message}}</p>
+                    </ion-label>
                 </ion-item>
             </ion-list>
         </div>
-
 
         <div class="chat-container">
             <div class="chat">
@@ -87,15 +97,11 @@
             </div>
         </div>
 
-
         <form [formGroup]="uploadForm" id="formpke">
             <input formControlName="message" maxlength="255" required inputmode="text" id="input" type="text" #input placeholder="Schrijf hier een reactie...">
             <div (click)="sendMessage(input.value)">
                 <ion-icon class="send" name="send"></ion-icon>
             </div>
         </form>
-
-
     </div>
-
 </ion-content>
