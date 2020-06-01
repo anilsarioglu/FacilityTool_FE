@@ -12,14 +12,12 @@ import * as XLSX from 'xlsx';
 //azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
-
-
-
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
+
 export class Tab1Page implements OnInit {
 //azure
  profile: any;
@@ -34,6 +32,7 @@ export class Tab1Page implements OnInit {
   toggle: boolean;
   // Assign Defect
   assignText: string = "Toewijzen aan:";
+  disableToewijzenButton: boolean = false;
   hideMe = {};
   employees: Employee[];
   selectedEmployeeIds: string[] = [];
@@ -171,9 +170,10 @@ export class Tab1Page implements OnInit {
       this.employees = employees;
     });
     this.hideMe[reportId] = !this.hideMe[reportId]
+    this.disableToewijzenButton = true;
   }
 
-  onEmptyClick(report: Report) {
+  onCancelClick(report: Report) {
     this.hideMe[report.id] = !this.hideMe[report.id];
     this.selectedEmployeeIds = [];
   }
@@ -195,12 +195,17 @@ export class Tab1Page implements OnInit {
                 console.log(report);
               });
             this.assignText = "Toegewezen aan:";
+            this.disableToewijzenButton = true;
           }
           }
         }
       ]
     });
     await alert.present();
+  }
+
+  onAssignToChange () {
+    this.disableToewijzenButton = false;
   }
 
   // Upvoting
