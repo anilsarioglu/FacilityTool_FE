@@ -20,7 +20,7 @@
 
         <ion-item>
             <ion-label position="floating">Beschrijving categorie: </ion-label>
-            <ion-textarea inputmode="text" formControlName="description"></ion-textarea>
+            <ion-textarea [(ngModel)]="toggle" inputmode="text" formControlName="description"></ion-textarea>
         </ion-item>
         <ion-button [disabled]="!categoryForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button>
     </form>
@@ -33,8 +33,9 @@
         <div>
             <ion-list *ngFor="let c of kopieLijstVanCategories; let i = index;">
                 <ion-item>
-                    {{c.name}}
-                    <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory(i,c.name)">
+                    <ion-label>{{c.name}}</ion-label>
+                    <ion-label>{{c.description}}</ion-label>
+                    <ion-button size="medium" color="transparant" slot="end" (click)="deleteCategory(i,c)">
                         <ion-icon color="danger" name="trash-outline"></ion-icon>
                     </ion-button>
                 </ion-item>

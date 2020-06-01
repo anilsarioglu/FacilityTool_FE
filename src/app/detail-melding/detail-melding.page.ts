@@ -21,32 +21,33 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./detail-melding.page.scss'],
 })
 export class DetailMeldingPage implements OnInit {
-
-
   private serverUrl = 'http://localhost:8080/socket'
   private stompClient;
 
   uploadForm: FormGroup;
-  meldingData: any
-  myDate: String = new Date().toISOString();
+  meldingData: any;
+  myDate: string = new Date().toISOString();
 
-  message: String = '';
+  message: string = '';
   date = new Date();
 
   storageDatum: Date;
-  storageMessage: String = '';
-  storageName: String = '';
+  storageMessage: string = '';
+  storageName: string = '';
 
   items = [];
   values;
   meldingDB;
+
+  ishidden: boolean = false;
+  newState: any;
 
   sliderOpts = {
     zoom: false,
     slidesPerView: 6,
     centeredSlides: true,
     spaceBetween: 10
-  }
+  };
 
   constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private ms: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
     this.activatedRoute.queryParams.subscribe((res) => {
@@ -55,23 +56,23 @@ export class DetailMeldingPage implements OnInit {
         this.meldingDB = data;
         console.log(data);
       });
+      this.newState = ' ';
     });
+
     this.storage.get('reaction').then((val) => {
       this.values = val;
-    })
+    });
     this.initializeWebSocketConnection();
-
   }
 
-
   initializeWebSocketConnection() {
-    let ws = new SockJS(this.serverUrl);
+    const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
-    let that = this;
+    const that = this;
     this.stompClient.connect({}, () => {
-      that.stompClient.subscribe("/chat", (message) => {
+      that.stompClient.subscribe('/chat', (message) => {
         if (message.body) {
-          $(".chat").append("<div class='message'>" + message.body + "</div>")
+          $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
         }
       });
     });
@@ -93,7 +94,6 @@ export class DetailMeldingPage implements OnInit {
     this.formulier();
   }
 
-
   formulier() {
     this.uploadForm = this.fb.group({
       messageId: this.meldingData.id,
@@ -103,10 +103,7 @@ export class DetailMeldingPage implements OnInit {
     });
   }
 
-
-
-  get messages() { return this.uploadForm.get("message") };
-
+  get messages() { return this.uploadForm.get('message'); }
 
   openPreview(img) {
     this.modalController.create({
@@ -117,5 +114,15 @@ export class DetailMeldingPage implements OnInit {
     }).then(modal => modal.present());
   }
 
+  Hide() {
+    this.ishidden = !this.ishidden;
+  }
 
+  changeState() {
+    this.ms.putStatusReport(this.meldingData.id, this.newState).subscribe((report) => {
+      console.log(report);
+      this.meldingData.status = this.newState;
+    });
+    this.ishidden = !this.ishidden;
+  }
 }

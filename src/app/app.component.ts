@@ -16,7 +16,7 @@ export class AppComponent {
   public appMenu = [
     { title: 'Overzicht', url: '/tab1', icon: 'list' },
     { title: 'Melding rapporteren', url: '/melding', icon: 'add' },
-    { title: 'Archive', url: '/test3', icon: 'archive' },
+    { title: 'Archief', url: '/test3', icon: 'archive' },
     { title: 'Noodnummers', url: '/emergency', icon: 'call' },
     { title: 'Categorie beheer', url: '/category-manage', icon: 'hammer' },
     { title: 'Sjabloon beheer', url: '/mail-template-manage', icon: 'mail' },
@@ -38,12 +38,12 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      this.checkDarkTheme();
+      //this.checkDarkTheme();
     });
   }
 
-  checkDarkTheme() {
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    if (prefersDark.matches) document.body.classList.toggle('dark');
-  }
+  // checkDarkTheme() {
+  //   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  //   if (prefersDark.matches) document.body.classList.toggle('dark');
+  // }
 }

@@ -9,11 +9,11 @@ import { Observable } from 'rxjs';
 export class CategoryService {
   private contentHeaders: HttpHeaders;
 
-  private urlCategories = "http://localhost:8080/categories/";
-  private urlCategoryByName = "http://localhost:8080/categories/by-name/";
+  private urlCategories = 'http://localhost:8080/categories/';
+  private urlCategoryByName = 'http://localhost:8080/categories/by-name/';
 
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/JSON');
+    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
   }
 
   getAllCategories(): Observable<Category[]> {

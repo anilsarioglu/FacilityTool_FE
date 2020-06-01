@@ -11,11 +11,12 @@ import { Observable } from 'rxjs';
 export class ReportService {
   private contentHeaders: HttpHeaders;
 
-  private urlReports = "http://localhost:8080/reports/";
-  private urlReportsByLocation = "http://localhost:8080/reports/by-location/";
-  private urlReportsById = "http://localhost:8080/reports/by-id/";
-  private urlToggleUpvote = "http://localhost:8080/reports/upvote/";
+  private urlReports = 'http://localhost:8080/reports/';
+  private urlReportsByLocation = 'http://localhost:8080/reports/by-location/';
+  private urlReportsById = 'http://localhost:8080/reports/by-id/';
+  private urlToggleUpvote = 'http://localhost:8080/reports/upvote/';
   private urlReactions = 'http://localhost:8080/reports/reactions/';
+  private urlStatus = 'http://localhost:8080/reports/status/';
 
   constructor(private http: HttpClient) {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
@@ -47,5 +48,9 @@ export class ReportService {
 
   putUpvoteReport(id: string): Observable<Report> {
     return this.http.put<Report>(this.urlToggleUpvote + id, { headers: this.contentHeaders});
+  }
+
+  putStatusReport(id: string, status: string): Observable<Report> {
+    return this.http.put<Report>(this.urlStatus + id, status, { headers: this.contentHeaders});
   }
 }

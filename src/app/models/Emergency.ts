@@ -1,7 +1,7 @@
 export class Emergency {
     id: string;
     emergencyContactsType: string;
-    employeeType: number;
+    employeeType: string;
     employeeName: string;
     phoneNumber: string;
     mobileNumber: string;

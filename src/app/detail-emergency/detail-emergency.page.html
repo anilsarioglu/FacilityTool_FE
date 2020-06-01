@@ -9,46 +9,91 @@
 
 <ion-content>
 
+
+
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
 
-        <ion-item>
-            <ion-label position="floating">Type noodnummer: </ion-label>
-            <ion-input type="text" formControlName="emergencyContactsType" value="{{this.emergencyData.emergencyContactsType}}"></ion-input>
-        </ion-item>
+
+        <div>
+            <ion-item>
+                <ion-label position="floating">Type noodnummer: </ion-label>
+                <ion-input minlength="5" maxlength="60" advies dienst ICT secrettype="text" formControlName="emergencyContactsType" value="{{this.emergencyData.emergencyContactsType}}">
+                </ion-input>
+            </ion-item>
+        </div>
+
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="emergencyContactsType.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
+
+
         <ion-item>
             <ion-label position="floating">Type werknemer: </ion-label>
-            <ion-input inputmode="text" formControlName="employeeType" value="{{this.emergencyData.employeeType}}">
+            <ion-input minlength="5" maxlength="60" inputmode="text" formControlName="employeeType" value="{{this.emergencyData.employeeType}}">
             </ion-input>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="employeeType.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label position="floating">Naam: </ion-label>
-            <ion-input inputmode="text" formControlName="employeeName" value="{{this.emergencyData.employeeName}}">
+            <ion-input minlength="5" maxlength="60" inputmode="text" formControlName="employeeName" value="{{this.emergencyData.employeeName}}">
             </ion-input>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="employeeName.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label position="floating">Telefoonnummer: </ion-label>
-            <ion-input inputmode="tel" formControlName="phoneNumber" value="{{this.emergencyData.phoneNumber}}">
+            <ion-input minlength="5" maxlength="60" inputmode="tel" formControlName="phoneNumber" value="{{this.emergencyData.phoneNumber}}">
             </ion-input>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="phoneNumber.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label position="floating">Mobiele nummer: </ion-label>
-            <ion-input inputmode="tel" formControlName="mobileNumber" value="{{this.emergencyData.mobileNumber}}">
+            <ion-input minlength="5" maxlength="60" inputmode="tel" formControlName="mobileNumber" value="{{this.emergencyData.mobileNumber}}">
             </ion-input>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="mobileNumber.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label position="floating">Primare mail: </ion-label>
-            <ion-input inputmode="email" formControlName="mail" value="{{this.emergencyData.mail}}"></ion-input>
+            <ion-input minlength="5" maxlength="60" inputmode="email" formControlName="mail" value="{{this.emergencyData.mail}}">
+            </ion-input>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="mail.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
         <ion-item>
             <ion-label position="floating">Secundaire mail: </ion-label>
-            <ion-input inputmode="email" formControlName="mail2" value="{{this.emergencyData.mail2}}">
+            <ion-input minlength="5" maxlength="60" inputmode="email" formControlName="mail2" value="{{this.emergencyData.mail2}}">
             </ion-input>
         </ion-item>
+        <div *ngFor="let error of errorMessages.name">
+            <ng-container *ngIf="mail2.hasError(error.type)">
+                <small class="error-message">{{error.message}}</small>
+            </ng-container>
+        </div>
 
 
 
