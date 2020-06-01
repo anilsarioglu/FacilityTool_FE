@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) }
   //azure
 ];
+
 @NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })

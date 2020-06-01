@@ -5,19 +5,19 @@ import { ReportService } from '../services/report/report.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
+import { Employee } from '../models/Employee';
+import { EmployeeService } from '../services/employee/employee.service';
 //xlxs
 import * as XLSX from 'xlsx';
 //azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-
-
-
 
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss'],
 })
+
 export class Tab1Page implements OnInit {
 //azure
  profile: any;
@@ -30,14 +30,22 @@ export class Tab1Page implements OnInit {
   actieveLijstVanMeldingen: any = [];
   sortVal: any;
   toggle: boolean;
+  // Assign Defect
+  assignText: string = "Toewijzen aan:";
+  disableToewijzenButton: boolean = false;
+  hideMe = {};
+  employees: Employee[];
+  selectedEmployeeIds: string[] = [];
+  
   pincolor: any;
 
-  constructor(private ms: ReportService, private alertCtrl: AlertController,
+  constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
               private http: HttpClient) {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
     this.sortVal = ' ';
+    this.hideMe = {};
   }
 
   lijstMeldingen() {
@@ -134,7 +142,7 @@ export class Tab1Page implements OnInit {
     const event = e.currentTarget.innerText;
 
     const alert = await this.alertCtrl.create({
-      header: 'Weet u zeker dat u deze melding wil verwijderen!',
+      header: 'Weet u zeker dat u deze melding wil verwijderen?',
       message: '' + event.toLowerCase(),
       buttons: [
         {
@@ -156,7 +164,51 @@ export class Tab1Page implements OnInit {
     await alert.present();
   }
 
-  // Upvoting System
+  // Assign Defect
+  onAssignClick(reportId: string) {
+    this.employeeService.getAllEmployees().subscribe(employees => {
+      this.employees = employees;
+    });
+    this.hideMe[reportId] = !this.hideMe[reportId]
+    this.disableToewijzenButton = true;
+  }
+
+  onCancelClick(report: Report) {
+    this.hideMe[report.id] = !this.hideMe[report.id];
+    this.selectedEmployeeIds = [];
+  }
+
+  async onToewijzenClick(report: Report) {
+    const alert = await this.alertCtrl.create({
+      header: 'Bevestiging gevraagd!',
+      message: 'De geselecteerde medewerkers zullen een melding krijgen',
+      buttons: [
+        {
+          text: 'Annuleer',
+          role: 'cancel'
+        }, {
+          text: 'Bevestig',
+          handler: () => {
+            console.log(this.selectedEmployeeIds);
+            for (let employeeId of this.selectedEmployeeIds) {
+              this.employeeService.postReportToEmployee(employeeId, report).subscribe(report => {
+                console.log(report);
+              });
+            this.assignText = "Toegewezen aan:";
+            this.disableToewijzenButton = true;
+          }
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  onAssignToChange () {
+    this.disableToewijzenButton = false;
+  }
+
+  // Upvoting
   onIconClick(melding: Report, index: number) {
     this.melding = melding;
     console.log('Cliked on item ' + index);

@@ -85,6 +85,12 @@ ion-grid {
     color: "danger";
 }
 
+.assign {
+    float: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 @media only screen and (max-width: 600px) {
     #sortingList {
         width: 50%;

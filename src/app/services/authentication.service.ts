@@ -18,7 +18,6 @@ export class AuthenticationService {
 
 
   async onLoginSuccess() {
-    // this.router.navigate(['/app/tabs/tab1'])
     this.router.navigate(['/tab1'])
   }
 
