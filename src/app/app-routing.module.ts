@@ -22,7 +22,11 @@ const routes: Routes = [
   { path: 'category-manage', loadChildren: () => import('./category-manage/category-manage.module').then(m => m.CategoryManagePageModule) },
   { path: 'tech-detail-report', loadChildren: () => import('./tech-detail-report/tech-detail-report.module').then(m => m.TechDetailReportPageModule) },
   { path: 'emergency', loadChildren: () => import('./emergency/emergency.module').then(m => m.EmergencyPageModule) },
-  { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) }
+  { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) },
+  { path: 'external-firm', loadChildren: () => import('./external-firm/external-firm.module').then(m => m.ExternalFirmPageModule) },
+  { path: 'detail-ex-firm', loadChildren: () => import('./detail-ex-firm/detail-ex-firm.module').then(m => m.DetailExFirmPageModule) }
+
+
   //azure
 ];
 @NgModule({
