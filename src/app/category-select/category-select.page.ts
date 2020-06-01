@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Category } from '../services/category/category';
+import { Category } from '../models/Category';
 import { NavController, AlertController } from '@ionic/angular';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -62,14 +62,15 @@ export class CategorySelectPage implements OnInit {
       header: "Categorie",
       message: "" + event.toLowerCase(),
       buttons: [
+        
+        { text: 'Annuleer' },
         {
           text: 'Selecteer categorie',
           handler: () => {
             alert.dismiss().then(() => { this.router.navigate(['/melding'], { queryParams: { location: this.location, category: event } }); });
             return false;
           }
-        },
-        { text: 'Annuleer' }
+        }
       ]
     });
     await alert.present();

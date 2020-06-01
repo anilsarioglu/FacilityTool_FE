@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { DatePipe } from '@angular/common';
-import { MeldingService } from '../services/melding/melding.service';
+import { ReportService } from '../services/report/report.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -21,57 +21,58 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./detail-melding.page.scss'],
 })
 export class DetailMeldingPage implements OnInit {
-
-
   private serverUrl = 'http://localhost:8080/socket'
   private stompClient;
 
   uploadForm: FormGroup;
-  meldingData: any
-  myDate: String = new Date().toISOString();
+  meldingData: any;
+  myDate: string = new Date().toISOString();
 
-  message: String = '';
+  message: string = '';
   date = new Date();
 
   storageDatum: Date;
-  storageMessage: String = '';
-  storageName: String = '';
+  storageMessage: string = '';
+  storageName: string = '';
 
   items = [];
   values;
   meldingDB;
+
+  ishidden: boolean = false;
+  newState: any;
 
   sliderOpts = {
     zoom: false,
     slidesPerView: 6,
     centeredSlides: true,
     spaceBetween: 10
-  }
+  };
 
-  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private ms: MeldingService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private ms: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
-      this.ms.getById(this.meldingData.id).subscribe((data) => {
+      this.ms.getReportById(this.meldingData.id).subscribe((data) => {
         this.meldingDB = data;
         console.log(data);
       });
+      this.newState = ' ';
     });
+
     this.storage.get('reaction').then((val) => {
       this.values = val;
-    })
+    });
     this.initializeWebSocketConnection();
-
   }
 
-
   initializeWebSocketConnection() {
-    let ws = new SockJS(this.serverUrl);
+    const ws = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
-    let that = this;
+    const that = this;
     this.stompClient.connect({}, () => {
-      that.stompClient.subscribe("/chat", (message) => {
+      that.stompClient.subscribe('/chat', (message) => {
         if (message.body) {
-          $(".chat").append("<div class='message'>" + message.body + "</div>")
+          $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
         }
       });
     });
@@ -85,14 +86,13 @@ export class DetailMeldingPage implements OnInit {
 
     this.items.push(this.uploadForm.value);
     this.storage.set('reaction', this.items);
-    this.ms.postAlleReacties(this.uploadForm.value).subscribe();
+    this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
 
   }
 
   ngOnInit() {
     this.formulier();
   }
-
 
   formulier() {
     this.uploadForm = this.fb.group({
@@ -103,10 +103,7 @@ export class DetailMeldingPage implements OnInit {
     });
   }
 
-
-
-  get messages() { return this.uploadForm.get("message") };
-
+  get messages() { return this.uploadForm.get('message'); }
 
   openPreview(img) {
     this.modalController.create({
@@ -117,5 +114,15 @@ export class DetailMeldingPage implements OnInit {
     }).then(modal => modal.present());
   }
 
+  Hide() {
+    this.ishidden = !this.ishidden;
+  }
 
+  changeState() {
+    this.ms.putStatusReport(this.meldingData.id, this.newState).subscribe((report) => {
+      console.log(report);
+      this.meldingData.status = this.newState;
+    });
+    this.ishidden = !this.ishidden;
+  }
 }

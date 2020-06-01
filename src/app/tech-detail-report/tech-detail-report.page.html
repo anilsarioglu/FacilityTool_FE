@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tab1"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="title">Tech Detail Page</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+    <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{reportData.reporter}} - {{reportData.pNumber}}</ion-card-title>
+            <ion-card-subtitle>{{reportData.date | date:"dd/MM/yy-HHumm"}} </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+            <p> {{reportData.type}}</p>
+            <p>{{reportData.location}}</p>
+            <p>Algemene beschrijving: {{reportData.description}}</p>
+            <p>Locatie beschrijving: {{reportData.locationDescription}}</p>
+        </ion-card-content>
+    </ion-card>
+
+
+</ion-content>

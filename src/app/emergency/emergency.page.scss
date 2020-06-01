@@ -1,0 +1,8 @@
+ @media (min-width: 576px) {
+     ion-card {
+         display: flex;
+         flex-direction: column;
+         width: 50% !important;
+         margin: 2% auto !important;
+     }
+ }
