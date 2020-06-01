@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="header">Mail sjabloon beheer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form id="form">
+        <div>
+            <p class="midden">Huidige Mail Sjablonen</p>
+        </div>
+        <b>Geselecteerd sjabloon:</b>
+        <ion-select placeholder="selecteer sjabloon" (ionChange)="displayContent($event)" [(ngModel)]="selectedTemplate" [ngModelOptions]="{standalone: true}">
+            <ion-select-option *ngFor="let m of copyOfMailTemplateList">{{m.name}}</ion-select-option>
+        </ion-select>
+        <div style="text-align: right;">
+            <ion-button size="medium" color="transparant" slot="end" (click)="deleteMailTemplate()">
+                <ion-icon color="danger" name="trash-outline"></ion-icon>
+            </ion-button>
+            </div>
+        <b>Inhoud van geselecteerd sjabloon:</b>
+        <ion-textarea inputmode="text" readonly [(ngModel)]="content" [ngModelOptions]="{standalone: true}" rows="20" style="border:solid 1px black;"></ion-textarea>
+    </form>
+
+  <form [formGroup]="mailTemplateForm" (ngSubmit)="uploadSubmit()" id="form">
+    <div>
+        <p class="midden">Mail Sjabloon Toevoegen</p>
+    </div>
+
+    <ion-item>
+        <ion-label position="floating">Naam Mail Sjabloon: </ion-label>
+        <ion-textarea required inputmode="text" formControlName="name"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Inhoud Mail Sjabloon: </ion-label>
+        <ion-textarea inputmode="text" rows="20" formControlName="message"></ion-textarea>
+    </ion-item>
+    <ion-button [disabled]="!mailTemplateForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button>
+</form>
+</ion-content>
