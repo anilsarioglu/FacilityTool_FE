@@ -21,7 +21,9 @@ import { ToastController } from '@ionic/angular';
   styleUrls: ['./detail-melding.page.scss'],
 })
 export class DetailMeldingPage implements OnInit {
-  private serverUrl = 'http://localhost:8080/socket'
+  // private serverUrl = 'http://localhost:8080/socket';
+  // private serverUrl = 'https://vps100.ap.be/api/socket';
+
   private stompClient;
 
   uploadForm: FormGroup;
@@ -62,33 +64,32 @@ export class DetailMeldingPage implements OnInit {
     this.storage.get('reaction').then((val) => {
       this.values = val;
     });
-    this.initializeWebSocketConnection();
+    // this.initializeWebSocketConnection();
   }
 
-  initializeWebSocketConnection() {
-    const ws = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
-    const that = this;
-    this.stompClient.connect({}, () => {
-      that.stompClient.subscribe('/chat', (message) => {
-        if (message.body) {
-          $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
-        }
-      });
-    });
-  }
+  // initializeWebSocketConnection() {
+  //   const ws = new SockJS(this.serverUrl);
+  //   this.stompClient = Stomp.over(ws);
+  //   const that = this;
+  //   this.stompClient.connect({}, () => {
+  //     that.stompClient.subscribe('/chat', (message) => {
+  //       if (message.body) {
+  //         $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
+  //       }
+  //     });
+  //   });
+  // }
 
-  sendMessage(message) {
-    this.stompClient.send('/app/send/message', {}, message);
-    $('#input').val('');
-    this.message = message;
-    // console.log(this.uploadForm.value);
+  // sendMessage(message) {
+  //   this.stompClient.send('/app/send/message', {}, message);
+  //   $('#input').val('');
+  //   this.message = message;
+  //   // console.log(this.uploadForm.value);
 
-    this.items.push(this.uploadForm.value);
-    this.storage.set('reaction', this.items);
-    this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
-
-  }
+  //   this.items.push(this.uploadForm.value);
+  //   this.storage.set('reaction', this.items);
+  //   this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
+  // }
 
   ngOnInit() {
     this.formulier();
