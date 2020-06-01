@@ -22,7 +22,11 @@ const routes: Routes = [
   { path: 'category-manage', loadChildren: () => import('./category-manage/category-manage.module').then(m => m.CategoryManagePageModule) },
   { path: 'tech-detail-report', loadChildren: () => import('./tech-detail-report/tech-detail-report.module').then(m => m.TechDetailReportPageModule) },
   { path: 'emergency', loadChildren: () => import('./emergency/emergency.module').then(m => m.EmergencyPageModule) },
-  { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) }
+  { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) },  {
+    path: 'mail-template-manage',
+    loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then( m => m.MailTemplateManagePageModule)
+  }
+
   //azure
 ];
 @NgModule({
