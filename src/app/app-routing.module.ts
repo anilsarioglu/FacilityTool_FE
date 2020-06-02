@@ -22,14 +22,11 @@ const routes: Routes = [
   { path: 'tech-detail-report', loadChildren: () => import('./tech-detail-report/tech-detail-report.module').then(m => m.TechDetailReportPageModule) },
   { path: 'emergency', loadChildren: () => import('./emergency/emergency.module').then(m => m.EmergencyPageModule) },
   { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) },
-<<<<<<< HEAD
-  { path: 'mail-template-manage', loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then(m => m.MailTemplateManagePageModule) }
-=======
+  { path: 'mail-template-manage', loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then(m => m.MailTemplateManagePageModule) },
   { path: 'external-firm', loadChildren: () => import('./external-firm/external-firm.module').then(m => m.ExternalFirmPageModule) },
   { path: 'detail-ex-firm', loadChildren: () => import('./detail-ex-firm/detail-ex-firm.module').then(m => m.DetailExFirmPageModule) }
 
 
->>>>>>> TPG9-FE-32-exFirms
   //azure
 ];
 
