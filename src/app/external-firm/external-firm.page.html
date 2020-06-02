@@ -1,0 +1,79 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/tab1"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Externe Firma's</ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+
+
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed" pullFactor="0.5" pullMin="100" pullMax="200">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <button class="accordion">Externe firma Toevoegen</button>
+    <div class="panel">
+        <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
+            <!-- <div>
+                <p class="midden">Externe firma Toevoegen</p>
+            </div> -->
+
+            <ion-item>
+                <ion-label position="floating">Bedrijfsnaam: </ion-label>
+                <ion-textarea minlength="5" maxlength="60" required inputmode="text" formControlName="companyName">
+                </ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Contactpersoon: </ion-label>
+                <ion-textarea minlength="5" maxlength="60" required inputmode="text" formControlName="contactPerson">
+                </ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">E-mail: </ion-label>
+                <ion-textarea minlength="5" maxlength="60" required inputmode="email" formControlName="mail">
+                </ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Telefoonnummer: </ion-label>
+                <ion-textarea minlength="5" maxlength="60" required inputmode="tel" formControlName="phoneNumber">
+                </ion-textarea>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Mobiele nummer: </ion-label>
+                <ion-textarea minlength="5" maxlength="60" required inputmode="tel" formControlName="mobileNumber">
+                </ion-textarea>
+            </ion-item>
+
+
+            <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button>
+        </form>
+    </div>
+
+
+    <ion-card *ngFor="let efl of externalFirmList;let i = index;" id="kaart">
+        <ion-item>
+            <ion-label>{{efl.companyName}}</ion-label>
+            <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" (click)="deleteExternalFirm(i,$event,efl.id)" class="btn btn-danger remove-btn">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+            <ion-button style="zoom:1.5;" color="warning" slot="end" type="button" (click)="changeExternalFirm(efl)" class="btn btn-warning edit-btn">
+                <ion-icon name="create"></ion-icon>
+            </ion-button>
+        </ion-item>
+
+
+        <ion-card-content>
+            <p>contactpersoon: {{efl.contactPerson}}</p>
+            <p *ngIf="efl.mail">E-mail: {{efl.mail}}</p>
+            <p *ngIf="efl.phoneNumber">Telefoonnummer: {{efl.phoneNumber}}</p>
+            <p *ngIf="efl.mobileNumber">Mobiele nummer: {{efl.mobileNumber}}</p>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
