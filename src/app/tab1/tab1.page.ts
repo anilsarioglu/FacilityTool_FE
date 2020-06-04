@@ -178,7 +178,7 @@ export class Tab1Page implements OnInit {
     this.selectedEmployeeIds = [];
   }
 
-  async onToewijzenClick(report: Report) {
+  async onToewijzenClick(reportId: String) {
     const alert = await this.alertCtrl.create({
       header: 'Bevestiging gevraagd!',
       message: 'De geselecteerde medewerkers zullen een melding krijgen',
@@ -191,8 +191,8 @@ export class Tab1Page implements OnInit {
           handler: () => {
             console.log(this.selectedEmployeeIds);
             for (let employeeId of this.selectedEmployeeIds) {
-              this.employeeService.postReportToEmployee(employeeId, report).subscribe(report => {
-                console.log(report);
+              this.employeeService.postReportIdToEmployee(employeeId, reportId).subscribe(reportId => {
+                console.log(reportId);
               });
             this.assignText = "Toegewezen aan:";
             this.disableToewijzenButton = true;

@@ -82,7 +82,7 @@
                                   <ion-select-option *ngFor="let employee of employees" [value]="employee.id">{{ employee.name }}</ion-select-option>
                                 </ion-select>
                               </ion-item>
-                              <ion-button fill="outline" size="small" class="assign" [disabled]="disableToewijzenButton" (click)="onToewijzenClick(ml)">Toewijzen</ion-button>
+                              <ion-button fill="outline" size="small" class="assign" [disabled]="disableToewijzenButton" (click)="onToewijzenClick(ml.id)">Toewijzen</ion-button>
                               <ion-button fill="clear" size="small" class="assign" (click)="onCancelClick(ml)">Annuleer</ion-button>
                         </div>
                     </ion-card-content>

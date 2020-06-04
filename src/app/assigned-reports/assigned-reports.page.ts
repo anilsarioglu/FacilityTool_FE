@@ -16,7 +16,7 @@ export class AssignedReportsPage implements OnInit {
   reportlist: any = []; 
   copyReportlist: any = []; 
   activeReportlist: any = []; 
-  sortVal: string;
+  sortVal: any;
   constructor(private employeeService: EmployeeService, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.listReports(); 
     this.sortVal = ' ';
@@ -26,7 +26,7 @@ export class AssignedReportsPage implements OnInit {
   }
 
   listReports() {
-    this.employeeService.getAllReports("5ed60e91c1913518bf7f2c8f").subscribe(data => {
+    this.employeeService.getAllReports("5ed60eb1c1913518bf7f2c90").subscribe(data => {
       console.log(data);
       this.reportlist = data;
 

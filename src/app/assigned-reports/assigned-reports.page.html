@@ -27,7 +27,7 @@
   <ion-grid>
     <ion-row>
         <ion-col *ngFor="let report of reportlist; let i = index;" id="kaart">
-            <ion-card>
+            <ion-card class="reportcard">
                 <ion-item>
                     <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(report.status)}"></ion-icon>
                     <ion-label> {{report.reporter}} - {{report.pNumber}}</ion-label>

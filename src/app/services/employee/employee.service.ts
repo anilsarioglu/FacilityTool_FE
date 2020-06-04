@@ -27,8 +27,8 @@ export class EmployeeService {
     return this.http.get<Employee>(this.urlEmployeeById + id, { headers: this.contentHeaders });
   }
 
-  postReportToEmployee(id: string, report: Report): Observable<Report> {
-    return this.http.post<Report>(this.urlEmployees + id + this.urlEmployeeReportExtension, report, { headers: this.contentHeaders });
+  postReportIdToEmployee(employeeId: string, reportId: String): Observable<String> {
+    return this.http.post<String>(this.urlEmployees + employeeId + this.urlEmployeeReportExtension, reportId, { headers: this.contentHeaders });
   }
 
   getAllReports(id: string): Observable<Report[]>{
