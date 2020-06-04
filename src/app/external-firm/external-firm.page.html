@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar color="danger">
         <ion-buttons slot="start">
-            <ion-back-button defaultHref="/tab1"></ion-back-button>
+            <ion-menu-button autoHide="false"></ion-menu-button>
         </ion-buttons>
         <ion-title class="ion-text-center">Externe Firma's</ion-title>
     </ion-toolbar>
@@ -16,9 +16,6 @@
     <button class="accordion">Externe firma Toevoegen</button>
     <div class="panel">
         <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
-            <!-- <div>
-                <p class="midden">Externe firma Toevoegen</p>
-            </div> -->
 
             <ion-item>
                 <ion-label position="floating">Bedrijfsnaam: </ion-label>
