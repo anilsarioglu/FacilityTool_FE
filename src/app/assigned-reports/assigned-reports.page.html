@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="header">Mijn Defecten</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg" [fullscreen]="true">
+
+  <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+
+  <div id="filter">
+      <ion-list id="sortingList">
+          <ion-item>
+              <ion-label>Sorteer op:</ion-label>
+              <ion-select [(ngModel)]="sortVal" placeholder="" (ionChange)="sortAll()">
+                  <ion-select-option value="datum">Datum</ion-select-option>
+                  <ion-select-option value="type">Type</ion-select-option>
+                  <ion-select-option value="locatie">Locatie</ion-select-option>
+                  <ion-select-option value="status">Status</ion-select-option>
+              </ion-select>
+          </ion-item>
+      </ion-list>
+  </div>
+
+  <ion-grid>
+    <ion-row>
+        <ion-col *ngFor="let report of reportlist; let i = index;" id="kaart">
+            <ion-card>
+                <ion-item>
+                    <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(report.status)}"></ion-icon>
+                    <ion-label> {{report.reporter}} - {{report.pNumber}}</ion-label>
+                    <ion-button style:color="danger" color="danger" fill="outline" type="button" (click)="detailMelding(report)">View
+                    </ion-button>
+                </ion-item>
+
+                <ion-card-content class="meldinggrid">
+                    <div class="box1">
+                        <div class="description">
+                            <p>{{report.date | date:'dd/MM/yy-HHumm'}}</p>
+                            <p>{{report.location}}</p>
+                            <p> {{report.type}}</p>
+                            <p> {{report.description}}</p>
+                            <p> {{report.locationDescription}}</p>
+                        </div>
+                    </div>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</ion-grid>
+
+
+</ion-content>
