@@ -15,8 +15,11 @@ export class AssignedReportsPage implements OnInit {
   report: Report;
   reportlist: any = []; 
   copyReportlist: any = []; 
+  activeReportlist: any = []; 
+  sortVal: string;
   constructor(private employeeService: EmployeeService, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.listReports(); 
+    this.sortVal = ' ';
   }
 
   ngOnInit() {
@@ -30,9 +33,8 @@ export class AssignedReportsPage implements OnInit {
     });
   }
 
-  detailMelding(data) {
+  detailReport(data) {
     console.log('geklikt');
-    // this.router.navigate(['/detail-melding'], data);
     this.router.navigate(['/detail-melding'], {
       queryParams: {
         value: JSON.stringify(data)
@@ -58,25 +60,56 @@ export class AssignedReportsPage implements OnInit {
         return 'grey';
     }
   }
-
+  activeList() {
+    let ch;
+    this.activeReportlist = this.reportlist;
+    this.activeReportlist = this.reportlist.filter((item) => {
+      return (item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1) || item.type.toString() === '';
+    });
+    this.copyReportlist = this.activeReportlist;
+  }
   //search in list
-  // async searchItems(e) {
-  //   const val: string = e.target.value;
+  async searchItems(e) {
+    const val: string = e.target.value;
 
-  //   this.activeList();
-  //   if (val.trim() !== '') {
-  //     this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen.filter((item) => {
-  //       return (item.type.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           (item.reporter.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           (item.date.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           (item.location.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           (item.pNumber.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           (item.status.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           // (item.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-  //           (item.locationDescription.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
-  //     });
-  //   }
-  // }
+    this.activeList();
+    if (val.trim() !== '') {
+      this.copyReportlist = this.activeReportlist.filter((item) => {
+        return (item.type.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.reporter.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.date.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.location.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.pNumber.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.status.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            // (item.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.locationDescription.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+      });
+    }
+  }
 
+  sortAll() {
+    this.copyReportlist = this.copyReportlist.sort((n1, n2) => {
+      if (this.sortVal === 'datum') {
+        // @ts-ignore
+          return new Date(n1.date) as any - new Date(n2.date) as any;
+      } else if (this.sortVal === 'locatie') {
+        if (n1.location > n2.location) {
+          return 1;
+        }
+        if (n1.location < n2.location) {
+          return -1;
+        }
+        return 0;
+      } else if (this.sortVal === 'status') {
+        if (n1.status > n2.status) {
+          return 1;
+        }
+        if (n1.status < n2.status) {
+          return -1;
+        }
+        return 0;
+      }
+    });
+  }
 }
