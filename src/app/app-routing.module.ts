@@ -24,14 +24,21 @@ const routes: Routes = [
   { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) },
   { path: 'mail-template-manage', loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then(m => m.MailTemplateManagePageModule) },
   { path: 'external-firm', loadChildren: () => import('./external-firm/external-firm.module').then(m => m.ExternalFirmPageModule) },
-  { path: 'detail-ex-firm', loadChildren: () => import('./detail-ex-firm/detail-ex-firm.module').then(m => m.DetailExFirmPageModule) },  {
+  { path: 'detail-ex-firm', loadChildren: () => import('./detail-ex-firm/detail-ex-firm.module').then(m => m.DetailExFirmPageModule) },
+  {
     path: 'assigned-reports',
     loadChildren: () => import('./assigned-reports/assigned-reports.module').then( m => m.AssignedReportsPageModule)
+  },
+  {
+    path: 'archive',
+    loadChildren: () => import('./archive/archive.module').then( m => m.ArchivePageModule)
+  },
+  {
+    path: 'archive',
+    loadChildren: () => import('./archive/archive.module').then( m => m.ArchivePageModule)
   }
 
-
-
-  //azure
+  //azures
 ];
 
 @NgModule({

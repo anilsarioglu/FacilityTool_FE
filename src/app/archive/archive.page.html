@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="header">Archief</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg" [fullscreen]="true">
+  <div>
+    <ion-searchbar (keyup)="search($event)"></ion-searchbar>
+    <ngx-datatable 
+      #table class="material" [columnMode]="colMode.force" [headerHeight]="50" [footerHeight]="50" 
+      rowHeight="auto" [limit]="10" [rows]="rows"
+    >
+      <ngx-datatable-column name="Beschrijving" prop="description"></ngx-datatable-column>
+      <ngx-datatable-column name="Locatie" prop="location"></ngx-datatable-column>
+      <ngx-datatable-column name="Datum" prop="date"></ngx-datatable-column>
+      <ngx-datatable-column name="Melder" prop="reporter"></ngx-datatable-column>
+      <ngx-datatable-column name="Status"></ngx-datatable-column>
+      <ngx-datatable-column name="Acties" [sortable]="false">
+        <ng-template let-row="row", let-value="value" ngx-datatable-cell-template>
+          <ion-button size="small" fill="outline" (click)="showDetails(row)">Details</ion-button>
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+  <ion-button (click)="exportExcel()" class="exportbutton" id="export" color="danger">Lijst Exporteren
+  </ion-button>
+   <table id="excel-table" class="exportcss">
+      <tr>       
+        <th>Beschrijving</th>
+        <th>Locatie</th> 
+        <th>Categorie</th>
+        <th>Datum</th>  
+        <th>Datum van aanvraag</th>
+        <th>Melder</th> 
+        <th>PNummer</th>
+        <th>Prioriteit</th>
+        <th>Status</th>
+      </tr>    
+      <tr *ngFor="let report of rows">
+        <td>{{report.description}}</td>
+        <td>{{report.location}}</td>
+        <td>{{report.category}}</td>
+        <td>{{report.date | date:'dd/MM/yy-HHumm'}}</td>
+        <td>{{report.requestDate | date:'dd/MM/yy-HHumm'}}</td>
+        <td>{{report.reporter}}</td>
+        <td>{{report.pNumber}}</td>
+        <td>{{report.numberUpvotes}}</td>
+        <td>{{report.status}}</td>
+      </tr> 
+  </table>
+</ion-content>
