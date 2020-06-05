@@ -27,7 +27,7 @@
   <ion-grid>
     <ion-row>
         <ion-col *ngFor="let report of reportlist; let i = index;" id="kaart">
-            <div>
+            <div class="reportcard">
             <ion-card >
                 <ion-item>
                     <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(report.status)}"></ion-icon>
@@ -36,8 +36,8 @@
                     </ion-button>
                 </ion-item>
 
-                <ion-card-content class="meldinggrid">
-                    <div class="box1">
+                <ion-card-content>
+                    <div>
                         <div class="description">
                             <p>{{report.date | date:'dd/MM/yy-HHumm'}}</p>
                             <p>{{report.location}}</p>
