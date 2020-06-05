@@ -22,7 +22,15 @@ const routes: Routes = [
   { path: 'tech-detail-report', loadChildren: () => import('./tech-detail-report/tech-detail-report.module').then(m => m.TechDetailReportPageModule) },
   { path: 'emergency', loadChildren: () => import('./emergency/emergency.module').then(m => m.EmergencyPageModule) },
   { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) },
-  { path: 'mail-template-manage', loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then(m => m.MailTemplateManagePageModule) }
+  { path: 'mail-template-manage', loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then(m => m.MailTemplateManagePageModule) },  {
+    path: 'archive',
+    loadChildren: () => import('./archive/archive.module').then( m => m.ArchivePageModule)
+  },
+  {
+    path: 'archive',
+    loadChildren: () => import('./archive/archive.module').then( m => m.ArchivePageModule)
+  }
+
   //azure
 ];
 
