@@ -9,7 +9,7 @@
 
 <ion-content class="bg" [fullscreen]="true">
 
-  <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+  <!-- <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
 
   <div id="filter">
       <ion-list id="sortingList">
@@ -22,12 +22,13 @@
               </ion-select>
           </ion-item>
       </ion-list>
-  </div>
+  </div> -->
 
   <ion-grid>
     <ion-row>
         <ion-col *ngFor="let report of reportlist; let i = index;" id="kaart">
-            <ion-card class="reportcard">
+            <div>
+            <ion-card >
                 <ion-item>
                     <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(report.status)}"></ion-icon>
                     <ion-label> {{report.reporter}} - {{report.pNumber}}</ion-label>
@@ -47,6 +48,7 @@
                     </div>
                 </ion-card-content>
             </ion-card>
+            </div>
         </ion-col>
     </ion-row>
 </ion-grid>
