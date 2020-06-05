@@ -23,7 +23,6 @@ export class Tab1Page implements OnInit {
  profile: any;
  graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
 
-
   melding: any;
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
@@ -31,11 +30,13 @@ export class Tab1Page implements OnInit {
   sortVal: any;
   toggle: boolean;
   // Assign Defect
-  assignText: string = "Toewijzen aan:";
   disableToewijzenButton: boolean = false;
   hideMe = {};
   employees: Employee[];
   selectedEmployeeIds: string[] = [];
+  reportIndex: number[] = [];
+  isEnabled:boolean = true;
+  annuleerOrSluitenText: string = "Annuleer";
   
   pincolor: any;
 
@@ -77,6 +78,7 @@ export class Tab1Page implements OnInit {
 
   async toggleOpdDef() {
     this.activeList();
+    //this.selectedEmployeeIds = [];
   }
 
   activeList() {
@@ -165,22 +167,24 @@ export class Tab1Page implements OnInit {
   }
 
   // Assign Defect
-  onAssignClick(reportId: string) {
+  onAssignClick(reportId: string, index: number) {
     this.employeeService.getAllEmployees().subscribe(employees => {
       this.employees = employees;
     });
     this.hideMe[reportId] = !this.hideMe[reportId]
     this.disableToewijzenButton = true;
+    this.isEnabled = false;
   }
 
-  onCancelClick(report: Report) {
-    this.hideMe[report.id] = !this.hideMe[report.id];
+  onCancelOrCancelClick(reportId: string) {
+    this.hideMe[reportId] = !this.hideMe[reportId];
     this.selectedEmployeeIds = [];
+    this.isEnabled = true;
   }
 
   async onToewijzenClick(report: Report) {
     const alert = await this.alertCtrl.create({
-      header: 'Bevestiging gevraagd!',
+      header: 'Bevestiging nodig ...',
       message: 'De geselecteerde medewerkers zullen een melding krijgen',
       buttons: [
         {
@@ -194,8 +198,8 @@ export class Tab1Page implements OnInit {
               this.employeeService.postReportToEmployee(employeeId, report).subscribe(report => {
                 console.log(report);
               });
-            this.assignText = "Toegewezen aan:";
             this.disableToewijzenButton = true;
+            this.annuleerOrSluitenText = "Sluiten";
           }
           }
         }
