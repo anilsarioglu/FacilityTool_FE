@@ -78,12 +78,12 @@
                         <div [hidden]="!hideMe[ml.id]">
                             <ion-item>
                                 <ion-label>Toewijzen aan:</ion-label>
-                                <ion-select [(ngModel)]="selectedEmployeeIds" multiple="true" (ionChange)="onAssignToChange()" placeholder="Kies technische werknemer(s)">
+                                <ion-select [(ngModel)]="selectedEmployeeIds" multiple="true" (ionChange)="onAssignToChange()" placeholder="{{selectEmployeePlaceholder}}">
                                   <ion-select-option *ngFor="let employee of employees" [value]="employee.id">{{ employee.name }}</ion-select-option>
                                 </ion-select>
                               </ion-item>
-                              <ion-button fill="outline" size="small" class="assign" [disabled]="disableToewijzenButton" (click)="onToewijzenClick(ml)">Toewijzen</ion-button>
-                              <ion-button fill="clear" size="small" class="assign" (click)="onCancelOrCancelClick(ml.id)">{{annuleerOrSluitenText}}</ion-button>
+                              <ion-button fill="outline" size="small" class="assign" [disabled]="disableToewijzenButton" (click)="onToewijzenClick(ml.id)">Toewijzen</ion-button>
+                              <ion-button fill="clear" size="small" class="assign" (click)="onCancelOrCloseClick(ml.id)">{{annuleerOrSluitenText}}</ion-button>
                         </div>
                     </ion-card-content>
                 </ion-card>

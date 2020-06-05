@@ -22,7 +22,14 @@ const routes: Routes = [
   { path: 'tech-detail-report', loadChildren: () => import('./tech-detail-report/tech-detail-report.module').then(m => m.TechDetailReportPageModule) },
   { path: 'emergency', loadChildren: () => import('./emergency/emergency.module').then(m => m.EmergencyPageModule) },
   { path: 'detail-emergency', loadChildren: () => import('./detail-emergency/detail-emergency.module').then(m => m.DetailEmergencyPageModule) },
-  { path: 'mail-template-manage', loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then(m => m.MailTemplateManagePageModule) },  {
+  { path: 'mail-template-manage', loadChildren: () => import('./mail-template-manage/mail-template-manage.module').then(m => m.MailTemplateManagePageModule) },
+  { path: 'external-firm', loadChildren: () => import('./external-firm/external-firm.module').then(m => m.ExternalFirmPageModule) },
+  { path: 'detail-ex-firm', loadChildren: () => import('./detail-ex-firm/detail-ex-firm.module').then(m => m.DetailExFirmPageModule) },
+  {
+    path: 'assigned-reports',
+    loadChildren: () => import('./assigned-reports/assigned-reports.module').then( m => m.AssignedReportsPageModule)
+  },
+  {
     path: 'archive',
     loadChildren: () => import('./archive/archive.module').then( m => m.ArchivePageModule)
   },
@@ -31,7 +38,7 @@ const routes: Routes = [
     loadChildren: () => import('./archive/archive.module').then( m => m.ArchivePageModule)
   }
 
-  //azure
+  //azures
 ];
 
 @NgModule({
