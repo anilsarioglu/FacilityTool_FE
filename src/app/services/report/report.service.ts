@@ -11,12 +11,20 @@ import { Observable } from 'rxjs';
 export class ReportService {
   private contentHeaders: HttpHeaders;
 
-  private urlReports = 'http://localhost:8080/reports/';
-  private urlReportsByLocation = 'http://localhost:8080/reports/by-location/';
-  private urlReportsById = 'http://localhost:8080/reports/by-id/';
-  private urlToggleUpvote = 'http://localhost:8080/reports/upvote/';
-  private urlReactions = 'http://localhost:8080/reports/reactions/';
-  private urlStatus = 'http://localhost:8080/reports/status/';
+
+  private urlReports = 'https://vps100.ap.be/api/reports/';
+  private urlReportsByLocation = 'https://vps100.ap.be/api/reports/by-location/';
+  private urlReportsById = 'https://vps100.ap.be/api/by-id/';
+  private urlToggleUpvote = 'https://vps100.ap.be/api/reports/upvote/';
+  private urlReactions = 'https://vps100.ap.be/api/reports/reactions/';
+  private urlStatus = 'https://vps100.ap.be/api/reports/status/';
+
+  // private urlReports = 'http://localhost:8080/reports/';
+  // private urlReportsByLocation = 'http://localhost:8080/reports/by-location/';
+  // private urlReportsById = 'http://localhost:8080/reports/by-id/';
+  // private urlToggleUpvote = 'http://localhost:8080/reports/upvote/';
+  // private urlReactions = 'http://localhost:8080/reports/reactions/';
+  // private urlStatus = 'http://localhost:8080/reports/status/';
 
   constructor(private http: HttpClient) {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
@@ -47,10 +55,10 @@ export class ReportService {
   }
 
   putUpvoteReport(id: string): Observable<Report> {
-    return this.http.put<Report>(this.urlToggleUpvote + id, { headers: this.contentHeaders});
+    return this.http.put<Report>(this.urlToggleUpvote + id, { headers: this.contentHeaders });
   }
 
   putStatusReport(id: string, status: string): Observable<Report> {
-    return this.http.put<Report>(this.urlStatus + id, status, { headers: this.contentHeaders});
+    return this.http.put<Report>(this.urlStatus + id, status, { headers: this.contentHeaders });
   }
 }

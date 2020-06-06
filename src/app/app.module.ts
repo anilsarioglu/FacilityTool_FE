@@ -22,6 +22,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ImageModalPage } from './image-modal/image-modal.page';
 import { IonicStorageModule } from '@ionic/storage';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 
 import { MsalModule, MsalInterceptor, BroadcastService } from '@azure/msal-angular';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -41,6 +42,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
     HttpClientModule,
     AppRoutingModule,
     Ng2ImgMaxModule,
+    NgxDatatableModule,
     // azure
     MsalModule.forRoot({
       auth: {
@@ -86,7 +88,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true
-  }
+    }
   ],
   bootstrap: [AppComponent]
 })

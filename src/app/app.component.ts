@@ -15,11 +15,13 @@ export class AppComponent {
 
   public appMenu = [
     { title: 'Overzicht', url: '/tab1', icon: 'list' },
+    { title: 'Mijn defecten', url: '/assigned-reports', icon: 'person-circle' },
     { title: 'Melding rapporteren', url: '/melding', icon: 'add' },
-    { title: 'Archief', url: '/test3', icon: 'archive' },
+    { title: 'Archief', url: '/archive', icon: 'archive' },
     { title: 'Noodnummers', url: '/emergency', icon: 'call' },
     { title: 'Categorie beheer', url: '/category-manage', icon: 'hammer' },
     { title: 'Sjabloon beheer', url: '/mail-template-manage', icon: 'mail' },
+    { title: "Externe firma's", url: '/external-firm', icon: 'briefcase' },
     { title: 'Instellingen', url: '/tab3', icon: 'settings' }
   ];
 

@@ -1,0 +1,96 @@
+<ion-header>
+    <ion-toolbar color="danger">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="/external-firm"></ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">detail externe firma's</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
+
+        <div>
+            <ion-item>
+                <ion-label position="floating">contactpersoon: </ion-label>
+                <ion-input minlength="5" maxlength="60" type="text" formControlName="contactPerson" value="{{this.externalFirmData.contactPerson}}">
+                </ion-input>
+            </ion-item>
+            <div *ngFor="let error of errorMessages.name">
+                <ng-container *ngIf="contactPerson.hasError(error.type)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
+        </div>
+
+        <div>
+            <ion-item>
+                <ion-label position="floating">Bedrijf: </ion-label>
+                <ion-input minlength="5" maxlength="60" type="text" formControlName="companyName" value="{{this.externalFirmData.companyName}}">
+                </ion-input>
+            </ion-item>
+            <div *ngFor="let error of errorMessages.name">
+                <ng-container *ngIf="companyName.hasError(error.type)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
+        </div>
+
+        <div>
+            <ion-item>
+                <ion-label position="floating">E-mail: </ion-label>
+                <ion-input minlength="5" maxlength="60" inputmode="email" formControlName="mail" value="{{this.externalFirmData.mail}}">
+                </ion-input>
+            </ion-item>
+            <div *ngFor="let error of errorMessages.name">
+                <ng-container *ngIf="mail.hasError(error.type)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
+        </div>
+
+        <div>
+            <ion-item>
+                <ion-label position="floating">Telefoonnummer: </ion-label>
+                <ion-input minlength="5" maxlength="60" inputmode="tel" formControlName="phoneNumber" value="{{this.externalFirmData.phoneNumber}}">
+                </ion-input>
+            </ion-item>
+            <div *ngFor="let error of errorMessages.name">
+                <ng-container *ngIf="phoneNumber.hasError(error.type)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
+        </div>
+
+
+        <div>
+            <ion-item>
+                <ion-label position="floating">Mobiele nummer: </ion-label>
+                <ion-input minlength="5" maxlength="60" inputmode="tel" formControlName="mobileNumber" value="{{this.externalFirmData.mobileNumber}}">
+                </ion-input>
+            </ion-item>
+            <div *ngFor="let error of errorMessages.name">
+                <ng-container *ngIf="mobileNumber.hasError(error.type)">
+                    <small class="error-message">{{error.message}}</small>
+                </ng-container>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Wijzigen</ion-button>
+
+    </form>
+
+
+
+</ion-content>

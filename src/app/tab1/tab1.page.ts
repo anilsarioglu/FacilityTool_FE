@@ -23,7 +23,6 @@ export class Tab1Page implements OnInit {
  profile: any;
  graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
 
-
   melding: any;
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
@@ -31,12 +30,15 @@ export class Tab1Page implements OnInit {
   sortVal: any;
   toggle: boolean;
   // Assign Defect
-  assignText: string = "Toewijzen aan:";
+  selectEmployeePlaceholder: string = "Kies technische werknemer(s)";
   disableToewijzenButton: boolean = false;
   hideMe = {};
   employees: Employee[];
   selectedEmployeeIds: string[] = [];
-  
+  reportIndex: number[] = [];
+  isEnabled:boolean = true;
+  annuleerOrSluitenText: string = "Annuleer";
+
   pincolor: any;
 
   constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
@@ -77,6 +79,7 @@ export class Tab1Page implements OnInit {
 
   async toggleOpdDef() {
     this.activeList();
+    //this.selectedEmployeeIds = [];
   }
 
   activeList() {
@@ -166,21 +169,33 @@ export class Tab1Page implements OnInit {
 
   // Assign Defect
   onAssignClick(reportId: string) {
+    this.selectEmployeePlaceholder = "Kies technische werknemer(s)";
     this.employeeService.getAllEmployees().subscribe(employees => {
       this.employees = employees;
+      for (let employee of this.employees) {
+        if (employee.assignedReportsId.includes(reportId)) {
+          this.selectedEmployeeIds.push(employee.id);
+          this.selectEmployeePlaceholder = "Al toegewezen aan ";
+          this.selectEmployeePlaceholder = this.selectEmployeePlaceholder + employee.name + " ";
+        }
+      }
     });
+
     this.hideMe[reportId] = !this.hideMe[reportId]
     this.disableToewijzenButton = true;
+    this.isEnabled = false;
+    this.annuleerOrSluitenText = "Annuleer";
   }
 
-  onCancelClick(report: Report) {
-    this.hideMe[report.id] = !this.hideMe[report.id];
+  onCancelOrCloseClick(reportId: string) {
+    this.hideMe[reportId] = !this.hideMe[reportId];
     this.selectedEmployeeIds = [];
+    this.isEnabled = true;
   }
 
-  async onToewijzenClick(report: Report) {
+  async onToewijzenClick(reportId: String) {
     const alert = await this.alertCtrl.create({
-      header: 'Bevestiging gevraagd!',
+      header: 'Bevestiging nodig ...',
       message: 'De geselecteerde medewerkers zullen een melding krijgen',
       buttons: [
         {
@@ -191,11 +206,11 @@ export class Tab1Page implements OnInit {
           handler: () => {
             console.log(this.selectedEmployeeIds);
             for (let employeeId of this.selectedEmployeeIds) {
-              this.employeeService.postReportToEmployee(employeeId, report).subscribe(report => {
-                console.log(report);
+              this.employeeService.postReportIdToEmployee(employeeId, reportId).subscribe(reportId => {
+                console.log(reportId);
               });
-            this.assignText = "Toegewezen aan:";
             this.disableToewijzenButton = true;
+            this.annuleerOrSluitenText = "Sluiten";
           }
           }
         }
@@ -220,29 +235,6 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  // downloadCSVFromJson = (filename, arrayOfJson) => {
-  //   // convert JSON to CSV
-  //   const replacer = (key, value) => value === null ? '' : value;
-  //   const header = Object.keys(arrayOfJson[0]);
-  //   let csv = arrayOfJson.map(row => header.map(fieldName =>
-  //       JSON.stringify(row[fieldName], replacer)).join(','));
-  //   csv.unshift(header.join(','));
-  //   csv = csv.join('\r\n');
-
-  //   // Create link and download
-  //   const link = document.createElement('a');
-  //   link.setAttribute('href', 'data:text/csv;charset=utf-8,%EF%BB%BF' + encodeURIComponent(csv));
-  //   link.setAttribute('download', filename);
-  //   link.style.visibility = 'hidden';
-  //   document.body.appendChild(link);
-  //   link.click();
-  //   document.body.removeChild(link);
-  // }
-  // ExportJson() {
-  //   this.downloadCSVFromJson('MeldingenLijst.xlsx', this.kopieLijstVanMeldingen);
-  // }
-
-  /*name of the excel-file which will be downloaded. */ 
 
   fileName= 'ExcelSheet.xlsx';  
     
