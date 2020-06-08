@@ -29,7 +29,6 @@ export class AssignedReportsPage implements OnInit {
     this.employeeService.getAllReports("5ed60eb1c1913518bf7f2c90").subscribe(data => {
       console.log(data);
       this.reportlist = data;
-
     });
   }
 
