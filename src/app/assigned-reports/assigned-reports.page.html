@@ -25,14 +25,13 @@
   </div> -->
 
   <ion-grid>
-    <ion-row>
-        <ion-col *ngFor="let report of reportlist; let i = index;" id="kaart">
-            <div>
+    <ion-row class="meldingCol">
+        <ion-col *ngFor="let report of reportlist; let i = index;" id="kaart" size="8">
             <ion-card >
                 <ion-item>
                     <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(report.status)}"></ion-icon>
                     <ion-label> {{report.reporter}} - {{report.pNumber}}</ion-label>
-                    <ion-button style:color="danger" color="danger" fill="outline" type="button" (click)="detailReport(report)">View
+                    <ion-button color="danger" fill="outline" type="button" (click)="detailReport(report)">View
                     </ion-button>
                 </ion-item>
 
@@ -48,7 +47,6 @@
                     </div>
                 </ion-card-content>
             </ion-card>
-            </div>
         </ion-col>
     </ion-row>
 </ion-grid>
