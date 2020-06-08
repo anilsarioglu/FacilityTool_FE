@@ -8,15 +8,20 @@
 </ion-header>
 
 <ion-content class="bg" [fullscreen]="true">
-  <div>
-    <ion-searchbar (keyup)="search($event)"></ion-searchbar>
+  <ion-searchbar (keyup)="search($event)"></ion-searchbar>
+
+  <div *ngIf=!isMobile>
     <ngx-datatable 
       #table class="material" [columnMode]="colMode.force" [headerHeight]="50" [footerHeight]="50" 
       rowHeight="auto" [limit]="10" [rows]="rows"
     >
       <ngx-datatable-column name="Beschrijving" prop="description"></ngx-datatable-column>
       <ngx-datatable-column name="Locatie" prop="location"></ngx-datatable-column>
-      <ngx-datatable-column name="Datum" prop="date"></ngx-datatable-column>
+      <ngx-datatable-column name="Datum" prop="date">
+        <ng-template let-value="value" ngx-datatable-cell-template>
+          {{value | date:'dd/MM/yy-HHumm'}}
+        </ng-template>
+      </ngx-datatable-column>
       <ngx-datatable-column name="Melder" prop="reporter"></ngx-datatable-column>
       <ngx-datatable-column name="Status"></ngx-datatable-column>
       <ngx-datatable-column name="Acties" [sortable]="false">
@@ -26,8 +31,37 @@
       </ngx-datatable-column>
     </ngx-datatable>
   </div>
-  <ion-button (click)="exportExcel()" class="exportbutton" id="export" color="danger">Lijst Exporteren
-  </ion-button>
+
+  <div *ngIf=isMobile>
+    <ion-list id="sortingList">
+        <ion-item>
+            <ion-label>Sorteer op:</ion-label>
+            <ion-select [(ngModel)]="sortVal" (ionChange)="sortAll()">
+                <ion-select-option value="datum">Datum</ion-select-option>
+                <ion-select-option value="locatie">Locatie</ion-select-option>
+                <ion-select-option value="status">Status</ion-select-option>
+                <ion-select-option value="melder">Melder</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngFor="let defect of rows; let i = index;">
+      <ion-item>
+        <ion-label (click)="showDetails(defect)">
+          <h2>{{ defect.description }}</h2>
+          <h3>{{ defect.location }}</h3>
+          <h3>{{ defect.status }}</h3>
+          <ion-thumbnail slot="start">
+            <ion-img [src]="imgSrcs[i]"></ion-img>
+          </ion-thumbnail>
+          <h4 class="text-align-right">{{ defect.date | date:'dd/MM/yy-HHumm'}}</h4>
+          <h3 class="text-align-right">{{ defect.reporter }}</h3>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <ion-button (click)="exportExcel()" class="exportbutton" id="export" color="danger">Lijst Exporteren</ion-button>
    <table id="excel-table" class="exportcss">
       <tr>       
         <th>Beschrijving</th>

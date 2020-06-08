@@ -1,6 +1,7 @@
 import { Category } from './Category';
 import { Location } from './Location';
 import { Reaction } from './Reaction';
+import { Photo } from './Photo';
 
 export class Report {
         public id: string;
@@ -17,5 +18,5 @@ export class Report {
         public isUpvoted: boolean;
         public status: string;
         public reactions: Reaction;
-        public photos: Object;
+        public photos: Photo[];
 }

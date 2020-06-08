@@ -14,6 +14,7 @@ import SockJS from 'sockjs-client';
 import $ from 'jquery';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
+import { Tab1Page } from '../tab1/tab1.page';
 
 @Component({
   selector: 'app-detail-melding',
@@ -51,10 +52,10 @@ export class DetailMeldingPage implements OnInit {
     spaceBetween: 10
   };
 
-  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private ms: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private rs: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
-      this.ms.getReportById(this.meldingData.id).subscribe((data) => {
+      this.rs.getReportById(this.meldingData.id).subscribe((data) => {
         this.meldingDB = data;
         console.log(data);
       });
@@ -120,10 +121,10 @@ export class DetailMeldingPage implements OnInit {
   }
 
   changeState() {
-    this.ms.putStatusReport(this.meldingData.id, this.newState).subscribe((report) => {
+    this.rs.putStatusReport(this.meldingData.id, this.newState).subscribe((report) => {
       console.log(report);
       this.meldingData.status = this.newState;
     });
-    this.ishidden = !this.ishidden;
+    this.ishidden = !this.ishidden;   
   }
 }

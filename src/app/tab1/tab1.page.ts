@@ -27,7 +27,7 @@ export class Tab1Page implements OnInit {
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
   actieveLijstVanMeldingen: any = [];
-  sortVal: any;
+  sortVal: string = "locatie";
   toggle: boolean;
   // Assign Defect
   selectEmployeePlaceholder: string = "Kies technische werknemer(s)";
@@ -48,6 +48,10 @@ export class Tab1Page implements OnInit {
     this.lijstMeldingen();
     this.sortVal = ' ';
     this.hideMe = {};
+  }
+
+  ionViewWillEnter() {
+    this.lijstMeldingen();
   }
 
   lijstMeldingen() {
