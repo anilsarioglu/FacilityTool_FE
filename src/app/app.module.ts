@@ -88,7 +88,7 @@ const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigato
       provide: HTTP_INTERCEPTORS,
       useClass: MsalInterceptor,
       multi: true
-  }
+    }
   ],
   bootstrap: [AppComponent]
 })
