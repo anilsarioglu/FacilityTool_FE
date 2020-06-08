@@ -50,6 +50,10 @@ export class Tab1Page implements OnInit {
     this.hideMe = {};
   }
 
+  ionViewWillEnter() {
+    this.lijstMeldingen();
+  }
+
   lijstMeldingen() {
     this.ms.getAllReports().subscribe(data => {
       console.log(data);
