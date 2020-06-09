@@ -29,6 +29,7 @@ export class Tab1Page implements OnInit {
   actieveLijstVanMeldingen: any = [];
   sortVal: string = "locatie";
   toggle: boolean;
+  segment: string;
   // Assign Defect
   selectEmployeePlaceholder: string = "Kies technische werknemer(s)";
   disableToewijzenButton: boolean = false;
@@ -46,12 +47,7 @@ export class Tab1Page implements OnInit {
               private http: HttpClient) {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
-    this.sortVal = ' ';
     this.hideMe = {};
-  }
-
-  ionViewWillEnter() {
-    this.lijstMeldingen();
   }
 
   lijstMeldingen() {
@@ -60,6 +56,16 @@ export class Tab1Page implements OnInit {
       this.meldingLijst = data;
       this.activeList();
     });
+  }
+
+  ionViewWillEnter() {
+    this.lijstMeldingen();
+    this.segment = "defect";
+    this.sortVal = "prioriteit"
+  }
+
+  segmentChanged(event: any){
+    this.activeList();
   }
 
   async searchItems(e) {
@@ -81,19 +87,13 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  async toggleOpdDef() {
-    this.activeList();
-    //this.selectedEmployeeIds = [];
-  }
-
   activeList() {
-    let ch;
-    if (this.toggle) { ch = 'Defect'; } else { ch = 'Opdracht'; }
     this.actieveLijstVanMeldingen = this.meldingLijst;
     this.actieveLijstVanMeldingen = this.meldingLijst.filter((item) => {
-      return (item.type === null || item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1);
+      return (item.type === null || item.type.toString().trim().toLowerCase() == this.segment);
     });
     this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen;
+    this.sortAll();
   }
 
   sortAll() {
@@ -106,6 +106,14 @@ export class Tab1Page implements OnInit {
           return 1;
         }
         if (n1.type < n2.type) {
+          return -1;
+        }
+        return 0;
+      } else if (this.sortVal === 'prioriteit') {
+        if (n1.numberUpvotes < n2.numberUpvotes) {
+          return 1;
+        }
+        if (n1.numberUpvotes > n2.numberUpvotes) {
           return -1;
         }
         return 0;
@@ -240,7 +248,7 @@ export class Tab1Page implements OnInit {
   }
 
 
-  fileName= 'ExcelSheet.xlsx';  
+  fileName = 'ExcelSheet.xlsx';  
     
   exportExcel(): void 
       {
@@ -260,16 +268,9 @@ export class Tab1Page implements OnInit {
       }
 
   ngOnInit() {
-    // this.getProfile();
+    
   }
- // azure profile
-//  getProfile() {
-//   this.http.get(this.graphMeEndpoint).toPromise()
-//     .then(profile => {
-//       this.profile = profile;
-//     });
-// }
-
+ 
   doRefresh(event) {
     this.lijstMeldingen();
     setTimeout(() => {
