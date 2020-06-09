@@ -19,15 +19,20 @@ export class ReportService {
   // private urlReactions = 'https://vps100.ap.be/api/reports/reactions/';
   // private urlStatus = 'https://vps100.ap.be/api/reports/status/';
 
-  private urlReports = 'http://localhost:8080/reports/';
-  private urlReportsByLocation = 'http://localhost:8080/reports/by-location/';
+  private urlReports = 'http://localhost:8080/api/reports/';
+  private urlReportsByLocation = 'http://localhost:8080/api/reports/by-location/';
   private urlReportsById = 'http://localhost:8080/reports/by-id/';
   private urlToggleUpvote = 'http://localhost:8080/reports/upvote/';
   private urlReactions = 'http://localhost:8080/reports/reactions/';
   private urlStatus = 'http://localhost:8080/reports/status/';
 
+  idToken: string;
+
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    this.idToken = localStorage.getItem("idToken");
+    this.contentHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + this.idToken
+    }).set('Content-Type', 'application/json');
   }
 
   postReport(report: Report): Observable<Report> {
