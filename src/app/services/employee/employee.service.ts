@@ -10,14 +10,27 @@ import { Report } from 'src/app/models/Report';
 export class EmployeeService {
   private contentHeaders: HttpHeaders;
 
-  private urlEmployees = "http://localhost:8080/employees/";
-  private urlEmployeeById = "http://localhost:8080/employees/by-id/"; 
+  private VPSAPIBE = "https://vps100.ap.be/api/";
+  private urlEmployees = this.VPSAPIBE + "employees/";
+  private urlEmployeeById = this.VPSAPIBE + "employees/by-id/";
+
+  // private APIBE = 'http://localhost:8080/api/';
+  // private urlEmployees = this.APIBE + "employees/";
+  // private urlEmployeeById = this.APIBE + "employees/by-id/";
+
+
   private urlEmployeeReportExtension = "/reports/";
 
 
+
+  idToken: string;
+
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
-   }
+    this.idToken = localStorage.getItem("idToken");
+    this.contentHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + this.idToken
+    }).set('Content-Type', 'application/json');
+  }
 
   getAllEmployees(): Observable<Employee[]> {
     return this.http.get<Employee[]>(this.urlEmployees, { headers: this.contentHeaders });
@@ -31,7 +44,7 @@ export class EmployeeService {
     return this.http.post<String>(this.urlEmployees + employeeId + this.urlEmployeeReportExtension, reportId, { headers: this.contentHeaders });
   }
 
-  getAllReports(id: string): Observable<Report[]>{
+  getAllReports(id: string): Observable<Report[]> {
     return this.http.get<Report[]>(this.urlEmployees + id + this.urlEmployeeReportExtension, { headers: this.contentHeaders });
   }
 }
