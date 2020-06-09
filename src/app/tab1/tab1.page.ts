@@ -91,7 +91,7 @@ export class Tab1Page implements OnInit {
     if (this.toggle) { ch = 'Defect'; } else { ch = 'Opdracht'; }
     this.actieveLijstVanMeldingen = this.meldingLijst;
     this.actieveLijstVanMeldingen = this.meldingLijst.filter((item) => {
-      return (item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1) || item.type.toString() === '';
+      return (item.type === null || item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1);
     });
     this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen;
   }

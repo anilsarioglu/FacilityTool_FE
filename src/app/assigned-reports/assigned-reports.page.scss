@@ -18,17 +18,23 @@
     text-align: center;
 }
 
-
 .meldingCol{
-    display: flex;
-  justify-content: center;
-  flex-direction: row;
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @media only screen and (max-width: 600px) {
-    .meldingCol {
-        width: 130%;
-        margin-right: 80px;
+    .meldingCol{
+        width: auto;
+    }
+
+    #sortingList {
+        width: 65%;
+        margin-left: 0;
     }
     
 }
+
+
+

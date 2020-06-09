@@ -36,7 +36,11 @@ const routes: Routes = [
   {
     path: 'archive',
     loadChildren: () => import('./archive/archive.module').then( m => m.ArchivePageModule)
+  },  {
+    path: 'my-reports',
+    loadChildren: () => import('./my-reports/my-reports.module').then( m => m.MyReportsPageModule)
   }
+
 
   //azures
 ];

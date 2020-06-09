@@ -8,7 +8,6 @@
             Meldingen
         </ion-title>
     </ion-toolbar>
-
 </ion-header>
 
 
@@ -46,7 +45,7 @@
                     <ion-item>
                         <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(ml.status)}"></ion-icon>
                         <ion-label> {{ml.reporter}} - {{ml.pNumber}}</ion-label>
-                        <ion-button style:color="danger" color="danger" fill="outline" type="button" (click)="detailMelding(ml)">View
+                        <ion-button color="danger" fill="outline" type="button" (click)="detailMelding(ml)">View
                         </ion-button>
                         <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" [disabled]="!isEnabled" (click)="onAssignClick(ml.id, i)">
                             <ion-icon name="clipboard-outline"></ion-icon>

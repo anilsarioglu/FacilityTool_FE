@@ -15,13 +15,14 @@ export class AppComponent {
 
   public appMenu = [
     { title: 'Overzicht', url: '/tab1', icon: 'list' },
-    { title: 'Mijn defecten', url: '/assigned-reports', icon: 'person-circle' },
-    { title: 'Melding rapporteren', url: '/melding', icon: 'add' },
-    { title: 'Archief', url: '/archive', icon: 'archive' },
+    { title: 'Mijn rapporteringen', url: '/my-reports', icon: 'bookmarks' },
+    { title: 'Toegewezen rapporteringen', url: '/assigned-reports', icon: 'list-circle' },
+    { title: 'Melding rapporteren', url: '/melding', icon: 'add-circle' },
+    { title: 'Archief', url: '/archive', icon: 'library' },
     { title: 'Noodnummers', url: '/emergency', icon: 'call' },
     { title: 'Categorie beheer', url: '/category-manage', icon: 'hammer' },
     { title: 'Sjabloon beheer', url: '/mail-template-manage', icon: 'mail' },
-    { title: "Externe firma's", url: '/external-firm', icon: 'briefcase' },
+    { title: 'Externe firma\'s', url: '/external-firm', icon: 'briefcase' },
     { title: 'Instellingen', url: '/tab3', icon: 'settings' }
   ];
 
@@ -29,7 +30,7 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    //private authService: MsalService
+    // private authService: MsalService
 
   ) {
     this.initializeApp();
@@ -40,7 +41,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      //this.checkDarkTheme();
+      // this.checkDarkTheme();
     });
   }
 
