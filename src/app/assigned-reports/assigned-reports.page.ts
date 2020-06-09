@@ -13,13 +13,13 @@ export class AssignedReportsPage implements OnInit {
 
   employee: Employee; 
   report: Report;
-  reportlist: any = []; 
-  copyReportlist: any = []; 
-  activeReportlist: any = []; 
-  sortVal: any;
+  reportlist: Report[]=[]; 
+  copyReportlist: Report[]=[]; 
+  activeReportlist: Report[]=[]; 
+  sortVal: string = "datum";
   constructor(private employeeService: EmployeeService, private router: Router, private activatedRoute: ActivatedRoute) { 
-    this.listReports(); 
-    this.sortVal = ' ';
+    this.listReports();
+    
   }
 
   ngOnInit() {
@@ -28,9 +28,17 @@ export class AssignedReportsPage implements OnInit {
   listReports() {
     this.employeeService.getAllReports("5ed60eb1c1913518bf7f2c90").subscribe(data => {
       console.log(data);
-      this.reportlist = data;
-
+      //this.reportlist = data; 
+      //tijdelijke oplossing om enkel defecten te tonen
+      for (let def of data){
+        if(def.type == " Defect "){
+          this.reportlist.push(def)
+        }
+      }
+      this.sortAll(); 
+      this.copyReportlist = this.reportlist;
     });
+    
   }
 
   detailReport(data) {
@@ -60,21 +68,15 @@ export class AssignedReportsPage implements OnInit {
         return 'grey';
     }
   }
-  activeList() {
-    let ch;
-    this.activeReportlist = this.reportlist;
-    this.activeReportlist = this.reportlist.filter((item) => {
-      return (item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1) || item.type.toString() === '';
-    });
-    this.copyReportlist = this.activeReportlist;
-  }
+  
   //search in list
   async searchItems(e) {
     const val: string = e.target.value;
 
-    this.activeList();
+    this.copyReportlist = this.reportlist; 
+    
     if (val.trim() !== '') {
-      this.copyReportlist = this.activeReportlist.filter((item) => {
+      this.reportlist = this.copyReportlist.filter((item) => {
         return (item.type.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.reporter.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.date.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
@@ -89,7 +91,7 @@ export class AssignedReportsPage implements OnInit {
   }
 
   sortAll() {
-    this.copyReportlist = this.copyReportlist.sort((n1, n2) => {
+    this.reportlist = this.reportlist.sort((n1, n2) => {
       if (this.sortVal === 'datum') {
         // @ts-ignore
           return new Date(n1.date) as any - new Date(n2.date) as any;
