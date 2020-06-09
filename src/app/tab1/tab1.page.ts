@@ -23,20 +23,22 @@ export class Tab1Page implements OnInit {
  profile: any;
  graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
 
-
   melding: any;
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
   actieveLijstVanMeldingen: any = [];
-  sortVal: any;
+  sortVal: string = "locatie";
   toggle: boolean;
   // Assign Defect
-  assignText: string = "Toewijzen aan:";
+  selectEmployeePlaceholder: string = "Kies technische werknemer(s)";
   disableToewijzenButton: boolean = false;
   hideMe = {};
   employees: Employee[];
   selectedEmployeeIds: string[] = [];
-  
+  reportIndex: number[] = [];
+  isEnabled:boolean = true;
+  annuleerOrSluitenText: string = "Annuleer";
+
   pincolor: any;
 
   constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
@@ -46,6 +48,10 @@ export class Tab1Page implements OnInit {
     this.lijstMeldingen();
     this.sortVal = ' ';
     this.hideMe = {};
+  }
+
+  ionViewWillEnter() {
+    this.lijstMeldingen();
   }
 
   lijstMeldingen() {
@@ -77,6 +83,7 @@ export class Tab1Page implements OnInit {
 
   async toggleOpdDef() {
     this.activeList();
+    //this.selectedEmployeeIds = [];
   }
 
   activeList() {
@@ -84,7 +91,7 @@ export class Tab1Page implements OnInit {
     if (this.toggle) { ch = 'Defect'; } else { ch = 'Opdracht'; }
     this.actieveLijstVanMeldingen = this.meldingLijst;
     this.actieveLijstVanMeldingen = this.meldingLijst.filter((item) => {
-      return (item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1) || item.type.toString() === '';
+      return (item.type === null || item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1);
     });
     this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen;
   }
@@ -166,21 +173,33 @@ export class Tab1Page implements OnInit {
 
   // Assign Defect
   onAssignClick(reportId: string) {
+    this.selectEmployeePlaceholder = "Kies technische werknemer(s)";
     this.employeeService.getAllEmployees().subscribe(employees => {
       this.employees = employees;
+      for (let employee of this.employees) {
+        if (employee.assignedReportsId.includes(reportId)) {
+          this.selectedEmployeeIds.push(employee.id);
+          this.selectEmployeePlaceholder = "Al toegewezen aan ";
+          this.selectEmployeePlaceholder = this.selectEmployeePlaceholder + employee.name + " ";
+        }
+      }
     });
+
     this.hideMe[reportId] = !this.hideMe[reportId]
     this.disableToewijzenButton = true;
+    this.isEnabled = false;
+    this.annuleerOrSluitenText = "Annuleer";
   }
 
-  onCancelClick(report: Report) {
-    this.hideMe[report.id] = !this.hideMe[report.id];
+  onCancelOrCloseClick(reportId: string) {
+    this.hideMe[reportId] = !this.hideMe[reportId];
     this.selectedEmployeeIds = [];
+    this.isEnabled = true;
   }
 
   async onToewijzenClick(reportId: String) {
     const alert = await this.alertCtrl.create({
-      header: 'Bevestiging gevraagd!',
+      header: 'Bevestiging nodig ...',
       message: 'De geselecteerde medewerkers zullen een melding krijgen',
       buttons: [
         {
@@ -194,8 +213,8 @@ export class Tab1Page implements OnInit {
               this.employeeService.postReportIdToEmployee(employeeId, reportId).subscribe(reportId => {
                 console.log(reportId);
               });
-            this.assignText = "Toegewezen aan:";
             this.disableToewijzenButton = true;
+            this.annuleerOrSluitenText = "Sluiten";
           }
           }
         }
