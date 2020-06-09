@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { HttpParams } from '@angular/common/http';
 
 
 
@@ -11,7 +12,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  token: string;
 
   public appMenu = [
     { title: 'Overzicht', url: '/tab1', icon: 'list' },
@@ -30,23 +33,26 @@ export class AppComponent {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    // private authService: MsalService
 
   ) {
     this.initializeApp();
   }
 
+  ngOnInit() {
+    const url = location.href;
+    if (url.includes('?')) {
+      const httpParams = new HttpParams({ fromString: url.split('?')[1] });
+      this.token = httpParams.get('token');
+      localStorage.setItem('idToken', this.token);
+    }
+  }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
-      // this.checkDarkTheme();
     });
   }
 
-  // checkDarkTheme() {
-  //   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-  //   if (prefersDark.matches) document.body.classList.toggle('dark');
-  // }
+
 }

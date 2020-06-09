@@ -9,11 +9,22 @@ import { Observable } from 'rxjs';
 export class MailTemplateService {
   private contentHeaders: HttpHeaders;
 
-  private urlMailTemplates = "http://localhost:8080/mail-templates/";
-  private urlMailTemplateByName = "http://localhost:8080/mail-templates/by-name/";
+  private VPSAPIBE = "https://vps100.ap.be/api/";
+  private urlMailTemplates = this.VPSAPIBE + "mail-templates/";
+  private urlMailTemplateByName = this.VPSAPIBE + "mail-templates/by-name/";
+
+  // private APIBE = 'http://localhost:8080/api/'
+  // private urlMailTemplates = this.APIBE +  "mail-templates/";
+  // private urlMailTemplateByName = this.APIBE + "mail-templates/by-name/";
+
+
+  idToken: string;
 
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/JSON');
+    this.idToken = localStorage.getItem("idToken");
+    this.contentHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + this.idToken
+    }).set('Content-Type', 'application/json');
   }
 
   getAllMailTemplates(): Observable<MailTemplate[]> {
