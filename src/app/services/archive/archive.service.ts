@@ -16,10 +16,10 @@ export class ArchiveService {
   }
 
   getAllDefects(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.urlArchive + "/defect", { headers: this.contentHeaders });
+    return this.http.get<Report[]>(this.urlArchive + "defect", { headers: this.contentHeaders });
   }
 
   getAllTasks(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.urlArchive + "/task", { headers: this.contentHeaders });
+    return this.http.get<Report[]>(this.urlArchive + "task", { headers: this.contentHeaders });
   }
 }
