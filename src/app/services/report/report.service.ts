@@ -12,21 +12,21 @@ export class ReportService {
   private contentHeaders: HttpHeaders;
 
 
-  private VPSAPIBE = "https://vps100.ap.be/api/";
-  private urlReports = this.VPSAPIBE + 'reports/';
-  private urlReportsByLocation = this.VPSAPIBE + 'reports/by-location/';
-  private urlReportsById = this.VPSAPIBE + 'by-id/';
-  private urlToggleUpvote = this.VPSAPIBE + 'reports/upvote/';
-  private urlReactions = this.VPSAPIBE + 'reports/reactions/';
-  private urlStatus = this.VPSAPIBE + 'reports/status/';
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlReports = this.VPSAPIBE + 'reports/';
+  // private urlReportsByLocation = this.VPSAPIBE + 'reports/by-location/';
+  // private urlReportsById = this.VPSAPIBE + 'by-id/';
+  // private urlToggleUpvote = this.VPSAPIBE + 'reports/upvote/';
+  // private urlReactions = this.VPSAPIBE + 'reports/reactions/';
+  // private urlStatus = this.VPSAPIBE + 'reports/status/';
 
-  // private APIBE = 'http://localhost:8080/api/';
-  // private urlReports = this.APIBE + 'reports/';
-  // private urlReportsByLocation = this.APIBE + 'reports/by-location/';
-  // private urlReportsById = this.APIBE + 'reports/by-id/';
-  // private urlToggleUpvote = this.APIBE + 'reports/upvote/';
-  // private urlReactions = this.APIBE + 'reports/reactions/';
-  // private urlStatus = this.APIBE + 'reports/status/';
+  private APIBE = 'http://localhost:8080/api/';
+  private urlReports = this.APIBE + 'reports/';
+  private urlReportsByLocation = this.APIBE + 'reports/by-location/';
+  private urlReportsById = this.APIBE + 'reports/by-id/';
+  private urlToggleUpvote = this.APIBE + 'reports/upvote/';
+  private urlReactions = this.APIBE + 'reports/reactions/';
+  private urlStatus = this.APIBE + 'reports/status/';
 
   idToken: string;
 

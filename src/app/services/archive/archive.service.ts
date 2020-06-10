@@ -10,11 +10,11 @@ export class ArchiveService {
   private contentHeaders: HttpHeaders;
 
 
-  private VPSAPIBE = "https://vps100.ap.be/api/";
-  private urlArchive = this.VPSAPIBE + 'reports/archive/';
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlArchive = this.VPSAPIBE + 'reports/archive/';
 
-  // private APIBE = 'http://localhost:8080/api/';
-  // private urlArchive = this.APIBE + 'reports/archive/';
+  private APIBE = 'http://localhost:8080/api/';
+  private urlArchive = this.APIBE + 'reports/archive';
 
   idToken: string;
 

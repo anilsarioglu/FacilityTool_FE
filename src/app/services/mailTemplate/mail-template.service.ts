@@ -9,13 +9,13 @@ import { Observable } from 'rxjs';
 export class MailTemplateService {
   private contentHeaders: HttpHeaders;
 
-  private VPSAPIBE = "https://vps100.ap.be/api/";
-  private urlMailTemplates = this.VPSAPIBE + "mail-templates/";
-  private urlMailTemplateByName = this.VPSAPIBE + "mail-templates/by-name/";
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlMailTemplates = this.VPSAPIBE + "mail-templates/";
+  // private urlMailTemplateByName = this.VPSAPIBE + "mail-templates/by-name/";
 
-  // private APIBE = 'http://localhost:8080/api/'
-  // private urlMailTemplates = this.APIBE +  "mail-templates/";
-  // private urlMailTemplateByName = this.APIBE + "mail-templates/by-name/";
+  private APIBE = 'http://localhost:8080/api/'
+  private urlMailTemplates = this.APIBE +  "mail-templates/";
+  private urlMailTemplateByName = this.APIBE + "mail-templates/by-name/";
 
 
   idToken: string;
