@@ -15,6 +15,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Prediction } from '../services/prediction/prediction';
 import * as mobilenet from '@tensorflow-models/mobilenet';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-melding',
@@ -38,6 +39,10 @@ export class MeldingPage implements OnInit {
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
+
+   // user info
+   userdata: any; 
+   usernaam: String; 
 
   showDateSelector: boolean = false;
 
@@ -65,11 +70,22 @@ export class MeldingPage implements OnInit {
     private imageCompress: NgxImageCompressService, private modalController: ModalController,
     private http: HttpClient, private navCtrl: NavController,
     private router: Router, private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File) {
+    private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File,
+    private userService: UserService) {
+
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
     this.location = this.activatedRoute.snapshot.params['locatie'];
     this.category = this.activatedRoute.snapshot.params['category'];
+
+    this.userService.getUserDetails().subscribe(data => {
+      this.userdata = data;
+      console.log(this.userdata); 
+ 
+      this.usernaam = data["name"];
+    });
+
   }
+
 
   popup() {
     for (let i = 0; i < this.predictions.length; i++) {
@@ -105,7 +121,7 @@ export class MeldingPage implements OnInit {
 
     this.reactions.push(this.createItem({
       // id: this.be,
-      name: this.reporter,
+      name: this.usernaam,
       message: this.messages,
       date: this.date
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
@@ -159,7 +175,7 @@ export class MeldingPage implements OnInit {
 
   formulier() {
     this.uploadForm = this.fb.group({
-      reporter: [this.reporter],
+      reporter: [this.usernaam],
       pNumber: [this.pNumber],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
       date: [this.date],

@@ -11,6 +11,7 @@ import { EmployeeService } from '../services/employee/employee.service';
 import * as XLSX from 'xlsx';
 //azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-tab1',
@@ -19,9 +20,12 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 
 export class Tab1Page implements OnInit {
-//azure
- profile: any;
- graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
+
+  // user info
+  userdata: any; 
+  usernaam: String; 
+
+
 
   melding: any;
   meldingLijst: any = [];
@@ -41,13 +45,20 @@ export class Tab1Page implements OnInit {
 
   pincolor: any;
 
-  constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
+  constructor(private ms: ReportService, private employeeService: EmployeeService, private userService: UserService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
               private http: HttpClient) {
     this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
     this.sortVal = ' ';
     this.hideMe = {};
+
+    this.userService.getUserDetails().subscribe(data => {
+      this.userdata = data;
+      console.log(this.userdata); 
+ 
+      this.usernaam = data["name"];
+    });
   }
 
   ionViewWillEnter() {
