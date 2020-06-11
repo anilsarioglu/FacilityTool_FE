@@ -34,17 +34,16 @@ export class MeldingPage implements OnInit {
   uploadForm: FormGroup;
   meldingen: Report[];
   date = new Date();
-  //reporter = 'Amine Abdelfettah';
   // reporter = '';
-  //pNumber = 'P103906';
+
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
 
   // user info
   userdata: any;
-  // usernaam: String; 
-  email: String;
+  usernaam: any; 
+  //email: String;
 
   showDateSelector: boolean = false;
 
@@ -87,8 +86,8 @@ export class MeldingPage implements OnInit {
       // console.log(this.reporter);
 
       localStorage.setItem("userName", this.userdata["name"])
-
-      this.email = data["email"];
+      localStorage.setItem("email", this.userdata["email"])
+      //this.email = data["email"];
     });
 
   }
