@@ -35,16 +35,16 @@ export class MeldingPage implements OnInit {
   meldingen: Report[];
   date = new Date();
   //reporter = 'Amine Abdelfettah';
-  reporter = ''; 
+  // reporter = '';
   //pNumber = 'P103906';
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
 
-   // user info
-   userdata: any; 
+  // user info
+  userdata: any;
   // usernaam: String; 
-   email: String;
+  email: String;
 
   showDateSelector: boolean = false;
 
@@ -82,8 +82,12 @@ export class MeldingPage implements OnInit {
     this.userService.getUserDetails().subscribe(data => {
       this.userdata = data;
       //console.log(this.userdata); 
- 
-      this.reporter = this.userdata["name"];
+
+      // this.reporter = this.userdata["name"];
+      // console.log(this.reporter);
+
+      localStorage.setItem("userName", this.userdata["name"])
+
       this.email = data["email"];
     });
 
@@ -124,16 +128,16 @@ export class MeldingPage implements OnInit {
 
     this.reactions.push(this.createItem({
       // id: this.be,
-      name: this.reporter,
+      name: '',
       message: this.messages,
       date: this.date
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
-    console.log(this.uploadForm.value);
-    // this.ms.postReport(this.uploadForm.value).subscribe((report) => {
-    //   console.log(report)
-    // });
+    // console.log(this.uploadForm.value);
+    this.ms.postReport(this.uploadForm.value).subscribe((report) => {
+      console.log(report)
+    });
     // this.ms.postReaction("1", this.uploadForm.value).subscribe((data) => { console.log(data); });
     this.router.navigate(['/tab1']);
   }
@@ -158,7 +162,7 @@ export class MeldingPage implements OnInit {
 
   //Hide and show date picker by checking the type of report
   showDateInput($event) {
-    console.log($event);
+    // console.log($event);
     if (this.type.value == " Opdracht ") {
       this.showDateSelector = true;
       this.dateBind = this.date.toISOString();
@@ -177,8 +181,10 @@ export class MeldingPage implements OnInit {
 
 
   formulier() {
+    const reporter = localStorage.getItem("userName")
     this.uploadForm = this.fb.group({
-      reporter: [this.reporter],
+
+      reporter: [reporter],
       // email: [this.email],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
       date: [this.date],
@@ -197,7 +203,7 @@ export class MeldingPage implements OnInit {
 
   get reporters() { return this.uploadForm.get("reporter") };
   get pNumbers() { return this.uploadForm.get("pNumber") };
-  get datums() { return this.uploadForm.get("date") };
+  // get datums() { return this.uploadForm.get("date") };
   get type() { return this.uploadForm.get("type") };
   get reqDate() { return this.uploadForm.get("requestDate") };
   get locations() { return this.uploadForm.get("location") };
