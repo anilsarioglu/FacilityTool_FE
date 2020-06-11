@@ -25,11 +25,19 @@ export class UserManagePage implements OnInit {
   }
 
   ngOnInit() {
+    this.initUsers();
+  }
+
+  initUsers(){
     this.us.getAllUsers().subscribe(data => {
       this.users = data;
       this.userList = this.users;
       this.copyListOfUsers = this.userList;
     });
+  }
+
+  ionViewWillEnter(){
+    this.initUsers();
   }
 
   searchItems(e) {
