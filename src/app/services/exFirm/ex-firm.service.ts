@@ -10,14 +10,13 @@ export class ExFirmService {
 
   private contentHeaders: HttpHeaders;
 
-  private VPSAPIBE = "https://vps100.ap.be/api/"
-  private urlExternalFirms = this.VPSAPIBE + "externalFirms";
-  private urlExternalFirmById = this.VPSAPIBE + "externalFirm/";
+  // private VPSAPIBE = "https://vps100.ap.be/api/"
+  // private urlExternalFirms = this.VPSAPIBE + "externalFirms";
+  // private urlExternalFirmById = this.VPSAPIBE + "externalFirm/";
 
-  // private APIBE = 'http://localhost:8080/api/'
-  // private urlExternalFirms = this.APIBE + "externalFirms";
-  // private urlExternalFirmById = this.APIBE + "externalFirm/";
-
+  private APIBE = 'http://localhost:8080/api/'
+  private urlExternalFirms = this.APIBE + "externalFirms";
+  private urlExternalFirmById = this.APIBE + "externalFirm/";
 
   idToken: string;
 

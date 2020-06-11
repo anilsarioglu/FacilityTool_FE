@@ -10,18 +10,14 @@ import { Report } from 'src/app/models/Report';
 export class EmployeeService {
   private contentHeaders: HttpHeaders;
 
-  private VPSAPIBE = "https://vps100.ap.be/api/";
-  private urlEmployees = this.VPSAPIBE + "employees/";
-  private urlEmployeeById = this.VPSAPIBE + "employees/by-id/";
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlEmployees = this.VPSAPIBE + "employees/";
+  // private urlEmployeeById = this.VPSAPIBE + "employees/by-id/";
 
-  // private APIBE = 'http://localhost:8080/api/';
-  // private urlEmployees = this.APIBE + "employees/";
-  // private urlEmployeeById = this.APIBE + "employees/by-id/";
-
-
+  private APIBE = 'http://localhost:8080/api/';
+  private urlEmployees = this.APIBE + "employees/";
+  private urlEmployeeById = this.APIBE + "employees/by-id/";
   private urlEmployeeReportExtension = "/reports/";
-
-
 
   idToken: string;
 

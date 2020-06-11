@@ -10,13 +10,13 @@ export class EmergencyService {
 
   private contentHeaders: HttpHeaders;
 
-  private VPSAPIBE = "https://vps100.ap.be/api/";
-  private urlEmergencies = this.VPSAPIBE + "emergencies";
-  private urlEmergenciesById = this.VPSAPIBE + "emergencies/";
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlEmergencies = this.VPSAPIBE + "emergencies";
+  // private urlEmergenciesById = this.VPSAPIBE + "emergencies/";
 
-  // private APIBE = 'http://localhost:8080/api/';
-  // private urlEmergencies = this.APIBE + "emergencies";
-  // private urlEmergenciesById = this.APIBE + "emergencies/";
+  private APIBE = 'http://localhost:8080/api/';
+  private urlEmergencies = this.APIBE + "emergencies";
+  private urlEmergenciesById = this.APIBE + "emergencies/";
 
   idToken: string;
 
