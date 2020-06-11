@@ -16,37 +16,59 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Prediction } from '../services/prediction/prediction';
 import * as mobilenet from '@tensorflow-models/mobilenet';
 import { UserService } from '../services/user/user.service';
-
 @Component({
   selector: 'app-melding',
   templateUrl: './melding.page.html',
   styleUrls: ['./melding.page.scss'],
 })
-
 export class MeldingPage implements OnInit {
-
+  constructor(private popoverController: PopoverController, private barcode: BarcodeScanner, private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
+              private imageCompress: NgxImageCompressService, private modalController: ModalController,
+              private http: HttpClient, private navCtrl: NavController,
+              private router: Router, private activatedRoute: ActivatedRoute,
+              private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File,
+              private userService: UserService) {
+    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
+    this.location = this.activatedRoute.snapshot.params.locatie;
+    this.category = this.activatedRoute.snapshot.params.category;
+    this.userService.getUserDetails().subscribe(data => {
+      this.userdata = data;
+      // console.log(this.userdata);
+      // this.reporter = this.userdata["name"];
+      // console.log(this.reporter);
+      localStorage.setItem('userName', this.userdata.name);
+      localStorage.setItem('email', this.userdata.email);
+      // this.email = data["email"];
+    });
+  }
+  get reporters() { return this.uploadForm.get('reporter'); }
+  get pNumbers() { return this.uploadForm.get('pNumber'); }
+  // get datums() { return this.uploadForm.get("date") };
+  get type() { return this.uploadForm.get('type'); }
+  get reqDate() { return this.uploadForm.get('requestDate'); }
+  get locations() { return this.uploadForm.get('location'); }
+  get categories() { return this.uploadForm.get('category'); }
+  get description() { return this.uploadForm.get('description'); }
+  get locationDescription() { return this.uploadForm.get('locationDescription'); }
+  get statuss() { return this.uploadForm.get('status'); }
+  get reactions(): FormArray { return this.uploadForm.get('reactions') as FormArray; }
+  get messages() { return this.uploadForm.get('message'); }
+  get photos(): FormArray { return this.uploadForm.get('photos') as FormArray; }
   @ViewChild('img', { static: false }) imageEl: ElementRef;
-
   predictions: Prediction[];
-
   model: any;
-
   uploadForm: FormGroup;
   meldingen: Report[];
   date = new Date();
   // reporter = '';
-
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
-
   // user info
   userdata: any;
-  usernaam: any; 
-  //email: String;
-
-  showDateSelector: boolean = false;
-
+  usernaam: any;
+  // email: String;
+  showDateSelector = false;
   requestDate: Date;
   location: any;
   category: string;
@@ -58,73 +80,55 @@ export class MeldingPage implements OnInit {
   imgResultAfterCompress: string;
   fileName: any;
   myFiles: string[] = [];
-
   sliderOpts = {
     zoom: false,
     slidesPerView: 5,
     centeredSlides: true,
     spaceBetween: 3
-  }
-
+  };
   private contentHeaders: HttpHeaders;
-  constructor(private popoverController: PopoverController, private barcode: BarcodeScanner, private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
-    private imageCompress: NgxImageCompressService, private modalController: ModalController,
-    private http: HttpClient, private navCtrl: NavController,
-    private router: Router, private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File,
-    private userService: UserService) {
-
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
-    this.location = this.activatedRoute.snapshot.params['locatie'];
-    this.category = this.activatedRoute.snapshot.params['category'];
-
-    this.userService.getUserDetails().subscribe(data => {
-      this.userdata = data;
-      //console.log(this.userdata); 
-
-      // this.reporter = this.userdata["name"];
-      // console.log(this.reporter);
-
-      localStorage.setItem("userName", this.userdata["name"])
-      localStorage.setItem("email", this.userdata["email"])
-      //this.email = data["email"];
-    });
-
-  }
-
-
+  inputCat = '';
+  inputLoc = '';
+  // Binds the date picker component with variable
+  dateBind;
+  public errorMessages = {
+    type: [
+      { type: 'required', message: 'Kies defect of opdracht' }
+    ],
+    locatie: [
+      { type: 'required', message: 'kies een locatie' }
+    ],
+    beschrijving: [
+      { type: 'required', message: 'Een beschrijving is noodzakelijk' },
+      { type: 'mexlength', message: 'Rustig, je moet ook geen verhaal schrijven' }
+    ],
+    locatiebeschr: [
+      { type: 'mexlength', message: 'Lengte mag niet langer dan 100 karakters bevatten' }
+    ]
+  };
   popup() {
     for (let i = 0; i < this.predictions.length; i++) {
       alert(this.predictions[i].className + '-' + this.predictions[i].probability);
     }
   }
-
-
   async ngOnInit() {
     this.formulier();
     this.model = await mobilenet.load();
     this.setValue();
   }
-
-  inputCat: string = '';
-  inputLoc: string = '';
-
   setValue() {
     this.activatedRoute.queryParams.subscribe(params => {
-      const category_param = params['category'];
+      const category_param = params.category;
       console.log(category_param);
       this.inputCat = category_param;
     });
     this.activatedRoute.queryParams.subscribe(params => {
-      const location_param = params['location'];
+      const location_param = params.location;
       console.log(location_param);
       this.inputLoc = location_param;
     });
   }
-
-
   uploadSubmit() {
-
     this.reactions.push(this.createItem({
       // id: this.be,
       name: '',
@@ -132,57 +136,42 @@ export class MeldingPage implements OnInit {
       date: this.date
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
-
     // console.log(this.uploadForm.value);
     this.ms.postReport(this.uploadForm.value).subscribe((report) => {
-      console.log(report)
+      console.log(report);
     });
     // this.ms.postReaction("1", this.uploadForm.value).subscribe((data) => { console.log(data); });
     this.router.navigate(['/tab1']);
   }
-
-
-
   async kiesLocatie() {
-    this.navCtrl.navigateForward("/locatie" + "?location=" + this.inputLoc + "?category=" + this.inputCat)
+    this.navCtrl.navigateForward('/locatie' + '?location=' + this.inputLoc + '?category=' + this.inputCat);
   }
-
   async kiesCategory() {
-    this.navCtrl.navigateForward("/category-select" + "?location=" + this.inputLoc + "?category=" + this.inputCat);
+    this.navCtrl.navigateForward('/category-select' + '?location=' + this.inputLoc + '?category=' + this.inputCat);
   }
-
-  //Logging the selected date event
+  // Logging the selected date event
   selectedDateTime($event) {
     console.log($event); // --> wil contains $event.day.value, $event.month.value and $event.year.value
   }
-
-  //Binds the date picker component with variable
-  dateBind;
-
-  //Hide and show date picker by checking the type of report
+  // Hide and show date picker by checking the type of report
   showDateInput($event) {
     // console.log($event);
-    if (this.type.value == " Opdracht ") {
+    if (this.type.value == ' Opdracht ') {
       this.showDateSelector = true;
       this.dateBind = this.date.toISOString();
-      console.log("Date should be current date: " + this.dateBind);
-    }
-    else if (this.type.value == " Defect ") {
+      console.log('Date should be current date: ' + this.dateBind);
+    } else if (this.type.value == ' Defect ') {
       this.showDateSelector = false;
       this.dateBind = undefined;
-      console.log("Date should always be undefined: " + this.dateBind);
+      console.log('Date should always be undefined: ' + this.dateBind);
     }
   }
-
   createItem(data): FormGroup {
     return this.fb.group(data);
   }
-
-
   formulier() {
-    const reporter = localStorage.getItem("userName")
+    const reporter = localStorage.getItem('userName');
     this.uploadForm = this.fb.group({
-
       reporter: [reporter],
       // email: [this.email],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
@@ -199,34 +188,17 @@ export class MeldingPage implements OnInit {
       photos: this.fb.array([])
     });
   }
-
-  get reporters() { return this.uploadForm.get("reporter") };
-  get pNumbers() { return this.uploadForm.get("pNumber") };
-  // get datums() { return this.uploadForm.get("date") };
-  get type() { return this.uploadForm.get("type") };
-  get reqDate() { return this.uploadForm.get("requestDate") };
-  get locations() { return this.uploadForm.get("location") };
-  get categories() { return this.uploadForm.get("category") }
-  get description() { return this.uploadForm.get("description") };
-  get locationDescription() { return this.uploadForm.get("locationDescription") };
-  get statuss() { return this.uploadForm.get("status") };
-  get reactions(): FormArray { return this.uploadForm.get('reactions') as FormArray; }
-  get messages() { return this.uploadForm.get("message") };
-  get photos(): FormArray { return this.uploadForm.get('photos') as FormArray; };
-
   removePhoto(i) {
     this.photos.removeAt(i);
   }
-
   openPreview(img) {
     this.modalController.create({
       component: ImageModalPage,
       componentProps: {
-        img: img
+        img
       }
     }).then(modal => modal.present());
   }
-
   dataURItoBlob(dataURI) {
     const byteString = window.atob(dataURI);
     const arrayBuffer = new ArrayBuffer(byteString.length);
@@ -237,27 +209,22 @@ export class MeldingPage implements OnInit {
     const blob = new Blob([int8Array], { type: 'image/*' });
     return blob;
   }
-
-
   compressFile(image) {
-    var orientation = -1;
+    const orientation = -1;
     this.sizeOfOriginalImage = this.imageCompress.byteCount(image) / (1024 * 1024);
     this.imageCompress.compressFile(image, orientation, 50, 50).then(
-      result => {
-        this.imgResultAfterCompress = result;
-        this.localCompressedURl = result;
-        this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024)
-        const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
-
-      });
+        result => {
+          this.imgResultAfterCompress = result;
+          this.localCompressedURl = result;
+          this.sizeOFCompressedImage = this.imageCompress.byteCount(result) / (1024 * 1024);
+          const imageBlob = this.dataURItoBlob(this.imgResultAfterCompress.split(',')[1]);
+        });
   }
-
   detectImages(event) {
-    var orientation = -1;
-    let files = event.target.files;
-
-    for (let file of files) {
-      var reader = new FileReader();
+    const orientation = -1;
+    const files = event.target.files;
+    for (const file of files) {
+      const reader = new FileReader();
       reader.onload = (event: any) => {
         this.localUrl = event.target.result;
         setTimeout(async () => {
@@ -265,43 +232,22 @@ export class MeldingPage implements OnInit {
           this.predictions = await this.model.classify(imgEl);
         }, 0);
         // 35, 25
-        //10,5
+        // 10,5
         this.imageCompress.compressFile(this.localUrl, orientation, 10, 5).then(
-          result => {
-
-            this.photos.push(this.createItem({
-              name: file.name,
-              lastModified: file.lastModified,
-              lastModifiedDate: file.lastModifiedDate,
-              size: file.size,
-              type: file.type,
-              url: result
-            }));
-
-          });
-      }
+            result => {
+              this.photos.push(this.createItem({
+                name: file.name,
+                lastModified: file.lastModified,
+                lastModifiedDate: file.lastModifiedDate,
+                size: file.size,
+                type: file.type,
+                url: result
+              }));
+            });
+      };
       reader.readAsDataURL(file);
     }
   }
-
-
-  public errorMessages = {
-    type: [
-      { type: 'required', message: 'Kies defect of opdracht' }
-    ],
-    locatie: [
-      { type: 'required', message: 'kies een locatie' }
-    ],
-    beschrijving: [
-      { type: 'required', message: 'Een beschrijving is noodzakelijk' },
-      { type: 'mexlength', message: 'Rustig, je moet ook geen verhaal schrijven' }
-    ],
-    locatiebeschr: [
-      { type: 'mexlength', message: 'Lengte mag niet langer dan 100 karakters bevatten' }
-    ]
-  };
-
-
   getImage(sourceType: number) {
     const options: CameraOptions = {
       quality: 100,
@@ -310,29 +256,25 @@ export class MeldingPage implements OnInit {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
-      sourceType: sourceType,
+      sourceType,
       saveToPhotoAlbum: false,
       allowEdit: false
-    }
-
+    };
     this.camera.getPicture(options).then(imagedata => {
-      let data = 'data:image/*;base64,' + imagedata;
+      const data = 'data:image/*;base64,' + imagedata;
       this.localUrl = data;
       this.photos.push(this.createItem({
         url: this.localUrl
       }));
     });
   }
-
-
   takePhotos() {
     this.barcode.scan().then(data => {
       this.photos.push(this.createItem({
         text: data.text
       }));
-    })
-
-    let options: CameraOptions = {
+    });
+    const options: CameraOptions = {
       quality: 100,
       allowEdit: true,
       targetWidth: 1000,
@@ -341,17 +283,15 @@ export class MeldingPage implements OnInit {
       mediaType: this.camera.MediaType.PICTURE,
       encodingType: this.camera.EncodingType.JPEG,
       destinationType: this.camera.DestinationType.FILE_URI
-    }
+    };
     this.camera.getPicture().then((imagedata) => {
-      let filename = imagedata.substring(imagedata.lastIndexOf('/') + 1);
-      let path = imagedata.substring(0, imagedata.lastIndexOf('/') + 1);
+      const filename = imagedata.substring(imagedata.lastIndexOf('/') + 1);
+      const path = imagedata.substring(0, imagedata.lastIndexOf('/') + 1);
       this.file.readAsDataURL(path, filename).then(base64data => {
         this.photos.push(this.createItem({
           url: base64data
         }));
-      })
-    })
+      });
+    });
   }
-
-
 }
