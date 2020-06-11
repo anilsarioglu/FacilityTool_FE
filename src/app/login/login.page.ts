@@ -5,6 +5,7 @@ import { AuthenticationService } from '../services/authentication.service';
 import { LoadingController } from '@ionic/angular';
 
 import { MsalService, BroadcastService } from '@azure/msal-angular';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -13,12 +14,12 @@ import { MsalService, BroadcastService } from '@azure/msal-angular';
 })
 export class LoginPage implements OnInit {
 
+ 
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   async ngOnInit() {
 
   }
-
 
 }

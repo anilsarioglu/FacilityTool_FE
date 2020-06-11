@@ -34,7 +34,6 @@ export class MeldingPage implements OnInit {
   uploadForm: FormGroup;
   meldingen: Report[];
   date = new Date();
-  // reporter = '';
 
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
@@ -42,13 +41,12 @@ export class MeldingPage implements OnInit {
 
   // user info
   userdata: any;
-  usernaam: any; 
-  //email: String;
+  naampje : any; 
 
   showDateSelector: boolean = false;
 
   requestDate: Date;
-  location: any;
+  location: String;
   category: string;
   localUrl: any;
   localCompressedURl: any;
@@ -57,7 +55,7 @@ export class MeldingPage implements OnInit {
   imgResultBeforeCompress: string;
   imgResultAfterCompress: string;
   fileName: any;
-  myFiles: string[] = [];
+  // wordt niet gebruikt?? myFiles: string[] = [];
 
   sliderOpts = {
     zoom: false,
@@ -87,7 +85,6 @@ export class MeldingPage implements OnInit {
 
       localStorage.setItem("userName", this.userdata["name"])
       localStorage.setItem("email", this.userdata["email"])
-      //this.email = data["email"];
     });
 
   }
