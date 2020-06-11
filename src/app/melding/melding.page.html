@@ -15,7 +15,9 @@
         <ion-item>
             <div class="locAndcatDiv">
                 <div>
-                    <label>Locatie: {{ inputLoc }}</label>                    
+                    <label>Locatie: </label>
+                    <input size="60" type="text" formControlName="location" formGroupName="location" readonly style="border:0" [(ngModel)]="inputLoc">
+                    <!-- <label>Locatie: {{ inputLoc }}</label>                     -->
                     <br>
                     <ion-button (click)="kiesLocatie()" expand="block" color="danger" fill="outline" required>
                         Kies Locatie
@@ -31,7 +33,10 @@
         <ion-item>
             <div class="locAndcatDiv">
                 <div>
-                    <label>Categorie: {{ inputCat }}</label>
+                    <!-- <label>Categorie: {{ inputCat }}</label> -->
+                    <label>Categorie: </label>
+                    <input size="60" type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
+
                     <br>
                     <ion-button (click)="kiesCategory()" expand="block" color="danger" fill="outline" required>
                         Kies Categorie
