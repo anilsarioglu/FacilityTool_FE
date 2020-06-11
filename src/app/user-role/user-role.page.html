@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-back-button defaultHref="/user-manage"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="title">Rol toewijzen</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
+
+
+      <div>
+              <ion-label position="floating">Naam: {{this.userData.name}}</ion-label>
+      </div>
+      <p></p>
+      <div>
+        <ion-label position="floating">Huidige rol: {{this.userData.role}}</ion-label>
+        </div>
+        <p></p>
+      <ion-item>
+        <ion-label position="floating">Selecteer toe te wijzen rol:</ion-label>
+        <ion-select required placeholder="selecteer een rol" formControlName="role" okText="Bevestig" cancelText="Annuleer">
+            <ion-select-option value="Medewerker">Medewerker</ion-select-option>
+            <ion-select-option value="Opleidingshoofd">Opleidingshoofd</ion-select-option>
+            <ion-select-option value="Logistieke Medewerker">Logistieke Medewerker</ion-select-option>
+            <ion-select-option value="Logistieke Coördinator">Logistieke Coördinator</ion-select-option>
+            <ion-select-option value="Facilitaire Medewerker">Facilitaire Medewerker</ion-select-option>
+            <ion-select-option value="Facilitaire Coördinator">Facilitaire Coördinator</ion-select-option>
+            <ion-select-option value="Admin">Admin</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toe wijzen</ion-button>
+
+  </form>
+
+</ion-content>

@@ -39,6 +39,14 @@ const routes: Routes = [
   },  {
     path: 'my-reports',
     loadChildren: () => import('./my-reports/my-reports.module').then( m => m.MyReportsPageModule)
+  },
+  {
+    path: 'user-manage',
+    loadChildren: () => import('./user-manage/user-manage.module').then( m => m.UserManagePageModule)
+  },
+  {
+    path: 'user-role',
+    loadChildren: () => import('./user-role/user-role.module').then( m => m.UserRolePageModule)
   }
 
 

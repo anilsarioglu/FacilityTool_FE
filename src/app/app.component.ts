@@ -26,6 +26,7 @@ export class AppComponent implements OnInit {
     { title: 'Categorie beheer', url: '/category-manage', icon: 'hammer' },
     { title: 'Sjabloon beheer', url: '/mail-template-manage', icon: 'mail' },
     { title: 'Externe firma\'s', url: '/external-firm', icon: 'briefcase' },
+    { title: 'Gebruiker beheer', url: '/user-manage', icon: 'people' },
     { title: 'Instellingen', url: '/tab3', icon: 'settings' }
   ];
 
