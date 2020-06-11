@@ -14,18 +14,22 @@ ion-slides {
         padding-bottom: 10px;
     }
 }
-.bold{
-    font-weight: bold;
-}
 
 .error-message {
     color: var(--ion-color-danger);
 }
 
+.locAndcatDiv {
+    width: 100%;
+}
 
+.locAndcatDiv ion-button{
+    height: 30px;
+    text-align: left;
+}
 
 .footerBtn {
-    height: 60px;
+    height: 40px;
 }
 
 #form {

@@ -17,11 +17,7 @@ export class EmployeeService {
   private APIBE = 'http://localhost:8080/api/';
   private urlEmployees = this.APIBE + "employees/";
   private urlEmployeeById = this.APIBE + "employees/by-id/";
-
-
   private urlEmployeeReportExtension = "/reports/";
-
-
 
   idToken: string;
 

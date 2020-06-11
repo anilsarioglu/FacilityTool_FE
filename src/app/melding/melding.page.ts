@@ -15,6 +15,7 @@ import { FileUploader } from 'ng2-file-upload';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { Prediction } from '../services/prediction/prediction';
 import * as mobilenet from '@tensorflow-models/mobilenet';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-melding',
@@ -33,11 +34,16 @@ export class MeldingPage implements OnInit {
   uploadForm: FormGroup;
   meldingen: Report[];
   date = new Date();
-  reporter = 'Amine Abdelfettah';
-  pNumber = 'P103906';
+  // reporter = '';
+
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
+
+  // user info
+  userdata: any;
+  usernaam: any; 
+  //email: String;
 
   showDateSelector: boolean = false;
 
@@ -65,11 +71,27 @@ export class MeldingPage implements OnInit {
     private imageCompress: NgxImageCompressService, private modalController: ModalController,
     private http: HttpClient, private navCtrl: NavController,
     private router: Router, private activatedRoute: ActivatedRoute,
-    private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File) {
+    private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File,
+    private userService: UserService) {
+
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
     this.location = this.activatedRoute.snapshot.params['locatie'];
     this.category = this.activatedRoute.snapshot.params['category'];
+
+    this.userService.getUserDetails().subscribe(data => {
+      this.userdata = data;
+      //console.log(this.userdata); 
+
+      // this.reporter = this.userdata["name"];
+      // console.log(this.reporter);
+
+      localStorage.setItem("userName", this.userdata["name"])
+      localStorage.setItem("email", this.userdata["email"])
+      //this.email = data["email"];
+    });
+
   }
+
 
   popup() {
     for (let i = 0; i < this.predictions.length; i++) {
@@ -105,7 +127,7 @@ export class MeldingPage implements OnInit {
 
     this.reactions.push(this.createItem({
       // id: this.be,
-      name: this.reporter,
+      name: '',
       message: this.messages,
       date: this.date
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
@@ -139,7 +161,7 @@ export class MeldingPage implements OnInit {
 
   //Hide and show date picker by checking the type of report
   showDateInput($event) {
-    console.log($event);
+    // console.log($event);
     if (this.type.value == " Opdracht ") {
       this.showDateSelector = true;
       this.dateBind = this.date.toISOString();
@@ -158,9 +180,11 @@ export class MeldingPage implements OnInit {
 
 
   formulier() {
+    const reporter = localStorage.getItem("userName")
     this.uploadForm = this.fb.group({
-      reporter: [this.reporter],
-      pNumber: [this.pNumber],
+
+      reporter: [reporter],
+      // email: [this.email],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
       date: [this.date],
       type: ['', [Validators.required]],
@@ -178,7 +202,7 @@ export class MeldingPage implements OnInit {
 
   get reporters() { return this.uploadForm.get("reporter") };
   get pNumbers() { return this.uploadForm.get("pNumber") };
-  get datums() { return this.uploadForm.get("date") };
+  // get datums() { return this.uploadForm.get("date") };
   get type() { return this.uploadForm.get("type") };
   get reqDate() { return this.uploadForm.get("requestDate") };
   get locations() { return this.uploadForm.get("location") };

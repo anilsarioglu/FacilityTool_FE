@@ -11,6 +11,7 @@ import { EmployeeService } from '../services/employee/employee.service';
 import * as XLSX from 'xlsx';
 //azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-tab1',
@@ -20,17 +21,11 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 export class Tab1Page implements OnInit {
 
-  constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
-              private http: HttpClient) {
-    this.melding = this.activatedRoute.snapshot.params.melding;
-    this.lijstMeldingen();
-    this.sortVal = ' ';
-    this.hideMe = {};
-  }
-//azure
- profile: any;
- graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
+  // user info
+  userdata: any;
+  usernaam: String;
+
+
 
   melding: any;
   meldingLijst: any = [];
@@ -38,6 +33,7 @@ export class Tab1Page implements OnInit {
   actieveLijstVanMeldingen: any = [];
   sortVal: string = "locatie";
   toggle: boolean;
+  segment: string;
   // Assign Defect
   selectEmployeePlaceholder: string = "Kies technische werknemer(s)";
   disableToewijzenButton: boolean = false;
@@ -50,12 +46,19 @@ export class Tab1Page implements OnInit {
 
   pincolor: any;
 
-
-  fileName= 'ExcelSheet.xlsx';  
-  ngOnInit() {}
-
-  ionViewWillEnter() {
+  constructor(private ms: ReportService, private employeeService: EmployeeService, private userService: UserService, private alertCtrl: AlertController,
+              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
+    this.melding = this.activatedRoute.snapshot.params.melding;
     this.lijstMeldingen();
+    this.hideMe = {};
+
+    this.userService.getUserDetails().subscribe(data => {
+      this.userdata = data;
+      console.log(this.userdata);
+
+      this.usernaam = data["name"];
+    });
   }
 
   lijstMeldingen() {
@@ -64,6 +67,16 @@ export class Tab1Page implements OnInit {
       this.meldingLijst = data;
       this.activeList();
     });
+  }
+
+  ionViewWillEnter() {
+    this.lijstMeldingen();
+    this.segment = "defect";
+    this.sortVal = "prioriteit"
+  }
+
+  segmentChanged(event: any){
+    this.activeList();
   }
 
   async searchItems(e) {
@@ -85,19 +98,13 @@ export class Tab1Page implements OnInit {
     }
   }
 
-  async toggleOpdDef() {
-    this.activeList();
-    //this.selectedEmployeeIds = [];
-  }
-
   activeList() {
-    let ch;
-    if (this.toggle) { ch = 'Defect'; } else { ch = 'Opdracht'; }
     this.actieveLijstVanMeldingen = this.meldingLijst;
     this.actieveLijstVanMeldingen = this.meldingLijst.filter((item) => {
-      return (item.type === null || item.type.toString().toLowerCase().indexOf(ch.toLowerCase()) > -1);
+      return (item.type === null || item.type.toString().trim().toLowerCase() == this.segment);
     });
     this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen;
+    this.sortAll();
   }
 
   sortAll() {
@@ -110,6 +117,14 @@ export class Tab1Page implements OnInit {
           return 1;
         }
         if (n1.type < n2.type) {
+          return -1;
+        }
+        return 0;
+      } else if (this.sortVal === 'prioriteit') {
+        if (n1.numberUpvotes < n2.numberUpvotes) {
+          return 1;
+        }
+        if (n1.numberUpvotes > n2.numberUpvotes) {
           return -1;
         }
         return 0;
@@ -189,7 +204,7 @@ export class Tab1Page implements OnInit {
       }
     });
 
-    this.hideMe[reportId] = !this.hideMe[reportId];
+    this.hideMe[reportId] = !this.hideMe[reportId]
     this.disableToewijzenButton = true;
     this.isEnabled = false;
     this.annuleerOrSluitenText = 'Annuleer';
@@ -243,13 +258,28 @@ export class Tab1Page implements OnInit {
     });
   }
 
-  exportExcel(): void {
-      const element = document.getElementById('excel-table');
-      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-      const wb: XLSX.WorkBook = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-      XLSX.writeFile(wb, this.fileName);
+  fileName = 'ExcelSheet.xlsx';
+
+  exportExcel(): void
+      {
+          /* table id is passed over here */
+          let element = document.getElementById('excel-table');
+
+
+            const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+
+          /* generate workbook and add the worksheet */
+          const wb: XLSX.WorkBook = XLSX.utils.book_new();
+          XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+
+        //  /* save to file */
+          XLSX.writeFile(wb, this.fileName);
+
+      }
+
+  ngOnInit() {
+
   }
 
   doRefresh(event) {

@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { Report } from '../../models/Report';
+import { User } from '../../models/User';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ArchiveService {
+export class UserService {
+
   private contentHeaders: HttpHeaders;
 
-
   // private VPSAPIBE = "https://vps100.ap.be/api/";
-  // private urlArchive = this.VPSAPIBE + 'reports/archive/';
+  // private urlCategories = this.VPSAPIBE + 'categories/';
+  // private urlCategoryByName = this.VPSAPIBE + 'categories/by-name/';
 
   private APIBE = 'http://localhost:8080/api/';
-  private urlArchive = this.APIBE + 'reports/archive/';
+  private urlUser = this.APIBE + 'user/me';
 
   idToken: string;
 
@@ -25,12 +26,8 @@ export class ArchiveService {
     }).set('Content-Type', 'application/json');
   }
 
-
-  getAllDefects(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.urlArchive + "defect", { headers: this.contentHeaders });
+  getUserDetails(): Observable<User> {
+    return this.http.get<User>(this.urlUser, { headers: this.contentHeaders });
   }
 
-  getAllTasks(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.urlArchive + "task", { headers: this.contentHeaders });
-  }
 }

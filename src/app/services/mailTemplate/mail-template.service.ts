@@ -17,7 +17,6 @@ export class MailTemplateService {
   private urlMailTemplates = this.APIBE +  "mail-templates/";
   private urlMailTemplateByName = this.APIBE + "mail-templates/by-name/";
 
-
   idToken: string;
 
   constructor(private http: HttpClient) {
