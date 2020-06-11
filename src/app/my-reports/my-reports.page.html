@@ -10,19 +10,56 @@
 </ion-header>
 
 <ion-content>
+  <div [hidden]=ishidden>
+    <ion-card-header>
+      <ion-label position="floating" ngDefaultControl>{{reporterName}}</ion-label>
+      <br/>
+      <ion-label position="floating" ngDefaultControl>{{reportDate | date:'dd/MM/yy-HHumm'}}</ion-label>
+      <br/>
+      <br/>
+      <ion-label position="floating">Status: {{reportState}}</ion-label>
+    </ion-card-header>
+
+    <ion-item>
+      <ion-label position="floating">Type melding: </ion-label>
+      <ion-select [(ngModel)]="reportType" placeholder="{{reportType}}" okText="Bevestig" cancelText="Annuleer">
+        <ion-select-option value="Defect" >Defect</ion-select-option>
+        <ion-select-option value="Opdracht">Opdracht</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Locatie: </ion-label>
+      <ion-select placeholder="{{reportLocatie}}" okText="Bevestig" cancelText="Annuleer">
+        <ion-select-option *ngFor="let loc of locatieLijst;let i = index;" (click)="chooseLoc(loc)">{{loc.campus |slice :6:9}} - {{loc.room}} {{loc.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Algemene beschrijving: </ion-label>
+      <ion-input minlength="5" maxlength="60" type="text" [(ngModel)]="reportDescr"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Locatie beschrijving: </ion-label>
+      <ion-input minlength="5" maxlength="60" type="text" [(ngModel)]="reportLocDesc"></ion-input>
+    </ion-item>
+
+    <ion-button color="danger" type="button" (click)="closeEdit()">Annuleer wijziging</ion-button>
+    <ion-button class="formBtn" color="apgrey" type="button" (click)="uploadSubmit()">Accepteer wijzigingen</ion-button>
+  </div>
+
   <ion-grid>
     <ion-row>
       <ion-col *ngFor="let rep of reportList;let i = index;">
         <ion-card>
           <ion-item>
-            <ion-label> {{rep.reporter}} - {{rep.pNumber}}</ion-label>
+            <ion-label> {{rep.type}} - {{rep.description}}</ion-label>
           </ion-item>
           <ion-card-content class="description">
-                <p>{{rep.date | date:'dd/MM/yy-HHumm'}}</p>
-                <p>{{rep.location}}</p>
-                <p> {{rep.type}}</p>
-                <p> {{rep.description}}</p>
-                <p> {{rep.locationDescription}}</p>
+                <p>Datum: {{rep.date | date:'dd/MM/yy-HHumm'}}</p>
+                <p>Locatie: {{rep.location}}</p>
+                <p>{{rep.locationDescription}}</p>
           </ion-card-content>
           <ion-item *ngIf="rep.status === 'IN_WACHT'">
             <ion-button color="danger" fill="outline" type="button" (click)="editReport(rep)">Wijzig</ion-button>
