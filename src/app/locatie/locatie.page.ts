@@ -39,8 +39,8 @@ export class LocatiePage implements OnInit {
       this.locaties = data;
       this.locatieLijst = this.locaties;
       this.setValue();
-      this.storage.set("location", this.locaties);
-    })
+      this.storage.set('location', this.locaties);
+    });
   }
 
   setValue() {

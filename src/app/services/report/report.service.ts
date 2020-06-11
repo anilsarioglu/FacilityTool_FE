@@ -61,4 +61,8 @@ export class ReportService {
   putStatusReport(id: string, status: string): Observable<Report> {
     return this.http.put<Report>(this.urlStatus + id, status, { headers: this.contentHeaders });
   }
+
+  putReport(id: string, report: Report): Observable<Report> {
+    return this.http.put<Report>(this.urlReports + id, report, { headers: this.contentHeaders });
+  }
 }
