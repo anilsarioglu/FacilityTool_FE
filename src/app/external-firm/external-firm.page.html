@@ -37,13 +37,13 @@
 
             <ion-item>
                 <ion-label position="floating">Telefoonnummer: </ion-label>
-                <ion-textarea minlength="5" maxlength="60" required inputmode="tel" formControlName="phoneNumber">
+                <ion-textarea minlength="5" maxlength="11" required inputmode="tel" formControlName="phoneNumber">
                 </ion-textarea>
             </ion-item>
 
             <ion-item>
                 <ion-label position="floating">Mobiele nummer: </ion-label>
-                <ion-textarea minlength="5" maxlength="60" required inputmode="tel" formControlName="mobileNumber">
+                <ion-textarea minlength="5" maxlength="11" required inputmode="tel" formControlName="mobileNumber">
                 </ion-textarea>
             </ion-item>
 
@@ -53,7 +53,7 @@
     </div>
 
 
-    <ion-card *ngFor="let efl of externalFirmList;let i = index;" id="kaart">
+    <ion-card class="CompanyCard" *ngFor="let efl of externalFirmList;let i = index;" id="kaart">
         <ion-item>
             <ion-label>{{efl.companyName}}</ion-label>
             <ion-button style="zoom:1.5;" color="danger" slot="end" type="button" (click)="deleteExternalFirm(i,$event,efl.id)" class="btn btn-danger remove-btn">

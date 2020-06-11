@@ -2,10 +2,22 @@ ion-content ion-toolbar {
   --background: translucent;
 }
 
-.logoutButton{
-  width: 100%;
-  cursor: pointer;
-  text-align: center;
-  padding-left: 15px;
-  padding-right: 15px;
+// .logoutButton{
+//   width: 100%;
+//   cursor: pointer;
+//   text-align: center;
+//   padding-left: 15px;
+//   padding-right: 15px;
+// }
+.logoutButton {
+  text-transform: none !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 8%;
+  width: full;
+  a {
+      text-decoration: none;
+      color: white;
+  }
 }

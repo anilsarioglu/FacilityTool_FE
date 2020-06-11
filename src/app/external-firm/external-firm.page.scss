@@ -10,6 +10,10 @@
      margin-top: 20px;
      margin-bottom: 20px;
  }
+
+ .CompanyCard{
+     margin-top: 20px;
+ }
  
 //  .midden {
 //      text-align: center;
@@ -82,9 +86,10 @@
  }
  
  div.panel.show {
-     opacity: 1;
-     max-height: 500px;
- }
+    opacity: 1;
+    max-height: 1000px;
+    
+}
  
  //  .accordion {
  //      background-color: #eee;

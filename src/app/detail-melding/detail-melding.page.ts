@@ -125,6 +125,6 @@ export class DetailMeldingPage implements OnInit {
       console.log(report);
       this.meldingData.status = this.newState;
     });
-    this.ishidden = !this.ishidden;   
+    this.ishidden = !this.ishidden;
   }
 }
