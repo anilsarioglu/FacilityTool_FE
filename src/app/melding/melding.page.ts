@@ -34,15 +34,17 @@ export class MeldingPage implements OnInit {
   uploadForm: FormGroup;
   meldingen: Report[];
   date = new Date();
-  reporter = 'Amine Abdelfettah';
-  pNumber = 'P103906';
+  //reporter = 'Amine Abdelfettah';
+  reporter = ''; 
+  //pNumber = 'P103906';
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_BEHANDELING';
 
    // user info
    userdata: any; 
-   usernaam: String; 
+  // usernaam: String; 
+   email: String;
 
   showDateSelector: boolean = false;
 
@@ -79,9 +81,10 @@ export class MeldingPage implements OnInit {
 
     this.userService.getUserDetails().subscribe(data => {
       this.userdata = data;
-      console.log(this.userdata); 
+      //console.log(this.userdata); 
  
-      this.usernaam = data["name"];
+      this.reporter = this.userdata["name"];
+      this.email = data["email"];
     });
 
   }
@@ -121,16 +124,16 @@ export class MeldingPage implements OnInit {
 
     this.reactions.push(this.createItem({
       // id: this.be,
-      name: this.usernaam,
+      name: this.reporter,
       message: this.messages,
       date: this.date
       // datum: this.datePipe.transform(this.datum, 'dd-MM-yyTHH:mm:ss')
     }));
 
-    // console.log(this.uploadForm.value);
-    this.ms.postReport(this.uploadForm.value).subscribe((report) => {
-      console.log(report)
-    });
+    console.log(this.uploadForm.value);
+    // this.ms.postReport(this.uploadForm.value).subscribe((report) => {
+    //   console.log(report)
+    // });
     // this.ms.postReaction("1", this.uploadForm.value).subscribe((data) => { console.log(data); });
     this.router.navigate(['/tab1']);
   }
@@ -175,8 +178,8 @@ export class MeldingPage implements OnInit {
 
   formulier() {
     this.uploadForm = this.fb.group({
-      reporter: [this.usernaam],
-      pNumber: [this.pNumber],
+      reporter: [this.reporter],
+      // email: [this.email],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
       date: [this.date],
       type: ['', [Validators.required]],
