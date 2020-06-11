@@ -16,7 +16,6 @@ export class AuthenticationService {
     this.router = router;
   }
 
-
   async onLoginSuccess() {
     this.router.navigate(['/tab1'])
   }

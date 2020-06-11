@@ -11,28 +11,39 @@
 <ion-content class="bg">
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
+             
+        <ion-item>
+            <div class="locAndcatDiv">
+                <div>
+                    <label>Locatie: </label>
+                    <input size="60" type="text" formControlName="location" formGroupName="location" readonly style="border:0" [(ngModel)]="inputLoc">
+                    <!-- <label>Locatie: {{ inputLoc }}</label>                     -->
+                    <br>
+                    <ion-button (click)="kiesLocatie()" expand="block" color="danger" fill="outline" required>
+                        Kies Locatie
+                    </ion-button>
+                </div>
+                <div *ngFor="let error of errorMessages.name">
+                    <ng-container *ngIf="locatie.hasError(error.type)">
+                        <small class="error-message">{{error.message}}</small>
+                    </ng-container>
+                </div>
+            </div>
+        </ion-item>
+        <ion-item>
+            <div class="locAndcatDiv">
+                <div>
+                    <!-- <label>Categorie: {{ inputCat }}</label> -->
+                    <label>Categorie: </label>
+                    <input size="60" type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
 
-        <div>
-            <div>
-                <label>Locatie: </label>
-                <input size="60" type="text" formControlName="location" formGroupName="location" readonly style="border:0" [(ngModel)]="inputLoc">
-                <ion-button (click)="kiesLocatie()" color="danger" size="small" expand="full" required style="height: 40px;">
-                    Locatie kiezen
-                </ion-button>
+                    <br>
+                    <ion-button (click)="kiesCategory()" expand="block" color="danger" fill="outline" required>
+                        Kies Categorie
+                    </ion-button>
+                </div>
             </div>
-            <div *ngFor="let error of errorMessages.name">
-                <ng-container *ngIf="locatie.hasError(error.type)">
-                    <small class="error-message">{{error.message}}</small>
-                </ng-container>
-            </div>
-        </div>
-        <div>
-            <label>Categorie: </label>
-            <input size="60" type="text" formControlName="category" formGroupName="category" readonly style="border:0" [(ngModel)]="inputCat">
-            <ion-button (click)="kiesCategory()" color="danger" size="small" expand="full" required style="height: 40px;">
-                Categorie kiezen
-            </ion-button>
-        </div>
+        </ion-item>
         <div>
             <ion-item>
                 <ion-label>Type</ion-label>
@@ -43,7 +54,6 @@
                 </ion-select>
             </ion-item>
         </div>
-        
         <div *ngIf="showDateSelector" >
             <ion-item>
                 <ion-label>Datum uit te voeren: </ion-label>
@@ -128,7 +138,7 @@
                 </ion-fab-list>
             </ion-fab>
         </div>
-        <ion-button [disabled]="!uploadForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Rapporteren</ion-button>
+        <ion-button [disabled]="!uploadForm.valid" class="footerBtn" color="danger" expand="full" type="submit">Rapporteren</ion-button>
 
     </form>
 </ion-content>

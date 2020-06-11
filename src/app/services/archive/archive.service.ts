@@ -14,7 +14,7 @@ export class ArchiveService {
   // private urlArchive = this.VPSAPIBE + 'reports/archive/';
 
   private APIBE = 'http://localhost:8080/api/';
-  private urlArchive = this.APIBE + 'reports/archive';
+  private urlArchive = this.APIBE + 'reports/archive/';
 
   idToken: string;
 
@@ -27,10 +27,10 @@ export class ArchiveService {
 
 
   getAllDefects(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.urlArchive + "/defect", { headers: this.contentHeaders });
+    return this.http.get<Report[]>(this.urlArchive + "defect", { headers: this.contentHeaders });
   }
 
   getAllTasks(): Observable<Report[]> {
-    return this.http.get<Report[]>(this.urlArchive + "/task", { headers: this.contentHeaders });
+    return this.http.get<Report[]>(this.urlArchive + "task", { headers: this.contentHeaders });
   }
 }

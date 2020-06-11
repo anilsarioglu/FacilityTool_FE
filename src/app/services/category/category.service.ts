@@ -17,9 +17,6 @@ export class CategoryService {
   private urlCategories = this.APIBE + 'categories/';
   private urlCategoryByName = this.APIBE + 'categories/by-name/';
 
-
-
-
   idToken: string;
 
   constructor(private http: HttpClient) {

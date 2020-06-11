@@ -18,7 +18,6 @@ export class ExFirmService {
   private urlExternalFirms = this.APIBE + "externalFirms";
   private urlExternalFirmById = this.APIBE + "externalFirm/";
 
-
   idToken: string;
 
   constructor(private http: HttpClient) {

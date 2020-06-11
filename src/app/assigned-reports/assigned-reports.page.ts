@@ -26,7 +26,7 @@ export class AssignedReportsPage implements OnInit {
   }
 
   listReports() {
-    this.employeeService.getAllReports("5ed60eb1c1913518bf7f2c90").subscribe(data => {
+    this.employeeService.getAllReports("5ec93fadc3f11c5acc484c7d").subscribe(data => {
       console.log(data);
       //this.reportlist = data; 
       //tijdelijke oplossing om enkel defecten te tonen
