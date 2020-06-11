@@ -10,11 +10,22 @@ export class ExFirmService {
 
   private contentHeaders: HttpHeaders;
 
-  private urlExternalFirms = "http://localhost:8080/externalFirms";
-  private urlExternalFirmById = "http://localhost:8080/externalFirm/";
+  // private VPSAPIBE = "https://vps100.ap.be/api/"
+  // private urlExternalFirms = this.VPSAPIBE + "externalFirms";
+  // private urlExternalFirmById = this.VPSAPIBE + "externalFirm/";
+
+  private APIBE = 'http://localhost:8080/api/'
+  private urlExternalFirms = this.APIBE + "externalFirms";
+  private urlExternalFirmById = this.APIBE + "externalFirm/";
+
+
+  idToken: string;
 
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    this.idToken = localStorage.getItem("idToken");
+    this.contentHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + this.idToken
+    }).set('Content-Type', 'application/json');
   }
 
   postExternalFirm(externalFirm: ExternalFirm): Observable<ExternalFirm> {

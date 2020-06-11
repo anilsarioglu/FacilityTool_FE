@@ -12,42 +12,13 @@ import { MsalService, BroadcastService } from '@azure/msal-angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  errorMessage: string;
-  requestObj = {
-    scopes: ["user.read"]
-  };
 
-  constructor(private authService1: AuthenticationService, private navCtrl: NavController, private loadingController: LoadingController,private router: Router, private broadcastService: BroadcastService, private authService: MsalService) { }
+
+  constructor() { }
 
   async ngOnInit() {
 
   }
-  
 
-  async login() {
-    const isIE = window.navigator.userAgent.indexOf('MSIE ') > -1 || window.navigator.userAgent.indexOf('Trident/') > -1;
 
-        if (!isIE) {
-          this.authService.loginRedirect({
-            extraScopesToConsent: ["user.read", "openid", "profile"]
-          });
-          this.authService.acquireTokenSilent(this.requestObj).then(function (tokenResponse) {
-            // Callback code here
-            console.log(tokenResponse.accessToken);
-        }).catch(function (error) {
-            console.log(error);
-        });
-        
-        } else {
-          this.authService.loginPopup({
-            extraScopesToConsent: ["user.read", "openid", "profile"]
-          });
-          this.authService.acquireTokenPopup(this.requestObj).then(function (tokenResponse) {
-          
-            console.log(tokenResponse.accessToken);
-        }).catch(function (error) {
-            console.log(error);
-        });
-        }
-  }
 }

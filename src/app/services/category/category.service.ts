@@ -9,11 +9,24 @@ import { Observable } from 'rxjs';
 export class CategoryService {
   private contentHeaders: HttpHeaders;
 
-  private urlCategories = 'http://localhost:8080/categories/';
-  private urlCategoryByName = 'http://localhost:8080/categories/by-name/';
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlCategories = this.VPSAPIBE + 'categories/';
+  // private urlCategoryByName = this.VPSAPIBE + 'categories/by-name/';
+
+  private APIBE = 'http://localhost:8080/api/';
+  private urlCategories = this.APIBE + 'categories/';
+  private urlCategoryByName = this.APIBE + 'categories/by-name/';
+
+
+
+
+  idToken: string;
 
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    this.idToken = localStorage.getItem("idToken");
+    this.contentHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + this.idToken
+    }).set('Content-Type', 'application/json');
   }
 
   getAllCategories(): Observable<Category[]> {

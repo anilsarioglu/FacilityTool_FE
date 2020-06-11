@@ -10,12 +10,23 @@ export class EmergencyService {
 
   private contentHeaders: HttpHeaders;
 
-  private urlEmergencies = "http://localhost:8080/emergencies";
-  private urlEmergenciesById = "http://localhost:8080/emergencies/";
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlEmergencies = this.VPSAPIBE + "emergencies";
+  // private urlEmergenciesById = this.VPSAPIBE + "emergencies/";
+
+  private APIBE = 'http://localhost:8080/api/';
+  private urlEmergencies = this.APIBE + "emergencies";
+  private urlEmergenciesById = this.APIBE + "emergencies/";
+
+  idToken: string;
 
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    this.idToken = localStorage.getItem("idToken");
+    this.contentHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + this.idToken
+    }).set('Content-Type', 'application/json');
   }
+
 
   getAllEmergencies(): Observable<Emergency[]> {
     return this.http.get<Emergency[]>(this.urlEmergencies, { headers: this.contentHeaders });

@@ -2,10 +2,11 @@ FROM node:latest AS build
 
 WORKDIR /app
 
-COPY . . 
+COPY . .
 
 RUN npm install && npm run build
 
-FROM nginx AS deploy 
+FROM nginx AS deploy
 
 COPY --from=build /app/www /var/www/html
+

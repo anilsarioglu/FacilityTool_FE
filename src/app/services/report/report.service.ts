@@ -12,22 +12,29 @@ export class ReportService {
   private contentHeaders: HttpHeaders;
 
 
-  // private urlReports = 'https://vps100.ap.be/api/reports/';
-  // private urlReportsByLocation = 'https://vps100.ap.be/api/reports/by-location/';
-  // private urlReportsById = 'https://vps100.ap.be/api/by-id/';
-  // private urlToggleUpvote = 'https://vps100.ap.be/api/reports/upvote/';
-  // private urlReactions = 'https://vps100.ap.be/api/reports/reactions/';
-  // private urlStatus = 'https://vps100.ap.be/api/reports/status/';
+  // private VPSAPIBE = "https://vps100.ap.be/api/";
+  // private urlReports = this.VPSAPIBE + 'reports/';
+  // private urlReportsByLocation = this.VPSAPIBE + 'reports/by-location/';
+  // private urlReportsById = this.VPSAPIBE + 'by-id/';
+  // private urlToggleUpvote = this.VPSAPIBE + 'reports/upvote/';
+  // private urlReactions = this.VPSAPIBE + 'reports/reactions/';
+  // private urlStatus = this.VPSAPIBE + 'reports/status/';
 
-  private urlReports = 'http://localhost:8080/reports/';
-  private urlReportsByLocation = 'http://localhost:8080/reports/by-location/';
-  private urlReportsById = 'http://localhost:8080/reports/by-id/';
-  private urlToggleUpvote = 'http://localhost:8080/reports/upvote/';
-  private urlReactions = 'http://localhost:8080/reports/reactions/';
-  private urlStatus = 'http://localhost:8080/reports/status/';
+  private APIBE = 'http://localhost:8080/api/';
+  private urlReports = this.APIBE + 'reports/';
+  private urlReportsByLocation = this.APIBE + 'reports/by-location/';
+  private urlReportsById = this.APIBE + 'reports/by-id/';
+  private urlToggleUpvote = this.APIBE + 'reports/upvote/';
+  private urlReactions = this.APIBE + 'reports/reactions/';
+  private urlStatus = this.APIBE + 'reports/status/';
+
+  idToken: string;
 
   constructor(private http: HttpClient) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/json');
+    this.idToken = localStorage.getItem("idToken");
+    this.contentHeaders = new HttpHeaders({
+      Authorization: 'Bearer ' + this.idToken
+    }).set('Content-Type', 'application/json');
   }
 
   postReport(report: Report): Observable<Report> {
