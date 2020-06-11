@@ -10,7 +10,6 @@
     </ion-toolbar>
 </ion-header>
 
-
 <ion-content class="bg" [fullscreen]="true">
 
     <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
@@ -90,8 +89,6 @@
         </ion-row>
     </ion-grid>
 
-    <!-- <ion-button (click)='ExportJson()' class="exportbutton" id="export" color="danger">Lijst Exporteren
-    </ion-button> -->
     <ion-button (click)="exportExcel()" class="exportbutton" id="export" color="danger">Lijst Exporteren
     </ion-button>
      <table id="excel-table" class="exportcss">
@@ -99,7 +96,7 @@
             <th>Datum</th>
             <th>Melder</th> 
            <th>Locatie</th>  
-           <th> Type</th> 
+           <th>Type</th>
            <th>Beschrijving</th>
            <th>Locatie beschrijving</th>   
         </tr>    
@@ -112,12 +109,6 @@
            <td>{{ml.locationDescription}}</td> 
         </tr> 
     </table>
-
-    <!-- <ion-card>
-        <ion-item>
-           <p>{{this.adalService.userInfo.profile.name}}</p>
-        </ion-item>
-    </ion-card> -->
 
     <ion-fab (click)="addMelding()" vertical="bottom" horizontal="end" slot="fixed">
         <ion-fab-button color="danger">

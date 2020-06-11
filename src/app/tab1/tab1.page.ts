@@ -19,6 +19,15 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 })
 
 export class Tab1Page implements OnInit {
+
+  constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
+              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
+              private http: HttpClient) {
+    this.melding = this.activatedRoute.snapshot.params.melding;
+    this.lijstMeldingen();
+    this.sortVal = ' ';
+    this.hideMe = {};
+  }
 //azure
  profile: any;
  graphMeEndpoint = "https://graph.microsoft.com/v1.0/me";
@@ -41,14 +50,9 @@ export class Tab1Page implements OnInit {
 
   pincolor: any;
 
-  constructor(private ms: ReportService, private employeeService: EmployeeService, private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
-              private http: HttpClient) {
-    this.melding = this.activatedRoute.snapshot.params.melding;
-    this.lijstMeldingen();
-    this.sortVal = ' ';
-    this.hideMe = {};
-  }
+
+  fileName= 'ExcelSheet.xlsx';  
+  ngOnInit() {}
 
   ionViewWillEnter() {
     this.lijstMeldingen();
@@ -173,22 +177,22 @@ export class Tab1Page implements OnInit {
 
   // Assign Defect
   onAssignClick(reportId: string) {
-    this.selectEmployeePlaceholder = "Kies technische werknemer(s)";
+    this.selectEmployeePlaceholder = 'Kies technische werknemer(s)';
     this.employeeService.getAllEmployees().subscribe(employees => {
       this.employees = employees;
-      for (let employee of this.employees) {
+      for (const employee of this.employees) {
         if (employee.assignedReportsId.includes(reportId)) {
           this.selectedEmployeeIds.push(employee.id);
-          this.selectEmployeePlaceholder = "Al toegewezen aan ";
-          this.selectEmployeePlaceholder = this.selectEmployeePlaceholder + employee.name + " ";
+          this.selectEmployeePlaceholder = 'Al toegewezen aan ';
+          this.selectEmployeePlaceholder = this.selectEmployeePlaceholder + employee.name + ' ';
         }
       }
     });
 
-    this.hideMe[reportId] = !this.hideMe[reportId]
+    this.hideMe[reportId] = !this.hideMe[reportId];
     this.disableToewijzenButton = true;
     this.isEnabled = false;
-    this.annuleerOrSluitenText = "Annuleer";
+    this.annuleerOrSluitenText = 'Annuleer';
   }
 
   onCancelOrCloseClick(reportId: string) {
@@ -223,7 +227,7 @@ export class Tab1Page implements OnInit {
     await alert.present();
   }
 
-  onAssignToChange () {
+  onAssignToChange() {
     this.disableToewijzenButton = false;
   }
 
@@ -239,36 +243,14 @@ export class Tab1Page implements OnInit {
     });
   }
 
+  exportExcel(): void {
+      const element = document.getElementById('excel-table');
+      const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+      const wb: XLSX.WorkBook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-  fileName= 'ExcelSheet.xlsx';  
-    
-  exportExcel(): void 
-      {
-          /* table id is passed over here */   
-          let element = document.getElementById('excel-table'); 
-        
-        
-            const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-  
-          /* generate workbook and add the worksheet */
-          const wb: XLSX.WorkBook = XLSX.utils.book_new();
-          XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-  
-        //  /* save to file */
-          XLSX.writeFile(wb, this.fileName);
-        
-      }
-
-  ngOnInit() {
-    // this.getProfile();
+      XLSX.writeFile(wb, this.fileName);
   }
- // azure profile
-//  getProfile() {
-//   this.http.get(this.graphMeEndpoint).toPromise()
-//     .then(profile => {
-//       this.profile = profile;
-//     });
-// }
 
   doRefresh(event) {
     this.lijstMeldingen();
@@ -279,16 +261,13 @@ export class Tab1Page implements OnInit {
 
   colorStatus(data) {
     switch (data.toString().toUpperCase()) {
-      case 'IN_UITVOERING':
       case 'IN_BEHANDELING':
         return 'yellow';
-      case 'VOLTOOID':
-      case 'GOED_GEKEURD':
+      case 'BEËINDIGD':
         return 'green';
       case 'GEANNULEERD':
-      case 'BEËINDIGD':
+      case 'WORDT_NIET_UITGEVOERD':
         return 'red';
-      case 'GEARCHIVEERD':
       case 'IN_WACHT':
         return 'orange';
       default:
