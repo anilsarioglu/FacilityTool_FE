@@ -11,12 +11,13 @@
 <ion-content class="bg">
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
+             
         <ion-item>
             <div class="locAndcatDiv">
                 <div>
                     <label>Locatie: {{ inputLoc }}</label>                    
                     <br>
-                    <ion-button text-left (click)="kiesLocatie()" expand="block" color="danger" fill="outline" required>
+                    <ion-button (click)="kiesLocatie()" expand="block" color="danger" fill="outline" required>
                         Kies Locatie
                     </ion-button>
                 </div>
