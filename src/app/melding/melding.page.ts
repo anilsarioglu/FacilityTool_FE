@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Router, ActivatedRouteSnapshot, ActivatedRoute } from '@angular/router';
-import { NavController, NavParams, ModalController, PopoverController } from '@ionic/angular';
+import { NavController, NavParams, ModalController, PopoverController, AlertController } from '@ionic/angular';
 import { FormGroup, FormControl, Validators, FormBuilder, ReactiveFormsModule, FormArray } from '@angular/forms';
 import { getLocaleMonthNames, DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -61,7 +61,7 @@ export class MeldingPage implements OnInit {
     private http: HttpClient, private navCtrl: NavController,
     private router: Router, private activatedRoute: ActivatedRoute,
     private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File,
-    private userService: UserService) {
+    private userService: UserService, private alertCtrl: AlertController) {
 
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
     this.location = this.activatedRoute.snapshot.params['locatie'];
@@ -95,7 +95,8 @@ export class MeldingPage implements OnInit {
       this.inputLoc = location_param;
     });
   }
-  uploadSubmit() {
+  
+  async uploadSubmit() {
     this.reactions.push(this.createItem({
       // id: this.be,
       name: '',
@@ -110,6 +111,7 @@ export class MeldingPage implements OnInit {
     // this.ms.postReaction("1", this.uploadForm.value).subscribe((data) => { console.log(data); });
     this.router.navigate(['/tab1']);
   }
+
   async kiesLocatie() {
     this.navCtrl.navigateForward('/locatie' + '?location=' + this.inputLoc + '?category=' + this.inputCat);
   }
@@ -117,13 +119,32 @@ export class MeldingPage implements OnInit {
     this.navCtrl.navigateForward('/category-select' + '?location=' + this.inputLoc + '?category=' + this.inputCat);
   }
   // Logging the selected date event
-  selectedDateTime($event) {
+ async selectedDateTime($event) {
     console.log($event); // --> wil contains $event.day.value, $event.month.value and $event.year.value
+    if (this.date.toISOString() > $event) {
+      const alert = await this.alertCtrl.create({
+        header: 'Datum niet correct!',
+        message: 'U kunt geen opdracht laten uitvoeren in het verleden.',
+        buttons: [
+          {
+            text: 'Ok',
+            handler: () => {
+              alert.dismiss().then(() => {  
+                  this.uploadForm.reset();    
+              });
+            }
+          }
+        ]
+      });
+  
+      await alert.present();
+    }
   }
+
 
   //Binds the date picker component with variable
   dateBind;
-
+  
   //Hide and show date picker by checking the type of report
   showDateInput($event) {
     if (this.type.value == ' Opdracht ') {
@@ -136,9 +157,11 @@ export class MeldingPage implements OnInit {
       console.log('Date should always be undefined: ' + this.dateBind);
     }
   }
+
   createItem(data): FormGroup {
     return this.fb.group(data);
   }
+
   formulier() {
     const reporter = localStorage.getItem('userName');
     this.uploadForm = this.fb.group({
