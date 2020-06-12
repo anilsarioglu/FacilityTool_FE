@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="danger">
+      <ion-buttons slot="start">
+          <ion-menu-button autoHide="false"></ion-menu-button>
+      </ion-buttons>
+      <ion-title class="header">Gebruiker beheer</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form id="form">
+    <div>
+        <p class="midden">Alle gebruikers</p>
+    </div>
+    <ion-searchbar (ionInput)="searchItems($event)"></ion-searchbar>
+    <div>
+        <ion-list *ngFor="let u of copyListOfUsers; let i = index;">
+            <ion-item>
+                <ion-label>{{u.name}}</ion-label>
+                <ion-label>{{u.role}}</ion-label>
+                <ion-button style="zoom:1.5;" color="warning" slot="end" type="button" (click)="changeRole(u)" class="btn btn-warning edit-btn">
+                    <ion-icon name="create"></ion-icon>
+                </ion-button>
+            </ion-item>
+        </ion-list>
+    </div>
+</form>
+
+</ion-content>

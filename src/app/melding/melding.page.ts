@@ -21,56 +21,27 @@ import { UserService } from '../services/user/user.service';
   templateUrl: './melding.page.html',
   styleUrls: ['./melding.page.scss'],
 })
+
 export class MeldingPage implements OnInit {
-  constructor(private popoverController: PopoverController, private barcode: BarcodeScanner, private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
-              private imageCompress: NgxImageCompressService, private modalController: ModalController,
-              private http: HttpClient, private navCtrl: NavController,
-              private router: Router, private activatedRoute: ActivatedRoute,
-              private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File,
-              private userService: UserService) {
-    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
-    this.location = this.activatedRoute.snapshot.params.locatie;
-    this.category = this.activatedRoute.snapshot.params.category;
-    this.userService.getUserDetails().subscribe(data => {
-      this.userdata = data;
-      // console.log(this.userdata);
-      // this.reporter = this.userdata["name"];
-      // console.log(this.reporter);
-      localStorage.setItem('userName', this.userdata.name);
-      localStorage.setItem('email', this.userdata.email);
-      // this.email = data["email"];
-    });
-  }
-  get reporters() { return this.uploadForm.get('reporter'); }
-  get pNumbers() { return this.uploadForm.get('pNumber'); }
-  // get datums() { return this.uploadForm.get("date") };
-  get type() { return this.uploadForm.get('type'); }
-  get reqDate() { return this.uploadForm.get('requestDate'); }
-  get locations() { return this.uploadForm.get('location'); }
-  get categories() { return this.uploadForm.get('category'); }
-  get description() { return this.uploadForm.get('description'); }
-  get locationDescription() { return this.uploadForm.get('locationDescription'); }
-  get statuss() { return this.uploadForm.get('status'); }
-  get reactions(): FormArray { return this.uploadForm.get('reactions') as FormArray; }
-  get messages() { return this.uploadForm.get('message'); }
-  get photos(): FormArray { return this.uploadForm.get('photos') as FormArray; }
+
   @ViewChild('img', { static: false }) imageEl: ElementRef;
   predictions: Prediction[];
   model: any;
   uploadForm: FormGroup;
   meldingen: Report[];
   date = new Date();
-  // reporter = '';
+
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
-  status = 'IN_BEHANDELING';
+  status = 'IN_WACHT';
   // user info
   userdata: any;
-  usernaam: any;
-  // email: String;
-  showDateSelector = false;
+  naampje : any;
+
+  showDateSelector: boolean = false;
+
   requestDate: Date;
-  location: any;
+  location: String;
   category: string;
   localUrl: any;
   localCompressedURl: any;
@@ -79,6 +50,8 @@ export class MeldingPage implements OnInit {
   imgResultBeforeCompress: string;
   imgResultAfterCompress: string;
   fileName: any;
+  // wordt niet gebruikt?? myFiles: string[] = [];
+
   myFiles: string[] = [];
   sliderOpts = {
     zoom: false,
@@ -87,25 +60,31 @@ export class MeldingPage implements OnInit {
     spaceBetween: 3
   };
   private contentHeaders: HttpHeaders;
-  inputCat = '';
-  inputLoc = '';
-  // Binds the date picker component with variable
-  dateBind;
-  public errorMessages = {
-    type: [
-      { type: 'required', message: 'Kies defect of opdracht' }
-    ],
-    locatie: [
-      { type: 'required', message: 'kies een locatie' }
-    ],
-    beschrijving: [
-      { type: 'required', message: 'Een beschrijving is noodzakelijk' },
-      { type: 'mexlength', message: 'Rustig, je moet ook geen verhaal schrijven' }
-    ],
-    locatiebeschr: [
-      { type: 'mexlength', message: 'Lengte mag niet langer dan 100 karakters bevatten' }
-    ]
-  };
+  constructor(private popoverController: PopoverController, private barcode: BarcodeScanner, private ng2ImgMax: Ng2ImgMaxService, private _decimalPipe: DecimalPipe,
+    private imageCompress: NgxImageCompressService, private modalController: ModalController,
+    private http: HttpClient, private navCtrl: NavController,
+    private router: Router, private activatedRoute: ActivatedRoute,
+    private fb: FormBuilder, private datePipe: DatePipe, private ms: ReportService, private camera: Camera, private file: File,
+    private userService: UserService) {
+
+    this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
+    this.location = this.activatedRoute.snapshot.params['locatie'];
+    this.category = this.activatedRoute.snapshot.params['category'];
+
+    this.userService.getUserDetails().subscribe(data => {
+      this.userdata = data;
+      //console.log(this.userdata); 
+
+      // this.reporter = this.userdata["name"];
+      // console.log(this.reporter);
+
+      localStorage.setItem("userName", this.userdata["name"])
+      localStorage.setItem("email", this.userdata["email"])
+    });
+
+  }
+
+
   popup() {
     for (let i = 0; i < this.predictions.length; i++) {
       alert(this.predictions[i].className + '-' + this.predictions[i].probability);
@@ -116,6 +95,10 @@ export class MeldingPage implements OnInit {
     this.model = await mobilenet.load();
     this.setValue();
   }
+
+  inputCat: string = '';
+  inputLoc: string = '';
+
   setValue() {
     this.activatedRoute.queryParams.subscribe(params => {
       const category_param = params.category;
@@ -153,7 +136,11 @@ export class MeldingPage implements OnInit {
   selectedDateTime($event) {
     console.log($event); // --> wil contains $event.day.value, $event.month.value and $event.year.value
   }
-  // Hide and show date picker by checking the type of report
+
+  //Binds the date picker component with variable
+  dateBind;
+
+  //Hide and show date picker by checking the type of report
   showDateInput($event) {
     // console.log($event);
     if (this.type.value == ' Opdracht ') {
@@ -188,6 +175,21 @@ export class MeldingPage implements OnInit {
       photos: this.fb.array([])
     });
   }
+
+  get reporters() { return this.uploadForm.get("reporter") };
+  get pNumbers() { return this.uploadForm.get("pNumber") };
+  // get datums() { return this.uploadForm.get("date") };
+  get type() { return this.uploadForm.get("type") };
+  get reqDate() { return this.uploadForm.get("requestDate") };
+  get locations() { return this.uploadForm.get("location") };
+  get categories() { return this.uploadForm.get("category") }
+  get description() { return this.uploadForm.get("description") };
+  get locationDescription() { return this.uploadForm.get("locationDescription") };
+  get statuss() { return this.uploadForm.get("status") };
+  get reactions(): FormArray { return this.uploadForm.get('reactions') as FormArray; }
+  get messages() { return this.uploadForm.get("message") };
+  get photos(): FormArray { return this.uploadForm.get('photos') as FormArray; };
+
   removePhoto(i) {
     this.photos.removeAt(i);
   }
@@ -195,7 +197,7 @@ export class MeldingPage implements OnInit {
     this.modalController.create({
       component: ImageModalPage,
       componentProps: {
-        img
+        img: img
       }
     }).then(modal => modal.present());
   }
@@ -248,6 +250,25 @@ export class MeldingPage implements OnInit {
       reader.readAsDataURL(file);
     }
   }
+
+
+  public errorMessages = {
+    type: [
+      { type: 'required', message: 'Kies defect of opdracht' }
+    ],
+    locatie: [
+      { type: 'required', message: 'kies een locatie' }
+    ],
+    beschrijving: [
+      { type: 'required', message: 'Een beschrijving is noodzakelijk' },
+      { type: 'mexlength', message: 'Rustig, je moet ook geen verhaal schrijven' }
+    ],
+    locatiebeschr: [
+      { type: 'mexlength', message: 'Lengte mag niet langer dan 100 karakters bevatten' }
+    ]
+  };
+
+
   getImage(sourceType: number) {
     const options: CameraOptions = {
       quality: 100,
@@ -256,7 +277,7 @@ export class MeldingPage implements OnInit {
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
       correctOrientation: true,
-      sourceType,
+      sourceType: sourceType,
       saveToPhotoAlbum: false,
       allowEdit: false
     };

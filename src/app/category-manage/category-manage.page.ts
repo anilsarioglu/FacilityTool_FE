@@ -40,7 +40,8 @@ export class CategoryManagePage implements OnInit {
     this.kopieLijstVanCategories = this.categoryList;
     if (val.trim() !== '') {
       this.kopieLijstVanCategories = this.categoryList.filter((item) => {
-        return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+        return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+              (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
   }
@@ -61,7 +62,6 @@ export class CategoryManagePage implements OnInit {
 
   uploadSubmit() {
     this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
-      console.log(data);
       this.kopieLijstVanCategories.splice(this.kopieLijstVanCategories.length, 0, data);
     });
     this.categoryForm.reset();
@@ -69,7 +69,8 @@ export class CategoryManagePage implements OnInit {
 
   deleteCategory(i: number, cat: Category) {
     this.cs.deleteCategory(cat.name).subscribe();
-    this.kopieLijstVanCategories.splice(i, 1);
+    this.categoryList = this.categories;
     this.categories.splice(this.categories.indexOf(cat), 1);
+    this.kopieLijstVanCategories = this.categoryList;
   }
 }

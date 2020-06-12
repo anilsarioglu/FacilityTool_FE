@@ -7,9 +7,9 @@ import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
 import { Employee } from '../models/Employee';
 import { EmployeeService } from '../services/employee/employee.service';
-//xlxs
+// xlxs
 import * as XLSX from 'xlsx';
-//azure
+// azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user/user.service';
 
@@ -20,32 +20,28 @@ import { UserService } from '../services/user/user.service';
 })
 
 export class Tab1Page implements OnInit {
-
   // user info
   userdata: any;
   usernaam: String;
-
-
-
   melding: any;
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
   actieveLijstVanMeldingen: any = [];
-  sortVal: string = "locatie";
+  sortVal: string = 'locatie';
   toggle: boolean;
   segment: string;
   // Assign Defect
-  selectEmployeePlaceholder: string = "Kies technische werknemer(s)";
+  selectEmployeePlaceholder: string = 'Kies technische werknemer(s)';
   disableToewijzenButton: boolean = false;
   hideMe = {};
   employees: Employee[];
   selectedEmployeeIds: string[] = [];
   reportIndex: number[] = [];
-  isEnabled:boolean = true;
-  annuleerOrSluitenText: string = "Annuleer";
-
+  isEnabled: boolean = true;
+  annuleerOrSluitenText: string = 'Annuleer';
   pincolor: any;
-
+  fileName = 'ExcelSheet.xlsx';
+  
   constructor(private ms: ReportService, private employeeService: EmployeeService, private userService: UserService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
               private http: HttpClient) {
@@ -57,13 +53,13 @@ export class Tab1Page implements OnInit {
       this.userdata = data;
       console.log(this.userdata);
 
-      this.usernaam = data["name"];
+      this.usernaam = data['name'];
     });
   }
+  ngOnInit() {}
 
   lijstMeldingen() {
     this.ms.getAllReports().subscribe(data => {
-      console.log(data);
       this.meldingLijst = data;
       this.activeList();
     });
@@ -71,11 +67,11 @@ export class Tab1Page implements OnInit {
 
   ionViewWillEnter() {
     this.lijstMeldingen();
-    this.segment = "defect";
-    this.sortVal = "prioriteit"
+    this.segment = 'defect';
+    this.sortVal = 'prioriteit';
   }
 
-  segmentChanged(event: any){
+  segmentChanged(event: any) {
     this.activeList();
   }
 
@@ -89,7 +85,7 @@ export class Tab1Page implements OnInit {
             (item.reporter.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.date.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.location.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.pNumber.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            // (item.pNumber.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.status.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             // (item.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
@@ -112,27 +108,11 @@ export class Tab1Page implements OnInit {
       if (this.sortVal === 'datum') {
         // @ts-ignore
           return new Date(n1.date) as any - new Date(n2.date) as any;
-      } else if (this.sortVal === 'type') {
-        if (n1.type > n2.type) {
-          return 1;
-        }
-        if (n1.type < n2.type) {
-          return -1;
-        }
-        return 0;
       } else if (this.sortVal === 'prioriteit') {
         if (n1.numberUpvotes < n2.numberUpvotes) {
           return 1;
         }
         if (n1.numberUpvotes > n2.numberUpvotes) {
-          return -1;
-        }
-        return 0;
-      } else if (this.sortVal === 'locatie') {
-        if (n1.location > n2.location) {
-          return 1;
-        }
-        if (n1.location < n2.location) {
           return -1;
         }
         return 0;
@@ -149,13 +129,10 @@ export class Tab1Page implements OnInit {
   }
 
   async addMelding() {
-    console.log('addMelding');
     this.navCtrl.navigateForward('/melding');
   }
 
   detailMelding(data) {
-    console.log('geklikt');
-    // this.router.navigate(['/detail-melding'], data);
     this.router.navigate(['/detail-melding'], {
       queryParams: {
         value: JSON.stringify(data)
@@ -164,9 +141,7 @@ export class Tab1Page implements OnInit {
   }
 
   async deleteMelding(i, e, ml) {
-    console.log(e);
     const event = e.currentTarget.innerText;
-
     const alert = await this.alertCtrl.create({
       header: 'Weet u zeker dat u deze melding wil verwijderen?',
       message: '' + event.toLowerCase(),
@@ -176,7 +151,7 @@ export class Tab1Page implements OnInit {
           handler: () => {
             alert.dismiss().then(() => {
               this.ms.deleteReportById(ml.id).subscribe();
-              this.kopieLijstVanMeldingen.splice(i, 1);
+              this.activeList();
             });
             this.meldingLijst.splice(this.meldingLijst.indexOf(ml), 1);
             this.actieveLijstVanMeldingen.splice(this.actieveLijstVanMeldingen.indexOf(ml), 1);
@@ -191,7 +166,7 @@ export class Tab1Page implements OnInit {
   }
 
   // Assign Defect
-  onAssignClick(reportId: string) {
+  onAssignClick(reportId: string, i: number) {
     this.selectEmployeePlaceholder = 'Kies technische werknemer(s)';
     this.employeeService.getAllEmployees().subscribe(employees => {
       this.employees = employees;
@@ -203,8 +178,7 @@ export class Tab1Page implements OnInit {
         }
       }
     });
-
-    this.hideMe[reportId] = !this.hideMe[reportId]
+    this.hideMe[reportId] = !this.hideMe[reportId];
     this.disableToewijzenButton = true;
     this.isEnabled = false;
     this.annuleerOrSluitenText = 'Annuleer';
@@ -227,13 +201,12 @@ export class Tab1Page implements OnInit {
         }, {
           text: 'Bevestig',
           handler: () => {
-            console.log(this.selectedEmployeeIds);
-            for (let employeeId of this.selectedEmployeeIds) {
+            for (const employeeId of this.selectedEmployeeIds) {
               this.employeeService.postReportIdToEmployee(employeeId, reportId).subscribe(reportId => {
                 console.log(reportId);
               });
-            this.disableToewijzenButton = true;
-            this.annuleerOrSluitenText = "Sluiten";
+              this.disableToewijzenButton = true;
+              this.annuleerOrSluitenText = 'Sluiten';
           }
           }
         }
@@ -249,37 +222,22 @@ export class Tab1Page implements OnInit {
   // Upvoting
   onIconClick(melding: Report, index: number) {
     this.melding = melding;
-    console.log('Cliked on item ' + index);
-
     this.ms.putUpvoteReport(this.melding.id).subscribe((updatedMelding) => {
       this.meldingLijst[index] = updatedMelding;
       this.lijstMeldingen();
-      console.log(updatedMelding);
     });
   }
 
+  exportExcel(): void {
+          const element = document.getElementById('excel-table');
+          const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
-  fileName = 'ExcelSheet.xlsx';
-
-  exportExcel(): void
-      {
-          /* table id is passed over here */
-          let element = document.getElementById('excel-table');
-
-
-            const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
-
-          /* generate workbook and add the worksheet */
+          // toevoegen aan worksheet
           const wb: XLSX.WorkBook = XLSX.utils.book_new();
           XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-        //  /* save to file */
+          // bestand opslaan
           XLSX.writeFile(wb, this.fileName);
-
-      }
-
-  ngOnInit() {
-
   }
 
   doRefresh(event) {

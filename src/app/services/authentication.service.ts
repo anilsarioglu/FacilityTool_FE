@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-//import { IonicAuth, IonicAuthOptions } from '@ionic-enterprise/auth';
-import { Platform } from '@ionic/angular';
-import { Router } from '@angular/router';
+
+
 
 
 
@@ -9,19 +8,21 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private router: Router;
 
-  constructor(platform: Platform, router: Router) {
+  // routeId: any; 
+  // idToken: String; 
+  // decoded: any; 
+  constructor() {}
 
-    this.router = router;
-  }
 
-  async onLoginSuccess() {
-    this.router.navigate(['/tab1'])
-  }
+  // Authenticated(){
+  //   this.routeId = location.pathname; 
+  //   this.idToken = localStorage.getItem('idToken');
+  //   if(this.idToken != null)
+  //   {
+  //  this.decoded = jwt_decode(this.idToken)
+  //   }
+  
+  // }
 
-  onLogout() {
-    // this.router.navigate(['app/login']);
-    this.router.navigate(['/login']);
-  }
 }

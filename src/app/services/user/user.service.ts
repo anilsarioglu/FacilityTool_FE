@@ -16,6 +16,9 @@ export class UserService {
 
   private APIBE = 'http://localhost:8080/api/';
   private urlUser = this.APIBE + 'user/me';
+  private urlUsers = this.APIBE + 'users';
+  private urlChangeRole = this.APIBE + 'role/'
+  // private urlResetRole = this.APIBE + 'role-delete/'
 
   idToken: string;
 
@@ -30,4 +33,15 @@ export class UserService {
     return this.http.get<User>(this.urlUser, { headers: this.contentHeaders });
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.urlUsers, { headers: this.contentHeaders });
+  }
+
+  putUser(id: string, user: User): Observable<User> {
+    return this.http.put<User>(this.urlChangeRole + id, user, { headers: this.contentHeaders });
+  }
+
+  // resetUserRole(id: string): Observable<User> {
+  //   return this.http.put<User>(this.urlResetRole + id, { headers: this.contentHeaders });
+  // }
 }
