@@ -49,6 +49,9 @@ export class DetailMeldingPage implements OnInit {
   ishidden: boolean = false;
   newState: any;
 
+  searchValue: string = null;
+  avater = "https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png"
+
   sliderOpts = {
     zoom: false,
     slidesPerView: 6,
@@ -57,41 +60,45 @@ export class DetailMeldingPage implements OnInit {
   };
 
   constructor(private userservice: UserService, private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private rs: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
+    this.avater = "https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png"
+
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
-      console.log(this.meldingData);
+      // console.log(this.meldingData);
       this.rs.getReportById(this.meldingData.id).subscribe((data) => {
         this.meldingDB = data;
-        // console.log(data);
+        console.log(this.meldingDB);
       });
 
       this.userservice.getUserDetails().subscribe(data => {
+        console.log(data);
+
         this.userdata = data;
-        console.log(this.userdata);
+        // console.log(this.userdata);
 
         console.log(this.naam);
 
-
         this.naam = data["name"];
         this.email = data["email"];
-        localStorage.setItem("userName", this.userdata["name"])
+        localStorage.setItem("userName", data["name"])
       });
       this.newState = ' ';
     });
 
   }
 
+  doRefresh(event) {
+    this.rs.getReportById(this.meldingData.id);
+    setTimeout(() => {
+      event.target.complete();
+    }, 100);
+  }
 
 
   sendMessage(message) {
-    // this.stompClient.send('/app/send/message', {}, message);
-    // $('#input').val('');
-    // this.message = message;
+    this.searchValue = '';
     console.log(this.uploadForm.value);
-
-    // this.items.push(this.uploadForm.value);
-    // this.storage.set('reaction', this.items);
-    // this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
+    this.rs.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
   }
 
   ngOnInit() {
@@ -104,7 +111,7 @@ export class DetailMeldingPage implements OnInit {
       messageId: this.meldingData.id,
       name: naam,
       message: this.message,
-      datum: this.date
+      date: this.date
     });
   }
 

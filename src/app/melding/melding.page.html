@@ -11,7 +11,7 @@
 <ion-content class="bg">
 
     <form [formGroup]="uploadForm" (ngSubmit)="uploadSubmit()" id="form">
-             
+
         <ion-item>
             <div class="locAndcatDiv">
                 <div>
@@ -54,7 +54,7 @@
                 </ion-select>
             </ion-item>
         </div>
-        <div *ngIf="showDateSelector" >
+        <div *ngIf="showDateSelector">
             <ion-item>
                 <ion-label>Datum uit te voeren: </ion-label>
                 <ion-datetime #dateSelector displayFormat="D MMM YYYY H:mm" min="2020" max="2100" (ionChange)="selectedDateTime(dateSelector.value)" formControlName="requestDate" [(value)]="dateBind"></ion-datetime>
@@ -120,8 +120,6 @@
                 </ion-input>
             </div>
 
-            <!-- 
-            vertical="bottom" horizontal="end" -->
             <ion-fab id="imgMobile" horizontal="end">
                 <ion-fab-button class="fabke" color="danger">Foto</ion-fab-button>
 
@@ -138,7 +136,8 @@
                 </ion-fab-list>
             </ion-fab>
         </div>
-        <ion-button [disabled]="!uploadForm.valid" class="footerBtn" color="danger" expand="full" type="submit">Rapporteren</ion-button>
+        <ion-button [disabled]="!uploadForm.valid" class="footerBtn" color="danger" expand="full" type="submit">
+            Rapporteren</ion-button>
 
     </form>
 </ion-content>
