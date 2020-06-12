@@ -23,19 +23,11 @@ export class LocatiePage implements OnInit {
 
 
   constructor(private storage: Storage,private navCtrl: NavController, private router: Router,
-    private http: HttpClient, private ls: LocationService, private alertCtrl: AlertController, private ms: ReportService, private activatedRoute: ActivatedRoute) { }
+    private http: HttpClient, private locationService: LocationService, private alertCtrl: AlertController, private reportService: ReportService, private activatedRoute: ActivatedRoute) { }
 
 
   ngOnInit() {
-    /*
-    this.storage.get("location").then(data => {
-      if (this.locaties || this.locaties.length == data.length) {
-        this.locaties = data;
-        // console.log(data.length);
-      }
-    })
-    */
-    this.ls.getAllLocations().subscribe(data => {
+    this.locationService.getAllLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
       this.setValue();
@@ -102,7 +94,7 @@ export class LocatiePage implements OnInit {
         {
           text: 'reeds gemelde defecten',
           handler: () => {
-            this.ms.getReportsByLocation(event).subscribe(async data => {
+            this.reportService.getReportsByLocation(event).subscribe(async data => {
               if (data.length >= 1) {
                 alert.dismiss().then(() => { this.router.navigate(['/locatie-melding' + '/' + event]); });
                 return ;

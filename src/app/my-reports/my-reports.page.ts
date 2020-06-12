@@ -14,12 +14,11 @@ import {Location} from '../models/Location';
   templateUrl: './my-reports.page.html',
   styleUrls: ['./my-reports.page.scss'],
 })
-export class MyReportsPage implements OnInit {
+export class MyReportsPage {
 
   report: Report;
   reportList: Report[] = [];
   username: string;
-  userdata: any;
   activeReport: Report;
   ishidden = true;
   reportState: string = '';
@@ -34,32 +33,41 @@ export class MyReportsPage implements OnInit {
   locatieLijst: any[];
 
   constructor(private reportService: ReportService,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
-              private ls: LocationService, private http: HttpClient) {
+              private router: Router, private activatedRoute: ActivatedRoute,
+              private locationService: LocationService) {
     this.username = localStorage.getItem('userName');
     this.report = this.activatedRoute.snapshot.params.melding;
     this.listsInit();
   }
-  ngOnInit() {
-  }
+ 
+  //Vul lijst met alle rapporteringen van de active user. 
   private listsInit() {
     this.reportService.getAllReports().subscribe(data => {
       this.reportList = data;
 
       this.reportList = this.reportList.filter((item) => {
-        // tslint:disable-next-line:triple-equals
         return (item.reporter == this.username &&
           item.status.toString() !== 'GEANNULEERD');
       });
 
     });
 
-    this.ls.getAllLocations().subscribe(data => {
+    this.locationService.getAllLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
     });
   }
 
+   //De gebruiker wordt genavigeerd naar de detail pagina van de melding. 
+   detailReport(data) {
+    this.router.navigate(['/detail-melding'], {
+      queryParams: {
+        value: JSON.stringify(data)
+      },
+    });
+  }
+
+  //De rapportering wordt geannuleerd en in het archive geplaats. 
   cancelAndArchive(rep, i) {
     this.reportService.putStatusReport(rep.id, 'GEANNULEERD').subscribe((report) => {
       rep.status = 'GEANNULEERD';
@@ -79,6 +87,7 @@ export class MyReportsPage implements OnInit {
     this.ishidden = false;
   }
 
+  //De gewijzigde rapportering wordt naar de DB gestuurd. 
   uploadSubmit() {
     this.activeReport.type = this.reportType;
     this.activeReport.description = this.reportDescr;
