@@ -80,7 +80,7 @@ export class MyReportsPage implements OnInit {
     this.activeReport = rep;
     this.reportDate = rep.date;
     this.reportType = rep.type;
-    this.reporterName = rep.reporter + ' - ' + rep.pNumber;
+    this.reporterName = rep.reporter;
     this.reportState = rep.status;
     this.reportDescr = rep.description;
     this.reportLocDesc = rep.locationDescription;

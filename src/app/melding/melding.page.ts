@@ -34,9 +34,6 @@ export class MeldingPage implements OnInit {
   meldingData = ['Defect', 'Opdracht'];
   // status = 'In behandeling';
   status = 'IN_WACHT';
-  // user info
-  userdata: any;
-  naampje : any;
 
   showDateSelector: boolean = false;
 
@@ -50,7 +47,6 @@ export class MeldingPage implements OnInit {
   imgResultBeforeCompress: string;
   imgResultAfterCompress: string;
   fileName: any;
-  // wordt niet gebruikt?? myFiles: string[] = [];
 
   myFiles: string[] = [];
   sliderOpts = {
@@ -70,18 +66,6 @@ export class MeldingPage implements OnInit {
     this.contentHeaders = new HttpHeaders().set('Content-Type', 'application/*');
     this.location = this.activatedRoute.snapshot.params['locatie'];
     this.category = this.activatedRoute.snapshot.params['category'];
-
-    this.userService.getUserDetails().subscribe(data => {
-      this.userdata = data;
-      //console.log(this.userdata); 
-
-      // this.reporter = this.userdata["name"];
-      // console.log(this.reporter);
-
-      localStorage.setItem("userName", this.userdata["name"])
-      localStorage.setItem("email", this.userdata["email"])
-    });
-
   }
 
 
@@ -142,7 +126,6 @@ export class MeldingPage implements OnInit {
 
   //Hide and show date picker by checking the type of report
   showDateInput($event) {
-    // console.log($event);
     if (this.type.value == ' Opdracht ') {
       this.showDateSelector = true;
       this.dateBind = this.date.toISOString();
@@ -160,7 +143,6 @@ export class MeldingPage implements OnInit {
     const reporter = localStorage.getItem('userName');
     this.uploadForm = this.fb.group({
       reporter: [reporter],
-      // email: [this.email],
       // datum: [this.datePipe.transform(this.datum, 'dd-MM-yy')],
       date: [this.date],
       type: ['', [Validators.required]],

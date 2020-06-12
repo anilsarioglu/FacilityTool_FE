@@ -105,7 +105,7 @@ export class LocatiePage implements OnInit {
             this.ms.getReportsByLocation(event).subscribe(async data => {
               if (data.length >= 1) {
                 alert.dismiss().then(() => { this.router.navigate(['/locatie-melding' + '/' + event]); });
-                return false;
+                return ;
               } else {
                 const alert2 = await this.alertCtrl.create({
                   header: "Geen defecten.",
