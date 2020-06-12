@@ -35,7 +35,7 @@
             </ion-item>
         </ion-list>
         <ion-row>
-            <ion-label id="emptyText" *ngIf="kopieLijstVanMeldingen[0] === null">Geen rapporteringen.</ion-label>
+            <ion-label id="emptyText" *ngIf="!kopieLijstVanMeldingen[0]">Geen rapporteringen.</ion-label>
             <ion-col *ngFor="let ml of kopieLijstVanMeldingen;let i = index;" size="12">
                 <ion-card>
                     <ion-item>
