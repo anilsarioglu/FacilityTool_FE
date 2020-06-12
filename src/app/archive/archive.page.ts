@@ -15,40 +15,34 @@ export class ArchivePage {
   isMobile: boolean = false;
   imgSrcs: string[] = [];
   sortVal: string = "datum";
-
   rows: Report[] = [];
   temp: Report[] = [];
-
   @ViewChild(DatatableComponent, {static: false}) table: DatatableComponent;
   colMode = ColumnMode;
+  fileName = 'Archive.xlsx';
 
   constructor(private archiveService: ArchiveService, private router: Router, private platform: Platform) {
-    this.checkIfMobile()
+    this.checkIfMobile();
     this.archiveService.getAllDefects().subscribe(defects => {
        // cache our list
        this.temp = [...defects];
        // push our inital complete list
        this.rows = defects;
        this.fillDefectPhotoURL();
-    })
+    });
    }
 
    checkIfMobile() {
-    // DOESN'T WORK ON GOOGLE CHROME EMULATOR
+     // DOESN'T WORK ON GOOGLE CHROME EMULATOR
 
-    // if (this.platform.is("desktop")) {
-    //   this.isMobile = false;
-    // } else {
-    //   this.isMobile = true;
-    // }
+     // if (this.platform.is("desktop")) {
+     //   this.isMobile = false;
+     // } else {
+     //   this.isMobile = true;
+     // }
 
-    // FOR DEMO PURPOSES ONLY
-      if (this.platform.is("ios")) {
-        this.isMobile = true;
-      } else {
-        this.isMobile = false;
-      }
-
+     // FOR DEMO PURPOSES ONLY
+     this.isMobile = this.platform.is('ios');
    }
 
    fillDefectPhotoURL() {
@@ -56,7 +50,7 @@ export class ArchivePage {
        if (this.rows[i].photos.length > 0) {
          this.imgSrcs[i] = this.rows[i].photos[0].url;
        } else {
-         this.imgSrcs[i] = "../../assets/imgs/Defect.png";
+         this.imgSrcs[i] = '../../assets/imgs/Defect.png';
        }
      }
    }
@@ -93,22 +87,6 @@ export class ArchivePage {
       if (this.sortVal === 'datum') {
         // @ts-ignore
           return new Date(n1.date) as any - new Date(n2.date) as any;
-      } else if (this.sortVal === 'locatie') {
-        if (n1.location > n2.location) {
-          return 1;
-        }
-        if (n1.location < n2.location) {
-          return -1;
-        }
-        return 0;
-      } else if (this.sortVal === 'status') {
-        if (n1.status > n2.status) {
-          return 1;
-        }
-        if (n1.status < n2.status) {
-          return -1;
-        }
-        return 0;
       } else if (this.sortVal === 'melder') {
         if (n1.reporter > n2.reporter) {
           return 1;
@@ -120,18 +98,15 @@ export class ArchivePage {
       }
     });
   }
-
-  fileName = 'Archive.xlsx';    
   exportExcel(): void {
-    /* table id is passed over here */   
-    const element: HTMLElement = document.getElementById('excel-table'); 
+    const element: HTMLElement = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
-    /* generate workbook and add the worksheet */
+    // toevoegen aan worksheets
     const wb: XLSX.WorkBook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-    /* save to file */
-    XLSX.writeFile(wb, this.fileName);  
+    // bestand opslaan
+    XLSX.writeFile(wb, this.fileName);
   }
 }

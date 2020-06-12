@@ -97,7 +97,7 @@ export class Tab1Page implements OnInit {
   activeList() {
     this.actieveLijstVanMeldingen = this.meldingLijst;
     this.actieveLijstVanMeldingen = this.meldingLijst.filter((item) => {
-      return (item.type === null || item.type.toString().trim().toLowerCase() == this.segment);
+      return (item.type === null || item.type.toString().trim().toLowerCase() === this.segment);
     });
     this.kopieLijstVanMeldingen = this.actieveLijstVanMeldingen;
     this.sortAll();
@@ -229,15 +229,15 @@ export class Tab1Page implements OnInit {
   }
 
   exportExcel(): void {
-          const element = document.getElementById('excel-table');
-          const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    const element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
 
-          // toevoegen aan worksheet
-          const wb: XLSX.WorkBook = XLSX.utils.book_new();
-          XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+     // toevoegen aan worksheet
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
 
-          // bestand opslaan
-          XLSX.writeFile(wb, this.fileName);
+    // bestand opslaan
+    XLSX.writeFile(wb, this.fileName);
   }
 
   doRefresh(event) {
@@ -250,12 +250,7 @@ export class Tab1Page implements OnInit {
   colorStatus(data) {
     switch (data.toString().toUpperCase()) {
       case 'IN_BEHANDELING':
-        return 'yellow';
-      case 'BEËINDIGD':
         return 'green';
-      case 'GEANNULEERD':
-      case 'WORDT_NIET_UITGEVOERD':
-        return 'red';
       case 'IN_WACHT':
         return 'orange';
       default:

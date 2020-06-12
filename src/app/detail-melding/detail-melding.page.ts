@@ -122,7 +122,6 @@ export class DetailMeldingPage implements OnInit {
 
   changeState() {
     this.rs.putStatusReport(this.meldingData.id, this.newState).subscribe((report) => {
-      console.log(report);
       this.meldingData.status = this.newState;
     });
     this.ishidden = !this.ishidden;

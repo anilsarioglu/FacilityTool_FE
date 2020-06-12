@@ -19,33 +19,33 @@ export class MyReportsPage implements OnInit {
 
   report: Report;
   reportList: Report[] = [];
-  //reporterId: string;
-  username: any; 
-  userdata: any; 
+  // reporterId: string;
+  username: any;
+  userdata: any;
   activeReport: Report;
   ishidden = true;
-  reportState: string = '';
-  reportType: string = '';
-  reportDescr: string = '';
-  reportLocDesc: string = '';
-  reporterName: string = '';
-  reportDate: string = '';
+  reportState = '';
+  reportType = '';
+  reportDescr = '';
+  reportLocDesc = '';
+  reporterName = '';
+  reportDate = '';
   reportLocatie: any;
 
   locaties: Location[];
   locatieLijst: any[];
 
-  constructor(private reportService: ReportService, private employeeService: EmployeeService, private userService: UserService ,private alertCtrl: AlertController,
+  constructor(private reportService: ReportService, private employeeService: EmployeeService, private userService: UserService , private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
               private ls: LocationService, private http: HttpClient) {
-    //this.reporterId = 'P103906';
+    // this.reporterId = 'P103906';
     this.userService.getUserDetails().subscribe(data => {
       this.userdata = data;
-      this.username = localStorage.getItem("userName");
+      this.username = localStorage.getItem('userName');
       // localStorage.setItem("userName", this.userdata["name"]);
-      
+
     });
-    
+
     this.report = this.activatedRoute.snapshot.params.melding;
     this.listsInit();
   }
@@ -56,12 +56,13 @@ export class MyReportsPage implements OnInit {
       this.reportList = data;
 
       this.reportList = this.reportList.filter((item) => {
+        // tslint:disable-next-line:triple-equals
         return (item.reporter == this.username &&
           item.status.toString() !== 'GEANNULEERD');
       });
-     
+
     });
-   
+
     this.ls.getAllLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
