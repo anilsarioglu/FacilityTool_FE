@@ -14,9 +14,7 @@ export class ExternalFirmPage implements OnInit {
   externalFirmList: any = [];
   uploadForm: FormGroup;
 
-
-
-  constructor(private efs: ExFirmService, private alertCtrl: AlertController, private router: Router, private fb: FormBuilder) {
+  constructor(private exFirmService: ExFirmService, private alertCtrl: AlertController, private router: Router, private fb: FormBuilder) {
     this.listExternalFirms();
   }
 
@@ -47,10 +45,8 @@ export class ExternalFirmPage implements OnInit {
   }
 
   uploadSubmit() {
-    // console.log(this.uploadForm.value);
 
-    this.efs.postExternalFirm(this.uploadForm.value).subscribe((data) => {
-      console.log(data);
+    this.exFirmService.postExternalFirm(this.uploadForm.value).subscribe((data) => {
       this.externalFirmList.splice(this.externalFirmList.length, 0, data);
     });
     this.uploadForm.reset();
@@ -69,7 +65,6 @@ export class ExternalFirmPage implements OnInit {
     });
   }
 
-
   doRefresh(event) {
     this.listExternalFirms();
     setTimeout(() => {
@@ -79,14 +74,12 @@ export class ExternalFirmPage implements OnInit {
 
 
   listExternalFirms() {
-    this.efs.getAllExternalFirms().subscribe(data => {
-      console.log(data);
+    this.exFirmService.getAllExternalFirms().subscribe(data => {
       this.externalFirmList = data;
     });
   }
 
   async deleteExternalFirm(i, e, id) {
-    console.log(e);
     const event = e.currentTarget.innerText;
 
     const alert = await this.alertCtrl.create({
@@ -97,7 +90,7 @@ export class ExternalFirmPage implements OnInit {
           text: 'Ja',
           handler: () => {
             alert.dismiss().then(() => {
-              this.efs.deleteExternalFirmById(id).subscribe();
+              this.exFirmService.deleteExternalFirmById(id).subscribe();
               this.externalFirmList.splice(i, 1);
             });
             return false;
@@ -109,17 +102,12 @@ export class ExternalFirmPage implements OnInit {
     await alert.present();
   }
 
-
   changeExternalFirm(data) {
-    console.log('geklikt');
     this.router.navigate(['/detail-ex-firm'], {
       queryParams: {
         value: JSON.stringify(data)
       },
     });
   }
-
-
-
 
 }

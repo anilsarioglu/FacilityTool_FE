@@ -27,7 +27,7 @@ export class CategoryManagePage implements OnInit {
 
   ngOnInit() {
     this.formulier();
-    this.cs.getAllCategories().subscribe(data => {
+    this.cs.getAllLocalCategories().subscribe(data => {
       this.categories = data;
       this.categoryList = this.categories;
       this.kopieLijstVanCategories = this.categoryList;
@@ -41,7 +41,7 @@ export class CategoryManagePage implements OnInit {
     if (val.trim() !== '') {
       this.kopieLijstVanCategories = this.categoryList.filter((item) => {
         return (item.name.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-              (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
+          (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
     }
   }
