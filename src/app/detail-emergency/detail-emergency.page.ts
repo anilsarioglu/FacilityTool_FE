@@ -40,17 +40,17 @@ export class DetailEmergencyPage implements OnInit {
 
 
   formulier() {
-    let numberPattern = "(^[i][n][t][.] [0-9]{5}$)|^([0][23] [0-9]{3} [0-9]{2} [0-9]{2}$)|(^[+][32]{2} [3]{1} [0-9]{3} [0-9]{2} [0-9]{2}$)|(^[0-9]{4} [0-9]{2} [0-9]{2} [0-9]{2}$)|(^[+][32]{2} [0-9]{3} [0-9]{2} [0-9]{2} [0-9]{2}$)";
-    let mailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+    let numberPattern = "^[+()int.0-9_ ]*$";
+    let mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
     this.uploadForm = this.fb.group({
       id: [this.emergencyData["id"]],
       emergencyContactsType: [this.emergencyData["emergencyContactsType"]],
       employeeType: [this.emergencyData["employeeType"]],
       employeeName: [this.emergencyData["employeeName"]],
-      phoneNumber: [this.emergencyData["phoneNumber"], [Validators.required, Validators.pattern(numberPattern)]],
+      phoneNumber: [this.emergencyData["phoneNumber"], [Validators.pattern(numberPattern)]],
       mobileNumber: [this.emergencyData["mobileNumber"], [Validators.required, Validators.pattern(numberPattern)]],
       mail: [this.emergencyData["mail"], [Validators.required, Validators.pattern(mailPattern)]],
-      mail2: [this.emergencyData["mail2"], [Validators.required, Validators.pattern(mailPattern)]],
+      mail2: [this.emergencyData["mail2"], [Validators.pattern(mailPattern)]],
     });
   }
 

@@ -39,16 +39,16 @@ export class DetailExFirmPage implements OnInit {
 
 
   formulier() {
-    let mailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+    let mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
     let number = "^[+()int.0-9_ ]*$";
     let name = "^[a-zA-Z_ ]*$";
     this.uploadForm = this.fb.group({
       id: [this.externalFirmData["id"]],
-      contactPerson: ['', [Validators.required, Validators.pattern(name)]],
-      mail: ['', [Validators.required, Validators.pattern(mailPattern)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(number)]],
-      mobileNumber: ['', [Validators.required, Validators.pattern(number)]],
-      companyName: ['', [Validators.required, Validators.pattern(name)]]
+      contactPerson: [this.externalFirmData["contactPerson"], [Validators.required, Validators.pattern(name)]],
+      mail: [this.externalFirmData["mail"], [Validators.required, Validators.pattern(mailPattern)]],
+      phoneNumber: [this.externalFirmData["phoneNumber"], [ Validators.pattern(number)]],
+      mobileNumber: [this.externalFirmData["mobileNumber"], [Validators.required, Validators.pattern(number)]],
+      companyName: [this.externalFirmData["companyName"], [Validators.required, Validators.pattern(name)]]
     });
   }
 
