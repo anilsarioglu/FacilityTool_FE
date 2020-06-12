@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ReportService} from '../services/report/report.service';
-import {AlertController, NavController} from '@ionic/angular';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import { ReportService } from '../services/report/report.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Report } from '../models/Report';
-import {FormGroup, Validators} from '@angular/forms';
-import {LocationService} from '../services/location/location.service';
-import {Location} from '../models/Location';
+import { LocationService } from '../services/location/location.service';
+import { Location } from '../models/Location';
 
 
 @Component({
@@ -52,7 +49,7 @@ export class MyReportsPage {
 
     });
 
-    this.locationService.getAllLocations().subscribe(data => {
+    this.locationService.getAllLocalLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
     });

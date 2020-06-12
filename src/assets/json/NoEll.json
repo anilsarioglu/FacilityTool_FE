@@ -1,0 +1,2319 @@
+  [{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Hoofdingang"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Inkomhal"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Lift"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Binnentuin"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.01",
+  		"name": "Onthaal - studentenadministratie"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.02",
+  		"name": "Projectruimte"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.03",
+  		"name": "Projectruimte"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.04",
+  		"name": "Labo TOPO"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.05",
+  		"name": "Berging labo Topo"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.06",
+  		"name": "VIP Vergaderruimte"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.07",
+  		"name": "Cafetaria - Refter studenten"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.08",
+  		"name": "Onstpanningsruimte"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.09",
+  		"name": "Projectroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.10",
+  		"name": "Projectroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.11",
+  		"name": "Projectroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.12",
+  		"name": "Projectroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.13",
+  		"name": "Projectroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.14",
+  		"name": "Projectroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.15",
+  		"name": "Projectroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.16",
+  		"name": "Projectroom - EHBO room"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.17",
+  		"name": "Spreekcel"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.18",
+  		"name": "Spreekcel"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.40",
+  		"name": "Keuken"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.42",
+  		"name": "Afwas keuken"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.43",
+  		"name": "Koel & Vriesruimte"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.44",
+  		"name": "Berging keuken"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.45",
+  		"name": "Gang keuken"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.46",
+  		"name": "Berging studentenclub"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.47",
+  		"name": "Afval containers"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.48",
+  		"name": "Kleedkamer keuken"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.50",
+  		"name": "Sas toilet personeel"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.51",
+  		"name": "Toilet personeel dames"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.52A",
+  		"name": "Toilet personeel heren urinoirs"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.52B",
+  		"name": "Toilet personeel heren"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.53",
+  		"name": "Sas WC - Fietsenstalling"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.54",
+  		"name": "WC Dames"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.55",
+  		"name": "WC Heren"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.56",
+  		"name": "Douches heren"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.57",
+  		"name": "Douches Dames"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.60",
+  		"name": "Fietsenstalling studenten"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.60A",
+  		"name": "Fietsenstalling personeel"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.61",
+  		"name": "Lockerruimte - Berging"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.62",
+  		"name": "Gas Opslag"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.63",
+  		"name": "Data (patchroom)"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.64",
+  		"name": "Berging Schoonmaak"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.G01",
+  		"name": "Inkhomhal-zuid"
+  	},
+
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.G02",
+  		"name": "Lounge"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.G03",
+  		"name": "Inkomhal-Noord"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.T01",
+  		"name": "Traphal 01 GLV - Oost"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.T02",
+  		"name": "Traphal 02 GLV - Zuid"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.T03",
+  		"name": "Traphal 03 GLV - Aula 01.08"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.T04",
+  		"name": "Traphal 04 GLV - Vluchttrap West"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.T05",
+  		"name": "Traphal 05 GLV -Kelder"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.T06",
+  		"name": "Traphal 03 GLV -Noord"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "00.T07",
+  		"name": "Traphal 03 GLV Vluchttrap Oost"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Studentenoverleg"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.67",
+  		"name": "Technische ruimte"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.68",
+  		"name": "Fotostudio"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.68A",
+  		"name": "Berging"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.69",
+  		"name": "Berging - Archief"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.70",
+  		"name": ""
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.71",
+  		"name": "Practicum mechanica - lesroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.72A",
+  		"name": "Practicum electromechanica werkbanken"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.72B",
+  		"name": "Practicum electromechanica draaien & lassen"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.72C",
+  		"name": "Practicum OT"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.G01",
+  		"name": "Gang kelder"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.L02",
+  		"name": "Sas lift"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Doorgang"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": -1,
+  		"room": "-01.T05",
+  		"name": "trap kelder - GLV"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.01",
+  		"name": "Labo elektriciteit"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.02",
+  		"name": "Labo veiligheid - GDM 2"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.03",
+  		"name": "Labo netwerken"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.04",
+  		"name": "Labo mechanica - mechatronica"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.05",
+  		"name": "Labo elek. machines"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.06",
+  		"name": "Labo aandrijftechn."
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.07",
+  		"name": "Labo elektronica"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.08",
+  		"name": "Auditorium 3 - zuid"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.08",
+  		"name": "Auditorium 2 - centraal"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.08",
+  		"name": "Auditorium 1 - noord"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.09",
+  		"name": "Labo klimatisatie"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.10",
+  		"name": "Labo onderhoud"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.11",
+  		"name": "Labo onderhoudsmetingen"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.12",
+  		"name": "Pompinstallatie EM"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.13",
+  		"name": "Labo automatisatie 2 "
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.14",
+  		"name": "Labo automatisatie 2 "
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.15",
+  		"name": "Labo proces 1"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.16",
+  		"name": "Labo energie 1"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.17",
+  		"name": "Labo energie 2 - KNX"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.18",
+  		"name": "Projectroom 1 - Lesroom - Atelier GDM 1"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.19",
+  		"name": "Lockers"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.20",
+  		"name": "Projectroom 2 - Lesroom - Atelier GDM 2"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.21",
+  		"name": "Labo GDM - Lesroom - Atelier GDM 1"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.22",
+  		"name": "Projectroom 3 - Lesroom - Atelier GDM 3"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.23",
+  		"name": "Studio GDM - Berging"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.50",
+  		"name": "WC - Sas Toilet"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.51",
+  		"name": "Toilet Dames"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.52",
+  		"name": "Toilet Heren"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.60",
+  		"name": "Technische ruimte Zuid"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.61",
+  		"name": "Sas Technische ruimte West"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.62",
+  		"name": "Technische ruimte West"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.63",
+  		"name": "Sas Klima room"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.64",
+  		"name": "Sas Stookroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.65",
+  		"name": "Sas Stookroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.66",
+  		"name": "Stookroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.G01",
+  		"name": "Gang Oost"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.G02",
+  		"name": "Gang Zuid"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.G03",
+  		"name": "Gang West - voorkant aula"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.G04",
+  		"name": "Gang West - klimaroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.G05",
+  		"name": "Gang Noord"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.L01",
+  		"name": "Sas lift"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.T01",
+  		"name": "Traphal 01 Oost"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.T02",
+  		"name": "Traphal 02 Zuid"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.T03",
+  		"name": "Traphal 03 Aula 01.08"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.T04",
+  		"name": "Traphal 04 Vluchttrap West"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.T06",
+  		"name": "Traphal 06 Noord"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 1,
+  		"room": "01.T07",
+  		"name": "Traphal 07 Vluchttrap Oost"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.01",
+  		"name": "Auditorium 3"
+  	}, {
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.02",
+  		"name": "Sas Aula 02.03"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.03",
+  		"name": "Auditorium 2"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.04",
+  		"name": "Sas Aula 02.05"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.05",
+  		"name": "Auditorium 1"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.06",
+  		"name": "Berginc ICT"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.07",
+  		"name": "Serverroom"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.08",
+  		"name": "Kantoor ICT-helpdesk"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.09",
+  		"name": "Kantoor Studiebegeleiding "
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.10",
+  		"name": "Open leercentrum"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.11",
+  		"name": "Berging poets"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.50",
+  		"name": "WC - Sas Toilet"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.51",
+  		"name": "Toilet heren"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.52",
+  		"name": "Toilet Dames"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.60",
+  		"name": "Technische ruimte"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.G01",
+  		"name": "Gang"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.L01",
+  		"name": "Sas lift"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.T01",
+  		"name": "Traphal 01 Oost"
+  	}, {
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.T02",
+  		"name": "Traphal 01 Zuid"
+  	}, {
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.T03",
+  		"name": "Traphal 03"
+  	}, {
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 2,
+  		"room": "02.T06",
+  		"name": "Traphal 06 daktuin"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.01",
+  		"name": "Lesroom - Labo integrale veiligheid"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.02",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.03",
+  		"name": "Computerroom - lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.04",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.05",
+  		"name": "Computerroom - Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.06",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.07",
+  		"name": "Computerroom - Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.08",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.09",
+  		"name": "Computerroom - PC-room"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.10",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.11",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.12",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.13",
+  		"name": "Lesroom"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.14",
+  		"name": "Berging poets"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.50",
+  		"name": "WC - Sas Toilet dames"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.51",
+  		"name": "Toilet Dames"
+  	}, {
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.52A",
+  		"name": "Sas Toilet Heren"
+  	}, {
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.52B",
+  		"name": "Toilet Heren"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.T01",
+  		"name": "Traphal 01 Oost"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.T02",
+  		"name": "Traphal 02 Zuid"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 3,
+  		"room": "03.T03",
+  		"name": "Traphal 03"
+  	},
+
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.01",
+  		"name": "Kantoor Departementshoofd"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.02",
+  		"name": "Kantoor EM"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.03",
+  		"name": "Kantoor Diensthoofd A&O"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.04",
+  		"name": "Vergaderruimte - Vergaderzaal"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.05",
+  		"name": "Kantoor Beleidsmedewerkers"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.06",
+  		"name": "Kantoor ENE"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.07",
+  		"name": "Kantoor EA"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.08",
+  		"name": "Kantoor GDM"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.09",
+  		"name": "Vergaderruimte - Kantoor TI"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.10",
+  		"name": "Kantoor IV"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.11",
+  		"name": "Kantoor VG"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.12",
+  		"name": "Vergaderruimte - Kantoor Planners"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.13",
+  		"name": "Lectorenruimte"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.14",
+  		"name": "Vergaderruimte - Vergaderzaal"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.17",
+  		"name": "Vestiaire"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.18",
+  		"name": "Vergaderzaal"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.19",
+  		"name": "Kantoor - Vergaderzaal"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.20",
+  		"name": "420 blaze it - Lectorenruimte"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.21",
+  		"name": "Overlegruimte"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.22",
+  		"name": "Overlegruimte"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.23",
+  		"name": "Overlegruimte"
+  	}, {
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.24",
+  		"name": "Kopieerruimte"
+  	}, {
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.25",
+  		"name": "Overlegruimte"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.26",
+  		"name": "Berging refter"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.27",
+  		"name": "Refter personeel"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.28",
+  		"name": "Berging poets"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.50A",
+  		"name": "Sas Toilet Dames"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.50B",
+  		"name": "Toilet Dames"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.50C",
+  		"name": "Toilet Dames rolstoel"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.51A",
+  		"name": "Toilet Heren urinoirs"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.51B",
+  		"name": "Toilet Heren Rolstoel"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.51C",
+  		"name": "Toilet Heren"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.52",
+  		"name": "Sas Toilet Heren"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.60",
+  		"name": "Technische ruimte"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.61",
+  		"name": "Technische ruimte 04.19"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.G01",
+  		"name": "Gang"
+  	},
+  	{
+
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.T01",
+  		"name": "Traphal 01 Oost"
+  	},
+  	{
+  		"campus": "Spoor Noord - Ellermanstraat",
+  		"floor": 4,
+  		"room": "04.T02",
+  		"name": "Traphal 02 Zuid"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.001",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.004",
+  		"name": "Aula"
+  	},
+  	{
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.005",
+  		"name": "room"
+  	},
+  	{
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.006",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.007",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.008",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.009",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.010",
+  		"name": "Aula"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.011",
+  		"name": "Aula"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.013",
+  		"name": "Aula"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "WC"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Doorgang naar Campus Ellermanstraat"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.017",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.018",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.019",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.020",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.021",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.022",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.023",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.033",
+  		"name": "Crea-room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Fietsenstalling"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Motorfietsenstalling"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "-01.043",
+  		"name": "Archief departement onderwijs en training en onthaal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Traphal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Binnentuin"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": -1,
+  		"room": "",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Onthaal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.001",
+  		"name": "Vergaderzaal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Hoofdingang"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Traphal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Fietsenstalling"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.002",
+  		"name": "Consult room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.003",
+  		"name": "Consult room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.004",
+  		"name": "Consult room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.005",
+  		"name": "Consult room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.006",
+  		"name": "Medische dienst"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.007",
+  		"name": "Medische dienst"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.011",
+  		"name": "Restaurant"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.011",
+  		"name": "Keuken"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.011",
+  		"name": "Cafetaria"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Doorgang naar campus Ellermanstraat"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.024",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.025",
+  		"name": "Aula Andries Kinsbergen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.027",
+  		"name": "Aula Rudi Verheyen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.027",
+  		"name": "Aula Camille Paulus"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.028",
+  		"name": "Aula Amine Abdelfettah"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Ingang Ellermanstraat"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.037",
+  		"name": "Aula"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.038",
+  		"name": "Aula"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.039",
+  		"name": "Trajectbegeleiding permanente vorming"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.040",
+  		"name": "Studentenadministratie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.041",
+  		"name": "Zelfstudie "
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.042",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": " ",
+  		"name": "Postvakken"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "00.046",
+  		"name": "Balie studentenadministratie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 0,
+  		"room": "",
+  		"name": "Binnentuin"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "Terras"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "PC werkplaatsen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.002 ",
+  		"name": "Bibliotheek"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "WC"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.003",
+  		"name": "Kantoor"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "Fotokopie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.005",
+  		"name": "Medewerkers bibliotheek"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.006",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.010",
+  		"name": "Groepswerk 1"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.011",
+  		"name": "Groepswerk 2"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.012",
+  		"name": "Groepswerk 3"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "Leesplaatsen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "Ingang Noorderlaan (fietserbrug)"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "Laptopwerkplaatsen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "",
+  		"name": "Balie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.100",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.101",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.102",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.103",
+  		"name": "room Methodische werkvormen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.104 ",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.105",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.106 ",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.107",
+  		"name": "Video conference Gerebern Laenen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.108",
+  		"name": "Video conference Gerebern Laenen"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 1,
+  		"room": "01.110",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.001",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.002",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.003",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.004",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.005",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.006",
+  		"name": "Kantoor onderwijzend personeel"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.007",
+  		"name": "Kantoor lectoren onderzoek"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "",
+  		"name": "WC"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "",
+  		"name": "Fotokopie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.008",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.009",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.010",
+  		"name": "Kantoor onderwijzend personeel"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "",
+  		"name": "Trappenhal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "",
+  		"name": "Dakterras openbare rookzone"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.100",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.101",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.102",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.103",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.104",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.105",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.106",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.107",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.108",
+  		"name": "Verpleegstation vroedkunde"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.109",
+  		"name": "Verpleegstation vroedkunde"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.110 ",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.111",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.112",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.113",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.114",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.115",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.116",
+  		"name": "Patientenkamer"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.117",
+  		"name": "Consult room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.118",
+  		"name": "Consult room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.119",
+  		"name": "Opleidingshoofd intensieve zorg en spoedgevallenzorg"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.120",
+  		"name": "Opleidingshoofd en stagecoördinator verpleegkunde"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.121",
+  		"name": "Kantoor onderwijzend personeel"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.122",
+  		"name": "Praktijkroom til-techniek video-observatieroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.123",
+  		"name": "Video-observatieroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.124 ",
+  		"name": "Video-observatieroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 2,
+  		"room": "02.125",
+  		"name": "Video-observatieroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.001",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.002",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.003",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.004",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.005",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.006",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.007",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.008",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.009",
+  		"name": "Kantoor onderwijzend personeel"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.010",
+  		"name": "Kantoor ondeerwijzend personeel"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.011",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "",
+  		"name": "Fotokopie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "",
+  		"name": "WC"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "",
+  		"name": "Trappenhal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.012",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.013",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.014",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.015",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.016",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.017",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.101",
+  		"name": "CTV-room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.102",
+  		"name": "ADL-room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.104",
+  		"name": "Zelfstudie "
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.106",
+  		"name": "Praktijkroom Kritische zorgen en operatie [T013]"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.108",
+  		"name": "Praktijkroom pediatrie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.109",
+  		"name": "Praktijkroom vroedkunde"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.111",
+  		"name": "Opleidingshoofd ergotherapie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.112",
+  		"name": "Studiebegeleiding"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.113",
+  		"name": "Studiebegeleiding studentenvoorziening"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.114",
+  		"name": "Opleidingshoofd taalbegeleiding"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.115",
+  		"name": "Consultroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.116",
+  		"name": "Consultroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.117",
+  		"name": "Opleidingshoofd en stagecoördinator vroedkunde"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.118",
+  		"name": "Stagecoördinatoren orthopedagogie/sociaal werk en aanspreekpunt internationalisering"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.119",
+  		"name": "Geboortehuis Nova Vida consultatieruimte"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.120",
+  		"name": "Geboortehuis Nova Vida consultatieruimte"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.121",
+  		"name": "Geboortehuis Nova Vida workshopruimte [T013]"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.122",
+  		"name": "Demoklas verpleegkunde vroedkunde "
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.123",
+  		"name": "Demoklas verpleegkunde vroedkunde "
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 3,
+  		"room": "03.124",
+  		"name": "Demoklas verpleegkunde vroedkunde "
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "",
+  		"name": "WC"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "",
+  		"name": "Trappenhal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "",
+  		"name": "Fotokopie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.001",
+  		"name": "Labo biologie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.002",
+  		"name": "Labo fysica"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.003",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.004",
+  		"name": "Preparatieroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.005",
+  		"name": "WO - natuur - wetenschappen "
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.006",
+  		"name": "WO - aardrijkskunde"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.007",
+  		"name": "Crea-room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.008",
+  		"name": "Berging crea-room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.009",
+  		"name": "Doe-klas"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.010",
+  		"name": "Doe-klas"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.011",
+  		"name": "Kantoor onderwijzend personeel"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.012",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.013",
+  		"name": "Muziek-praktijk"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.014",
+  		"name": "Muziek-praktijk"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.015",
+  		"name": "Muziek-praktijk"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.016",
+  		"name": "Berging muziek"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.017",
+  		"name": "Muzische vorming"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 4,
+  		"room": "04.018",
+  		"name": "Muzische vorming"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "",
+  		"name": "WC"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "",
+  		"name": "Lift"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "",
+  		"name": "Trappenhal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.001",
+  		"name": "Moderoom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.002",
+  		"name": "Was"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.003",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.004",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.005",
+  		"name": "Computerroom"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.006",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.007",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.008",
+  		"name": "Leskeuken"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.010",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.011",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.012",
+  		"name": "Kantoor onderwijzend personeel"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.013",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.014",
+  		"name": "room"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.015",
+  		"name": "Techniekl okaal"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.016",
+  		"name": "Zelfstudie"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "",
+  		"name": "Terras"
+  	}, {
+  		"campus": "Spoor Noord - Noorderplaats",
+  		"floor": 5,
+  		"room": "05.017",
+  		"name": "Computerroom"
+  	}
+
+  ]

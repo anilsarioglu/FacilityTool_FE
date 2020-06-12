@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoryService {
+
+  private localUrl = "http://localhost:8100/assets/json/categories.json";
+
   private contentHeaders: HttpHeaders;
 
   // private VPSAPIBE = "https://vps100.ap.be/api/";
@@ -24,6 +27,10 @@ export class CategoryService {
     this.contentHeaders = new HttpHeaders({
       Authorization: 'Bearer ' + this.idToken
     }).set('Content-Type', 'application/json');
+  }
+
+  getAllLocalCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.localUrl, { headers: this.contentHeaders });
   }
 
   getAllCategories(): Observable<Category[]> {

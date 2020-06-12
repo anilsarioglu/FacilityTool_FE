@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class LocationService {
-  //private url = "http://localhost:8100/assets/json/ell.json";
+  private localUrl = "http://localhost:8100/assets/json/NoEll.json";
   private contentHeaders: HttpHeaders;
 
 
@@ -35,8 +35,16 @@ export class LocationService {
     }).set('Content-Type', 'application/json');
   }
 
+  getAllLocalLocations(): Observable<Location[]> {
+    return this.http.get<Location[]>(this.localUrl, { headers: this.contentHeaders });
+  }
+
   getAllLocations(): Observable<Location[]> {
     return this.http.get<Location[]>(this.urlLocations, { headers: this.contentHeaders });
+  }
+
+  postLocation(location: Location): Observable<Location> {
+    return this.http.post<Location>(this.urlLocations, location, { headers: this.contentHeaders });
   }
 
   getLocationsByCampus(campus: string): Observable<Location[]> {

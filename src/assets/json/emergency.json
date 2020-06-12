@@ -1,0 +1,45 @@
+ [{
+ 		"emergencyContactsType": "Facilitaire diensten",
+ 		"employeeType": "Medewerker domein",
+ 		"employeeName": "Staf Weymiens",
+ 		"phoneNumber": "+32 3 220 54 09",
+ 		"mobileNumber": "+32 470 19 02 21",
+ 		"mail": "staf.weymiens@ap.be",
+ 		"mail2": "facilitairmeldpunt.ell@ap.be"
+ 	},
+ 	{
+ 		"emergencyContactsType": "ICT diensten",
+ 		"employeeType": "Medewerker helpdesk",
+ 		"employeeName": "Vincent Van Alsenoy",
+ 		"phoneNumber": "+32 3 220 55 33",
+ 		"mobileNumber": "",
+ 		"mail": "vincent.vanalsenoy@ap.be",
+ 		"mail2": "heldesk.ell@ap.be"
+ 	},
+
+ 	{
+ 		"emergencyContactsType": "Logistieke diensten en didactisch materiaal",
+ 		"employeeType": "Diensthoofd administratie en organisatie",
+ 		"employeeName": "Carl Geeroms",
+ 		"phoneNumber": "+32 3 220 55 63",
+ 		"mobileNumber": "+32 475 47 35 89",
+ 		"mail": "carl.geeroms@ap.be"
+ 	},
+ 	{
+ 		"emergencyContactsType": "Logistieke diensten",
+ 		"employeeType": "Onderhoudsmedewerker",
+ 		"employeeName": "Sümeyra Celen",
+ 		"phoneNumber": "+32 485 35 93 07",
+ 		"mobileNumber": "int. 88427",
+ 		"mail": "sumeyra.celen@ap.be"
+ 	},
+ 	{
+ 		"emergencyContactsType": "Logistieke diensten",
+ 		"employeeType": "Onderhoudsmedewerker",
+ 		"employeeName": "Hassine Fahem",
+ 		"phoneNumber": "+32 492 08 49 08",
+ 		"mobileNumber": "int. 88427",
+ 		"mail": ""
+ 	}
+
+ ]

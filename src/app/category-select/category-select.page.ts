@@ -21,17 +21,17 @@ export class CategorySelectPage implements OnInit {
     private http: HttpClient, private cs: CategoryService, private alertCtrl: AlertController, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.cs.getAllCategories().subscribe(data => {
+    this.cs.getAllLocalCategories().subscribe(data => {
       this.categories = data;
       this.categoryList = this.categories;
-      this.setValue();     
+      this.setValue();
     })
   }
 
   setValue() {
     this.activatedRoute.queryParams.subscribe(params => {
       const location_param = params['location'];
-      this.location = location_param;   
+      this.location = location_param;
     });
   }
 
@@ -62,7 +62,7 @@ export class CategorySelectPage implements OnInit {
       header: "Categorie",
       message: "" + event.toLowerCase(),
       buttons: [
-        
+
         { text: 'Annuleer' },
         {
           text: 'Selecteer categorie',
@@ -76,6 +76,6 @@ export class CategorySelectPage implements OnInit {
     await alert.present();
 
   }
-  
+
 
 }

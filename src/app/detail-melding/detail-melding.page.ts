@@ -15,6 +15,7 @@ import $ from 'jquery';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 import { Tab1Page } from '../tab1/tab1.page';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-detail-melding',
@@ -41,9 +42,15 @@ export class DetailMeldingPage implements OnInit {
   items = [];
   values;
   meldingDB;
+  userdata: any;
+  naam: string;
+  email: string;
 
   ishidden: boolean = false;
   newState: any;
+
+  searchValue: string = null;
+  avater = "";
 
   sliderOpts = {
     zoom: false,
@@ -52,56 +59,59 @@ export class DetailMeldingPage implements OnInit {
     spaceBetween: 10
   };
 
-  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private rs: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private userservice: UserService, private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private rs: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
+    this.avater = "https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png"
+
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
+      // console.log(this.meldingData);
       this.rs.getReportById(this.meldingData.id).subscribe((data) => {
         this.meldingDB = data;
+        console.log(this.meldingDB);
+      });
+
+      this.userservice.getUserDetails().subscribe(data => {
         console.log(data);
+
+        this.userdata = data;
+        // console.log(this.userdata);
+
+        console.log(this.naam);
+
+        this.naam = data["name"];
+        this.email = data["email"];
+        localStorage.setItem("userName", data["name"])
       });
       this.newState = ' ';
     });
 
-    this.storage.get('reaction').then((val) => {
-      this.values = val;
-    });
-    // this.initializeWebSocketConnection();
   }
 
-  // initializeWebSocketConnection() {
-  //   const ws = new SockJS(this.serverUrl);
-  //   this.stompClient = Stomp.over(ws);
-  //   const that = this;
-  //   this.stompClient.connect({}, () => {
-  //     that.stompClient.subscribe('/chat', (message) => {
-  //       if (message.body) {
-  //         $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
-  //       }
-  //     });
-  //   });
-  // }
+  doRefresh(event) {
+    this.rs.getReportById(this.meldingData.id);
+    setTimeout(() => {
+      event.target.complete();
+    }, 100);
+  }
 
-  // sendMessage(message) {
-  //   this.stompClient.send('/app/send/message', {}, message);
-  //   $('#input').val('');
-  //   this.message = message;
-  //   // console.log(this.uploadForm.value);
 
-  //   this.items.push(this.uploadForm.value);
-  //   this.storage.set('reaction', this.items);
-  //   this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
-  // }
+  sendMessage(message) {
+    this.searchValue = '';
+    console.log(this.uploadForm.value);
+    this.rs.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
+  }
 
   ngOnInit() {
     this.formulier();
   }
 
   formulier() {
+    const naam = localStorage.getItem('userName');
     this.uploadForm = this.fb.group({
       messageId: this.meldingData.id,
-      name: this.meldingData.melder,
+      name: naam,
       message: this.message,
-      datum: this.date
+      date: this.date
     });
   }
 

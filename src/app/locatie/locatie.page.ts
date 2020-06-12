@@ -21,6 +21,7 @@ export class LocatiePage implements OnInit {
   meldingbestaat: Boolean;
   tekst;
 
+  LocalLocation;
 
   constructor(private storage: Storage,private navCtrl: NavController, private router: Router,
     private http: HttpClient, private locationService: LocationService, private alertCtrl: AlertController, private reportService: ReportService, private activatedRoute: ActivatedRoute) { }
@@ -32,7 +33,8 @@ export class LocatiePage implements OnInit {
       this.locatieLijst = this.locaties;
       this.setValue();
       this.storage.set('location', this.locaties);
-    });
+    })
+
   }
 
   setValue() {
@@ -97,7 +99,7 @@ export class LocatiePage implements OnInit {
             this.reportService.getReportsByLocation(event).subscribe(async data => {
               if (data.length >= 1) {
                 alert.dismiss().then(() => { this.router.navigate(['/locatie-melding' + '/' + event]); });
-                return ;
+                return;
               } else {
                 const alert2 = await this.alertCtrl.create({
                   header: "Geen defecten.",

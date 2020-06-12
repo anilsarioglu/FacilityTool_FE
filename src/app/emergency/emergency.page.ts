@@ -13,7 +13,7 @@ export class EmergencyPage implements OnInit {
 
   emergencyList: any = [];
 
-  constructor(private storage: Storage, private es: EmergencyService, private alertCtrl: AlertController, private router: Router) {
+  constructor(private storage: Storage, private emergencyService: EmergencyService, private alertCtrl: AlertController, private router: Router) {
     this.listEmergencies();
   }
 
@@ -21,7 +21,7 @@ export class EmergencyPage implements OnInit {
     this.listEmergencies();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.listEmergencies();
   }
 
@@ -33,15 +33,13 @@ export class EmergencyPage implements OnInit {
   }
 
   listEmergencies() {
-    this.es.getAllEmergencies().subscribe(data => {
-      console.log(data);
+    this.emergencyService.getAllLocalEmergencies().subscribe(data => {
       this.emergencyList = data;
       this.storage.set("emergency", this.emergencyList);
     });
   }
 
   async deleteEmergency(i, e, id) {
-    console.log(e);
     const event = e.currentTarget.innerText;
 
     const alert = await this.alertCtrl.create({
@@ -52,7 +50,7 @@ export class EmergencyPage implements OnInit {
           text: 'Ja',
           handler: () => {
             alert.dismiss().then(() => {
-              this.es.deleteEmergencyById(id).subscribe();
+              this.emergencyService.deleteEmergencyById(id).subscribe();
               this.emergencyList.splice(i, 1);
             });
             return false;
@@ -66,7 +64,6 @@ export class EmergencyPage implements OnInit {
 
 
   changeEmergency(data) {
-    console.log('geklikt');
     this.router.navigate(['/detail-emergency'], {
       queryParams: {
         value: JSON.stringify(data)
