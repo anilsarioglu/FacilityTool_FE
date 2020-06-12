@@ -1,12 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { EmployeeService } from '../services/employee/employee.service';
-import { UserService } from '../services/user/user.service';
 import { ReportService } from '../services/report/report.service';
-import { AlertController, NavController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import { Report } from '../models/Report';
-import { FormGroup, Validators } from '@angular/forms';
 import { LocationService } from '../services/location/location.service';
 import { Location } from '../models/Location';
 
@@ -16,12 +11,11 @@ import { Location } from '../models/Location';
   templateUrl: './my-reports.page.html',
   styleUrls: ['./my-reports.page.scss'],
 })
-export class MyReportsPage implements OnInit {
+export class MyReportsPage {
 
   report: Report;
   reportList: Report[] = [];
   username: string;
-  userdata: any;
   activeReport: Report;
   ishidden = true;
   reportState: string = '';
@@ -35,38 +29,42 @@ export class MyReportsPage implements OnInit {
   locaties: Location[];
   locatieLijst: any[];
 
-  constructor(private reportService: ReportService, private employeeService: EmployeeService, private userService: UserService, private alertCtrl: AlertController,
-    private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
-    private ls: LocationService, private http: HttpClient) {
-    // this.reporterId = 'P103906';
-    this.userService.getUserDetails().subscribe(data => {
-      this.userdata = data;
-      this.username = localStorage.getItem('userName');
-      this.report = this.activatedRoute.snapshot.params.melding;
-      this.listsInit();
-    });
-
+  constructor(private reportService: ReportService,
+              private router: Router, private activatedRoute: ActivatedRoute,
+              private locationService: LocationService) {
+    this.username = localStorage.getItem('userName');
+    this.report = this.activatedRoute.snapshot.params.melding;
+    this.listsInit();
   }
-  ngOnInit() {
-  }
+ 
+  //Vul lijst met alle rapporteringen van de active user. 
   private listsInit() {
     this.reportService.getAllReports().subscribe(data => {
       this.reportList = data;
 
       this.reportList = this.reportList.filter((item) => {
-        // tslint:disable-next-line:triple-equals
         return (item.reporter == this.username &&
           item.status.toString() !== 'GEANNULEERD');
       });
 
     });
 
-    this.ls.getAllLocalLocations().subscribe(data => {
+    this.locationService.getAllLocalLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
     });
   }
 
+   //De gebruiker wordt genavigeerd naar de detail pagina van de melding. 
+   detailReport(data) {
+    this.router.navigate(['/detail-melding'], {
+      queryParams: {
+        value: JSON.stringify(data)
+      },
+    });
+  }
+
+  //De rapportering wordt geannuleerd en in het archive geplaats. 
   cancelAndArchive(rep, i) {
     this.reportService.putStatusReport(rep.id, 'GEANNULEERD').subscribe((report) => {
       rep.status = 'GEANNULEERD';
@@ -86,6 +84,7 @@ export class MyReportsPage implements OnInit {
     this.ishidden = false;
   }
 
+  //De gewijzigde rapportering wordt naar de DB gestuurd. 
   uploadSubmit() {
     this.activeReport.type = this.reportType;
     this.activeReport.description = this.reportDescr;

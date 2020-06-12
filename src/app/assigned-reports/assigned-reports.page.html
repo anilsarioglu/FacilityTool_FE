@@ -23,7 +23,7 @@
       </ion-list>
  </div>
 
-    <div *ngFor="let report of reportlist; let i = index;" id="kaart" class="meldingCol">
+    <div *ngFor="let report of reportList; let i = index;" id="kaart" class="meldingCol">
         <ion-card >
             <ion-item>
                 <ion-icon name="ellipse" slot="start" [ngStyle]="{'color': colorStatus(report.status)}"></ion-icon>

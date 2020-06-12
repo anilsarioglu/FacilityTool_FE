@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   userName: String; 
 
 
-
   public appMenu = [
     { title: 'Overzicht', url: '/tab1', icon: 'list' },
     { title: 'Melding rapporteren', url: '/melding', icon: 'add-circle' },
@@ -47,10 +46,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.userService.getUserDetails().subscribe(data => {
       this.userdata = data;
-      console.log("userdata:" + this.userdata);
-      
       this.userName = this.userdata["name"];
-      console.log("useranilastag:" + this.userName);
       localStorage.setItem("userName", this.userdata["name"]);
     });
     const url = location.href;
@@ -59,8 +55,6 @@ export class AppComponent implements OnInit {
       this.token = httpParams.get('token');
       localStorage.setItem('idToken', this.token);
     }
-    
-  
   }
 
   initializeApp() {
@@ -70,5 +64,4 @@ export class AppComponent implements OnInit {
     });
   }
   
-
 }

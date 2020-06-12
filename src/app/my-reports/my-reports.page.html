@@ -52,6 +52,7 @@
         <ion-card>
           <ion-item>
             <ion-label> {{rep.type}} - {{rep.date | date:'dd/MM/yy-HHumm'}}</ion-label>
+            <ion-button color="danger" slot="end" fill="outline" type="button" (click)="detailReport(rep)">View</ion-button>
           </ion-item>
           <ion-card-content class="description">
                 <p>Beschrijving: {{rep.description}}</p>
