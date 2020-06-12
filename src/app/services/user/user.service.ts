@@ -56,7 +56,7 @@ export class UserService {
     return this.http.put<User>(this.urlChangeRole + id + '/role', user, { headers: this.contentHeaders });
   }
 
-  // resetUserRole(id: string): Observable<User> {
-  //   return this.http.put<User>(this.urlResetRole + id + '/delete-role', { headers: this.contentHeaders });
-  // }
+  resetUserRole(id: string): Observable<User> {
+    return this.http.put<User>(this.urlResetRole + id + '/delete-role', id, { headers: this.contentHeaders });
+  }
 }
