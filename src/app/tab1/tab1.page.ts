@@ -217,6 +217,7 @@ export class Tab1Page implements OnInit {
   }
 
   onAssignToChange() {
+    
     this.disableToewijzenButton = false;
   }
 
