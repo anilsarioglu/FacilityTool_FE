@@ -15,6 +15,7 @@ import $ from 'jquery';
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 import { Tab1Page } from '../tab1/tab1.page';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-detail-melding',
@@ -41,6 +42,9 @@ export class DetailMeldingPage implements OnInit {
   items = [];
   values;
   meldingDB;
+  userdata: any;
+  naam: string;
+  email: string;
 
   ishidden: boolean = false;
   newState: any;
@@ -52,54 +56,53 @@ export class DetailMeldingPage implements OnInit {
     spaceBetween: 10
   };
 
-  constructor(private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private rs: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
+  constructor(private userservice: UserService, private toastController: ToastController, private storage: Storage, private file: File, private modalController: ModalController, private ng2ImgMax: Ng2ImgMaxService, private rs: ReportService, private activatedRoute: ActivatedRoute, private fb: FormBuilder, private datePipe: DatePipe) {
     this.activatedRoute.queryParams.subscribe((res) => {
       this.meldingData = JSON.parse(res.value);
+      console.log(this.meldingData);
       this.rs.getReportById(this.meldingData.id).subscribe((data) => {
         this.meldingDB = data;
         // console.log(data);
       });
+
+      this.userservice.getUserDetails().subscribe(data => {
+        this.userdata = data;
+        console.log(this.userdata);
+
+        console.log(this.naam);
+
+
+        this.naam = data["name"];
+        this.email = data["email"];
+        localStorage.setItem("userName", this.userdata["name"])
+      });
       this.newState = ' ';
     });
 
-    // this.storage.get('reaction').then((val) => {
-    //   this.values = val;
-    // });
-    // this.initializeWebSocketConnection();
   }
 
-  // initializeWebSocketConnection() {
-  //   const ws = new SockJS(this.serverUrl);
-  //   this.stompClient = Stomp.over(ws);
-  //   const that = this;
-  //   this.stompClient.connect({}, () => {
-  //     that.stompClient.subscribe('/chat', (message) => {
-  //       if (message.body) {
-  //         $('.chat').append('<div class=\'message\'>' + message.body + '</div>');
-  //       }
-  //     });
-  //   });
-  // }
 
-  // sendMessage(message) {
-  //   this.stompClient.send('/app/send/message', {}, message);
-  //   $('#input').val('');
-  //   this.message = message;
-  //   // console.log(this.uploadForm.value);
 
-  //   this.items.push(this.uploadForm.value);
-  //   this.storage.set('reaction', this.items);
-  //   this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
-  // }
+  sendMessage(message) {
+    // this.stompClient.send('/app/send/message', {}, message);
+    // $('#input').val('');
+    // this.message = message;
+    console.log(this.uploadForm.value);
+
+    // this.items.push(this.uploadForm.value);
+    // this.storage.set('reaction', this.items);
+    // this.ms.postReaction(this.meldingData.id, this.uploadForm.value).subscribe();
+  }
 
   ngOnInit() {
     this.formulier();
   }
 
   formulier() {
+    const naam = localStorage.getItem('userName');
     this.uploadForm = this.fb.group({
       messageId: this.meldingData.id,
-      name: this.meldingData.melder,
+      name: naam,
       message: this.message,
       datum: this.date
     });
