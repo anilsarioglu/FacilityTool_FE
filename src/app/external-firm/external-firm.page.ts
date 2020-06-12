@@ -50,8 +50,9 @@ export class ExternalFirmPage implements OnInit {
 
     this.efs.postExternalFirm(this.uploadForm.value).subscribe((data) => {
       console.log(data);
+      this.externalFirmList.splice(this.externalFirmList.length, 0, data);
     });
-    location.reload();
+    this.uploadForm.reset();
   }
 
   formulier() {
@@ -61,7 +62,7 @@ export class ExternalFirmPage implements OnInit {
     this.uploadForm = this.fb.group({
       contactPerson: ['', [Validators.required, Validators.pattern(name)]],
       mail: ['', [Validators.required, Validators.pattern(mailPattern)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(number)]],
+      phoneNumber: ['', [Validators.pattern(number)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(number)]],
       companyName: ['', [Validators.required, Validators.pattern(name)]]
     });

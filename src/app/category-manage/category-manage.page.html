@@ -19,7 +19,7 @@
         </ion-item>
 
         <ion-item>
-            <ion-label position="floating">Beschrijving categorie: </ion-label>
+            <ion-label position="floating">Beschrijving categorie [opt]: </ion-label>
             <ion-textarea [(ngModel)]="toggle" inputmode="text" formControlName="description"></ion-textarea>
         </ion-item>
         <ion-button [disabled]="!categoryForm.valid" class="btn btn-primary" class="footerBtn" color="apgrey" expand="full" type="submit">Toevoegen</ion-button>

@@ -45,10 +45,10 @@ export class DetailExFirmPage implements OnInit {
     this.uploadForm = this.fb.group({
       id: [this.externalFirmData["id"]],
       contactPerson: [this.externalFirmData["contactPerson"], [Validators.required, Validators.pattern(name)]],
-      mail: ['', [Validators.required, Validators.pattern(mailPattern)]],
-      phoneNumber: ['', [Validators.required, Validators.pattern(number)]],
-      mobileNumber: ['', [Validators.required, Validators.pattern(number)]],
-      companyName: ['', [Validators.required, Validators.pattern(name)]]
+      mail: [this.externalFirmData["mail"], [Validators.required, Validators.pattern(mailPattern)]],
+      phoneNumber: [this.externalFirmData["phoneNumber"], [ Validators.pattern(number)]],
+      mobileNumber: [this.externalFirmData["mobileNumber"], [Validators.required, Validators.pattern(number)]],
+      companyName: [this.externalFirmData["companyName"], [Validators.required, Validators.pattern(name)]]
     });
   }
 

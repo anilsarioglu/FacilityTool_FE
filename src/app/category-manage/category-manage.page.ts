@@ -53,7 +53,7 @@ export class CategoryManagePage implements OnInit {
   formulier() {
     this.categoryForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
-      description: ['', [Validators.required, Validators.maxLength(100)]],
+      description: ['', [Validators.maxLength(100)]],
     });
   }
 

@@ -18,6 +18,7 @@ export class EmergencyPage implements OnInit {
   }
 
   ngOnInit() {
+    this.listEmergencies();
   }
 
   doRefresh(event) {
@@ -25,6 +26,10 @@ export class EmergencyPage implements OnInit {
     setTimeout(() => {
       event.target.complete();
     }, 100);
+  }
+
+  ionViewWillEnter(){
+    this.listEmergencies();
   }
 
   listEmergencies() {
