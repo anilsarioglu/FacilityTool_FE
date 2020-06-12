@@ -44,7 +44,7 @@ export class DetailExFirmPage implements OnInit {
     let name = "^[a-zA-Z_ ]*$";
     this.uploadForm = this.fb.group({
       id: [this.externalFirmData["id"]],
-      contactPerson: [this.emp["contactPerson"], [Validators.required, Validators.pattern(name)]],
+      contactPerson: [this.externalFirmData["contactPerson"], [Validators.required, Validators.pattern(name)]],
       mail: ['', [Validators.required, Validators.pattern(mailPattern)]],
       phoneNumber: ['', [Validators.required, Validators.pattern(number)]],
       mobileNumber: ['', [Validators.required, Validators.pattern(number)]],
