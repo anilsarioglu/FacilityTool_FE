@@ -30,7 +30,7 @@ export class LocatiePage implements OnInit {
 
   ngOnInit() {
 
-
+    //local
     this.ls.getAllLocalLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
