@@ -36,3 +36,12 @@ hr {
     background-color: #F52F2F;
     height: 1px;
 }
+
+.tooltiptext {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.tooltip:hover .tooltiptext {
+    opacity: 1;
+}

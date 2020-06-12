@@ -60,11 +60,26 @@ export class CategoryManagePage implements OnInit {
   get name() { return this.categoryForm.get('name'); }
   get description() { return this.categoryForm.get('description'); }
 
-  uploadSubmit() {
-    this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
-      this.kopieLijstVanCategories.splice(this.kopieLijstVanCategories.length, 0, data);
-    });
-    this.categoryForm.reset();
+  async uploadSubmit() {
+    let found = false;
+    for (let cat of this.categoryList) {
+      if (cat.name === this.categoryForm.get('name').value) {
+        found = true;
+      }
+    }
+    if (found) {
+      const alert = await this.alertCtrl.create({
+        header: 'Categorie bestaat al!',
+        message: 'Er is al een categorie met deze naam aangemaakt in de lijst.',
+        buttons: ['Oke']
+      });
+      await alert.present();
+    } else {
+      this.cs.postCategory(this.categoryForm.value).subscribe((data) => {
+        this.kopieLijstVanCategories.splice(this.kopieLijstVanCategories.length, 0, data);
+      });
+      this.categoryForm.reset();
+    }
   }
 
   async deleteCategory(i: number, cat: Category) {

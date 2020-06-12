@@ -9,6 +9,7 @@
         overflow: hidden;
     }
     .login {
+        font-size: 18px;
         text-transform: none !important;
         display: block;
         margin-left: auto;
@@ -44,6 +45,7 @@
             text-align: center;
         }
         .login {
+            font-size: 20px;
             text-transform: none !important;
             display: block;
             margin-left: auto;
@@ -56,4 +58,8 @@
             }
         }
     }
+}
+
+a {
+    text-decoration: none;
 }
