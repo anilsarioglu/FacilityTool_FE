@@ -15,7 +15,6 @@ export class AssignedReportsPage implements OnInit {
   report: Report;
   reportlist: Report[]=[]; 
   copyReportlist: Report[]=[]; 
-  activeReportlist: Report[]=[]; 
   activeUserId: string;
   sortVal: string = "datum";
   constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { 
@@ -25,27 +24,20 @@ export class AssignedReportsPage implements OnInit {
   ngOnInit() {
   }
 
+  //Vul de lijst met de toegewezen rapporteringen van de gebruiker die aangemeld is.  
   listReports() {
     this.userService.getUserDetails().subscribe(details => {
       this.userService.getAssignedReports(details.id).subscribe(data => {
         console.log("UserID -> " + details.id);
         console.log("Data -> " + data);
-        //this.reportlist = data; 
-        //tijdelijke oplossing om enkel defecten te tonen
-        for (let def of data){
-          if(def.type == " Defect "){
-            this.reportlist.push(def)
-          }
-        }
+        this.reportlist = data; 
         this.sortAll(); 
-        this.copyReportlist = this.reportlist;
       });
     });
 
-    
-    
   }
 
+  //De gebruiker wordt genavigeerd naar de detail pagina van de melding. 
   detailReport(data) {
     console.log('geklikt');
     this.router.navigate(['/detail-melding'], {
@@ -54,7 +46,7 @@ export class AssignedReportsPage implements OnInit {
       },
     });
   }
-
+  //Kleuren van de statussen worden toegewezen. 
   colorStatus(data) {
     switch (data.toString().toUpperCase()) {
       case 'IN_UITVOERING':
@@ -74,27 +66,7 @@ export class AssignedReportsPage implements OnInit {
     }
   }
   
-  //search in list
-  async searchItems(e) {
-    const val: string = e.target.value;
-
-    this.copyReportlist = this.reportlist; 
-    
-    if (val.trim() !== '') {
-      this.reportlist = this.copyReportlist.filter((item) => {
-        return (item.type.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.reporter.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.date.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.location.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.pNumber.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.status.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            // (item.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            (item.locationDescription.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-    }
-  }
-
+  //Sorteer de lijst op datum, locatie of status.
   sortAll() {
     this.reportlist = this.reportlist.sort((n1, n2) => {
       if (this.sortVal === 'datum') {
