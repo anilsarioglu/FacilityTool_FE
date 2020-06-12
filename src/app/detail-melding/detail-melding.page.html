@@ -19,14 +19,11 @@
                 <ion-card-subtitle>Status:
                     <ion-label [hidden]=ishidden>{{meldingData.status}}</ion-label>
                     <ion-select [hidden]=!ishidden [(ngModel)]="newState" placeholder={{meldingData.status}} okText="Bevestig" cancelText="Annuleer" (ionChange)="changeState()">
-                        <ion-select-option value="IN_UITVOERING">In uitvoering</ion-select-option>
-                        <ion-select-option value="IN_BEHANDELING">In behandeling</ion-select-option>
-                        <ion-select-option value="VOLTOOID">Voltooid</ion-select-option>
-                        <ion-select-option value="GOED_GEKEURD">Goedgekeurd</ion-select-option>
-                        <ion-select-option value="GEANNULEERD">Geannuleerd</ion-select-option>
-                        <ion-select-option value="BEËINDIGD">Beëindigd</ion-select-option>
-                        <ion-select-option value="GEARCHIVEERD">Gearchiveerd</ion-select-option>
                         <ion-select-option value="IN_WACHT">In wacht</ion-select-option>
+                        <ion-select-option value="IN_BEHANDELING">In behandeling</ion-select-option>
+                        <ion-select-option value="GEANNULEERD">Geannuleerd</ion-select-option>
+                        <ion-select-option value="VOLTOOID">Voltooid</ion-select-option>
+                        <ion-select-option value="WORDT_NIET_UITGEVOERD">Wordt niet uitgevoerd</ion-select-option>
                     </ion-select>
                     <ion-icon id="edit-icon" name="pencil-sharp" (click)="Hide()"></ion-icon>
                 </ion-card-subtitle>
