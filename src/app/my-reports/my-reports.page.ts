@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-<<<<<<< HEAD
-import { ReportService } from '../services/report/report.service';
 import { EmployeeService } from '../services/employee/employee.service';
+import { UserService } from '../services/user/user.service';
+import { ReportService } from '../services/report/report.service';
 import { AlertController, NavController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
@@ -9,18 +9,7 @@ import { Report } from '../models/Report';
 import { FormGroup, Validators } from '@angular/forms';
 import { LocationService } from '../services/location/location.service';
 import { Location } from '../models/Location';
-import { UserService } from '../services/user/user.service';
-=======
-import {ReportService} from '../services/report/report.service';
-import {AlertController, NavController} from '@ionic/angular';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
-import { Report } from '../models/Report';
-import {FormGroup, Validators} from '@angular/forms';
-import {LocationService} from '../services/location/location.service';
-import {Location} from '../models/Location';
 
->>>>>>> development
 
 @Component({
   selector: 'app-my-reports',
@@ -54,9 +43,9 @@ export class MyReportsPage implements OnInit {
       this.userdata = data;
       this.username = localStorage.getItem('userName');
       this.report = this.activatedRoute.snapshot.params.melding;
-      // localStorage.setItem("userName", this.userdata["name"]);
       this.listsInit();
     });
+
   }
   ngOnInit() {
   }
