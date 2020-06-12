@@ -14,8 +14,10 @@ export class UserService {
   // private VPSAPIBE = "https://vps100.ap.be/api/";
   // private urlUsers = this.VPSAPIBE + 'users';
   // private urlUser = this.VPSAPIBE + 'users/me';
+  // private urlAssignedReports = this.VPSAPIBE + 'users/'
   // private urlChangeRole = this.VPSAPIBE + 'users/';
   // private urlResetRole = this.VPSAPIBE + 'users/';
+  // private urlAddReportToUser = this.VPSAPIBE + this.urlUsers + '/';
 
   private APIBE = 'http://localhost:8080/api/';
   private urlUsers = this.APIBE + 'users';
@@ -23,7 +25,8 @@ export class UserService {
   private urlAssignedReports = this.APIBE + 'users/'
   private urlChangeRole = this.APIBE + 'users/';
   private urlResetRole = this.APIBE + 'users/';
-  private urlAddReportToUser = this.APIBE + this.urlUsers + '/';
+  private urlAddReportToUser = this.APIBE + 'users/';
+
   idToken: string;
 
   constructor(private http: HttpClient) {

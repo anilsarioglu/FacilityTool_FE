@@ -6,4 +6,5 @@ export class User {
         public role: string; 
         public accessToken: string; 
         public notification: boolean; 
+        public assignedReportsId: string[];
 }
