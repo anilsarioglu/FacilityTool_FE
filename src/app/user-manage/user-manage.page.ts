@@ -60,10 +60,26 @@ export class UserManagePage implements OnInit {
     });
   }
 
-  // resetRole(id){
-  //   this.us.resetUserRole(id).subscribe();
-  //   console.log(id);
-  //   location.reload();
-  // }
+ async resetRole(id: string){
+    const alert = await this.alertCtrl.create({
+      header: 'Rol resetten!',
+      message: 'Bent u zeker dat u de rol van deze user wil resetten naar "Medewerker"?',
+      buttons: [
+        {
+          text: 'Ja',
+          handler: () => {
+            alert.dismiss().then(() => {
+              this.us.resetUserRole(id).subscribe();
+              this.ngOnInit();
+            });
+            return false;
+          }
+        },
+        { text: 'Nee' }
+      ]
+    });
+
+    await alert.present();
+  }
 }
 

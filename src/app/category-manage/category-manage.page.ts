@@ -67,10 +67,28 @@ export class CategoryManagePage implements OnInit {
     this.categoryForm.reset();
   }
 
-  deleteCategory(i: number, cat: Category) {
-    this.cs.deleteCategory(cat.name).subscribe();
-    this.categoryList = this.categories;
-    this.categories.splice(this.categories.indexOf(cat), 1);
-    this.kopieLijstVanCategories = this.categoryList;
+  async deleteCategory(i: number, cat: Category) {
+    const alert = await this.alertCtrl.create({
+      header: 'Verwijderen!',
+      message: 'Bent u zeker dat u deze categorie wilt verwijderen?',
+      buttons: [
+        {
+          text: 'Ja',
+          handler: () => {
+            alert.dismiss().then(() => {
+              this.cs.deleteCategory(cat.name).subscribe();
+              this.categoryList = this.categories;
+              this.categories.splice(this.categories.indexOf(cat), 1);
+              this.kopieLijstVanCategories = this.categoryList;
+            });
+            return false;
+          }
+        },
+        { text: 'Nee' }
+      ]
+    });
+
+    await alert.present();
   }
 }
+
