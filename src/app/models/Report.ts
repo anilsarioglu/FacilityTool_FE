@@ -14,8 +14,8 @@ export class Report {
         public category: Category;
         public description: string;
         public locationDescription: string;
-        public numberUpvotes: number;
-        public isUpvoted: boolean;
+        public numberUpVotes: number;
+        public upVotedByIds: string[];
         public status: string;
         public reactions: Reaction;
         public photos: Photo[];

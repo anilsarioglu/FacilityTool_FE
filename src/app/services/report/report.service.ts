@@ -61,8 +61,8 @@ export class ReportService {
     return this.http.delete<{}>(this.urlReports + id, { headers: this.contentHeaders });
   }
 
-  putUpvoteReport(id: string): Observable<Report> {
-    return this.http.put<Report>(this.urlToggleUpvote + id, { headers: this.contentHeaders });
+  putUpvoteReport(reportId: string, userId: string): Observable<Report> {
+    return this.http.put<Report>(this.urlToggleUpvote + reportId, userId, { headers: this.contentHeaders });
   }
 
   putStatusReport(id: string, status: string): Observable<Report> {

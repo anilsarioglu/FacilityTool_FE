@@ -23,6 +23,7 @@ export class Tab1Page implements OnInit {
   // user info
   userdata: any;
   usernaam: String;
+  userId: string;
   melding: any;
   meldingLijst: any = [];
   kopieLijstVanMeldingen: any = [];
@@ -41,6 +42,7 @@ export class Tab1Page implements OnInit {
   annuleerOrSluitenText: string = 'Annuleer';
   pincolor: any;
   fileName = 'ExcelSheet.xlsx';
+  didUpvote: boolean[] = [];
   
   constructor(private ms: ReportService, private userService: UserService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
@@ -51,9 +53,10 @@ export class Tab1Page implements OnInit {
 
     this.userService.getUserDetails().subscribe(data => {
       this.userdata = data;
+      this.userId = data.id;
       console.log(this.userdata);
-
       this.usernaam = data['name'];
+      this.checkDidUpvote();
     });
   }
   ngOnInit() {}
@@ -69,6 +72,12 @@ export class Tab1Page implements OnInit {
     this.lijstMeldingen();
     this.segment = 'defect';
     this.sortVal = 'prioriteit';
+  }
+
+  checkDidUpvote() {
+    for (let i = 0; i < this.meldingLijst.length; i++) {
+        this.didUpvote[i] = this.meldingLijst[i].upVotedByIds.includes(this.userId);
+    }
   }
 
   segmentChanged(event: any) {
@@ -217,15 +226,15 @@ export class Tab1Page implements OnInit {
   }
 
   onAssignToChange() {
-    
     this.disableToewijzenButton = false;
   }
 
-  // Upvoting
+  // UpVote
   onIconClick(melding: Report, index: number) {
     this.melding = melding;
-    this.ms.putUpvoteReport(this.melding.id).subscribe((updatedMelding) => {
+    this.ms.putUpvoteReport(this.melding.id, this.userdata.id).subscribe((updatedMelding) => {
       this.meldingLijst[index] = updatedMelding;
+      this.checkDidUpvote()
       this.lijstMeldingen();
     });
   }

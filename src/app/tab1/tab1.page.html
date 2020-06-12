@@ -67,11 +67,11 @@
                                 <h3> {{ml.locationDescription}}</h3>
                             </div>
                             <div class="upvote">
-                                <p>{{ ml.numberUpvotes }}</p>
-                                <ion-button color="danger" icon-only *ngIf="!ml.upvoted" (click)="onIconClick(ml, i)">
+                                <p>{{ ml.numberUpVotes }}</p>
+                                <ion-button color="danger" icon-only *ngIf="!didUpvote[i]" (click)="onIconClick(ml, i)">
                                     <ion-icon name="heart-outline" class="heart-icon"></ion-icon>
                                 </ion-button>
-                                <ion-button color="danger" icon-only *ngIf="ml.upvoted" (click)="onIconClick(ml, i)">
+                                <ion-button color="danger" icon-only *ngIf="didUpvote[i]" (click)="onIconClick(ml, i)">
                                     <ion-icon name="heart" class="heart-icon"></ion-icon>
                                 </ion-button>
                             </div>
