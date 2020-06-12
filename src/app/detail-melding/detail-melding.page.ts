@@ -57,14 +57,14 @@ export class DetailMeldingPage implements OnInit {
       this.meldingData = JSON.parse(res.value);
       this.rs.getReportById(this.meldingData.id).subscribe((data) => {
         this.meldingDB = data;
-        console.log(data);
+        // console.log(data);
       });
       this.newState = ' ';
     });
 
-    this.storage.get('reaction').then((val) => {
-      this.values = val;
-    });
+    // this.storage.get('reaction').then((val) => {
+    //   this.values = val;
+    // });
     // this.initializeWebSocketConnection();
   }
 
