@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Employee } from '../models/Employee';
 import { Report } from '../models/Report';
-import { EmployeeService } from '../services/employee/employee.service';
+import { UserService } from '../services/user/user.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -16,28 +16,33 @@ export class AssignedReportsPage implements OnInit {
   reportlist: Report[]=[]; 
   copyReportlist: Report[]=[]; 
   activeReportlist: Report[]=[]; 
+  activeUserId: string;
   sortVal: string = "datum";
-  constructor(private employeeService: EmployeeService, private router: Router, private activatedRoute: ActivatedRoute) { 
+  constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { 
     this.listReports();
-    
   }
 
   ngOnInit() {
   }
 
   listReports() {
-    this.employeeService.getAllReports("5ec93fadc3f11c5acc484c7d").subscribe(data => {
-      console.log(data);
-      //this.reportlist = data; 
-      //tijdelijke oplossing om enkel defecten te tonen
-      for (let def of data){
-        if(def.type == " Defect "){
-          this.reportlist.push(def)
+    this.userService.getUserDetails().subscribe(details => {
+      this.userService.getAssignedReports(details.id).subscribe(data => {
+        console.log("UserID -> " + details.id);
+        console.log("Data -> " + data);
+        //this.reportlist = data; 
+        //tijdelijke oplossing om enkel defecten te tonen
+        for (let def of data){
+          if(def.type == " Defect "){
+            this.reportlist.push(def)
+          }
         }
-      }
-      this.sortAll(); 
-      this.copyReportlist = this.reportlist;
+        this.sortAll(); 
+        this.copyReportlist = this.reportlist;
+      });
     });
+
+    
     
   }
 

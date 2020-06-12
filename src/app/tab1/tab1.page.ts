@@ -6,12 +6,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Report } from '../models/Report';
 import {formatDate} from '@angular/common';
 import { Employee } from '../models/Employee';
-import { EmployeeService } from '../services/employee/employee.service';
 // xlxs
 import * as XLSX from 'xlsx';
 // azure
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { UserService } from '../services/user/user.service';
+import { User } from '../models/User';
 
 @Component({
   selector: 'app-tab1',
@@ -34,7 +34,7 @@ export class Tab1Page implements OnInit {
   selectEmployeePlaceholder: string = 'Kies technische werknemer(s)';
   disableToewijzenButton: boolean = false;
   hideMe = {};
-  employees: Employee[];
+  technicalEmployees: User[];
   selectedEmployeeIds: string[] = [];
   reportIndex: number[] = [];
   isEnabled: boolean = true;
@@ -42,7 +42,7 @@ export class Tab1Page implements OnInit {
   pincolor: any;
   fileName = 'ExcelSheet.xlsx';
   
-  constructor(private ms: ReportService, private employeeService: EmployeeService, private userService: UserService, private alertCtrl: AlertController,
+  constructor(private ms: ReportService, private userService: UserService, private alertCtrl: AlertController,
               private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
               private http: HttpClient) {
     this.melding = this.activatedRoute.snapshot.params.melding;
@@ -168,9 +168,10 @@ export class Tab1Page implements OnInit {
   // Assign Defect
   onAssignClick(reportId: string, i: number) {
     this.selectEmployeePlaceholder = 'Kies technische werknemer(s)';
-    this.employeeService.getAllEmployees().subscribe(employees => {
-      this.employees = employees;
-      for (const employee of this.employees) {
+    this.userService.getAllUsers().subscribe(employees => {
+      //console.log(employees);
+      this.technicalEmployees = employees;
+      for (let employee of this.technicalEmployees) {
         if (employee.assignedReportsId.includes(reportId)) {
           this.selectedEmployeeIds.push(employee.id);
           this.selectEmployeePlaceholder = 'Al toegewezen aan ';
@@ -190,7 +191,7 @@ export class Tab1Page implements OnInit {
     this.isEnabled = true;
   }
 
-  async onToewijzenClick(reportId: String) {
+  async onToewijzenClick(reportId: string) {
     const alert = await this.alertCtrl.create({
       header: 'Bevestiging nodig ...',
       message: 'De geselecteerde medewerkers zullen een melding krijgen',
@@ -202,7 +203,7 @@ export class Tab1Page implements OnInit {
           text: 'Bevestig',
           handler: () => {
             for (const employeeId of this.selectedEmployeeIds) {
-              this.employeeService.postReportIdToEmployee(employeeId, reportId).subscribe(reportId => {
+              this.userService.postReportToUser(employeeId, reportId).subscribe(reportId => {
                 console.log(reportId);
               });
               this.disableToewijzenButton = true;
