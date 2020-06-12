@@ -18,29 +18,24 @@
             Opdrachten
         </ion-segment-button>
     </ion-segment>
-        
     <br />
         <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
             <ion-refresher-content></ion-refresher-content>
         </ion-refresher>
-   
     <ion-grid>
+        <ion-searchbar placeholder="Zoeken" (ionInput)="searchItems($event)"></ion-searchbar>
+        <ion-list id="sortingList">
+            <ion-item>
+                <ion-label>Sorteer op:</ion-label>
+                <ion-select [(ngModel)]="sortVal" placeholder="" (ionChange)="sortAll()">
+                    <ion-select-option value="prioriteit">Prioriteit</ion-select-option>
+                    <ion-select-option value="datum">Datum</ion-select-option>
+                    <ion-select-option value="status">Status</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
         <ion-row>
-            <ion-col>
-                <ion-searchbar placeholder="Zoeken" (ionInput)="searchItems($event)"></ion-searchbar>
-                <ion-list id="sortingList">
-                    <ion-item>
-                        <ion-label>Sorteer op:</ion-label>
-                        <ion-select [(ngModel)]="sortVal" placeholder="" (ionChange)="sortAll()">
-                            <ion-select-option value="prioriteit">Prioriteit</ion-select-option>
-                            <ion-select-option value="datum">Datum</ion-select-option>
-                            <ion-select-option value="status">Status</ion-select-option>
-                        </ion-select>
-                    </ion-item>
-                </ion-list>
-            </ion-col>
-        </ion-row>
-        <ion-row>
+            <ion-label id="emptyText" *ngIf="kopieLijstVanMeldingen[0] === null">Geen rapporteringen.</ion-label>
             <ion-col *ngFor="let ml of kopieLijstVanMeldingen;let i = index;" size="12">
                 <ion-card>
                     <ion-item>

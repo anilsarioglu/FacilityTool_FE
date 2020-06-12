@@ -87,7 +87,7 @@ export class Tab1Page implements OnInit {
             (item.location.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             // (item.pNumber.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.status.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
-            // (item.categorie.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
+            (item.category.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.description.toString().toLowerCase().indexOf(val.toLowerCase()) > -1) ||
             (item.locationDescription.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
@@ -107,7 +107,7 @@ export class Tab1Page implements OnInit {
     this.kopieLijstVanMeldingen = this.kopieLijstVanMeldingen.sort((n1, n2) => {
       if (this.sortVal === 'datum') {
         // @ts-ignore
-          return new Date(n1.date) as any - new Date(n2.date) as any;
+          return new Date(n2.date) as any - new Date(n1.date) as any;
       } else if (this.sortVal === 'prioriteit') {
         if (n1.numberUpvotes < n2.numberUpvotes) {
           return 1;
@@ -169,7 +169,7 @@ export class Tab1Page implements OnInit {
   onAssignClick(reportId: string, i: number) {
     this.selectEmployeePlaceholder = 'Kies technische werknemer(s)';
     this.userService.getAllUsers().subscribe(employees => {
-      //console.log(employees);
+      // console.log(employees);
       this.technicalEmployees = employees;
       for (let employee of this.technicalEmployees) {
         if (employee.assignedReportsId.includes(reportId)) {
