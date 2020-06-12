@@ -8,6 +8,8 @@ import { Emergency } from '../../models/Emergency';
 })
 export class EmergencyService {
 
+  private localUrl = "http://localhost:8100/assets/json/emergency.json";
+
   private contentHeaders: HttpHeaders;
 
   // private VPSAPIBE = "https://vps100.ap.be/api/";
@@ -27,14 +29,14 @@ export class EmergencyService {
     }).set('Content-Type', 'application/json');
   }
 
+  getAllLocalEmergencies(): Observable<Emergency[]> {
+    return this.http.get<Emergency[]>(this.localUrl, { headers: this.contentHeaders });
+  }
 
   getAllEmergencies(): Observable<Emergency[]> {
     return this.http.get<Emergency[]>(this.urlEmergencies, { headers: this.contentHeaders });
   }
 
-  // getEmergencyById(id: string): Observable<Emergency> {
-  //   return this.http.get<Emergency>(this.urlEmergenciesById + id, { headers: this.contentHeaders });
-  // }
 
   putEmergency(id: string, emergency: Emergency): Observable<Emergency> {
     return this.http.put<Emergency>(this.urlEmergenciesById + id, emergency, { headers: this.contentHeaders });

@@ -50,7 +50,7 @@ export class DetailMeldingPage implements OnInit {
   newState: any;
 
   searchValue: string = null;
-  avater = "https://toppng.com/uploads/preview/beautiful-icon-vector-shield-marvel-free-icons-and-avengers-a-symbol-11553501608y8qjotnyh0.png"
+  avater = "";
 
   sliderOpts = {
     zoom: false,

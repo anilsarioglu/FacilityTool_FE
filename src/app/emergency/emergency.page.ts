@@ -21,7 +21,7 @@ export class EmergencyPage implements OnInit {
     this.listEmergencies();
   }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.listEmergencies();
   }
 
@@ -33,7 +33,7 @@ export class EmergencyPage implements OnInit {
   }
 
   listEmergencies() {
-    this.es.getAllEmergencies().subscribe(data => {
+    this.es.getAllLocalEmergencies().subscribe(data => {
       console.log(data);
       this.emergencyList = data;
       this.storage.set("emergency", this.emergencyList);

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {ReportService} from '../services/report/report.service';
-import {EmployeeService} from '../services/employee/employee.service';
-import {AlertController, NavController} from '@ionic/angular';
-import {ActivatedRoute, Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http';
+import { ReportService } from '../services/report/report.service';
+import { EmployeeService } from '../services/employee/employee.service';
+import { AlertController, NavController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 import { Report } from '../models/Report';
-import {FormGroup, Validators} from '@angular/forms';
-import {LocationService} from '../services/location/location.service';
-import {Location} from '../models/Location';
+import { FormGroup, Validators } from '@angular/forms';
+import { LocationService } from '../services/location/location.service';
+import { Location } from '../models/Location';
 import { UserService } from '../services/user/user.service';
 
 @Component({
@@ -35,9 +35,9 @@ export class MyReportsPage implements OnInit {
   locaties: Location[];
   locatieLijst: any[];
 
-  constructor(private reportService: ReportService, private employeeService: EmployeeService, private userService: UserService , private alertCtrl: AlertController,
-              private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
-              private ls: LocationService, private http: HttpClient) {
+  constructor(private reportService: ReportService, private employeeService: EmployeeService, private userService: UserService, private alertCtrl: AlertController,
+    private navCtrl: NavController, private router: Router, private activatedRoute: ActivatedRoute,
+    private ls: LocationService, private http: HttpClient) {
     // this.reporterId = 'P103906';
     this.userService.getUserDetails().subscribe(data => {
       this.userdata = data;
@@ -63,7 +63,7 @@ export class MyReportsPage implements OnInit {
 
     });
 
-    this.ls.getAllLocations().subscribe(data => {
+    this.ls.getAllLocalLocations().subscribe(data => {
       this.locaties = data;
       this.locatieLijst = this.locaties;
     });

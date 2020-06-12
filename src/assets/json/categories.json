@@ -1,0 +1,110 @@
+  [{
+  		"name": "Sanitair",
+		"description": "lavabo, urinoir, WC, waterkraan, boiler, ..."
+  	},
+  	{
+  		"name": "Verwarming",
+		"description": "Radiator, leidingen, brander, ... "
+  	},
+	{
+  		"name": "Verlichting",
+		"description": "Lampen, armaturen"
+  	},
+	{
+  		"name": "Elektriciteit",
+		"description": "stopcontacten, vloerdozen, ..."
+  	},
+	{
+  		"name": "Deur",
+		"description": "deurpomp, slot, scharnier, ..."
+  	},
+	{
+  		"name": "Muur",
+		"description": "barsten, schilderen, tegels, ..."
+  	},
+	{
+  		"name": "Vloer",
+		"description": "tegels, plinten, ..."
+  	},
+	{
+  		"name": "Lokaaluitrusting",
+		"description": "lesbanken, stoelen, whiteboard"
+  	},
+	{
+  		"name": "Ventilatie",
+		"description": ""
+  	},
+	{
+  		"name": "Raam",
+		"description": ""
+  	},
+	{
+  		"name": "Lift",
+		"description": ""
+  	},
+	{
+  		"name": "Signalisatie",
+		"description": ""
+  	},
+	{
+  		"name": "Zonnewering",
+		"description": ""
+  	},
+	{
+  		"name": "Dak",
+		"description": ""
+  	},
+	{
+  		"name": "Tuin",
+		"description": ""
+  	},
+	{
+  		"name": "Camera",
+		"description": ""
+  	},
+	{
+  		"name": "Alarm",
+		"description": "alarmcentrale, branddetectie, ..."
+  	},
+	{
+  		"name": "Diensten (Facilitair)",
+		"description": "ondersteuning bij events, transport, schilderen, fietspomp, ..."
+  	},
+	{
+  		"name": "Computer",
+		"description": ""
+  	},
+	{
+  		"name": "Netwerk",
+		"description": "wifi, netwerkbekabeling, ..."
+  	},
+	{
+  		"name": "ICT klasuitrusting",
+		"description": "beamer, beamerscherm, Wacom, geluidsversterking, ..."
+  	},
+	{
+  		"name": "Diensten (IT)",
+		"description": "ondersteuning bij events, ..."
+  	},
+	{
+  		"name": "Drank",
+		"description": "Koffie, thee, water, ..."
+  	},
+	{
+  		"name": "Lokaalinrichting",
+		"description": "openen van wanden, herschikken van tafels, refter inrichten voor broodjeslunch, ..."
+  	},
+	{
+  		"name": "Afval",
+		"description": "afval ophalen uit lokaal, recycleren van afval, ..."
+  	},
+	{
+  		"name": "Reinigen",
+		"description": "reinigen van ramen, deuren, vloer, stofzuigen, opruimen, ..."
+  	},
+	{
+  		"name": "Diensten (Logisitiek)",
+		"description": "ondersteuning bij events, ..."
+  	}
+	
+  ]
