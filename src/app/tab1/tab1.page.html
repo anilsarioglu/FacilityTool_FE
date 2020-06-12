@@ -80,7 +80,7 @@
                             <ion-item>
                                 <ion-label>Toewijzen aan:</ion-label>
                                 <ion-select [(ngModel)]="selectedEmployeeIds" multiple="true" (ionChange)="onAssignToChange()" placeholder="{{selectEmployeePlaceholder}}">
-                                  <ion-select-option *ngFor="let employee of employees" [value]="employee.id">{{ employee.name }}</ion-select-option>
+                                  <ion-select-option *ngFor="let employee of technicalEmployees" [value]="employee.id">{{ employee.name }}</ion-select-option>
                                 </ion-select>
                               </ion-item>
                               <ion-button fill="outline" color="danger" size="small" class="assign" [disabled]="disableToewijzenButton" (click)="onToewijzenClick(ml.id)">Bevestig</ion-button>
