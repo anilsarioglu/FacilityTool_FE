@@ -21,15 +21,15 @@ export class EmergencyPage implements OnInit {
     this.listEmergencies();
   }
 
+  ionViewWillEnter(){
+    this.listEmergencies();
+  }
+
   doRefresh(event) {
     this.listEmergencies();
     setTimeout(() => {
       event.target.complete();
     }, 100);
-  }
-
-  ionViewWillEnter(){
-    this.listEmergencies();
   }
 
   listEmergencies() {

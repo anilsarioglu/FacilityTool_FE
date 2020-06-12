@@ -18,10 +18,11 @@ export class ExternalFirmPage implements OnInit {
 
   constructor(private efs: ExFirmService, private alertCtrl: AlertController, private router: Router, private fb: FormBuilder) {
     this.listExternalFirms();
-
-
   }
 
+  ionViewWillEnter(){
+    this.listExternalFirms();
+  }
 
   formToggle() {
     let acc = document.getElementsByClassName("accordion");
