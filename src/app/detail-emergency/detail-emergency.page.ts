@@ -41,7 +41,7 @@ export class DetailEmergencyPage implements OnInit {
 
   formulier() {
     let numberPattern = "(^[i][n][t][.] [0-9]{5}$)|^([0][23] [0-9]{3} [0-9]{2} [0-9]{2}$)|(^[+][32]{2} [3]{1} [0-9]{3} [0-9]{2} [0-9]{2}$)|(^[0-9]{4} [0-9]{2} [0-9]{2} [0-9]{2}$)|(^[+][32]{2} [0-9]{3} [0-9]{2} [0-9]{2} [0-9]{2}$)";
-    let mailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+    let mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
     this.uploadForm = this.fb.group({
       id: [this.emergencyData["id"]],
       emergencyContactsType: [this.emergencyData["emergencyContactsType"]],

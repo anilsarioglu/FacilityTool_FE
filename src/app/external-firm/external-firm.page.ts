@@ -51,11 +51,11 @@ export class ExternalFirmPage implements OnInit {
     this.efs.postExternalFirm(this.uploadForm.value).subscribe((data) => {
       console.log(data);
     });
-
+    location.reload();
   }
 
   formulier() {
-    let mailPattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
+    let mailPattern = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$";
     let number = "^[+()int.0-9_ ]*$";
     let name = "^[a-zA-Z_ ]*$";
     this.uploadForm = this.fb.group({
